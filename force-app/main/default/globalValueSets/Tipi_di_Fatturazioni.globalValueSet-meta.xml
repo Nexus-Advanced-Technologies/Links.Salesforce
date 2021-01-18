@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Canone Quadrimestrale</fullName>
+        <default>false</default>
+        <label>Canone Quadrimestrale</label>
+    </customValue>
+    <customValue>
+        <fullName>Canone Semestrale</fullName>
+        <default>false</default>
+        <label>Canone Semestrale</label>
+    </customValue>
+    <customValue>
+        <fullName>Canone Trimestrale</fullName>
+        <default>false</default>
+        <label>Canone Trimestrale</label>
+    </customValue>
+    <customValue>
+        <fullName>Fee Mensile</fullName>
+        <default>false</default>
+        <label>Fee Mensile</label>
+    </customValue>
+    <customValue>
+        <fullName>SAL (#Ticket)</fullName>
+        <default>false</default>
+        <label>SAL (#Ticket)</label>
+    </customValue>
+    <customValue>
+        <fullName>SAL (0-0-100 =Equivale a 100%consegna finale)</fullName>
+        <default>false</default>
+        <label>SAL (0-0-100 =Equivale a 100%consegna finale)</label>
+    </customValue>
+    <customValue>
+        <fullName>SAL (100-0-0 =Equivale a 100%ordine)</fullName>
+        <default>false</default>
+        <label>SAL (100-0-0 =Equivale a 100%ordine)</label>
+    </customValue>
+    <customValue>
+        <fullName>SAL (30-40-30)</fullName>
+        <default>false</default>
+        <label>SAL (30-40-30)</label>
+    </customValue>
+    <customValue>
+        <fullName>SAL (30-50-20 =Equivale a 30%ordine, 50%UAT, 20%consegnafinale)</fullName>
+        <default>false</default>
+        <label>SAL (30-50-20 =Equivale a 30%ordine, 50%UAT, 20%consegnafinale)</label>
+    </customValue>
+    <customValue>
+        <fullName>SAL (40-30-30)</fullName>
+        <default>false</default>
+        <label>SAL (40-30-30)</label>
+    </customValue>
+    <customValue>
+        <fullName>SAL (50-50)</fullName>
+        <default>false</default>
+        <label>SAL (50-50)</label>
+    </customValue>
+    <customValue>
+        <fullName>N/A</fullName>
+        <default>false</default>
+        <label>N/A</label>
+    </customValue>
+    <masterLabel>Tipi di Fatturazioni</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

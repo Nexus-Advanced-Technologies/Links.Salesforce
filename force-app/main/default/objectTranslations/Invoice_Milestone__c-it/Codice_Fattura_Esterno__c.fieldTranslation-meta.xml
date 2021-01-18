@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Inserire il codice della fattura presente sul sistema di fatturazione aziendale --></help>
+    <label><!-- Codice Fattura Esterno --></label>
+    <name>Codice_Fattura_Esterno__c</name>
+</CustomFieldTranslation>

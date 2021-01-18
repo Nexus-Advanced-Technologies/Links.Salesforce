@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Source__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE((LeadSource), 
+&apos;Web&apos;, IMAGE(&apos;/resource/web&apos;, &apos;Web&apos;,25,25), 
+&apos;Phone Inquiry&apos;, IMAGE(&apos;/resource/phone&apos;, &apos;Phone Inquiry&apos;,25,25), 
+&apos;Partner Referral&apos;, IMAGE(&apos;/resource/community&apos;, &apos;Partner Referral&apos;,25,25), 
+&apos;Purchased List&apos;, IMAGE(&apos;/resource/purchasedList&apos;, &apos;Purchased List&apos;,25,25), 
+&apos;Not Defined&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Source</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

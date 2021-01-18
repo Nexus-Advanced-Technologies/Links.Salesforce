@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ebitda__c</fullName>
+    <externalId>false</externalId>
+    <formula>Ricavi2020FeFde__c - ( Costo_di_rivendita_HW_e_SW_e_ATI__c +  Costi_del_Personale_diretto_e_indiretto__c + Costi_di_trasferta__c +  Costi_per_attivit_a_corpo__c +  Altri_Costi__c +  costi_da_Fatture_da_Ricevere__c )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Ebitda</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

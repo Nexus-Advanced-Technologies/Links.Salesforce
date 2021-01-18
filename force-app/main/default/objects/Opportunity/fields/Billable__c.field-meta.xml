@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Billable__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>flag su Opportunity  per identificare le attività che generano un profitto e quelle che invece sono di puro costo</description>
+    <externalId>false</externalId>
+    <label>Billable</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>
