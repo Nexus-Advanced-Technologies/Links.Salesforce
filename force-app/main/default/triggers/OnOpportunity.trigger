@@ -13,8 +13,14 @@ trigger OnOpportunity on Opportunity (before insert) {
   Map<String,String> AcronimMap = new Map<String,String>();
   Map<String,String> RecordTypeMap = new Map<String,String>();
   Map<String,Integer> MaxReferenceNumberMap = new Map<String,Integer>();
-  for (RecordTypeAcronim__mdt record : [Select RecordTypeDeveloperName__c, 	Acronim__c FROM RecordTypeAcronim__mdt Where Sobject__c = 'Opportunity']) {
-    AcronimMap.put(record.RecordTypeDeveloperName__c, record.Acronim__c);
+  List<RecordTypeAcronym__mdt> RecordTypeAcronim = [Select RecordTypeDeveloperName__c, 	Acronym__c FROM RecordTypeAcronym__mdt Where Sobject__c = 'Opportunity'];
+  if(Test.isRunningTest()){
+
+    RecordTypeAcronim.add(new RecordTypeAcronym__mdt(RecordTypeDeveloperName__c = 'NexusGreaterAmount',Acronym__c='NX'));
+    RecordTypeAcronim.add(new RecordTypeAcronym__mdt(RecordTypeDeveloperName__c = 'NexusStandard',Acronym__c='NX'));
+  }
+  for (RecordTypeAcronym__mdt record : RecordTypeAcronim) {
+    AcronimMap.put(record.RecordTypeDeveloperName__c, record.Acronym__c);
   }
   for (RecordType record : [Select Id,DeveloperName FROM RecordType Where SObjectType = 'Opportunity']) {
     RecordTypeMap.put(record.Id,record.DeveloperName);
@@ -32,7 +38,10 @@ trigger OnOpportunity on Opportunity (before insert) {
   }
   for (Opportunity record : Trigger.new) {
     String CompanyAcronim = AcronimMap.get(RecordTypeMap.get(record.RecordTypeId));
-    Integer NumberOpportunity =  MaxReferenceNumberMap.get(CompanyAcronim) + 1;
+    Integer NumberOpportunity = 1;
+    if(MaxReferenceNumberMap.containsKey(CompanyAcronim)){
+       NumberOpportunity =  MaxReferenceNumberMap.get(CompanyAcronim) + 1;
+    }
     MaxReferenceNumberMap.put(CompanyAcronim, NumberOpportunity) ;
     record.Reference_Number__c = CompanyAcronim + '-' +  String.valueOf(NumberOpportunity).leftPad(5, '0');
   }
