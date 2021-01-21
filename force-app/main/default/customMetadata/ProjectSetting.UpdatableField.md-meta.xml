@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>UpdatableField</label>
+    <protected>false</protected>
+    <values>
+        <field>UpdatableField__c</field>
+        <value xsi:type="xsd:string">Name,Opportunity__c,Cliente__c,Codice_Account__c,PM__c,ReferenceNumber__c,Account_Category__c,Account__c,Project_Sentiment_Value__c,Stato__c,Tipo__c,Descrizione__c,Time_Tracking_Report__c,Budget_gg__c,Consuntivo_gg__c,Stima_gg_a_terminare__c,Annotazioni_sul_budget__c,Data_fine_prevista__c</value>
+    </values>
+</CustomMetadata>

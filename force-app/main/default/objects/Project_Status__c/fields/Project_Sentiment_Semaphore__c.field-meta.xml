@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Project_Sentiment_Semaphore__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISPICKVAL(Project_Sentiment_Value__c,&apos;Alarm&apos;),IMAGE(&quot;https://nexusat--c.eu17.visual.force.com/resource/1489804808000/red?&quot;,&apos;Indicator&apos;, 20, 20),
+IF(ISPICKVAL(Project_Sentiment_Value__c,&apos;Warning&apos;),IMAGE(&quot;https://nexusat--c.eu17.visual.force.com/resource/1489804808000/yellow?&quot;,&apos;Indicator&apos;, 20, 20),
+IF(ISPICKVAL(Project_Sentiment_Value__c,&apos;Ok&apos;),IMAGE(&quot;https://nexusat--c.eu17.visual.force.com/resource/1572355500000/green&quot;,&apos;Indicator&apos; , 20, 20),&quot;Impostare valore di Project Sentiment&quot;
+)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Project Sentiment Semaphore</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

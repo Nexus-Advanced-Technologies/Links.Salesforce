@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Costo_di_rivendita_HW_e_SW_e_ATI__c</fullName>
+    <externalId>false</externalId>
+    <label>Costo di rivendita HW e SW  e ATI</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

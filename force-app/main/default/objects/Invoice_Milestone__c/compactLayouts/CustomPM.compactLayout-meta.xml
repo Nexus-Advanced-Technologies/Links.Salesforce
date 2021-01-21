@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CustomPM</fullName>
+    <fields>Name</fields>
+    <fields>Codice_Fattura_Esterno__c</fields>
+    <fields>Ammontare__c</fields>
+    <fields>Stato__c</fields>
+    <fields>RecordTypeId</fields>
+    <label>CustomPM</label>
+</CompactLayout>

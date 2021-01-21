@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Oppurtunity_Standard</fullName>
+    <active>true</active>
+    <businessProcess>Sales</businessProcess>
+    <label>Oppurtunity Standard</label>
+    <picklistValues>
+        <picklist>Account_Category__c</picklist>
+        <values>
+            <fullName>12100</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>12101</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>12102</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>12103</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>12104</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>12105</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>12106</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>12107</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>12108</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>12109</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>12110</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>12111</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Fatturazione__c</picklist>
+        <values>
+            <fullName>Canone Quadrimestrale</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Canone Semestrale</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Canone Trimestrale</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fee Mensile</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>N%2FA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SAL %28%23Ticket%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SAL %280-0-100 %3DEquivale a 100%25consegna finale%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SAL %28100-0-0 %3DEquivale a 100%25ordine%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SAL %2830-40-30%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SAL %2830-50-20 %3DEquivale a 30%25ordine%2C 50%25UAT%2C 20%25consegnafinale%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SAL %2840-30-30%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SAL %2850-50%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ForecastCategoryName</picklist>
+        <values>
+            <fullName>Best Case</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Commit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Omitted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pipeline</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>IT_Service__c</picklist>
+        <values>
+            <fullName>11901</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>11902</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>11903</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>11905</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>LeadSource</picklist>
+        <values>
+            <fullName>Basecamp_2019</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Phone Inquiry</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Purchased List</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Referral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Salesforce Essentials 2017</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TechnologyHub</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Web</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Loss_Reason__c</picklist>
+        <values>
+            <fullName>Lost to Competitor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Budget %2F Lost Funding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Decision %2F Non-Responsive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Price</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Reason_Won_Lost__c</picklist>
+        <values>
+            <fullName>Al Cliente è piaciuto il prezzo%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Al Cliente è piaciuto il progetto%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer Relationship</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Il Cliente ha deciso di non adottare un CRM%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Il Cliente ha scelto un altro CRM%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Il Cliente non ha il budget per i Servizi Professionali NexusAT%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Il Cliente non ha il budget%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Il Cliente vuole SFDC%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Il Cliente vuole riparlarne tra 1 anno%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Poor qualification</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Price</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Proposed Solution</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Record_Owner__c</picklist>
+        <values>
+            <fullName>Flavia Dall%27Ora</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Francesco Veropalumbo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fulvio Vanacore</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Giovanni Costagliola</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Giuseppe Maiorano</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Massimo Colombo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roberto De Simone</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Service_Type__c</picklist>
+        <values>
+            <fullName>Altro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Digital Marketing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Operation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PRJ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SFDC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>T%26M</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type</picklist>
+        <values>
+            <fullName>Existing Business</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Business</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

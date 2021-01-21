@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ricavi2020FeFde__c</fullName>
+    <externalId>false</externalId>
+    <formula>Ricavi_2020_da_Fatture_emesse__c +  Ricavi_2020_da_Fatt_da_emettere__c +  di_cui_Risconto_al_2021__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Ricavi 2020 (Fe+Fde)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Invoice Milestone</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Invoices Milestone</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <recordTypes>
+        <label><!-- One Shot --></label>
+        <name>One_Shot</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Recursive --></label>
+        <name>Recursive</name>
+    </recordTypes>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <errorMessage><!-- Compilare i campi necessari e selezionare lo stato &quot;Da Fatturare&quot;. --></errorMessage>
+        <name>Block_Change_From_Draft</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Compilare i campi Ammontare e/o Opportunity prima di effettuare il cambio di stato. --></errorMessage>
+        <name>Block_Change_From_Draft_To_DaFatturare</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Impossibile tornare ad uno stato precedente. --></errorMessage>
+        <name>Block_Status_Change_From_FatturaPagata</name>
+    </validationRules>
+</CustomObjectTranslation>

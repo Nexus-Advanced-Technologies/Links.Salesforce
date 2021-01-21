@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Schema di fatturazione Dettaglio</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Tipo Pagamento Dettagli</value>
+    </caseValues>
+    <gender>Masculine</gender>
+    <recordTypes>
+        <label><!-- One Shot --></label>
+        <name>One_Shoot</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Recursive --></label>
+        <name>Ricorsivo</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Scostamento dal budget --></label>
+    <name>Scostamento_dal_budget__c</name>
+</CustomFieldTranslation>

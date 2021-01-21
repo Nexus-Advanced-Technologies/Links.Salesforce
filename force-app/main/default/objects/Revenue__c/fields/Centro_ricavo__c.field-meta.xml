@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Centro_ricavo__c</fullName>
+    <externalId>false</externalId>
+    <label>Centro ricavo</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Costo</fullName>
+                <default>false</default>
+                <label>Costo</label>
+            </value>
+            <value>
+                <fullName>Nexus - Editoria</fullName>
+                <default>false</default>
+                <label>Nexus - Editoria</label>
+            </value>
+            <value>
+                <fullName>Nexus - Operations</fullName>
+                <default>false</default>
+                <label>Nexus - Operations</label>
+            </value>
+            <value>
+                <fullName>Nexus - Progetti</fullName>
+                <default>false</default>
+                <label>Nexus - Progetti</label>
+            </value>
+            <value>
+                <fullName>Nexus - T&amp;M</fullName>
+                <default>false</default>
+                <label>Nexus - T&amp;M</label>
+            </value>
+            <value>
+                <fullName>Nexus Sales - Operations</fullName>
+                <default>false</default>
+                <label>Nexus Sales - Operations</label>
+            </value>
+            <value>
+                <fullName>Nexus Sales - Progetti</fullName>
+                <default>false</default>
+                <label>Nexus Sales - Progetti</label>
+            </value>
+            <value>
+                <fullName>Nexus Sales - SalesForce</fullName>
+                <default>false</default>
+                <label>Nexus Sales - SalesForce</label>
+            </value>
+            <value>
+                <fullName>Nexus Sales - T&amp;M</fullName>
+                <default>false</default>
+                <label>Nexus Sales - T&amp;M</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
