@@ -19,7 +19,7 @@ public class QuoteTriggerHelper {
             accountIds.add(q.AccountId);            
         }
         Map<Id,Account> accounts = new Map<Id,Account>(
-            [SELECT Id,Price_Book__c,Name
+            [SELECT Id,PriceBook__c,Name
             FROM Account
             WHERE Id IN :accountIds]
         );
@@ -36,9 +36,9 @@ public class QuoteTriggerHelper {
             System.debug('Account: '+q.AccountId);
             if(q.AccountId != null){
                 Account a = accounts.get(q.AccountId);
-                System.debug('Account: '+a.Id+' '+a.Name+' - PriceBook: '+a.Price_Book__c);
-                if(a.Price_Book__c != null){
-                    q.Pricebook2Id = a.Price_Book__c;
+                System.debug('Account: '+a.Id+' '+a.Name+' - PriceBook: '+a.PriceBook__c);
+                if(a.PriceBook__c != null){
+                    q.Pricebook2Id = a.PriceBook__c;
                 } else {
                     q.Pricebook2Id = standardPriceBook.Id;
                 }

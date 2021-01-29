@@ -1,67 +1,54 @@
 /**
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
- * @group             : 
- * @last modified on  : 01-21-2021
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @see               : OnOpportunity (Trigger)
+ * @see               : TriggerSetting (CustomMetadata)
+ * @important         : The OpportunityBeforeInsert__c field on TriggerSetting__mdt for Nexus record must be enabled for a positive test result
+ * @last modified on  : 24/01/2021
+ * @last modified by  : ¤ → alessio.marra@nexusat.it
  * Modifications Log 
  * Ver   Date         Author                               Modification
  * 1.0   01-21-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
 **/
 @isTest
 public class OnOpportunityTest {
-    
-	@testSetUp
-    public static void testOnOpportunity(){
-        
-    TriggerCustomSetting__c triggerCustomSetting = new TriggerCustomSetting__c();
-        //triggerCustomSetting.OnOpportunity_Before_Insert__c = true;
 
-       /* RecordTypeAcronim__mdt recordTypeAcronim = new RecordTypeAcronim__mdt (
-        Acronim__c = 'Test',
-        RecordTypeDeveloperName__c = 'Test1',
-        SObject__c = 'Test-1'
-        );
+	private static Id getRecordTypeId(String objectName, String recordTypeName) {
+		return [SELECT Id FROM RecordType WHERE sObjectType = :objectName AND DeveloperName = :recordTypeName AND isActive = true LIMIT 1].Id;
+	}
 
-        insert recordTypeAcronim;
-        */            
-        //RecordTypeAcronim__mdt recordTypeAcronim = new RecordTypeAcronim__mdt();      
+	private static Id insertAccount(String name) {
+		Account acc = new Account();
+		acc.Name = name;
+		insert acc;
+		return acc.Id;
+	}
 
-  }
-    
-   @isTest
-    public static void testOnOpportunityo(){
-        Id recordTypeId = [select id from RecordType where SobjectType = 'Opportunity' Limit 1].id ;
-        Id recordTypeId1 = [select id from RecordType where SobjectType = 'Opportunity' and Id != :recordTypeId Limit 1].id ;
+	private static Id insertOpportunity(String name, Id recordTypeId) {
+		Opportunity opp = new Opportunity();
+		opp.Name = name;
+		opp.accountId = insertAccount('Account Test (' + name + ')');
+		opp.StageName = 'Prospect';
+		opp.CloseDate = Date.newInstance(2020, 01, 01);
+		opp.RecordTypeId = recordTypeId;
+		insert opp;
+		return opp.Id;
+	}
 
-         Account account = new Account(
-            name= 'TestName');
-        insert account; 
+	@IsTest
+	static void testGenerateReferenceNumber() {
 
-        
-        
-        Opportunity opportunity = new Opportunity(
-            AccountId = account.id,
-            Name = 'oppTest',
-            StageName = 'Prospecting',
-            CloseDate = Date.today());
-            RecordTypeId = recordTypeId1;
-        insert opportunity;
+		Id recordTypeId = getRecordTypeId('Opportunity', 'NexusStandard');
+		
+		Test.startTest();
+		insertOpportunity('Opp1', recordTypeId);
+		insertOpportunity('Opp2', recordTypeId);
+		Test.stopTest();
 
-        Opportunity opportunity1 = new Opportunity(
-            AccountId = account.id,
-            Name = 'oppTest',
-            StageName = 'Prospecting',
-            CloseDate = Date.today());
-            RecordTypeId = recordTypeId;
-        insert opportunity1;
+		Opportunity opp1 = [SELECT ReferenceNumber__c FROM Opportunity WHERE Name = 'Opp1' LIMIT 1];
+		Opportunity opp2 = [SELECT ReferenceNumber__c FROM Opportunity WHERE Name = 'Opp2' LIMIT 1];
 
-        Opportunity opportunity2 = new Opportunity(
-            AccountId = account.id,
-            Name = 'oppTest',
-            StageName = 'Prospecting',
-            CloseDate = Date.today());
-            RecordTypeId = recordTypeId;
-        insert opportunity2;
-    }
+		System.assertEquals('NX-00000', opp1.ReferenceNumber__c);
+		System.assertEquals('NX-00001', opp2.ReferenceNumber__c);
+	}
 }

@@ -34,6 +34,10 @@
                 <behavior>Edit</behavior>
                 <field>Rating</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>CreatedDate__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Block_Change_From_Draft_To_DaFatturare</fullName>
+    <active>false</active>
+    <description>Blocca il passaggio di stato da &quot;Draft&quot; a &quot;DaFatturare&quot; se i campi Ammontare e/o Opportunity non sono compilati.</description>
+    <errorConditionFormula>AND(
+OR(
+ISBLANK(Amount__c),
+ISBLANK(Opportunity__c)
+),
+ ISPICKVAL( PRIORVALUE(Stage__c ), &apos;Draft&apos;),
+ ISPICKVAL( Stage__c , &apos;Da Fatturare&apos;)
+)</errorConditionFormula>
+    <errorMessage>Compilare i campi Ammontare e/o Opportunity prima di effettuare il cambio di stato.</errorMessage>
+</ValidationRule>

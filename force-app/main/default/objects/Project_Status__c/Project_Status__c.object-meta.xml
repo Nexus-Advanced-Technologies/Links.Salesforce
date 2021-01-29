@@ -161,6 +161,7 @@
         <type>Text</type>
     </nameField>
     <pluralLabel>Project Statuses</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
     <searchLayouts>
         <searchResultsAdditionalFields>Project_Sentiment_Semaphore__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Cliente__c</searchResultsAdditionalFields>

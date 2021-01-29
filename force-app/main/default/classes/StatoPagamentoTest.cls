@@ -9,9 +9,9 @@ private class StatoPagamentoTest {
 
         List<Account> lstAccount = new List<Account>(); //lista account
         List<Opportunity> lstOpportunity = new List<Opportunity>(); //lista opportunity 
-        List<Invoice_Milestone__c> lstInvoiceMilestone = new List<Invoice_Milestone__c>(); //lista Invoice Milestone
+        List<InvoiceMilestone__c> lstInvoiceMilestone = new List<InvoiceMilestone__c>(); //lista Invoice Milestone
         FattureInCloudSettings__c fattureInCloudeSettings = new FattureInCloudSettings__c();
-        fattureInCloudeSettings.StatoFattura__c = 'Fattura Inviata';
+        fattureInCloudeSettings.InvoiceStage__c = 'Fattura Inviata';
 
         insert fattureInCloudeSettings;
 
@@ -19,7 +19,7 @@ private class StatoPagamentoTest {
         for(Integer i=0 ;i <200;i++){
             Account acc = new Account();
             acc.Name ='Name'+i;
-            acc.NumeroInvoiceNonPagato__c = i;
+            acc.UnpaidInvoiceNumber__c = i;
             lstAccount.add(acc);
         }
         insert lstAccount;   
@@ -40,10 +40,10 @@ private class StatoPagamentoTest {
         //ciclo la lista di opportunity e per ognuna di esse inserisco le invoice milestone
         for(Opportunity opp: lstOpportunity){
             for(Integer i=0 ;i <3;i++){
-                Invoice_Milestone__c inv = new Invoice_Milestone__c();
+                InvoiceMilestone__c inv = new InvoiceMilestone__c();
                 inv.Name = 'intTest' + i;
-                inv.Data_prevista__c = Date.today() - 1;
-                inv.Stato__c = 'Fattura Inviata';
+                inv.ExpectedDate__c = Date.today() - 1;
+                inv.Stage__c = 'Fattura Inviata';
                 inv.Opportunity__c = opp.id;
                 lstInvoiceMilestone.add(inv);
             }

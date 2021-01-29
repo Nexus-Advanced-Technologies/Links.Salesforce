@@ -161,6 +161,7 @@
         <type>Text</type>
     </nameField>
     <pluralLabel>Fatture In Cloud</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
     <searchLayouts>
         <excludedStandardButtons>New</excludedStandardButtons>
         <excludedStandardButtons>OpenListInQuip</excludedStandardButtons>

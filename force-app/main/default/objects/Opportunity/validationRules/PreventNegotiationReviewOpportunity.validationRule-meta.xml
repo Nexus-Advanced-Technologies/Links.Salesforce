@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PreventNegotiationReviewOpportunity</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF( RecordType.DeveloperName = &apos;Opportunity_Greater_Amount&apos;,
+AND(
+OR(
+ISPICKVAL( PRIORVALUE( StageName ) , &apos;Prospecting&apos;),
+ISPICKVAL( PRIORVALUE( StageName ) , &apos;Qualification&apos;),
+ISPICKVAL( PRIORVALUE( StageName ) , &apos;Needs Analysis&apos;),
+ISPICKVAL( PRIORVALUE( StageName ) , &apos;Value Proposition - Demo&apos;),
+ISPICKVAL( PRIORVALUE( StageName ) , &apos;Proposal/Price Quote&apos;),
+ISPICKVAL( PRIORVALUE( StageName ) , &apos;Pianifica Milestone&apos;)
+),
+ISPICKVAL( StageName , &apos;Negotiation/Review&apos;)
+),
+AND(
+OR(
+ISPICKVAL( PRIORVALUE( StageName ) , &apos;Prospecting&apos;),
+ISPICKVAL( PRIORVALUE( StageName ) , &apos;Qualification&apos;),
+ISPICKVAL( PRIORVALUE( StageName ) , &apos;Needs Analysis&apos;),
+ISPICKVAL( PRIORVALUE( StageName ) , &apos;Value Proposition - Demo&apos;),
+ISPICKVAL( PRIORVALUE( StageName ) , &apos;Proposal/Price Quote&apos;)
+),
+ISPICKVAL( StageName , &apos;Negotiation/Review&apos;)
+)
+)</errorConditionFormula>
+    <errorMessage>L&apos;opportunità non può essere marcata come Negotiation/Review a partire dagli stati Prospecting, Qualification, Needs Analysis, Value Proposition - Demo, Proposal/Price Quote, Pianifica Milestone.
+Passare prima in Pianifica Milestone</errorMessage>
+</ValidationRule>

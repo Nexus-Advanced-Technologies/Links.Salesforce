@@ -4,7 +4,7 @@
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
     <label>Schema di Fatturazione</label>
-    <referenceTo>Tipo_Pagamento__c</referenceTo>
+    <referenceTo>PaymentType__c</referenceTo>
     <relationshipLabel>Opportunities</relationshipLabel>
     <relationshipName>Opportunities</relationshipName>
     <required>false</required>

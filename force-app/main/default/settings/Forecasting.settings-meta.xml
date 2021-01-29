@@ -274,8 +274,16 @@
             <label>Codice Commessa</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bSCV</field>
+            <label>CompanyAcronim</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOA</field>
             <label>Costo atteso rimanente</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bKzj</field>
+            <label>Created Date in Nexus ORG</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOB</field>
@@ -489,7 +497,9 @@
             <field>00N09000005AiBt</field>
             <field>00N1X000008PQOV</field>
             <field>00N1X000008PQO9</field>
+            <field>00N1X000008bSCV</field>
             <field>00N1X000008PQOA</field>
+            <field>00N1X000008bKzj</field>
             <field>00N1X000008PQOB</field>
             <field>00N1X000008PQOC</field>
             <field>00N09000005AiBu</field>
@@ -735,8 +745,16 @@
             <label>Codice Commessa</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bSCV</field>
+            <label>CompanyAcronim</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOA</field>
             <label>Costo atteso rimanente</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bKzj</field>
+            <label>Created Date in Nexus ORG</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOB</field>
@@ -950,7 +968,9 @@
             <field>00N09000005AiBt</field>
             <field>00N1X000008PQOV</field>
             <field>00N1X000008PQO9</field>
+            <field>00N1X000008bSCV</field>
             <field>00N1X000008PQOA</field>
+            <field>00N1X000008bKzj</field>
             <field>00N1X000008PQOB</field>
             <field>00N1X000008PQOC</field>
             <field>00N09000005AiBu</field>
@@ -1200,8 +1220,16 @@
             <label>Codice Commessa</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bSCV</field>
+            <label>CompanyAcronim</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOA</field>
             <label>Costo atteso rimanente</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bKzj</field>
+            <label>Created Date in Nexus ORG</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOB</field>
@@ -1416,7 +1444,9 @@
             <field>00N09000005AiBt</field>
             <field>00N1X000008PQOV</field>
             <field>00N1X000008PQO9</field>
+            <field>00N1X000008bSCV</field>
             <field>00N1X000008PQOA</field>
+            <field>00N1X000008bKzj</field>
             <field>00N1X000008PQOB</field>
             <field>00N1X000008PQOC</field>
             <field>00N09000005AiBu</field>
@@ -1662,8 +1692,16 @@
             <label>Codice Commessa</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bSCV</field>
+            <label>CompanyAcronim</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOA</field>
             <label>Costo atteso rimanente</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bKzj</field>
+            <label>Created Date in Nexus ORG</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOB</field>
@@ -1877,7 +1915,9 @@
             <field>00N09000005AiBt</field>
             <field>00N1X000008PQOV</field>
             <field>00N1X000008PQO9</field>
+            <field>00N1X000008bSCV</field>
             <field>00N1X000008PQOA</field>
+            <field>00N1X000008bKzj</field>
             <field>00N1X000008PQOB</field>
             <field>00N1X000008PQOC</field>
             <field>00N09000005AiBu</field>
@@ -2127,8 +2167,16 @@
             <label>Codice Commessa</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bSCV</field>
+            <label>CompanyAcronim</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOA</field>
             <label>Costo atteso rimanente</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bKzj</field>
+            <label>Created Date in Nexus ORG</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOB</field>
@@ -2343,7 +2391,9 @@
             <field>00N09000005AiBt</field>
             <field>00N1X000008PQOV</field>
             <field>00N1X000008PQO9</field>
+            <field>00N1X000008bSCV</field>
             <field>00N1X000008PQOA</field>
+            <field>00N1X000008bKzj</field>
             <field>00N1X000008PQOB</field>
             <field>00N1X000008PQOC</field>
             <field>00N09000005AiBu</field>
@@ -2589,8 +2639,16 @@
             <label>Codice Commessa</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bSCV</field>
+            <label>CompanyAcronim</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOA</field>
             <label>Costo atteso rimanente</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bKzj</field>
+            <label>Created Date in Nexus ORG</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOB</field>
@@ -2804,7 +2862,9 @@
             <field>00N09000005AiBt</field>
             <field>00N1X000008PQOV</field>
             <field>00N1X000008PQO9</field>
+            <field>00N1X000008bSCV</field>
             <field>00N1X000008PQOA</field>
+            <field>00N1X000008bKzj</field>
             <field>00N1X000008PQOB</field>
             <field>00N1X000008PQOC</field>
             <field>00N09000005AiBu</field>
@@ -3054,8 +3114,16 @@
             <label>Codice Commessa</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bSCV</field>
+            <label>CompanyAcronim</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOA</field>
             <label>Costo atteso rimanente</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bKzj</field>
+            <label>Created Date in Nexus ORG</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOB</field>
@@ -3270,7 +3338,9 @@
             <field>00N09000005AiBt</field>
             <field>00N1X000008PQOV</field>
             <field>00N1X000008PQO9</field>
+            <field>00N1X000008bSCV</field>
             <field>00N1X000008PQOA</field>
+            <field>00N1X000008bKzj</field>
             <field>00N1X000008PQOB</field>
             <field>00N1X000008PQOC</field>
             <field>00N09000005AiBu</field>
@@ -3516,8 +3586,16 @@
             <label>Codice Commessa</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bSCV</field>
+            <label>CompanyAcronim</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOA</field>
             <label>Costo atteso rimanente</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bKzj</field>
+            <label>Created Date in Nexus ORG</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOB</field>
@@ -3731,7 +3809,9 @@
             <field>00N09000005AiBt</field>
             <field>00N1X000008PQOV</field>
             <field>00N1X000008PQO9</field>
+            <field>00N1X000008bSCV</field>
             <field>00N1X000008PQOA</field>
+            <field>00N1X000008bKzj</field>
             <field>00N1X000008PQOB</field>
             <field>00N1X000008PQOC</field>
             <field>00N09000005AiBu</field>
@@ -3981,8 +4061,16 @@
             <label>Codice Commessa</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bSCV</field>
+            <label>CompanyAcronim</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOA</field>
             <label>Costo atteso rimanente</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bKzj</field>
+            <label>Created Date in Nexus ORG</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOB</field>
@@ -4197,7 +4285,9 @@
             <field>00N09000005AiBt</field>
             <field>00N1X000008PQOV</field>
             <field>00N1X000008PQO9</field>
+            <field>00N1X000008bSCV</field>
             <field>00N1X000008PQOA</field>
+            <field>00N1X000008bKzj</field>
             <field>00N1X000008PQOB</field>
             <field>00N1X000008PQOC</field>
             <field>00N09000005AiBu</field>
@@ -4443,8 +4533,16 @@
             <label>Codice Commessa</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bSCV</field>
+            <label>CompanyAcronim</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOA</field>
             <label>Costo atteso rimanente</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bKzj</field>
+            <label>Created Date in Nexus ORG</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOB</field>
@@ -4658,7 +4756,9 @@
             <field>00N09000005AiBt</field>
             <field>00N1X000008PQOV</field>
             <field>00N1X000008PQO9</field>
+            <field>00N1X000008bSCV</field>
             <field>00N1X000008PQOA</field>
+            <field>00N1X000008bKzj</field>
             <field>00N1X000008PQOB</field>
             <field>00N1X000008PQOC</field>
             <field>00N09000005AiBu</field>
@@ -4908,8 +5008,16 @@
             <label>Codice Commessa</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bSCV</field>
+            <label>CompanyAcronim</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOA</field>
             <label>Costo atteso rimanente</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bKzj</field>
+            <label>Created Date in Nexus ORG</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOB</field>
@@ -5124,7 +5232,9 @@
             <field>00N09000005AiBt</field>
             <field>00N1X000008PQOV</field>
             <field>00N1X000008PQO9</field>
+            <field>00N1X000008bSCV</field>
             <field>00N1X000008PQOA</field>
+            <field>00N1X000008bKzj</field>
             <field>00N1X000008PQOB</field>
             <field>00N1X000008PQOC</field>
             <field>00N09000005AiBu</field>
@@ -5370,8 +5480,16 @@
             <label>Codice Commessa</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bSCV</field>
+            <label>CompanyAcronim</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOA</field>
             <label>Costo atteso rimanente</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
+            <field>00N1X000008bKzj</field>
+            <label>Created Date in Nexus ORG</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
             <field>00N1X000008PQOB</field>
@@ -5585,7 +5703,9 @@
             <field>00N09000005AiBt</field>
             <field>00N1X000008PQOV</field>
             <field>00N1X000008PQO9</field>
+            <field>00N1X000008bSCV</field>
             <field>00N1X000008PQOA</field>
+            <field>00N1X000008bKzj</field>
             <field>00N1X000008PQOB</field>
             <field>00N1X000008PQOC</field>
             <field>00N09000005AiBu</field>

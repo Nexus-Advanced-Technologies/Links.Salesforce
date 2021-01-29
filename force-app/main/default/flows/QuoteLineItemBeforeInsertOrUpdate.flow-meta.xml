@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <assignments>
+        <name>UpdateInternalCost</name>
+        <label>Update InternalCost</label>
+        <locationX>50</locationX>
+        <locationY>373</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Internal_Cost__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.PricebookEntry.Internal_Cost__c</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>ParentRecordType</name>
+        <label>Parent RecordType?</label>
+        <locationX>182</locationX>
+        <locationY>253</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Nexus</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Quote.RecordType.DeveloperName</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>Nexus</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>UpdateInternalCost</targetReference>
+            </connector>
+            <label>Nexus</label>
+        </rules>
+    </decisions>
+    <description>ALWAYS
+- Update IntenalCost</description>
+    <interviewLabel>QuoteLineItem Before Insert Or Update {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>QuoteLineItem Before Insert Or Update</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>ParentRecordType</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>QuoteId</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue/>
+            </value>
+        </filters>
+        <object>QuoteLineItem</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Draft</status>
+</Flow>

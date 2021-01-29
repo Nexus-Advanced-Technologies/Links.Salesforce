@@ -1,0 +1,39 @@
+<aura:component >
+    <ltng:require scripts="{!join(',', $Resource.LEX + '/ms.js', $Resource.LEX + '/ms-regex.js')}" afterScriptsLoaded="{!c.scriptsLoaded}"/>
+    
+    <aura:attribute name="label" type="String" required="true"/>
+    <aura:attribute name="placeholderText" type="String" />
+    <aura:attribute name="name" type="String" required="true"/>
+    <aura:attribute name="value" type="String" required="true"/>
+    <aura:attribute name="delimiter" type="String" default=";" description="Character used to split the input"/>
+    <aura:attribute name="delimiterInDatabase" type="String" default=";" description="Character used to split the input for database storage"/>
+    <aura:attribute name="validationTypes" type="String" default="" description="Possible values (for multiple add them as comma separated): emailAddress, ipAddress, weburl, positiveDecimalNumberWithTwoDecimals, positiveInteger, nonEmptyString"/>
+    
+    <aura:attribute name="pills" type="List" default="[]" access="public" />
+    <aura:attribute name="scriptsLoaded" type="Boolean" default="false" access="private"/>
+    <aura:attribute name="valueDataLoaded" type="Boolean" default="false" access="private"/>
+    
+    <aura:registerEvent name="appEvent" type="c:pillsEvent"/>
+    <aura:handler event="c:pillsInputEvent" action="{!c.handleApplicationEvent}"/>
+    
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <aura:handler name="change" value="{!v.pills}" action="{!c.handlePillsChanged}"/>
+    <aura:handler name="change" value="{!v.value}" action="{!c.handleValueChanged}"/>
+    
+    <div class="slds-form-element">
+        <label class="slds-form-element__label" for="{!v.name}">{!v.label}</label>
+        <div class="slds-form-element__control">
+            <input aura:id="inputText" type="email" id="{!v.name}" class="slds-input" placeholder="{!v.placeholderText}" value="" onkeyup="{!c.onKeyUpInput}"/>
+            <div id="{!'listbox-selections-' + v.name}" role="listbox" aria-orientation="horizontal">
+                <ul class="slds-listbox slds-listbox_inline slds-p-top_xxx-small" role="group" aria-label="Inputted Options:">
+                    <aura:iteration items="{!v.pills}" var="pill">
+                        <li role="presentation" class="slds-listbox__item">
+                            <lightning:pill name="{!pill.id}" label="{!pill.label}" hasError="{!!pill.isValid}" onremove="{!c.onRemovePill}"/>
+                        </li>
+                    </aura:iteration>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+</aura:component>
