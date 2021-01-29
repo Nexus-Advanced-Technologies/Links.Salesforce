@@ -22,7 +22,7 @@
                     </div>
                     <div class="slds-col">
                         <span>
-                            <strong>{!opp.Totale_Saldato_Percentuale__c}% Completed</strong>
+                            <strong>{!opp.TotalSettledPercentage__c}% Completed</strong>
                         </span>
                     </div>
                 </div>
