@@ -28,27 +28,27 @@
                 </div>
                 <div class="cardMessageContainer">
                     <div class="slds-p-around--medium">     
-                        <lightning:progressBar value="{!opp.Totale_Saldato_Percentuale__c}"/> 
+                        <lightning:progressBar value="{!opp.TotalSettledPercentage__c}"/> 
                     </div> 
                 </div>                
                 <div class="slds-grid slds-grid_vertical-align-start" style="height:50px">
                     <div class="slds-col">
                         <span>Totale Saldato:</span><br/>
-                        <span><lightning:formattedNumber value="{!opp.Totale_Saldato__c}" style="currency" currencyCode="EUR"/></span>                        
+                        <span><lightning:formattedNumber value="{!opp.TotalSettled__c}" style="currency" currencyCode="EUR"/></span>                        
                     </div>                    
                 </div>    
                 <div class="slds-grid slds-grid_vertical-align-start" style="height:50px">
                     <div class="slds-col">
                         <span>Totale Draft:</span><br/>
-                        <span><lightning:formattedNumber value="{!opp.Totale_Draft__c}" style="currency" currencyCode="EUR"/></span>
+                        <span><lightning:formattedNumber value="{!opp.TotalInDraft__c}" style="currency" currencyCode="EUR"/></span>
                     </div>
                     <div class="slds-col">
                         <span>Totale da Fatturare:</span><br/>
-                        <span><lightning:formattedNumber value="{!opp.Totale_Da_Fatturare__c}" style="currency" currencyCode="EUR"/></span>
+                        <span><lightning:formattedNumber value="{!opp.TotalToBeInvoiced__c}" style="currency" currencyCode="EUR"/></span>
                     </div>
                     <div class="slds-col">
                         <span>Totale Fatture Inviate:</span><br/>
-                        <span><lightning:formattedNumber value="{!opp.Totale_Fatture_Inviate__c}" style="currency" currencyCode="EUR"/></span>
+                        <span><lightning:formattedNumber value="{!opp.TotalSentInvoices__c}" style="currency" currencyCode="EUR"/></span>
                     </div>
                 </div>
                 
@@ -56,11 +56,11 @@
                     <div class="slds-col">
                         <span>Fatturato da Pianificare:</span><br/>
                         <span>
-                            <lightning:formattedNumber value="{!opp.Fatturato_Da_Pianificare__c+'   '}" style="currency" currencyCode="EUR"/>
+                            <lightning:formattedNumber value="{!opp.RevenueToPlan__c+'   '}" style="currency" currencyCode="EUR"/>
                             di
                             <lightning:formattedNumber value="{!'   '+opp.Amount}" style="currency" currencyCode="EUR"/>
                         </span><br/>
-                        <span><lightning:formattedRichText value="{!' '+opp.Indicatore_Gap__c}" class="slds-text-body_small"/></span>
+                        <span><lightning:formattedRichText value="{!' '+opp.GapIndicator__c}" class="slds-text-body_small"/></span>
                     </div>                                    
                 </div>                
                 <lightning:button label="Riepilogo Offerta" 
