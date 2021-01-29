@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
-    <help><!-- Indica la presenza di un DDT incluso nel documento. --></help>
-    <label><!-- Ddt --></label>
-    <name>Ddt__c</name>
-</CustomFieldTranslation>

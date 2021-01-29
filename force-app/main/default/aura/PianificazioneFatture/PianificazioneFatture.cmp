@@ -1,0 +1,8 @@
+<aura:component controller="PianificazioneFattureController" implements="flexipage:availableForAllPageTypes,force:lightningQuickActionWithoutHeader,force:hasRecordId" access="global" >
+        <aura:attribute name="recordId" type="String" />
+        
+        
+        <lightning:button label="Pianifica Invoice Milestone" onclick="{!c.doInit}" 
+                                      variant="brand" iconName='utility:money'/>
+
+</aura:component>

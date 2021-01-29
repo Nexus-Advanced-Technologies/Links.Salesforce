@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CheckAmountEPagamento</fullName>
+    <active>true</active>
+    <description>I campi Amount e Schema di Fatturazione sono obbligatori al fine di portare l&apos;Opportunità in stato Pianifica Milestone.</description>
+    <errorConditionFormula>AND(
+OR(
+ISPICKVAL( PRIORVALUE( StageName ) , &apos;Prospecting&apos;),
+ISPICKVAL( PRIORVALUE( StageName ) , &apos;Qualification&apos;),
+ISPICKVAL( PRIORVALUE( StageName ) , &apos;Needs Analysis&apos;),
+ISPICKVAL( PRIORVALUE( StageName ) , &apos;Value Proposition - Demo&apos;),
+ISPICKVAL( PRIORVALUE( StageName ) , &apos;Proposal/Price Quote&apos;)
+),
+ISPICKVAL(StageName , &apos;Pianifica Milestone&apos;),
+OR(
+OR(Amount &lt;= 0, ISNULL(Amount)),
+ISBLANK(Tipo_Pagamento__c)
+)
+)</errorConditionFormula>
+    <errorMessage>Compilare i campi Amount e Schema di Fatturazione per portare l&apos;Opportunità in stato Pianifica Milestone.</errorMessage>
+</ValidationRule>

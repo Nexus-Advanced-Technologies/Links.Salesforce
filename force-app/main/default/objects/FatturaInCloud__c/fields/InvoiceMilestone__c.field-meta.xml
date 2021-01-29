@@ -5,7 +5,7 @@
     <description>Lookup alla fattura collegata.</description>
     <externalId>false</externalId>
     <label>Invoice Milestone</label>
-    <referenceTo>Invoice_Milestone__c</referenceTo>
+    <referenceTo>InvoiceMilestone__c</referenceTo>
     <relationshipLabel>Fatture In Cloud</relationshipLabel>
     <relationshipName>Fatture_In_Cloud</relationshipName>
     <required>false</required>

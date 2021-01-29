@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlowDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>IF Stage = &quot;Close Won&quot;
+- Create Project Status
+- Send Email Close Won
+IF Stage = &quot;Close Won&quot; &amp;&amp; Amoun &gt; 0
+- Send Email Sales
+IF Stage = &quot;Pianifica Milestone&quot;
+- Pianificazione Fatture
+IF Stage = &quot;Check CDG&quot;
+- Send Email Check CDG</description>
+    <masterLabel>Opportunity After Insert Or Update</masterLabel>
+</FlowDefinition>

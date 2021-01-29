@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Block_Change_From_Draft</fullName>
+    <active>false</active>
+    <description>Impedisce il passaggio di stato da Draft a Fattura Inviata o Fattura Pagata.</description>
+    <errorConditionFormula>AND(
+ ISPICKVAL( PRIORVALUE(Stage__c), &apos;Draft&apos;),
+ OR(
+  ISPICKVAL( Stage__c, &apos;Fattura Pagata&apos;),
+  ISPICKVAL( Stage__c, &apos;Fattura Inviata&apos;)
+ )
+)</errorConditionFormula>
+    <errorDisplayField>Stage__c</errorDisplayField>
+    <errorMessage>Compilare i campi necessari e selezionare lo stato &quot;Da Fatturare&quot;.</errorMessage>
+</ValidationRule>

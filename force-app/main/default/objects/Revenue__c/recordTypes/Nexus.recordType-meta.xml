@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nexus</fullName>
+    <active>true</active>
+    <label>Nexus</label>
+    <picklistValues>
+        <picklist>RevenueCenter__c</picklist>
+        <values>
+            <fullName>Cost</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nexus - Operations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nexus - Projects</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nexus - Publishing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nexus - T%26M</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nexus Sales - Operations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nexus Sales - Projects</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nexus Sales - SalesForce</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nexus Sales - T%26M</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

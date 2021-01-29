@@ -1,0 +1,16 @@
+
+Crema:
+    Salesforce:
+        ✔ Owner custom per Opportunity, Order, DDT, Invoice @done(21-01-22 10:42)
+    Integration:
+        ✔ LoadToSF aggiungere Owner custom @done(21-01-22 12:21)
+
+NexusToLinks:
+    PROD:
+        ☐ Delete "custom" field in Opportunity (ROI_Analysis_Completed__c, Loss_Reason__c)
+    
+    ✔ Rename apiname Opportunity @critical @done(21-01-22 16:23)
+    ✔ Remane apiname ProjectStatus @critical @done(21-01-22 16:23)
+    ☐ CodeReview (aggiungi attivazione trigger)
+    ✔ throw exception se un record non è associato a nessuna company nel metodo _splitByCompany_ @high @done(21-01-24 19:34)
+    ✔ Creazione nuova partial org @today @done(21-01-22 18:19)

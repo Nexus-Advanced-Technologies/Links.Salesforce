@@ -3,7 +3,7 @@
     <fullName>Total_Internal_Cost_Synced__c</fullName>
     <externalId>false</externalId>
     <label>Total Internal Cost</label>
-    <summarizedField>Quote.Total_Internal_Cost__c</summarizedField>
+    <summarizedField>Quote.TotalInternalCost__c</summarizedField>
     <summaryFilterItems>
         <field>Quote.IsSyncing</field>
         <operation>equals</operation>

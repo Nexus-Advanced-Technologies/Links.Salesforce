@@ -4,13 +4,13 @@
     <description>Ammontare invoice milestone da fatturare</description>
     <externalId>false</externalId>
     <label>Totale Da Fatturare</label>
-    <summarizedField>Invoice_Milestone__c.Ammontare__c</summarizedField>
+    <summarizedField>InvoiceMilestone__c.Amount__c</summarizedField>
     <summaryFilterItems>
-        <field>Invoice_Milestone__c.Stato__c</field>
+        <field>InvoiceMilestone__c.Stage__c</field>
         <operation>equals</operation>
         <value>Da Fatturare</value>
     </summaryFilterItems>
-    <summaryForeignKey>Invoice_Milestone__c.Opportunity__c</summaryForeignKey>
+    <summaryForeignKey>InvoiceMilestone__c.Opportunity__c</summaryForeignKey>
     <summaryOperation>sum</summaryOperation>
     <trackTrending>false</trackTrending>
     <type>Summary</type>
