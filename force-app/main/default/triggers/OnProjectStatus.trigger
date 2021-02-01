@@ -1,12 +1,13 @@
 /**
  * @description       : 
  * @author            : 
- * @last modified on  : 29/01/2021
+ * @last modified on  : 01/02/2021
  * @last modified by  : ¤ → alessio.marra@nexusat.it
  * Modifications Log 
  * Ver   Date         Author                         Modification
  * 1.0                                               Initial Version
  * 1.1   25/01/2021   ¤ → alessio.marra@nexusat.it   Added controll to enable/disable
+ * 1.2   01/02/2021   ¤ → alessio.marra@nexusat.it   Add CustomMetadata in TriggerUtilities with @TestVisible
 **/
 trigger OnProjectStatus on ProjectStatus__c (after insert, after update, before insert, before update) {
 	System.debug('¤ OnProjectStatus {');
@@ -16,7 +17,7 @@ trigger OnProjectStatus on ProjectStatus__c (after insert, after update, before 
 
 	//Get CustomMetadata with trigger information for each company
 	Map<String, TriggerSetting__mdt> triggerSettings = new Map<String, TriggerSetting__mdt>();
-	for (TriggerSetting__mdt var : [SELECT DeveloperName, ProjectStatusAfterInsert__c, ProjectStatusAfterUpdate__c, ProjectStatusBeforeInsert__c, ProjectStatusBeforeUpdate__c FROM TriggerSetting__mdt]) {
+	for (TriggerSetting__mdt var : TriggerUtilities.TriggerSettingProjectStatus) {
 		triggerSettings.put(var.DeveloperName, var);
 	}
 
