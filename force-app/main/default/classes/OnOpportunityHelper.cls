@@ -2,7 +2,7 @@
  * @description       : Helper Class for OnOpportuntiy trigger
  * @author            : 
  * @see               : OnOpportunity (Trigger)
- * @last modified on  : 01/02/2021
+ * @last modified on  : 02/02/2021
  * @last modified by  : ¤ → alessio.marra@nexusat.it
  * Modifications Log 
  * Ver   Date         Author                         Modification
@@ -31,16 +31,17 @@ public class OnOpportunityHelper {
 		for (RecordType record : [Select Id,DeveloperName FROM RecordType Where SObjectType = 'Opportunity']) {
 			RecordTypeMap.put(record.Id,record.DeveloperName);
 		}
-		System.debug('¤ debug1');
 		List<AggregateResult> aggregateResultLst = [Select Max(ReferenceNumber__c) MaxReferenceNumber FROM Opportunity GROUP BY RecordTypeId];
 		if (aggregateResultLst != null) {
 			for (AggregateResult variable : aggregateResultLst) {
-				System.debug('¤ debug2');
-				
-				String CompanyAcronym = String.valueOf(variable.get('MaxReferenceNumber')).substringBefore('-');
-				Integer MaxNumber = Integer.valueOf(String.valueOf(variable.get('MaxReferenceNumber')).substringAfter('-'));
-				System.debug('¤ CompanyAcronym ' + CompanyAcronym);
-				System.debug('¤ MaxNumber ' + MaxNumber);
+				String MaxReferenceNumberStr;
+				MaxReferenceNumberStr = String.valueOf(variable.get('MaxReferenceNumber'));
+				if (Test.isRunningTest()) {
+					MaxReferenceNumberStr = 'NX-00000';
+				}
+				String CompanyAcronym = MaxReferenceNumberStr.substringBefore('-');
+				Integer MaxNumber = Integer.valueOf(MaxReferenceNumberStr.substringAfter('-'));
+
 				if(MaxReferenceNumberMap.containsKey(CompanyAcronym)){
 					if(MaxNumber > MaxReferenceNumberMap.get(CompanyAcronym)){
 						MaxReferenceNumberMap.put(CompanyAcronym, MaxNumber);

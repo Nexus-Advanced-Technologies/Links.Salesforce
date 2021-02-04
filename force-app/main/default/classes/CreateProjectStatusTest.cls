@@ -1,22 +1,52 @@
 /**
  * @description       : 
  * @author            : 
- * @last modified on  : 25/01/2021
+ * @last modified on  : 03/02/2021
  * @last modified by  : ¤ → alessio.marra@nexusat.it
- * Modifications Log 
- * Ver   Date         Author                         Modification
- * 1.0                                               Initial Version
- * 1.1   25/01/2021   ¤ → alessio.marra@nexusat.it   Review ApiName Nomenclature
 **/
-@isTest(SeeAllData=true)
+@IsTest(SeeAllData=true)
 public class CreateProjectStatusTest {
-	@isTest
-	static void createStatusTest(){
 
-		OpportunitySetting__c sett = new OpportunitySetting__c(
-			FteWhere__c = 'Name = \'NX-00521 Test\''
-		);
-		insert sett;
+	private static List<TriggerSetting__mdt> createCustomMetadataOpportunity(Boolean status) {
+		List<TriggerSetting__mdt> triggerSettingMDT = (List<TriggerSetting__mdt>) Json.deserialize(
+			'[' +
+				'{' +
+					'"DeveloperName": "Nexus",' +
+					'"OpportunityBeforeInsert__c": "' + status + '"' +
+				'}' +
+			']'
+			,List<TriggerSetting__mdt>.class
+		); 
+		return triggerSettingMDT;
+	}
+
+	private static List<TriggerSetting__mdt> createCustomMetadataQuote(Boolean status) {
+		List<TriggerSetting__mdt> triggerSettingMDT = (List<TriggerSetting__mdt>) Json.deserialize(
+			'[' +
+				'{' +
+					'"DeveloperName": "Nexus",' +
+					'"QuoteAfterInsert__c": "' + status + '"' +
+				'}' +
+			']'
+			,List<TriggerSetting__mdt>.class
+		); 
+		return triggerSettingMDT;
+	}
+
+	private static Id getRecordTypeId(String objectName, String recordTypeName) {
+		return [SELECT Id FROM RecordType WHERE sObjectType = :objectName AND DeveloperName = :recordTypeName AND isActive = true LIMIT 1].Id;
+	}
+
+	@IsTest
+	static void createStatusTest() {
+
+		Test.startTest();
+		TriggerUtilities.TriggerSettingOpportunity = createCustomMetadataOpportunity(false);
+		TriggerUtilities.TriggerSettingQuote = createCustomMetadataQuote(true);
+
+		OpportunitySetting__c sett = [SELECT Id, FteWhere__c FROM OpportunitySetting__c LIMIT 1];
+		sett.FteWhere__c = 'Name = \'TS-00521 Test\'';
+		update sett;
 
 		//Insert Account
 		Account testAccount = New Account();
@@ -24,19 +54,14 @@ public class CreateProjectStatusTest {
 		testAccount.PriceBook__c = Test.getStandardPricebookId();
 		insert testAccount;
 
-		Id recStandarId = [SELECT Id, DeveloperName, Name 
-							FROM RecordType
-							WHERE DeveloperName = 'NexusStandard'].Id;
-		
-		Id recordTypeQuote = [SELECT Id FROM RecordType WHERE SObjectType = 'Quote' AND DeveloperName = 'Nexus' AND IsActive = true LIMIT 1].Id;
-
 		//Insert Opportunity
 		Opportunity opp = New Opportunity();
-		opp.Name = 'NX-00521 Test';
+		opp.Name = 'TS-00521 Test';
 		opp.AccountId = testAccount.Id;
-		opp.RecordTypeId = recStandarId;
+		opp.RecordTypeId = getRecordTypeId('Opportunity', 'NexusStandard');
 		opp.CloseDate = Date.today();
 		opp.StageName = 'Closed Won';
+		opp.ReferenceNumber__c = 'TS-00521';
 		insert opp;
 
 		//Insert Quote
@@ -44,16 +69,15 @@ public class CreateProjectStatusTest {
 		quoteTest.Name = 'test';
 		quoteTest.OpportunityId = opp.Id;
 		quoteTest.Status = 'Accepted';
-		quoteTest.RecordTypeId = recordTypeQuote;
+		quoteTest.RecordTypeId = getRecordTypeId('Quote', 'Nexus');
 		insert quoteTest;
 
-		Opportunity opp1 = [SELECT Id, Name, SyncedQuoteId FROM Opportunity WHERE name = 'NX-00521 Test'];
+		Opportunity opp1 = [SELECT Id, Name, SyncedQuoteId FROM Opportunity WHERE name = 'TS-00521 Test'];
 		opp1.SyncedQuoteId = quoteTest.Id;
 		update opp1;
 
-		Test.startTest();
 		List<Id> listOppId = new List<Id>();
-		Id oppId = [SELECT Id, Name, SyncedQuoteId FROM Opportunity WHERE name = 'NX-00521 Test'].Id;
+		Id oppId = [SELECT Id, Name, SyncedQuoteId FROM Opportunity WHERE name = 'TS-00521 Test'].Id;
 		listOppId.add(oppId);
 		CreateProjectStatus.createProjectStatusInvocable(listOppId);
 		Test.stopTest();

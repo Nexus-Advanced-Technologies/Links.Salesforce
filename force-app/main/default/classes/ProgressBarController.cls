@@ -16,6 +16,7 @@ public class ProgressBarController {
 							RevenueToPlan__c,TotalToBeInvoiced__c,TotalSettledPercentage__c,GapIndicator__c
 							FROM Opportunity
 							WHERE Id =: recordId];
+        system.debug('Ø-opp ' + opp);
 		return opp;
 	}
 }

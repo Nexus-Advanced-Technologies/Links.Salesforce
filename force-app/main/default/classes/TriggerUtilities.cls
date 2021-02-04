@@ -3,7 +3,7 @@
  * @author            : ¤ → alessio.marra@nexusat.it
  * @see               : OnOpportunity (Trigger)
  * @see               : TriggerSetting (CustomMetadata)
- * @last modified on  : 01/02/2021
+ * @last modified on  : 03/02/2021
  * @last modified by  : ¤ → alessio.marra@nexusat.it
  * Modifications Log 
  * Ver   Date         Author                         Modification
