@@ -1,15 +1,29 @@
 /**
  * @description       : 
  * @author            : 
- * @last modified on  : 25/01/2021
+ * @last modified on  : 01/02/2021
  * @last modified by  : ¤ → alessio.marra@nexusat.it
  * Modifications Log 
  * Ver   Date         Author                         Modification
  * 1.0                                               Initial Version
  * 1.1   25/01/2021   ¤ → alessio.marra@nexusat.it   Review ApiName Nomenclature
+ * 1.2   01/02/2021   ¤ → alessio.marra@nexusat.it   Add CustomMetadata in TriggerUtilities with @TestVisible
 **/
 @isTest(SeeAllData=true)
 private class QuoteTriggerHelperTest {
+
+	private static List<TriggerSetting__mdt> createCustomMetadata(Boolean status) {
+		List<TriggerSetting__mdt> triggerSettingMDT = (List<TriggerSetting__mdt>) Json.deserialize(
+			'[' +
+				'{' +
+					'"DeveloperName": "Nexus",' +
+					'"QuoteAfterInsert__c": "' + status + '"' +
+				'}' +
+			']'
+			,List<TriggerSetting__mdt>.class
+		); 
+		return triggerSettingMDT;
+	}
 
 	@isTest
 	static void testAssignStandardPricebookToQuote(){
@@ -41,6 +55,7 @@ private class QuoteTriggerHelperTest {
 		listQuote.add(quoteWithStandardPricebook);
 
 		Test.startTest();
+		TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
 		insert listQuote;
 		QuoteTriggerHelper.assignAccountPricebookToQuote(listQuote);
 		Test.stopTest();
@@ -92,8 +107,9 @@ private class QuoteTriggerHelperTest {
 		listQuote.add(quoteWithGeneralPricebook);
 		
 		Test.startTest();
+		TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
 		insert listQuote;
-		QuoteTriggerHelper.assignAccountPricebookToQuote(listQuote);        
+		QuoteTriggerHelper.assignAccountPricebookToQuote(listQuote);
 		Test.stopTest();
 
 		Quote quoteWithGeneralPricebook2 = [SELECT Id,Name,Pricebook2Id,Pricebook2.Name FROM Quote WHERE Name = 'Quote With General Pricebook'];

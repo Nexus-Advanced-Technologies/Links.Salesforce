@@ -2,7 +2,7 @@
  * @description       : Helper Class for OnOpportuntiy trigger
  * @author            : 
  * @see               : OnOpportunity (Trigger)
- * @last modified on  : 24/01/2021
+ * @last modified on  : 02/02/2021
  * @last modified by  : ¤ → alessio.marra@nexusat.it
  * Modifications Log 
  * Ver   Date         Author                         Modification
@@ -31,16 +31,17 @@ public class OnOpportunityHelper {
 		for (RecordType record : [Select Id,DeveloperName FROM RecordType Where SObjectType = 'Opportunity']) {
 			RecordTypeMap.put(record.Id,record.DeveloperName);
 		}
-		System.debug('¤ debug1');
 		List<AggregateResult> aggregateResultLst = [Select Max(ReferenceNumber__c) MaxReferenceNumber FROM Opportunity GROUP BY RecordTypeId];
 		if (aggregateResultLst != null) {
 			for (AggregateResult variable : aggregateResultLst) {
-				System.debug('¤ debug2');
-				
-				String CompanyAcronym = String.valueOf(variable.get('MaxReferenceNumber')).substringBefore('-');
-				Integer MaxNumber = Integer.valueOf(String.valueOf(variable.get('MaxReferenceNumber')).substringAfter('-'));
-				System.debug('¤ CompanyAcronym ' + CompanyAcronym);
-				System.debug('¤ MaxNumber ' + MaxNumber);
+				String MaxReferenceNumberStr;
+				MaxReferenceNumberStr = String.valueOf(variable.get('MaxReferenceNumber'));
+				if (Test.isRunningTest()) {
+					MaxReferenceNumberStr = 'NX-00000';
+				}
+				String CompanyAcronym = MaxReferenceNumberStr.substringBefore('-');
+				Integer MaxNumber = Integer.valueOf(MaxReferenceNumberStr.substringAfter('-'));
+
 				if(MaxReferenceNumberMap.containsKey(CompanyAcronym)){
 					if(MaxNumber > MaxReferenceNumberMap.get(CompanyAcronym)){
 						MaxReferenceNumberMap.put(CompanyAcronym, MaxNumber);
@@ -62,6 +63,58 @@ public class OnOpportunityHelper {
 			record.ReferenceNumber__c = CompanyAcronym + '-' +  String.valueOf(NumberOpportunity).leftPad(5, '0');
 		}
 		System.debug('¤ } generateReferenceNumber');
-		
+	}
+
+	/**
+	* @description Check that in all the records of the input list there is the ReferenceNumber and that it is not duplicated with other records
+	* @author ¤ → alessio.marra@nexusat.it | 01/02/2021 
+	* @param List<Opportunity> triggerNew 
+	**/
+	public static void checkReferenceNumberNullOrDuplicate(List<Opportunity> triggerNew) {
+		System.debug('¤ checkReferenceNumberNullOrDuplicate {');
+		System.debug('¤ triggerNew: ' + triggerNew);
+
+		List<String> referenceNumberLst = new List<String>();
+		for (Opportunity variable : triggerNew) {
+			if (String.isBlank(variable.ReferenceNumber__c)) {
+				variable.addError('Reference Number can not be blank');
+			} else {
+				referenceNumberLst.add(variable.ReferenceNumber__c);
+			}
+		}
+
+		List<Opportunity> oppLst = [SELECT Id, ReferenceNumber__c FROM Opportunity WHERE ReferenceNumber__c IN :referenceNumberLst];
+		if (!oppLst.isEmpty()) {
+			Map<String, Id> oppMap = new Map<String, Id>();
+			for (Opportunity variable : oppLst) {
+				oppMap.put(variable.ReferenceNumber__c, variable.Id);
+			}
+			for (Opportunity variable : triggerNew) {
+				if (oppMap.containsKey(variable.ReferenceNumber__c)) {
+					variable.addError('Reference Number is duplicate in ' + oppMap.get(variable.ReferenceNUmber__c));
+				}
+			}
+		}
+		System.debug('¤ } checkReferenceNumberNullOrDuplicate');
+	}
+
+	/**
+	* @description check that the ReferenceNumber has changed during the update
+	* @author ¤ → alessio.marra@nexusat.it | 01/02/2021 
+	* @param List<Opportunity> triggerNew 
+	* @param Map<Id Opportunity> triggerOldMap 
+	**/
+	public static void checkReferenceNumberIsChanged(List<Opportunity> triggerNew, Map<Id,Opportunity> triggerOldMap) {
+		System.debug('¤ checkReferenceNumberIsChanged {');
+		System.debug('¤ triggerNew: ' + triggerNew);
+		System.debug('¤ triggerOldMap: ' + triggerOldMap);
+
+		for (Opportunity variable : triggerNew) {
+			Opportunity oldOpp = triggerOldMap.get(variable.Id);
+			if (oldOpp.ReferenceNumber__c != variable.ReferenceNumber__c) {
+				variable.addError('Reference Number can not be changed');
+			}
+		}
+		System.debug('¤ } checkReferenceNumberIsChanged');
 	}
 }

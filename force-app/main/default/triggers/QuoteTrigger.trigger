@@ -1,12 +1,13 @@
 /**
  * @description       : 
  * @author            : 
- * @last modified on  : 25/01/2021
+ * @last modified on  : 01/02/2021
  * @last modified by  : ¤ → alessio.marra@nexusat.it
  * Modifications Log 
  * Ver   Date         Author                         Modification
  * 1.0                                               Initial Version
  * 1.1   25/01/2021   ¤ → alessio.marra@nexusat.it   Added controll to enable/disable
+ * 1.2   01/02/2021   ¤ → alessio.marra@nexusat.it   Add CustomMetadata in TriggerUtilities with @TestVisible
 **/
 trigger QuoteTrigger on Quote (after insert) {
 
@@ -15,7 +16,7 @@ trigger QuoteTrigger on Quote (after insert) {
 
 	//Get CustomMetadata with trigger information for each company
 	Map<String, TriggerSetting__mdt> triggerSettings = new Map<String, TriggerSetting__mdt>();
-	for (TriggerSetting__mdt var : [SELECT DeveloperName, QuoteAfterInsert__c FROM TriggerSetting__mdt]) {
+	for (TriggerSetting__mdt var : TriggerUtilities.TriggerSettingQuote) {
 		triggerSettings.put(var.DeveloperName, var);
 	}
 

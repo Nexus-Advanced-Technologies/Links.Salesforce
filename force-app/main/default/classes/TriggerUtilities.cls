@@ -3,13 +3,47 @@
  * @author            : ¤ → alessio.marra@nexusat.it
  * @see               : OnOpportunity (Trigger)
  * @see               : TriggerSetting (CustomMetadata)
- * @last modified on  : 25/01/2021
+ * @last modified on  : 03/02/2021
  * @last modified by  : ¤ → alessio.marra@nexusat.it
  * Modifications Log 
  * Ver   Date         Author                         Modification
  * 1.0   24/01/2021   ¤ → alessio.marra@nexusat.it   Initial Version
+ * 1.1   01/02/2021   ¤ → alessio.marra@nexusat.it   Add attribute TriggerSettingOpportunity, TriggerSettingProjectStatus, TriggerSettingQuote
 **/
 public class TriggerUtilities {
+
+	@TestVisible
+	public static List<TriggerSetting__mdt> TriggerSettingOpportunity {
+		get{
+			if(TriggerSettingOpportunity == null) {
+				TriggerSettingOpportunity = [SELECT DeveloperName, OpportunityBeforeInsert__c FROM TriggerSetting__mdt];
+			}
+			return TriggerSettingOpportunity;
+		}
+		set;
+	}
+
+	@TestVisible
+	public static List<TriggerSetting__mdt> TriggerSettingProjectStatus {
+		get{
+			if(TriggerSettingProjectStatus == null) {
+				TriggerSettingProjectStatus = [SELECT DeveloperName, ProjectStatusAfterInsert__c, ProjectStatusAfterUpdate__c, ProjectStatusBeforeInsert__c, ProjectStatusBeforeUpdate__c FROM TriggerSetting__mdt];
+			}
+			return TriggerSettingProjectStatus;
+		}
+		set;
+	}
+
+	@TestVisible
+	public static List<TriggerSetting__mdt> TriggerSettingQuote {
+		get{
+			if(TriggerSettingQuote == null) {
+				TriggerSettingQuote = [SELECT DeveloperName, QuoteAfterInsert__c FROM TriggerSetting__mdt];
+			}
+			return TriggerSettingQuote;
+		}
+		set;
+	}
 
 	public class TriggerUtilitiesException extends Exception {}
 

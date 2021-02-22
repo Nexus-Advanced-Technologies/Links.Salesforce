@@ -1,7 +1,7 @@
 /**
  * @description       : 
  * @author            : 
- * @last modified on  : 29/01/2021
+ * @last modified on  : 25/01/2021
  * @last modified by  : ¤ → alessio.marra@nexusat.it
  * Modifications Log 
  * Ver   Date         Author                         Modification
@@ -10,7 +10,7 @@
 **/
 global class OnProjectStatusSchedulable implements Schedulable {
 	global void execute(SchedulableContext ctx) {
-		//OnProjectStatusHelper.CalculateDaysDiffExcludingHoliday();
+		OnProjectStatusHelper.CalculateDaysDiffExcludingHoliday();
 		OnProjectStatusHelper.CalculateTotalFTE();
 	}
 }

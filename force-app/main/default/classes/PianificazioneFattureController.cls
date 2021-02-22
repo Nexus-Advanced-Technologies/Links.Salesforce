@@ -1,12 +1,13 @@
 /**
  * @description       : 
  * @author            : 
- * @last modified on  : 25/01/2021
+ * @last modified on  : 04/02/2021
  * @last modified by  : ¤ → alessio.marra@nexusat.it
  * Modifications Log 
  * Ver   Date         Author                         Modification
  * 1.0                                               Initial Version
  * 1.1   25/01/2021   ¤ → alessio.marra@nexusat.it   Review ApiName Nomenclature
+ * 1.2   04/02/2021   ¤ → alessio.marra@nexusat.it   BuxFixing RecordType Nomenclature
 **/
 public class PianificazioneFattureController {
 
@@ -53,7 +54,7 @@ public class PianificazioneFattureController {
 					{
 						rtId = [SELECT Id, DeveloperName 
 								FROM RecordType 
-								WHERE DeveloperName = 'Recursive'].Id;
+								WHERE DeveloperName = 'NexusRecursive' AND SObjectType = 'InvoiceMilestone__c'].Id;
 						System.debug('Ø-rtId '+rtId);
 						
 						for(PaymentTypeDetail__c tpd1 : tpdList){
@@ -118,7 +119,7 @@ public class PianificazioneFattureController {
 					{
 						rtId = [SELECT Id, DeveloperName 
 								FROM RecordType 
-								WHERE DeveloperName = 'One_Shot'].Id;
+								WHERE DeveloperName = 'NexusOneShot' AND SObjectType = 'InvoiceMilestone__c'].Id;
 						System.debug('Ø-rtId '+rtId);
 						
 						for(PaymentTypeDetail__c tpd : tpdList){
@@ -144,8 +145,8 @@ public class PianificazioneFattureController {
 					}
 				}
 				if(!imList.isEmpty()){
-			insert imList;
-			check = true;
+					insert imList;
+					check = true;
 				}
 		}catch(Exception ex){
 		System.debug('Exception : '+ex+', message: '+ex.getMessage()+' - '+ex.getLineNumber()+' - '+ex.getCause());
