@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>SendEmailOptyLost</fullName>
+        <ccEmails>sales@nexusat.it</ccEmails>
+        <description>SendEmailOptyLost</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/OpportunityLost</template>
+    </alerts>
+    <alerts>
+        <fullName>SendEmailOptyWon</fullName>
+        <ccEmails>sales@nexusat.it</ccEmails>
+        <description>SendEmailOptyWon</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/OpportunityWon</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>UpdateRecordTypeIdToGreater</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>NexusGreaterAmount</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>UpdateRecordTypeIdToGreater</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UpdateRecordTypeIdToLess</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>NexusStandard</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>UpdateRecordTypeIdToLess</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>SendEmailOptyLost</fullName>
+        <actions>
+            <name>SendEmailOptyLost</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Opportunity.Amount</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.StageName</field>
+            <operation>equals</operation>
+            <value>Closed Lost</value>
+        </criteriaItems>
+        <description>Invia una mail a sales@nexusat.it quando un&apos;opportunità è in chiuso perso e il suo ammontare è maggiore di 0€</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>SendEmailOptyWon</fullName>
+        <actions>
+            <name>SendEmailOptyWon</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Amount</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.StageName</field>
+            <operation>equals</operation>
+            <value>Closed Won</value>
+        </criteriaItems>
+        <description>Invia una mail a sales@nexusat.it quando un&apos;opportunità è in chiuso vinto e il suo ammontare è maggiore di 0€</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>UpdateOpportunityRecordTypeToGreater</fullName>
+        <actions>
+            <name>UpdateRecordTypeIdToGreater</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Updates the Opportunity Record Type based on the Amount set on the Custom Settings (OpportunitySetting)</description>
+        <formula>Amount &gt; $Setup.OpportunitySetting__c.ThresholdAmountToUpdateRecordType__c</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>UpdateOpportunityRecordTypeToLess</fullName>
+        <actions>
+            <name>UpdateRecordTypeIdToLess</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Updates the Opportunity Record Type based on the Amount set on the Custom Settings (OpportunitySetting)</description>
+        <formula>OR (     Amount &lt; $Setup.OpportunitySetting__c.ThresholdAmountToUpdateRecordType__c,     ISNULL(Amount) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

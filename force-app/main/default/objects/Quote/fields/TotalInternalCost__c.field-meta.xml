@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TotalInternalCost__c</fullName>
+    <description>Total internal cost, obtained from the single internal costs of the Quote Line Items</description>
+    <externalId>false</externalId>
+    <label>Total Internal Cost</label>
+    <summarizedField>QuoteLineItem.TotalInternalCost__c</summarizedField>
+    <summaryForeignKey>QuoteLineItem.QuoteId</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <type>Summary</type>
+</CustomField>

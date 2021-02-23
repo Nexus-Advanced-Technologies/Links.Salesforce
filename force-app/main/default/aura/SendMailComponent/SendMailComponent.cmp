@@ -1,0 +1,91 @@
+<aura:component controller="SendEmailClass" implements="flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+    
+    <aura:attribute name="ToField" type="List" required="true"/>
+    <aura:attribute name="idObject" type="String" required="true"/>
+    <aura:attribute name="checkSendMail" type="Boolean" default="true"/> 
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="isOnMobile" type="Boolean" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler event="c:pillsEvent" action="{!c.handleApplicationEvent}"/>
+    <aura:registerEvent name="appEvent" type="c:CloseModalEvent"/>
+    
+    <aura:if isTrue="{!v.isOnMobile}">
+        <div data-component-id="home_topDealsContainer" class="flexipageComponent" data-aura-class="flexipageComponent">
+            <div  class="slds-docked-composer__header " data-aura-class="homeHomeCard homeTopDealsContainer slds-docked-composer__header">
+                <article class="slds-card slds-card_boundary forceBaseCard" data-aura-class="forceBaseCard">
+                    <div class="slds-card__header slds-grid">
+                        <header class="slds-media slds-media--center slds-has-flexi-truncate">
+                            <div class="slds-media__body">
+                                <h2 class="header-title-container">
+                                    <span style="font-size: 1rem;" class="slds-card__header-title slds-truncate" title="Invio Mail">Invio Mail</span>
+                                </h2>
+                            </div>
+                        </header>
+                    </div>
+                    <div   class="slds-docked-composer__body" id="dialog-content-id-1">
+                        <div class="slds-card__body slds-card__body--inner">
+                            <div class="cardMessageContainer">
+                                <div class="slds-p-around--medium">     
+                                    <c:pillsInput aura:id="pillsInput" 
+                                                  label="TO Addresses" 
+                                                  name="ToAddresses"
+                                                  placeholderText="Input Destination Addresses separated by ';'"
+                                                  validationTypes="emailAddress" 
+                                                  value=""/>
+                                    <br/>                                                               
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-docked-form-footer">
+                        <lightning:button label="Indietro" 
+                                          iconName="utility:close" 
+                                          onclick="{!c.closeSendMailPopup}"/>
+                        <lightning:button variant="brand" 
+                                          label="Conferma" 
+                                          iconName="utility:check"
+                                          onclick="{!c.sendEmail}"
+                                          disabled ="{!v.checkSendMail}"/>  
+                    </div>
+                </article>
+            </div>
+        </div>
+        <aura:set attribute="else">
+            <div class="modal-container slds-modal__container" style="width: 50%;">
+                <div class="slds-modal__content slds-p-around--medium">
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">
+                            Invio Mail
+                        </h2>
+                    </header>
+                    <div class="slds-card__body slds-card__body--inner">
+                        <div class="cardMessageContainer">
+                            <div class="slds-p-around--medium">     
+                                <c:pillsInput aura:id="pillsInput" 
+                                              label="TO Addresses" 
+                                              name="ToAddresses"
+                                              placeholderText="Input Destination Addresses separated by ';'"
+                                              validationTypes="emailAddress" 
+                                              value=""/>
+                                <br/>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slds-modal__footer">
+                    <lightning:button label="Indietro" 
+                                      iconName="utility:close" 
+                                      onclick="{!c.closeSendMailPopup}"
+                                       />
+                    <lightning:button variant="brand" 
+                                      label="Conferma" 
+                                      iconName="utility:check" 
+                                      onclick="{!c.sendEmail}"
+                                      disabled ="{!v.checkSendMail}"/>
+                </div>
+            </div>
+        </aura:set>
+    </aura:if>
+</aura:component>

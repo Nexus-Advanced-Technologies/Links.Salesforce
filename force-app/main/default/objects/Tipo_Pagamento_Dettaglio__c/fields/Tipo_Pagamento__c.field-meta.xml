@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo_Pagamento__c</fullName>
+    <externalId>false</externalId>
+    <label>Schema di fatturazione</label>
+    <referenceTo>Tipo_Pagamento__c</referenceTo>
+    <relationshipLabel>Schema di fatturazione Dettagli</relationshipLabel>
+    <relationshipName>Tipo_Pagamento_Dettagli</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

@@ -1,0 +1,79 @@
+<aura:component controller="ProgressBarController" implements="flexipage:availableForAllPageTypes,force:lightningQuickActionWithoutHeader,force:hasRecordId" access="global">
+    <aura:attribute name="recordId" type="String" />    
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="oppList" type="List" default=""/>
+    <aura:attribute name="ToField" type="List" access="public" />
+    
+    <aura:handler event="c:CloseModalEvent" action="{!c.handleCloseModalEvent}"/>
+    <aura:registerEvent name="appEvent" type="c:pillsInputEvent"/>
+    
+    <aura:iteration items = "{!v.oppList}" var="opp">
+        
+        <div class="c-container">
+            <div class="slds-modal__content slds-p-around--large">
+                <div class="slds-grid slds-grid_align-spread">
+                    <div class="slds-col">
+                        <span>
+                            <h2 class="slds-text-heading_medium slds-hyphenate">
+                                Stato Fatturazione
+                            </h2>
+                        </span>
+                    </div>
+                    <div class="slds-col">
+                        <span>
+                            <strong>{!opp.TotalSettledPercentage__c}% Completed</strong>
+                        </span>
+                    </div>
+                </div>
+                <div class="cardMessageContainer">
+                    <div class="slds-p-around--medium">     
+                        <lightning:progressBar value="{!opp.TotalSettledPercentage__c}"/> 
+                    </div> 
+                </div>                
+                <div class="slds-grid slds-grid_vertical-align-start" style="height:50px">
+                    <div class="slds-col">
+                        <span>Totale Saldato:</span><br/>
+                        <span><lightning:formattedNumber value="{!opp.TotalSettled__c}" style="currency" currencyCode="EUR"/></span>                        
+                    </div>                    
+                </div>    
+                <div class="slds-grid slds-grid_vertical-align-start" style="height:50px">
+                    <div class="slds-col">
+                        <span>Totale Draft:</span><br/>
+                        <span><lightning:formattedNumber value="{!opp.TotalInDraft__c}" style="currency" currencyCode="EUR"/></span>
+                    </div>
+                    <div class="slds-col">
+                        <span>Totale da Fatturare:</span><br/>
+                        <span><lightning:formattedNumber value="{!opp.TotalToBeInvoiced__c}" style="currency" currencyCode="EUR"/></span>
+                    </div>
+                    <div class="slds-col">
+                        <span>Totale Fatture Inviate:</span><br/>
+                        <span><lightning:formattedNumber value="{!opp.TotalSentInvoices__c}" style="currency" currencyCode="EUR"/></span>
+                    </div>
+                </div>
+                
+                <div class="slds-grid slds-grid_vertical-align-start" style="height:70px">
+                    <div class="slds-col">
+                        <span>Fatturato da Pianificare:</span><br/>
+                        <span>
+                            <lightning:formattedNumber value="{!opp.RevenueToPlan__c+'   '}" style="currency" currencyCode="EUR"/>
+                            di
+                            <lightning:formattedNumber value="{!'   '+opp.Amount}" style="currency" currencyCode="EUR"/>
+                        </span><br/>
+                        <span><lightning:formattedRichText value="{!' '+opp.GapIndicator__c}" class="slds-text-body_small"/></span>
+                    </div>                                    
+                </div>                
+                <lightning:button label="Riepilogo Offerta" 
+                                  variant="brand"
+                                  iconName="utility:email"     
+                                  onclick="{!c.openSendMailPopup}" />                
+            </div>
+        </div>
+    </aura:iteration>
+    <div class="panel slds-modal slds-fade-in-large" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="header" aura:id="Modalbox" style="opacity: 1;">
+        <c:SendMailComponent aura:id="SendMailComponent" 
+                             ToField="{!v.ToField}" 
+                             idObject = "{!v.recordId}" />       
+    </div>
+    
+</aura:component>

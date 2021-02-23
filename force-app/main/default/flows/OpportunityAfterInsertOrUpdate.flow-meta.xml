@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>CreateProjectStatus</name>
+        <label>CreateProjectStatus</label>
+        <locationX>182</locationX>
+        <locationY>493</locationY>
+        <actionName>CreateProjectStatus</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>SendEmailCloseWon</targetReference>
+        </connector>
+        <inputParameters>
+            <name>listOppIds</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <name>PianificazioneFattureController</name>
+        <label>PianificazioneFattureController</label>
+        <locationX>578</locationX>
+        <locationY>493</locationY>
+        <actionName>PianificazioneFattureController</actionName>
+        <actionType>apex</actionType>
+        <inputParameters>
+            <name>listOppIds</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <name>SendEmailCheckCDG</name>
+        <label>SendEmail Check CDG</label>
+        <locationX>842</locationX>
+        <locationY>493</locationY>
+        <actionName>SendEmailClass</actionName>
+        <actionType>apex</actionType>
+        <inputParameters>
+            <name>listOppIds</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <name>SendEmailCloseWon</name>
+        <label>SendEmail Close Won</label>
+        <locationX>182</locationX>
+        <locationY>613</locationY>
+        <actionName>SendEmailClass</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Amount</targetReference>
+        </connector>
+        <inputParameters>
+            <name>listOppIds</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>SendMail to sales@nexusat.it</description>
+        <name>SendMailSales</name>
+        <label>SendMail Sales</label>
+        <locationX>50</locationX>
+        <locationY>853</locationY>
+        <actionName>Opportunity.SendEmailOptyWon</actionName>
+        <actionType>emailAlert</actionType>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>50.0</apiVersion>
+    <decisions>
+        <name>Amount</name>
+        <label>Amount?</label>
+        <locationX>182</locationX>
+        <locationY>733</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>GREATERTHAN0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Amount</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>SendMailSales</targetReference>
+            </connector>
+            <label>GREATER THAN 0</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>RecordType</name>
+        <label>RecordType?</label>
+        <locationX>1007</locationX>
+        <locationY>253</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Nexus</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>Nexus</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>StageName</targetReference>
+            </connector>
+            <label>Nexus</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>StageName</name>
+        <label>StageName?</label>
+        <locationX>644</locationX>
+        <locationY>373</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>CloseWon</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.StageName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Closed Won</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>CreateProjectStatus</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>Close Won</label>
+        </rules>
+        <rules>
+            <name>PianificaMilestone</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.StageName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Pianifica Milestone</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>PianificazioneFattureController</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>Pianifica Milestone</label>
+        </rules>
+        <rules>
+            <name>CheckCDG</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.StageName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Check CDG</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>SendEmailCheckCDG</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>Check CDG</label>
+        </rules>
+    </decisions>
+    <description>- Create Project Status
+- Send Email Close Won
+- Pianificazione Fatture
+- Send Email Check CDG</description>
+    <interviewLabel>Opportunity After Insert Or Update {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Opportunity After Insert Or Update</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>881</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>RecordType</targetReference>
+        </connector>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>or</filterLogic>
+        <filters>
+            <field>StageName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Closed Won</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>StageName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Pianifica Milestone</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>StageName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Check CDG</stringValue>
+            </value>
+        </filters>
+        <object>Opportunity</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+</Flow>

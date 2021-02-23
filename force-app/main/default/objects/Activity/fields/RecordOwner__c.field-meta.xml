@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RecordOwner__c</fullName>
+    <externalId>false</externalId>
+    <label>Record Owner</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Flavia Dall&apos;Ora</fullName>
+                <default>false</default>
+                <label>Flavia Dall&apos;Ora</label>
+            </value>
+            <value>
+                <fullName>Francesco Veropalumbo</fullName>
+                <default>false</default>
+                <label>Francesco Veropalumbo</label>
+            </value>
+            <value>
+                <fullName>Fulvio Vanacore</fullName>
+                <default>false</default>
+                <label>Fulvio Vanacore</label>
+            </value>
+            <value>
+                <fullName>Giovanni Costagliola</fullName>
+                <default>false</default>
+                <label>Giovanni Costagliola</label>
+            </value>
+            <value>
+                <fullName>Giuseppe Maiorano</fullName>
+                <default>false</default>
+                <label>Giuseppe Maiorano</label>
+            </value>
+            <value>
+                <fullName>Massimo Colombo</fullName>
+                <default>false</default>
+                <label>Massimo Colombo</label>
+            </value>
+            <value>
+                <fullName>Roberto De Simone</fullName>
+                <default>false</default>
+                <label>Roberto De Simone</label>
+            </value>
+            <value>
+                <fullName>Antonio Frigerio</fullName>
+                <default>false</default>
+                <label>Antonio Frigerio</label>
+            </value>
+            <value>
+                <fullName>Paride Ripoldi</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Paride Ripoldi</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

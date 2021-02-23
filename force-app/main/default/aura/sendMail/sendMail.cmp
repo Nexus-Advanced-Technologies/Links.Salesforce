@@ -1,0 +1,13 @@
+<aura:component controller="SendEmailClass"
+                implements="flexipage:availableForAllPageTypes,force:lightningQuickActionWithoutHeader,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="oppList" type="Object[]" />
+    <aura:attribute name="isOkToSend" type="Boolean"/>
+    <aura:attribute name="isOkRF" type="Boolean"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <lightning:button label="Invio Offerta a CDG" onclick="{!c.sendMail}" 
+                                  variant="brand" iconName='utility:email'/>
+</aura:component>

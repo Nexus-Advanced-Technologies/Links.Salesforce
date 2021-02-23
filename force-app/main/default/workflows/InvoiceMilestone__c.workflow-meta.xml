@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Action_Send_Email_Da_Fatturare</fullName>
+        <ccEmails>amministrazione@nexusat.it</ccEmails>
+        <ccEmails>sales@nexusat.it</ccEmails>
+        <description>Action Send Email - Da Fatturare</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/InvoiceTemplate</template>
+    </alerts>
+    <rules>
+        <fullName>Invia mail ad amministrazione</fullName>
+        <actions>
+            <name>Action_Send_Email_Da_Fatturare</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(ISPICKVAL(Stage__c,&apos;Da Fatturare&apos;),  StartSendEmailWorkflow__c=TRUE,  Amount__c&gt;0,  NOT(ISNULL(ExpectedDate__c))  )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Invia mail ad amministrazione_V2</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>InvoiceMilestone__c.Stage__c</field>
+            <operation>equals</operation>
+            <value>Da Fatturare</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>InvoiceMilestone__c.StartSendEmailWorkflow__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>InvoiceMilestone__c.Amount__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>InvoiceMilestone__c.ExpectedDate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

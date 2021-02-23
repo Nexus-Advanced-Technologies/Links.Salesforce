@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Stato__c</fullName>
+    <externalId>false</externalId>
+    <label>Stato</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Analisi requisiti</fullName>
+                <default>true</default>
+                <label>Analisi requisiti</label>
+            </value>
+            <value>
+                <fullName>Onboarding</fullName>
+                <default>false</default>
+                <label>Onboarding</label>
+            </value>
+            <value>
+                <fullName>WIP</fullName>
+                <default>false</default>
+                <label>WIP</label>
+            </value>
+            <value>
+                <fullName>UAT</fullName>
+                <default>false</default>
+                <label>UAT</label>
+            </value>
+            <value>
+                <fullName>Deploy in Produzione</fullName>
+                <default>false</default>
+                <label>Deploy in Produzione</label>
+            </value>
+            <value>
+                <fullName>Supporto post go-live</fullName>
+                <default>false</default>
+                <label>Supporto post go-live</label>
+            </value>
+            <value>
+                <fullName>Completato</fullName>
+                <default>false</default>
+                <label>Completato</label>
+            </value>
+            <value>
+                <fullName>Fatturato</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Fatturato</label>
+            </value>
+            <value>
+                <fullName>Invio Fattura</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Invio Fattura</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
