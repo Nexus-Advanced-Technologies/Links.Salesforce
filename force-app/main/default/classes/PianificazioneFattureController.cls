@@ -48,7 +48,8 @@ public class PianificazioneFattureController {
 																 WHERE PaymentType__c =: opp.PaymentType__c
 																 ORDER BY Rank__c ASC
 																];
-					
+					System.debug('tp.type ['+ tp.Type__c +']');
+
 					//Get RecordType and Create Invoice Milestone
 					if(tp.Type__c == 'Recursive')
 					{
@@ -124,6 +125,14 @@ public class PianificazioneFattureController {
 						
 						for(PaymentTypeDetail__c tpd : tpdList){
 							InvoiceMilestone__c im = New InvoiceMilestone__c();
+							
+							/* //20210223 MM add debug
+							System.debug('opp.Account.Acronym__c ['+ opp.Account.Acronym__c +']');
+							System.debug('String.valueOf(opp.ReferenceNumber__c) ['+ String.valueOf(opp.ReferenceNumber__c) +']');
+							System.debug('opp.Account.Name ['+ opp.Account.Name +']');
+							System.debug('opp.Account.Name.left(3) ['+ opp.Account.Name.left(3) +']');
+							System.debug('tpd.Name ['+ tpd.Name +']'); */
+
 							if(opp.Account.Acronym__c != null ){
 								im.Name = String.valueOf(opp.ReferenceNumber__c)+' - '+ opp.Account.Acronym__c+' - '+ tpd.Name;
 							}else{
@@ -137,10 +146,20 @@ public class PianificazioneFattureController {
 							String yearName = String.valueof(im.ExpectedDate__c.year());	///**********************
 							im.Year__c = String.valueOf(Date.today().year());
 							im.Year__c = yearName;
+							
+							//20210223 MM add debug
+							System.debug('opp.Amount ['+ opp.Amount +']');
+							System.debug('tpd.Value__c ['+ tpd.Value__c +']');
+
+							if (opp.Amount == null || tpd.Value__c == null)
+								throw new NullPointerException();
 							im.Amount__c = (opp.Amount * tpd.Value__c) / 100;
+
 							im.Description__c = tpd.Name +' - '+ opp.Name;
 							im.CustomerOrderNumber__c = opp.CustomerOrderNumber__c;
-							imList.add(im);		
+							imList.add(im);	
+							
+							System.debug('fine');
 						}
 					}
 				}
@@ -148,6 +167,8 @@ public class PianificazioneFattureController {
 					insert imList;
 					check = true;
 				}
+		}catch(NullPointerException npe) {
+			System.debug('The following exception has occurred: ' + npe.getMessage());
 		}catch(Exception ex){
 		System.debug('Exception : '+ex+', message: '+ex.getMessage()+' - '+ex.getLineNumber()+' - '+ex.getCause());
 		}
