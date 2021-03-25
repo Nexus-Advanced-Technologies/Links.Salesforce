@@ -3,7 +3,7 @@
  * @author            : ¤ → alessio.marra@nexusat.it
  * @see               : OnOpportunity (Trigger)
  * @see               : TriggerSetting (CustomMetadata)
- * @last modified on  : 03/02/2021
+ * @last modified on  : 25/03/2021
  * @last modified by  : ¤ → alessio.marra@nexusat.it
  * Modifications Log 
  * Ver   Date         Author                         Modification
@@ -192,7 +192,7 @@ public class TriggerUtilities {
 	* @author ¤ → alessio.marra@nexusat.it | 25/01/2021 
 	* @return List<String> 
 	**/
-	private static List<String> getCompany() {
+	public static List<String> getCompany() {
 		List<String> companyNameLst = new List<String>();
 		for (TriggerSetting__mdt var : [SELECT DeveloperName FROM TriggerSetting__mdt]) {
 			companyNameLst.add(var.DeveloperName);
