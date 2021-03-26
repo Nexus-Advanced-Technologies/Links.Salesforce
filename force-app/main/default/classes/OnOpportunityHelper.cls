@@ -2,13 +2,14 @@
  * @description       : Helper Class for OnOpportuntiy trigger
  * @author            : 
  * @see               : OnOpportunity (Trigger)
- * @last modified on  : 25/03/2021
+ * @last modified on  : 26/03/2021
  * @last modified by  : ¤ → alessio.marra@nexusat.it
  * Modifications Log 
  * Ver   Date         Author                         Modification
  * 1.0   24/01/2021                                  Initial Version (Porting from ORG Nexus)
  * 1.1   24/01/2021   ¤ → alessio.marra@nexusat.it   Porting by trigger OnOpportunity
  * 1.2   25/03/2021   ¤ → alessio.marra@nexusat.it   Code review and simplification for the next affiliates
+ * 1.3   26/03/2021   ¤ → alessio.marra@nexusat.it   generateReferenceNumbers() and checkReferenceNumberNullOrDuplicate() used only by Nexus Company
 **/
 public class OnOpportunityHelper {
 
@@ -19,10 +20,26 @@ public class OnOpportunityHelper {
 	* @param Map<Id Opportunity> triggerOldMap 
 	**/
 	public static void beforeInsert(List<Opportunity> triggerNew) {
+		String company = null;
 
-		//For all company
-		generateReferenceNumbers(triggerNew);
-		checkReferenceNumberNullOrDuplicate(triggerNew);
+		//Get Trigger.new List splitted by company in Map(company, list)
+		Map<String, List<Opportunity>> triggerNewSplittedMap = TriggerUtilities.splitByCompany(triggerNew);
+
+		//Get CustomMetadata with trigger information for each company
+		Map<String, TriggerSetting__mdt> triggerSettings = getTriggerSetting();
+
+		company = 'Nexus';
+		if (triggerNewSplittedMap.containsKey(company)) {
+			List<Opportunity> triggerNewSplitted = triggerNewSplittedMap.get(company);
+
+			if (triggerSettings.get(company).OpportunityBeforeInsert__c) {
+				generateReferenceNumbers(triggerNewSplitted);
+			}
+
+			//Always (It cannot be disabled by TriggerSetting Metadata)
+			checkReferenceNumberNullOrDuplicate(triggerNewSplitted);
+			company = null;
+		}
 	}
 
 	/**
@@ -35,6 +52,19 @@ public class OnOpportunityHelper {
 
 		//For all company
 		checkReferenceNumberIsChanged(triggerNew, triggerOldMap);
+	}
+
+	/**
+	* @description Get a map composed of: Company - CustomMetadata
+	* @author ¤ → alessio.marra@nexusat.it | 26/03/2021 
+	* @return Map<String, TriggerSetting__mdt> 
+	**/
+	private static Map<String, TriggerSetting__mdt> getTriggerSetting() {
+		Map<String, TriggerSetting__mdt> triggerSettings = new Map<String, TriggerSetting__mdt>();
+		for (TriggerSetting__mdt var : TriggerUtilities.TriggerSettingOpportunity) {
+			triggerSettings.put(var.DeveloperName, var);
+		}
+		return triggerSettings;
 	}
 
 	/**
@@ -144,7 +174,6 @@ public class OnOpportunityHelper {
 		for (Opportunity variable : triggerNew) {
 			if (String.isBlank(variable.ReferenceNumber__c)) {
 				throw new ExceptionHandler.ReferenceNumberException('Reference Number can not be blank');
-				// variable.addError('Reference Number can not be blank');
 			}
 		}
 	}
@@ -164,7 +193,6 @@ public class OnOpportunityHelper {
 			for (Opportunity variable : triggerNew) {
 				if (oppMap.containsKey(variable.ReferenceNumber__c)) {
 					throw new ExceptionHandler.ReferenceNumberException('Reference Number is duplicate in ' + oppMap.get(variable.ReferenceNumber__c));
-					//variable.addError('Reference Number is duplicate in ' + oppMap.get(variable.ReferenceNUmber__c));
 				}
 			}
 		}
@@ -200,7 +228,6 @@ public class OnOpportunityHelper {
 			Opportunity oldOpp = triggerOldMap.get(variable.Id);
 			if (oldOpp.ReferenceNumber__c != variable.ReferenceNumber__c) {
 				throw new ExceptionHandler.ReferenceNumberException('Reference Number can not be changed');
-				//variable.addError('Reference Number can not be changed');
 			}
 		}
 		LoggerHandler.end('¤ checkReferenceNumberIsChanged');
