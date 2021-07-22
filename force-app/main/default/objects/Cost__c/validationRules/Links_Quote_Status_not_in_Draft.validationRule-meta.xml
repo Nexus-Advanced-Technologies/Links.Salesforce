@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Links_Quote_Status_not_in_Draft</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+Quote__r.RecordType.DeveloperName = &quot;Links&quot;,
+NOT(ISPICKVAL(Quote__r.Status, &quot;0&quot;))
+)</errorConditionFormula>
+    <errorMessage>Costs can&apos;t be edited, if quote status is not in Draft.</errorMessage>
+</ValidationRule>

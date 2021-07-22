@@ -1,0 +1,290 @@
+<!--
+* @description       : Apex Controller for PDF Page
+* @author            : Riccardo Costantini
+* @last modified on  : 27 - 04 - 2021
+* @last modified by  : 
+* Modifications Log 
+* Ver   Date         Author   Modification
+* 0.5.1   14-04-2021   RC   Initial Version
+* 0.6.0   27-04-2021   RC   Modifiche concettuali apportate all'intero PDF relativo al cambio algoritmico dell'Economic Plan
+-->
+
+
+<apex:page controller="PagePDF" showHeader="false" 
+           sidebar="false" 
+           standardStylesheets="true" 
+           applyHtmlTag="false" 
+           applyBodyTag="false"  >
+           <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />    
+            <style type="text/css">
+                @page{
+                    size: letter;
+            margin: 25mm;
+            @top-center {
+                content: "Sample";
+            }
+            @bottom-center {
+                content: "Page " counter(page) " of " counter(pages);
+            }
+        }
+        .page-break {
+            display:block;
+            page-break-after:always;
+        }
+        body {
+            font-family: Arial Unicode MS;
+        }
+            </style>
+            </head>
+    <div class="fle-contr ">
+        <p style="text-align: left;width:62%;padding-top:0mm">
+            <apex:image url="{!URLFOR($Resource.LinksPdfLogo)}" width="60%"  alt="Logo Links"></apex:image>
+        </p>
+        <br/>
+        <div style="margin-top: 5mm;">
+            <table style="width:100%;">
+                <tr>
+                    <td style="width:50%;">
+                        <b>
+                            <apex:outputLabel value="{!$ObjectType.Quote.Fields.Name.Label}" />:
+                        </b> {!QuoteObj.Name}
+                    </td>
+                    <td style="width:50%;" >
+                        <b>
+                            <apex:outputLabel value="{!$ObjectType.Account.Fields.Name.Label}" />:
+                        </b> {!QuoteObj.Account.Name}
+                    </td>
+                </tr>
+                    <tr>
+
+                    <td style="width:50%;">
+                        <b>
+                            Opportunity <apex:outputLabel value="{!$ObjectType.Opportunity.Fields.Name.Label}" />:
+                        </b> {!QuoteObj.Opportunity.Name}
+                    </td>
+                    <td style="width:50%;" >
+                        <b>                            
+                            <apex:outputLabel value="{!$ObjectType.Quote.Fields.StartDate__c.Label}" />:
+                        </b> 
+                        <apex:outputText value="{0,date,dd'/'MM'/'yyyy}"> 
+                            <apex:param value="{!QuoteObj.StartDate__c}"/> 
+                        </apex:outputText>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:50%;">
+                        <b>
+                            <apex:outputLabel value="{!$ObjectType.Quote.Fields.Opportunity_Risk_Level__c.Label}" />:
+                        </b> {!QuoteObj.Opportunity_Risk_Level__c}
+                    </td>
+                    <td style="width:50%;">
+                        <b>
+                            <apex:outputLabel value="{!$ObjectType.Quote.Fields.Opportunity_Risk_Level_Description__c.Label}" />:
+                        </b> {!QuoteObj.Opportunity_Risk_Level_Description__c}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:50%;" >
+                        <b>                            
+                            <apex:outputLabel value="{!$ObjectType.Quote.Fields.EndDate__c.Label}" />:
+                        </b> 
+                        <apex:outputText value="{0,date,dd'/'MM'/'yyyy}"> 
+                            <apex:param value="{!QuoteObj.EndDate__c}"/> 
+                        </apex:outputText>
+                    </td>
+                </tr>
+            </table>
+            <br/>
+            <br/>
+        </div>
+        <table class="tg" width="100%">
+            <thead>
+                <tr>
+                    <th class="tg-0pky" style="background-color:#184FA4">
+                        <b>Revenue Type</b>
+                    </th>
+                    <th class="tg-0pky" style="background-color:#184FA4">
+                        <b>Ob Marg</b>
+                    </th>
+                    <th class="tg-0pky" style="background-color:#184FA4">
+                        <b>Links Revenue</b>
+                    </th>
+                    <th class="tg-0pky" style="background-color:#184FA4;">
+                        <b>Q.ta ATI</b>
+                    </th>
+                    <th class="tg-0pky" style="background-color:#184FA4">
+                        <b>Total Revenue</b> 
+                    </th>
+                    <th class="tg-0pky" style="background-color:#184FA4">
+                        <b>HR Cost</b>
+                    </th>
+                    <th class="tg-0pky" style="background-color:#184FA4">
+                        <b>Cost</b>
+                    </th> 
+                    <th class="tg-0pky" style="background-color:#184FA4">
+                        <b>Margin</b>
+                    </th> 
+                    <th class="tg-0pky" style="background-color:#184FA4">
+                        <b>Profit</b>
+                    </th> 
+                </tr>
+            </thead>
+            <tfoot>
+                <apex:repeat value="{!TotalEconomicPlanPDF}" var="tot" id="theRepeat2">
+                    <tr>
+                        <td class="tg-0lax" style="background-color:#DADADA;color: black">
+                            <b><apex:outputText value="{!tot.revenueType}"/></b>
+                        </td>
+                        <td class="tg-0lax" style="background-color:#DADADA;color: black">
+                            <b> -- </b>
+                        </td>
+                        <td class="tg-0lax" style="background-color:#DADADA;color: black">
+                            <b><apex:outputText value="{0, number, ###,##0}€">
+                                <apex:param value="{!tot.linksRevenue}"/>
+                                </apex:outputText></b>
+                        </td>
+                        <td class="tg-0lax" style="background-color:#DADADA;color: black">
+                            <b><apex:outputText value="{0, number, ###,##0}€">
+                                <apex:param value="{!tot.ATI}"/>
+                                </apex:outputText></b>
+                        </td>
+                        <td class="tg-0lax" style="background-color:#DADADA;color: black">
+                            <b><apex:outputText value="{0, number, ###,##0}€">
+                                <apex:param value="{!tot.totalRevenue}"/>
+                                </apex:outputText></b>
+                        </td>
+                        <td class="tg-0lax" style="background-color:#DADADA;color: black">
+                            <b><apex:outputText value="{0, number, ###,##0}€">
+                                <apex:param value="{!tot.costHR}"/>
+                                </apex:outputText></b>
+                        </td>
+                        <td class="tg-0lax" style="background-color:#DADADA;color: black">
+                            <b><apex:outputText value="{0, number, ###,##0}€">
+                                <apex:param value="{!tot.cost}"/>
+                                </apex:outputText></b>
+                        </td>
+                        <td class="tg-0lax" style="background-color:#DADADA;color: black">
+                            <b><apex:outputText value="{0, number, ###,##0}€">
+                                <apex:param value="{!tot.margin}"/>
+                                </apex:outputText></b>
+                                
+                        </td>
+                        <td class="tg-0lax" style="background-color:#DADADA;color: black">
+                            <b><apex:outputText value="{0,number,0}%">
+                                <apex:param value="{!tot.profit * 100}"/>
+                                </apex:outputText></b>
+                                
+                        </td>
+                    </tr>
+                </apex:repeat>
+            </tfoot>
+            <tbody>
+                <apex:repeat value="{!EconomicPlanPDF}" var="econplan" id="theRepeat">
+                    <tr>
+                        <td class="tg-0lax">
+                            <apex:outputText value="{!econplan.revenueType}"/>
+                        </td>
+                        <td class="tg-0lax">
+                            <apex:outputText value="{0,number,0}%">
+                                <apex:param value="{!econplan.defaultMarginPercent*100}"/>
+                            </apex:outputText>
+                        </td>
+                        <td class="tg-0lax">
+                            <apex:outputText value="{0, number, ###,##0}€">
+                                <apex:param value="{!econplan.linksRevenue}"/>
+                            </apex:outputText>
+                        </td>
+                        <td class="tg-0lax">
+                            <apex:outputText value="{0, number, ###,##0}€">
+                                <apex:param value="{!econplan.ATI}"/>
+                            </apex:outputText>
+                        </td>
+                        <td class="tg-0lax">
+                            <apex:outputText value="{0, number, ###,##0}€">
+                                <apex:param value="{!econplan.totalRevenue}"/>
+                            </apex:outputText>
+                        </td>
+                        <td class="tg-0lax">
+                            <apex:outputText value="{0, number, ###,##0}€">
+                                <apex:param value="{!econplan.costHR}"/>
+                            </apex:outputText>
+                        </td>
+                        <td class="tg-0lax">
+                            <apex:outputText value="{0, number, ###,##0}€">
+                                <apex:param value="{!econplan.cost}"/> 
+                            </apex:outputText>
+                        </td>
+                        <td class="tg-0lax">
+                            <apex:outputText value="{0, number, ###,##0}€">
+                                <apex:param value="{!econplan.margin}"/>
+                            </apex:outputText>
+                        </td>
+                        <td class="tg-0lax">
+                            <apex:outputText value="{0,number,0}%"> 
+                                <apex:param value="{!econplan.profit*100}"/>
+                                </apex:outputText>
+                        </td>
+                    </tr>
+                </apex:repeat>
+            </tbody> 
+            <br/>
+        </table>
+<table style="width:100%;">
+        <tr>
+            <td style="width: 33%">
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+            <apex:pageBlockSectionItem >
+            <apex:outputLabel > <b> Row Margin Check </b> </apex:outputLabel>
+            <apex:outputField value="{!QuoteObj.IsMarginValid__c}" style="outline: 2px solid black;"/>
+          </apex:pageBlockSectionItem>
+          </apex:pageBlockSection>  
+          </apex:pageBlock>
+        </td>
+        <td style="width: 33%">
+            <apex:pageBlock >
+                <apex:pageBlockSection >
+                <apex:pageBlockSectionItem >
+                <apex:outputLabel > <b> Total Margin Check </b> </apex:outputLabel>
+                <apex:outputField value="{!QuoteObj.isMinMarginValid__c}"/>
+              </apex:pageBlockSectionItem>
+              </apex:pageBlockSection>  
+              </apex:pageBlock>
+            </td>
+            <td style="text-align: right">
+            <apex:outputPanel rendered="{!QuoteObj.isMinMarginValid__c == true}">
+             <b style="font: bold 13px Arial;text-decoration: none; 
+             background-color: #229260;color: white;padding: 2px 6px 2px 6px;
+             border-top: 1px solid #CCCCCC;border-right: 1px solid #333333;
+             border-bottom: 1px solid #333333; 
+             border-left: 1px solid #CCCCCC;"> Auto Approved </b>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!QuoteObj.isMinMarginValid__c == false}">
+            <u> <b style="font: bold 13px Arial;text-decoration: none; 
+                background-color: #C23934;color: white;padding: 2px 6px 2px 6px;
+                border-top: 1px solid #CCCCCC;border-right: 1px solid #333333;
+                border-bottom: 1px solid #333333; 
+                border-left: 1px solid #CCCCCC;"> Approval Required </b> </u>
+            </apex:outputPanel>
+           </td>
+        </tr>
+
+    </table>
+        <footer class="links" style="color: black">
+            <p style="font-size:14px; text-align: right;">
+                <b>Data Presented Economic Plan:  {!DAY(TODAY())} / {!MONTH(TODAY())} / {!YEAR(TODAY())}</b> 
+          </p>
+            <hr class="row"/>
+            <p style="font-size:14px;">
+                <b>LINKS Management and Technology S.p.A.</b>
+            </p>
+            <b>Sede legale e operativa: LECCE</b> Via Rocco Scotellaro, 55 - Tel. 0832/443911 - Fax 0832/443926<br/>
+            <b>Sedi operative: MILANO</b> Via Messina,38 (Torre B) <b>ROMA </b> Via XX Settembre, 4 - <br/>
+            <b>BARI </b> Via Dante Alighieri, 25 <br/>
+            Sito Web:<a href="www.linkmt.it"> www.linksmt.it</a> - Mail: <a href="info@linksmt.it"> info@linksmt.it</a> – PEC: <a href="links@legalmail.it"> links@legalmail.it </a> <br/>
+            C.F. e P. IVA 03351210756 – Capitale Sociale € 1.500.000,00 interamente versato – <br/>
+            Registro Imprese Lecce 03351210756 – R.E.A. Lecce N.217691
+        </footer>
+    </div>
+</apex:page>

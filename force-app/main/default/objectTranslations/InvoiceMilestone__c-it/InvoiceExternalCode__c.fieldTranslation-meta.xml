@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Enter the invoice code present on the company billing system --></help>
+    <label><!-- Invoice External Code --></label>
+    <name>InvoiceExternalCode__c</name>
+</CustomFieldTranslation>

@@ -125,6 +125,16 @@
             <field>StatusIndicator__c</field>
             <table>InvoiceMilestone__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>CreatedDate__c</field>
+            <table>InvoiceMilestone__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ExtId__c</field>
+            <table>InvoiceMilestone__c</table>
+        </columns>
         <masterLabel>Invoices Milestone</masterLabel>
     </sections>
     <sections>
@@ -176,6 +186,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>FtAcc__c</field>
+            <table>InvoiceMilestone__c.Fatture_In_Cloud__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>CreatedDate__c</field>
             <table>InvoiceMilestone__c.Fatture_In_Cloud__r</table>
         </columns>
         <columns>
@@ -256,6 +271,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Owner</field>
+            <table>InvoiceMilestone__c.Fatture_In_Cloud__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>RecordType</field>
             <table>InvoiceMilestone__c.Fatture_In_Cloud__r</table>
         </columns>
         <columns>

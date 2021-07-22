@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Quote Revenue</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Quote Revenues</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>Links Sales Quote Revenue</layout>
+        <sections>
+            <label><!-- Additional Information --></label>
+            <section>Additional Information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Revenue Information --></label>
+            <section>Revenue Information</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Links --></label>
+        <name>Links</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Revenues can&apos;t be edited, if quote status is not in Draft. --></errorMessage>
+        <name>Links_Quote_Status_not_in_Draft</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Links Revenue must be greater than Quota ATI --></errorMessage>
+        <name>Links_Revenue_Maggiore_di_Quota_ATI</name>
+    </validationRules>
+</CustomObjectTranslation>

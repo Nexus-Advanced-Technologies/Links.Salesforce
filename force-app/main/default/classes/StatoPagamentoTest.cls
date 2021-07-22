@@ -22,12 +22,12 @@ private class StatoPagamentoTest {
 
 	@TestSetup
 	static  void impostazioneDati(){
-
+		String invoiceStage = 'Fattura Inviata';
 		List<Account> lstAccount = new List<Account>(); //lista account
 		List<Opportunity> lstOpportunity = new List<Opportunity>(); //lista opportunity 
 		List<InvoiceMilestone__c> lstInvoiceMilestone = new List<InvoiceMilestone__c>(); //lista Invoice Milestone
 		FattureInCloudSettings__c fattureInCloudeSettings = new FattureInCloudSettings__c();
-		fattureInCloudeSettings.InvoiceStage__c = 'Fattura Inviata';
+		fattureInCloudeSettings.InvoiceStage__c = invoiceStage;
 
 		insert fattureInCloudeSettings;
 
@@ -46,7 +46,7 @@ private class StatoPagamentoTest {
 		InvoiceMilestone__c inv = new InvoiceMilestone__c();
 		inv.Name = 'Invoice Test';
 		inv.ExpectedDate__c = Date.today().addDays(-1);
-		inv.Stage__c = 'Fattura Pagata';
+		inv.Stage__c = invoiceStage;
 		inv.Opportunity__c = opp.id;
 		insert inv;
 	}

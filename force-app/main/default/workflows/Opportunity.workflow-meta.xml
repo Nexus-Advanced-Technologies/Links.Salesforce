@@ -6,7 +6,7 @@
         <description>SendEmailOptyLost</description>
         <protected>false</protected>
         <senderType>CurrentUser</senderType>
-        <template>unfiled$public/OpportunityLost</template>
+        <template>Nexus/OpportunityLost</template>
     </alerts>
     <alerts>
         <fullName>SendEmailOptyWon</fullName>
@@ -14,7 +14,7 @@
         <description>SendEmailOptyWon</description>
         <protected>false</protected>
         <senderType>CurrentUser</senderType>
-        <template>unfiled$public/OpportunityWon</template>
+        <template>Nexus/OpportunityWon</template>
     </alerts>
     <fieldUpdates>
         <fullName>UpdateRecordTypeIdToGreater</fullName>
@@ -39,46 +39,6 @@
         <reevaluateOnChange>false</reevaluateOnChange>
     </fieldUpdates>
     <rules>
-        <fullName>SendEmailOptyLost</fullName>
-        <actions>
-            <name>SendEmailOptyLost</name>
-            <type>Alert</type>
-        </actions>
-        <active>false</active>
-        <criteriaItems>
-            <field>Opportunity.Amount</field>
-            <operation>greaterThan</operation>
-            <value>0</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Opportunity.StageName</field>
-            <operation>equals</operation>
-            <value>Closed Lost</value>
-        </criteriaItems>
-        <description>Invia una mail a sales@nexusat.it quando un&apos;opportunità è in chiuso perso e il suo ammontare è maggiore di 0€</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-    </rules>
-    <rules>
-        <fullName>SendEmailOptyWon</fullName>
-        <actions>
-            <name>SendEmailOptyWon</name>
-            <type>Alert</type>
-        </actions>
-        <active>true</active>
-        <criteriaItems>
-            <field>Opportunity.Amount</field>
-            <operation>greaterThan</operation>
-            <value>0</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Opportunity.StageName</field>
-            <operation>equals</operation>
-            <value>Closed Won</value>
-        </criteriaItems>
-        <description>Invia una mail a sales@nexusat.it quando un&apos;opportunità è in chiuso vinto e il suo ammontare è maggiore di 0€</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-    </rules>
-    <rules>
         <fullName>UpdateOpportunityRecordTypeToGreater</fullName>
         <actions>
             <name>UpdateRecordTypeIdToGreater</name>
@@ -86,7 +46,7 @@
         </actions>
         <active>true</active>
         <description>Updates the Opportunity Record Type based on the Amount set on the Custom Settings (OpportunitySetting)</description>
-        <formula>Amount &gt; $Setup.OpportunitySetting__c.ThresholdAmountToUpdateRecordType__c</formula>
+        <formula>AND ( Amount &gt; $Setup.OpportunitySetting__c.ThresholdAmountToUpdateRecordType__c,  RecordType.DeveloperName &lt;&gt; &apos;Links&apos;)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -97,7 +57,7 @@
         </actions>
         <active>true</active>
         <description>Updates the Opportunity Record Type based on the Amount set on the Custom Settings (OpportunitySetting)</description>
-        <formula>OR (     Amount &lt; $Setup.OpportunitySetting__c.ThresholdAmountToUpdateRecordType__c,     ISNULL(Amount) )</formula>
+        <formula>AND (      OR (     Amount &lt; $Setup.OpportunitySetting__c.ThresholdAmountToUpdateRecordType__c, ISNULL(Amount) ) ,   RecordType.DeveloperName &lt;&gt; &apos;Links&apos; )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
 </Workflow>

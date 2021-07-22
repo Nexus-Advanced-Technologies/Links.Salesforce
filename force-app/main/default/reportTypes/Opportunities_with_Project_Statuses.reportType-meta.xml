@@ -12,16 +12,6 @@
     <sections>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>AccountCategory__c</field>
-            <table>Opportunity</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Account_Category__c</field>
-            <table>Opportunity</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Account</field>
             <table>Opportunity</table>
         </columns>
@@ -32,12 +22,12 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Budget_Confirmed__c</field>
+            <field>BudgetConfirmed__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Record_Owner__c</field>
+            <field>BusinessManager__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
@@ -52,7 +42,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Codice_Commessa__c</field>
+            <field>OrderCode__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
@@ -77,12 +67,12 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Customer_Technical_Referent__c</field>
+            <field>CustomerTechnicalReferent__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Delivery_Project_Manager__c</field>
+            <field>DeliveryProjectManager__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
@@ -92,7 +82,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Discovery_Completed__c</field>
+            <field>DiscoveryCompleted__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
@@ -102,17 +92,12 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Fatturato_al_cliente__c</field>
+            <field>RevenueToPlan__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Fatturato_Da_Pianificare__c</field>
-            <table>Opportunity</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Fatturazione__c</field>
+            <field>Invoicing__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
@@ -122,7 +107,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Giorni_Uomo__c</field>
+            <field>ManDays__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
@@ -132,22 +117,22 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Indicatore_Gap__c</field>
-            <table>Opportunity</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>ITService__c</field>
-            <table>Opportunity</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>IT_Service__c</field>
+            <field>GapIndicator__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>LastActivityDate</field>
+            <table>Opportunity</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ActualTotalInternalCost__c</field>
+            <table>Opportunity</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ActualTradingProfit__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
@@ -167,12 +152,12 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>LeadSource</field>
+            <field>Billable__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Loss_Reason__c</field>
+            <field>LeadSource</field>
             <table>Opportunity</table>
         </columns>
         <columns>
@@ -182,27 +167,52 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Numero_Ordine_del_Cliente__c</field>
+            <field>Budget_Confirmed__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>OM_Offerta_Master__c</field>
+            <field>CustomerOrderNumber__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Opportunita_di_fatturazione__c</field>
+            <field>OMMasterOffer__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Opportunit_di_fatturazione_Ref_N__c</field>
+            <field>BillingOpportunity__c</field>
+            <table>Opportunity</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Discovery_Completed__c</field>
+            <table>Opportunity</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>CreatedDate__c</field>
+            <table>Opportunity</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>BillingOpportunityRefN__c</field>
+            <table>Opportunity</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ExpectedMargin__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Id</field>
+            <table>Opportunity</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ExpectedCost__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
@@ -217,12 +227,17 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>RecordType</field>
+            <field>RemainingExpectedCost__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>postServiceDesk__c</field>
+            <field>ExpectedTradingProfit__c</field>
+            <table>Opportunity</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>RecordType</field>
             <table>Opportunity</table>
         </columns>
         <columns>
@@ -237,12 +252,27 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>ExtId__c</field>
+            <table>Opportunity</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>PrimaryPartnerAccount</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>IsPrivate</field>
+            <table>Opportunity</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>SumTimeSpentDD__c</field>
+            <table>Opportunity</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>SumEstimateToFinishDD__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
@@ -257,32 +287,22 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Reason_Won_Lost__c</field>
+            <field>ReasonWonLost__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Reference_Number__c</field>
+            <field>ReferenceNumber__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>ROI_Analysis_Completed__c</field>
+            <field>PaymentType__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Tipo_Pagamento__c</field>
-            <table>Opportunity</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Service_Desk__c</field>
-            <table>Opportunity</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Service_Type__c</field>
+            <field>ServiceType__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
@@ -307,52 +327,52 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Totale_Da_Fatturare__c</field>
+            <field>TotalToBeInvoiced__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Totale_Da_Fatturare_Percentuale__c</field>
+            <field>TotalToBeInvoicedPercentage__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Totale_Draft__c</field>
+            <field>TotalInDraft__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Is_Delivery_Required__c</field>
+            <field>IsDeliveryRequired__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Totale_Draft_Percentuale__c</field>
+            <field>TotalInDraftPercentage__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Totale_Fatture_Inviate__c</field>
+            <field>TotalSentInvoices__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Totale_Fatture_Inviate_Percentuale__c</field>
+            <field>TotalSentInvoicesPercentage__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Totale_Saldato__c</field>
+            <field>TotalSettled__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Totale_Saldato_Percentuale__c</field>
+            <field>TotalSettledPercentage__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Trading_Profit__c</field>
+            <field>TradingProfit__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
@@ -362,7 +382,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Gross_Margin__c</field>
+            <field>GrossMargin__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
@@ -372,17 +392,12 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Gross_Margin_New__c</field>
+            <field>TotalInternalCostSynced__c</field>
             <table>Opportunity</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Total_Internal_Cost_Synced__c</field>
-            <table>Opportunity</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Totale_WIP__c</field>
+            <field>TotalInWIP__c</field>
             <table>Opportunity</table>
         </columns>
         <masterLabel>Opportunities</masterLabel>
@@ -390,22 +405,22 @@
     <sections>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Budget_gg__c</field>
+            <field>BudgetDD__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Cliente__c</field>
+            <field>Customer__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Codice_Account__c</field>
+            <field>AccountCode__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Consuntivo_gg__c</field>
+            <field>ConsumptiveDD__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
@@ -420,12 +435,12 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Data_fine_prevista__c</field>
+            <field>ExpectedEndDate__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Descrizione__c</field>
+            <field>Description__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
@@ -444,18 +459,28 @@
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>AccountCategory__c</field>
+            <table>Opportunity.Project_Milestones__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Account__c</field>
+            <table>Opportunity.Project_Milestones__r</table>
+        </columns>
+        <columns>
             <checkedByDefault>true</checkedByDefault>
             <field>Name</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Project_Sentiment_Semaphore__c</field>
+            <field>ProjectSentimentSemaphore__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Project_Sentiment_Value__c</field>
+            <field>ProjectSentimentValue__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
@@ -465,12 +490,32 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Scostamento_dal_budget__c</field>
+            <field>BudgetDeviation__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Scostamento_percentuale__c</field>
+            <field>PercentageDeviation__c</field>
+            <table>Opportunity.Project_Milestones__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>SumTimeSpentDD__c</field>
+            <table>Opportunity.Project_Milestones__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>SumOriginalEstimateDD__c</field>
+            <table>Opportunity.Project_Milestones__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>SumAmountProject__c</field>
+            <table>Opportunity.Project_Milestones__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ExtId__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
@@ -485,47 +530,57 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Stato__c</field>
+            <field>Stage__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Stato_attuale__c</field>
+            <field>CurrentStage__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Stima_gg_a_terminare__c</field>
+            <field>CreatedDate__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Time_Tracking_Report__c</field>
+            <field>EstimatedToFinishDD__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Tipo__c</field>
+            <field>ReferenceNumber__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Accuracy__c</field>
+            <field>TimeTrackingReport__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Est_Time_Remaining__c</field>
+            <field>RecordType</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Original_Estimate__c</field>
+            <field>Type__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Time_Spent__c</field>
+            <field>EmailNotification__c</field>
+            <table>Opportunity.Project_Milestones__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>SumAccuracyDD__c</field>
+            <table>Opportunity.Project_Milestones__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>SumEstTimeRemainingDD__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
@@ -535,17 +590,17 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>FTE_Mancanti__c</field>
+            <field>RemainingFTE__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Annotazioni_sul_budget__c</field>
+            <field>BudgetNotes__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Data_Aggiornamento__c</field>
+            <field>UpdateDate__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <columns>
@@ -555,7 +610,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Media_FTE__c</field>
+            <field>AverageFTE__c</field>
             <table>Opportunity.Project_Milestones__r</table>
         </columns>
         <masterLabel>Project Statuses</masterLabel>

@@ -168,7 +168,6 @@
         <excludedStandardButtons>Accept</excludedStandardButtons>
         <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
         <excludedStandardButtons>MassChangeOwner</excludedStandardButtons>
-        <listViewButtons>Sincronizza_Fatture_In_Cloud</listViewButtons>
         <searchResultsAdditionalFields>Anno__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Numero__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>DataDocumento__c</searchResultsAdditionalFields>

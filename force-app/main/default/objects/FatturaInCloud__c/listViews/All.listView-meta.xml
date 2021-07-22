@@ -3,18 +3,11 @@
     <fullName>All</fullName>
     <columns>NAME</columns>
     <columns>Account__c</columns>
-    <columns>Business_Key__c</columns>
-    <columns>Dato_Congruente__c</columns>
-    <columns>InvoiceMilestone__c</columns>
-    <columns>oggetto_interno__c</columns>
     <columns>Opportunity__c</columns>
+    <columns>InvoiceMilestone__c</columns>
     <columns>DataDocumento__c</columns>
-    <columns>Anno__c</columns>
-    <columns>Numero__c</columns>
-    <columns>Saldato__c</columns>
-    <columns>ImportoNetto__c</columns>
-    <columns>LastFetchTime__c</columns>
-    <columns>LAST_UPDATE</columns>
+    <columns>Business_Key__c</columns>
+    <columns>oggetto_interno__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>

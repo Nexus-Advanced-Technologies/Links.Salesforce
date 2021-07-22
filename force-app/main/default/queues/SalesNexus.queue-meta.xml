@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>true</doesSendEmailToMembers>
+    <email>mariachiara.tirinzoni@nexusat.it</email>
+    <name>SalesNexus</name>
+    <queueMembers>
+        <users>
+            <user>flaviadallora@nexusat.it</user>
+            <user>massimocolombo@nexusat.it</user>
+            <user>salesmanager@nexusat.it</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Lead</sobjectType>
+    </queueSobject>
+</Queue>

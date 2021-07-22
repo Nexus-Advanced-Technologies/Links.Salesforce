@@ -1,0 +1,385 @@
+<!--
+  @description       : HTML Page for LWC ecomomicPlanTableComponent
+  @author            : Œ | Mirco Centrone
+  @last modified on  : 10-05-2021
+  @last modified by  : Œ
+  Modifications Log 
+  Ver   Date         Author   Modification
+  1.0   04-02-2021   Œ   Initial Version
+  1.1   26-04-2021   Œ   Modifiche all'algoritmo di calcolo e approvazione dell'economicPlan, richieste dal cliente.
+-->
+<template>
+  <!-- Page Header -->
+  <div class="slds-page-header slds-m-right_small slds-page-header_related-list">
+    <div class="slds-page-header__row">
+      <div class="slds-page-header__col-title">
+        <nav role="navigation" aria-label="Breadcrumbs">
+          <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+            <li class="slds-breadcrumb__item">
+              <a href="#">Quote</a>
+            </li>
+            <li class="slds-breadcrumb__item">
+              <a href="#"></a>
+            </li>
+          </ol>
+        </nav>
+        <div class="slds-media">
+          <div class="slds-media__body">
+            <div class="slds-page-header__name">
+              <div class="slds-page-header__name-title">
+                <h1>
+                  <span class="slds-page-header__title slds-truncate" title="Economic Plan">Economic Plan</span>
+                </h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slds-page-header__col-actions">
+        <div class="slds-page-header__controls">
+          <div class="slds-page-header__control">
+            <ul class="slds-button-group-list">
+              <li>
+                <lightning-button-icon class="slds-float_right" icon-name="utility:refresh" alternative-text="Refresh"
+                  onclick={refresh}></lightning-button-icon>
+              </li>
+              <li>
+                <div class="slds-dropdown-trigger slds-dropdown-trigger_click">
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slds-page-header__row">
+      <div class="slds-page-header__col-meta">
+        <p class="slds-page-header__meta-text">{economicPlanSize} Revenue Types Calculated </p>
+      </div>
+      <div class="slds-page-header__col-controls">
+        <div class="slds-page-header__controls">
+          <div class="slds-page-header__control">
+            <div class="slds-dropdown-trigger slds-dropdown-trigger_click">
+            </div>
+          </div>
+          <div class="slds-page-header__control">
+            <ul class="slds-button-group-list">
+              <li>
+              </li>
+              <li>
+              </li>
+              <li>
+                <div class="slds-dropdown-trigger slds-dropdown-trigger_click">
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Table -->
+  <table
+    class="slds-table slds-table_cell-buffer slds-no-row-hover slds-table_bordered slds-max-medium-table_stacked-horizontal ">
+    <!-- Table Head -->
+    <thead>
+      <tr class="slds-line-height_reset thead-design">
+        <th class="thead-design" scope="col">
+          <div class="slds-truncate " title=" Revenue Type">Revenue Type</div>
+        </th>
+        <th class="thead-design" scope="col">
+          <div class="slds-truncate " title=" Error"></div>
+        </th>
+        <th class="thead-design" scope="col">
+          <div class="slds-truncate right " title="Default Margin">Ob Marg</div>
+        </th>
+        <!--
+        <th class="thead-design border-right" scope="col">
+          <div class="slds-truncate right  " title="Min Margin">Min Marg</div>
+        </th>
+        !-->
+        <th class="thead-design" scope="col">
+          <div class="slds-truncate right " title=" Links Revenue">Links Revenue</div>
+        </th>
+        <th class="thead-design" scope="col">
+          <div class="slds-truncate right " title="ATI">Q.ta ATI</div>
+        </th>
+        <th class="thead-design border-right" scope="col">
+          <div class="slds-truncate right  " title=" Tot Revenue"> Total Revenue
+          </div>
+        </th>
+        <th class="thead-design" scope="col">
+          <div class="slds-truncate right " title="HR Cost">HR Cost</div>
+        </th>
+        <th class="thead-design border-right" scope="col">
+          <div class="slds-truncate right  " title="Cost">Cost</div>
+        </th>
+        <th class="thead-design border-right" scope="col">
+          <div class="slds-truncate right  " title="Cost">Margin</div>
+        </th>
+        <th class="thead-design" scope="col">
+          <div class="slds-truncate right " title="Profit">Profit</div>
+        </th>
+      </tr>
+    </thead>
+    <!-- Table Body -->
+    <tbody>
+      <!-- Populate Table foreach econPlan.revenueType  -->
+      <template for:each={economicPlan} for:item="econPlan">
+        <tr key={econPlan.revenueType} class="slds-hint-parent ">
+          <template if:false={econPlan.rowError}>
+            <th data-label="Revenue Type" scope="row">
+              <div class="slds-truncate " title={econPlan.revenueType}>{econPlan.revenueType}</div>
+            </th>
+            <td data-label="Error">
+            </td>
+          </template>
+          <!-- Table Row Error Message -->
+          <template if:true={econPlan.rowError}>
+            <td class="slds-cell-edit slds-has-error" role="gridcell" scope="row">
+              <span class="slds-grid slds-grid_align-spread">
+                <span class="slds-truncate" title={econPlan.revenueType}><b>Ops! Something went wrong!</b></span>
+                <button class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small" tabindex="0"
+                  title="Edit Account Name of Acme - 1,200 Widgets">
+                  <svg class="slds-button__icon slds-button__icon_hint slds-button__icon_edit" aria-hidden="true">
+
+                  </svg>
+                  <span class="slds-assistive-text">{econPlan.revenueType}</span>
+                </button>
+              </span>
+            </td>
+            <section aria-describedby="dialog-body-id-14" aria-labelledby="dialog-heading-id-2"
+              class="slds-popover slds-popover_error" role="dialog" style="position:absolute;">
+              <button
+                class="slds-button slds-button_icon slds-button_icon-small slds-float_right slds-popover__close slds-button_icon-inverse"
+                title="Close dialog">
+                <svg class="slds-button__icon" aria-hidden="true">
+                </svg>
+                <span class="slds-assistive-text">Close dialog</span>
+              </button>
+              <header class="slds-popover__header">
+                <div class="slds-media slds-media_center slds-has-flexi-truncate ">
+                  <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-utility-error">
+                      <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                      </svg>
+                    </span>
+                  </div>
+                  <div class="slds-media__body">
+                    <h2 class="slds-truncate slds-text-heading_medium" title="Resolve error">Resolve error</h2>
+                  </div>
+                </div>
+              </header>
+              <div class="slds-popover__body">
+                <p><b>{econPlan.revenueType}</b></p>
+              </div>
+            </section>
+          </template>
+          <!-- Table Values -->
+          <td data-label="Default Margin">
+            <p class="slds-truncate right bold">
+              <lightning-formatted-number value={econPlan.defaultMarginPercent} format-style="percent">
+              </lightning-formatted-number>
+            </p>
+          </td>
+          <!--
+          <td data-label="Min Margin" class=" bold border-right">
+            <p class="slds-truncate right">
+              <lightning-formatted-number value={econPlan.minMarginPercent} format-style="percent">
+              </lightning-formatted-number>
+            </p>
+          </td>
+          !-->
+          <td data-label="Links Revenue" class="">
+            <p class="slds-truncate right">
+              <lightning-formatted-number value={econPlan.linksRevenue} format-style="currency" currency-code="EUR"
+                currency-display-as="symbol" minimum-fraction-digits="0" maximum-fraction-digits="2">
+              </lightning-formatted-number>
+            </p>
+          </td>
+          <td data-label="ATI" class="">
+            <p class="slds-truncate right">
+              <lightning-formatted-number value={econPlan.ATI} format-style="currency" currency-code="EUR"
+                currency-display-as="symbol" minimum-fraction-digits="0" maximum-fraction-digits="2">
+              </lightning-formatted-number>
+            </p>
+          </td>
+          <td data-label="Total Revenue" class=" bold border-right">
+            <p class="slds-truncate right">
+              <lightning-formatted-number value={econPlan.totalRevenue} format-style="currency" currency-code="EUR"
+                currency-display-as="symbol" minimum-fraction-digits="0" maximum-fraction-digits="2">
+              </lightning-formatted-number>
+            </p>
+          </td>
+          <td data-label="HR Cost" class="">
+            <p class="slds-truncate right">
+              <lightning-formatted-number value={econPlan.costHR} format-style="currency" currency-code="EUR"
+                currency-display-as="symbol" minimum-fraction-digits="0" maximum-fraction-digits="2">
+              </lightning-formatted-number>
+            </p>
+          </td>
+          <td data-label="Cost" class="border-right">
+            <p class="slds-truncate right">
+              <lightning-formatted-number value={econPlan.cost} format-style="currency" currency-code="EUR"
+                currency-display-as="symbol" minimum-fraction-digits="0" maximum-fraction-digits="2">
+              </lightning-formatted-number>
+            </p>
+          </td>
+          <td data-label="Margin" class=" bold border-right">
+            <p class="slds-truncate right">
+              <lightning-formatted-number value={econPlan.margin} format-style="currency" currency-code="EUR"
+                currency-display-as="symbol" minimum-fraction-digits="0" maximum-fraction-digits="2">
+              </lightning-formatted-number>
+            </p>
+          </td>
+          <!-- Table Row marginCheck: OK or LOW -->
+          <template if:true={econPlan.marginCheck}>
+            <td data-label="Profit" role="gridcell">
+              <div class="slds-grid slds-grid_vertical-align-right slds-grid_reverse bold">
+                <div class="slds-truncate " title="Profit">
+                  <lightning-formatted-number value={econPlan.profit} format-style="percent">
+                  </lightning-formatted-number>
+                </div>
+                <div class="slds-icon_container slds-m-left_x-small slds-m-right_xx-small bold ">
+                  <span data-slds-state="positive" class="slds-icon-score" title="OK">
+                    <svg viewBox="0 0 5 5" class="slds-icon-score__positive" aria-hidden="true">
+                      <circle cx="50%" cy="50%" r="3.000"></circle>
+                    </svg>
+                    <span class="slds-assistive-text">Margine di Profitto OK</span>
+                  </span>
+                </div>
+                <div class="slds-truncate" title="High">OK</div>
+              </div>
+            </td>
+          </template>
+          <template if:false={econPlan.marginCheck}>
+            <td data-label="Profit" role="gridcell">
+              <div class="slds-grid slds-grid_vertical-align-right slds-grid_reverse bold">
+                <div class="slds-truncate" title="Profit">
+                  <lightning-formatted-number value={econPlan.profit} format-style="percent">
+                  </lightning-formatted-number>
+                </div>
+                <div class="slds-icon_container slds-m-left_x-small slds-m-right_xx-small bold ">
+                  <span data-slds-state="negative" class="slds-icon-score" title="Low">
+
+                    <svg viewBox="0 0 5 5" class="slds-icon-score__negative" aria-hidden="true">
+                      <circle cx="50%" cy="50%" r="2.500"></circle>
+                    </svg>
+                    <span class="slds-assistive-text">Margine di Profitto Troppo Basso</span>
+                  </span>
+                </div>
+                <div class="slds-truncate" title="Low">Low</div>
+              </div>
+            </td>
+          </template>
+        </tr>
+      </template>
+      <!-- Table Last Row -->
+      <tr class=" slds-box slds-theme_shade slds-theme_alert-texture td-background-grey ">
+        <th data-label="Revenue Type" class="  slds-theme_shade slds-theme_alert-texture td-background-grey "
+          scope="row">
+          <div class="slds-truncate slds-theme_shade slds-theme_alert-texture last-row-bold td-background-grey"
+            title={totalEconomicPlan.revenueType}>
+            {totalEconomicPlan.revenueType}</div>
+        </th>
+        <td data-label="Error">
+        </td>
+        <td data-label="Default Margin">
+          <p class="slds-truncate slds-theme_shade slds-theme_alert-texture last-row-bold right td-background-grey"
+            title="Min Margin">
+            --&nbsp;&nbsp;&nbsp;&nbsp;
+          </p>
+        </td>
+        <!--
+        <td data-label="Min Margin" class="border-right">
+          <p class="slds-truncate slds-theme_shade slds-theme_alert-texture last-row-bold right td-background-grey"
+            title="Min Margin">
+            --&nbsp;&nbsp;&nbsp;&nbsp;
+          </p>
+        </td>
+        !-->
+        <td data-label="Links Revenue">
+          <p class="slds-truncate  slds-theme_shade slds-theme_alert-texture last-row-bold right td-background-grey">
+            <lightning-formatted-number value={totalEconomicPlan.linksRevenue} format-style="currency"
+              currency-code="EUR" currency-display-as="symbol" minimum-fraction-digits="0" maximum-fraction-digits="2">
+            </lightning-formatted-number>
+          </p>
+        </td>
+        <td data-label="ATI">
+          <p class="slds-truncate  slds-theme_shade slds-theme_alert-texture last-row-bold right td-background-grey">
+            <lightning-formatted-number value={totalEconomicPlan.ATI} format-style="currency" currency-code="EUR"
+              currency-display-as="symbol" minimum-fraction-digits="0" maximum-fraction-digits="2">
+            </lightning-formatted-number>
+          </p>
+        </td>
+        <td data-label=" Total Revenue" class="border-right">
+          <p class="slds-truncate  slds-theme_shade slds-theme_alert-texture last-row-bold right td-background-grey">
+            <lightning-formatted-number value={totalEconomicPlan.totalRevenue} format-style="currency"
+              currency-code="EUR" currency-display-as="symbol" minimum-fraction-digits="0" maximum-fraction-digits="2">
+            </lightning-formatted-number>
+          </p>
+        </td>
+        <td data-label="HR Cost">
+          <p class="slds-truncate  slds-theme_shade slds-theme_alert-texture last-row-bold right td-background-grey">
+            <lightning-formatted-number value={totalEconomicPlan.costHR} format-style="currency" currency-code="EUR"
+              currency-display-as="symbol" minimum-fraction-digits="0" maximum-fraction-digits="2">
+            </lightning-formatted-number>
+          </p>
+        </td>
+        <td data-label="Cost" class="border-right">
+          <p class="slds-truncate  slds-theme_shade slds-theme_alert-texture last-row-bold right td-background-grey">
+            <lightning-formatted-number value={totalEconomicPlan.cost} format-style="currency" currency-code="EUR"
+              currency-display-as="symbol" minimum-fraction-digits="0" maximum-fraction-digits="2">
+            </lightning-formatted-number>
+          </p>
+        </td>
+        <td data-label="Margin" class="border-right">
+          <p class="slds-truncate  slds-theme_shade slds-theme_alert-texture last-row-bold right td-background-grey">
+            <lightning-formatted-number value={totalEconomicPlan.margin} format-style="currency" currency-code="EUR"
+              currency-display-as="symbol" minimum-fraction-digits="0" maximum-fraction-digits="2">
+            </lightning-formatted-number>
+          </p>
+        </td>
+        <td data-label="Profit">
+          <p class="slds-truncate slds-theme_shade slds-theme_alert-texture last-row-bold right td-background-grey">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <lightning-formatted-number value={totalEconomicPlan.profit} format-style="percent">
+            </lightning-formatted-number>
+
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- Page Footer -->
+  <!--
+  <span class="slds-badge slds-float_right">Min Margin Value:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <lightning-formatted-number value={totalMinMargin} format-style="currency" currency-code="EUR"
+      currency-display-as="symbol" minimum-fraction-digits="0" maximum-fraction-digits="2">
+    </lightning-formatted-number> &nbsp;&nbsp;(
+    <lightning-formatted-number value={totalMinMarginPercent} format-style="percent">
+    </lightning-formatted-number>)&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>
+  !-->
+  </br>
+  <span> &nbsp;&nbsp;&nbsp;&nbsp; </span>
+  <template if:true={marginCheck}>
+    <span class="slds-badge slds-badge_inverse badge-backgroung-blue">Row Margin Check: OK</span>
+  </template>
+  <template if:false={marginCheck}>
+    <span class="slds-badge slds-theme_warning">Row Margin Check: LOW</span>
+  </template>
+  <span> &nbsp;&nbsp;&nbsp;&nbsp; </span>
+  <template if:true={totalMarginCheck}>
+    <span class="slds-badge slds-badge_inverse badge-backgroung-blue">Total Margin Check: OK</span>
+  </template>
+  <template if:false={totalMarginCheck}>
+    <span class="slds-badge slds-theme_warning">Total Margin Check: LOW</span>
+  </template>
+  <template if:true={totalMarginCheck}>
+    <span class="slds-badge slds-theme_success slds-float_right">Auto-Approved</span>
+  </template>
+  <template if:false={totalMarginCheck}>
+    <span class="slds-badge slds-theme_error slds-float_right">Approval Required</span>
+  </template>
+</template>

@@ -1,2 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata"/>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>NexusInvoiceMilestonError</fullName>
+        <categories>Nexus-InvoiceMileston</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error</shortDescription>
+        <value>Enter a detail of the Payment Type Detail</value>
+    </labels>
+    <labels>
+        <fullName>NexusInvoiceMilestonSuccess</fullName>
+        <categories>Nexus-InvoiceMileston</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Success</shortDescription>
+        <value>Invoice Milestone entered successfully</value>
+    </labels>
+</CustomLabels>

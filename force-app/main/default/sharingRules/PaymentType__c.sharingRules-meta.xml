@@ -1,2 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata"/>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>Nexus</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Nexus</label>
+        <sharedTo>
+            <group>NexusAt</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>NexusAt</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

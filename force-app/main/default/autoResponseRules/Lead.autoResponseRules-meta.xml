@@ -1,2 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<AutoResponseRules xmlns="http://soap.sforce.com/2006/04/metadata"/>
+<AutoResponseRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <autoResponseRule>
+        <fullName>HR Event 21</fullName>
+        <active>true</active>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Lead.LeadSource</field>
+                <operation>equals</operation>
+                <value>HR Event 21</value>
+            </criteriaItems>
+            <senderEmail>marketing@nexusat.it</senderEmail>
+            <senderName>NexusAT Team</senderName>
+            <template>Nexus/Response_HR_Event</template>
+        </ruleEntry>
+    </autoResponseRule>
+    <autoResponseRule>
+        <fullName>Web to lead - NexusAT</fullName>
+        <active>false</active>
+    </autoResponseRule>
+</AutoResponseRules>
