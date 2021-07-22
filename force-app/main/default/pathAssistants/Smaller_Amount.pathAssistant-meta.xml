@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Opportunity</entityName>
+    <fieldName>StageName</fieldName>
+    <masterLabel>Smaller Amount</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>Amount</fieldNames>
+        <fieldNames>PaymentType__c</fieldNames>
+        <info>&lt;p&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Compilare obbligatoriamente i campi &lt;/span&gt;&lt;b style=&quot;font-size: 13px;&quot;&gt;Amount &lt;/b&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;e &lt;/span&gt;&lt;b style=&quot;font-size: 13px;&quot;&gt;Tipo di Pagamento&lt;/b&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt; prima di passare in &amp;quot;Pianifica Milestone&amp;quot; e generare dunque in automatico le Invoice Milestone. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Una volta generate le Milestone, aggiornare il campo &lt;/span&gt;&lt;b style=&quot;font-size: 13px;&quot;&gt;Data Prevista&lt;/b&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt; sulle singole Invoice Milestone con il valore corretto.&lt;/span&gt;&lt;/p&gt;</info>
+        <picklistValueName>Milestone Planning</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>NexusStandard</recordTypeName>
+</PathAssistant>

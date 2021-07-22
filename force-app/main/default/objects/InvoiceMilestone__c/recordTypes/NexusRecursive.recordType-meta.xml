@@ -2,7 +2,7 @@
 <RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>NexusRecursive</fullName>
     <active>true</active>
-    <compactLayoutAssignment>CustomPM</compactLayoutAssignment>
+    <compactLayoutAssignment>Nexus_CompactLayout</compactLayoutAssignment>
     <label>Nexus Recursive</label>
     <picklistValues>
         <picklist>Stage__c</picklist>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>6</fullName>
+        <default>false</default>
+        <label>Prestazioni di Servizi</label>
+    </customValue>
+    <customValue>
+        <fullName>7</fullName>
+        <default>false</default>
+        <label>Vendita Hardware</label>
+    </customValue>
+    <customValue>
+        <fullName>8</fullName>
+        <default>false</default>
+        <label>Vendita Software e Servizi</label>
+    </customValue>
+    <customValue>
+        <fullName>18</fullName>
+        <default>false</default>
+        <label>Prestazioni di servizi c/terzi T&amp;M</label>
+    </customValue>
+    <customValue>
+        <fullName>19</fullName>
+        <default>false</default>
+        <label>Vendita di asset</label>
+    </customValue>
+    <customValue>
+        <fullName>20</fullName>
+        <default>false</default>
+        <label>Canoni per prestazioni</label>
+    </customValue>
+    <customValue>
+        <fullName>21</fullName>
+        <default>false</default>
+        <label>Altri ricavi</label>
+    </customValue>
+    <customValue>
+        <fullName>22</fullName>
+        <default>false</default>
+        <label>Rivendita prodotti finiti HW/SW</label>
+    </customValue>
+    <customValue>
+        <fullName>Acquisto Servizi</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Acquisto Servizi</label>
+    </customValue>
+    <customValue>
+        <fullName>Acquisto Hardware</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Acquisto Hardware</label>
+    </customValue>
+    <customValue>
+        <fullName>Acquisto Software</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Acquisto Software</label>
+    </customValue>
+    <customValue>
+        <fullName>Trasferte</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Trasferte</label>
+    </customValue>
+    <customValue>
+        <fullName>Altri Costi Diretti</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Altri Costi Diretti</label>
+    </customValue>
+    <customValue>
+        <fullName>Prestazione Servizi</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Prestazione Servizi</label>
+    </customValue>
+    <customValue>
+        <fullName>Risorse Umane</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Risorse Umane</label>
+    </customValue>
+    <customValue>
+        <fullName>Utenze</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Utenze</label>
+    </customValue>
+    <customValue>
+        <fullName>Canoni</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Canoni</label>
+    </customValue>
+    <customValue>
+        <fullName>Contributo</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Contributo</label>
+    </customValue>
+    <customValue>
+        <fullName>Ammortamenti</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Ammortamenti</label>
+    </customValue>
+    <customValue>
+        <fullName>Spese varie</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Spese varie</label>
+    </customValue>
+    <masterLabel>Revenue Types</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

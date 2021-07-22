@@ -27,7 +27,7 @@ public class PianificazioneFattureController {
 		Id rtId = null;
 		String imStringName = '';
 		try{
-			Opportunity opp = [SELECT Id, StageName, Name, CloseDate, PaymentType__c, ReferenceNumber__c,Amount,CustomerOrderNumber__c,Account.Acronym__c,Account.Name
+			Opportunity opp = [SELECT Id, StageName, Name, RecordType.DeveloperName, CloseDate, PaymentType__c, ReferenceNumber__c,Amount,CustomerOrderNumber__c,Account.Acronym__c,Account.Name
 								FROM Opportunity
 								WHERE Id =: recordId];
 			deleteInvoiceMilestonePresenti(opp);
@@ -53,11 +53,19 @@ public class PianificazioneFattureController {
 					//Get RecordType and Create Invoice Milestone
 					if(tp.Type__c == 'Recursive')
 					{
-						rtId = [SELECT Id, DeveloperName 
-								FROM RecordType 
-								WHERE DeveloperName = 'NexusRecursive' AND SObjectType = 'InvoiceMilestone__c'].Id;
-						System.debug('Ø-rtId '+rtId);
-						
+						if(opp.RecordType.DeveloperName == 'Nexus'){
+							rtId = [SELECT Id, DeveloperName 
+									FROM RecordType 
+									WHERE DeveloperName = 'NexusRecursive' AND SObjectType = 'InvoiceMilestone__c'].Id;
+							System.debug('Ø-rtId Nexus'+rtId);
+							}
+							if(opp.RecordType.DeveloperName == 'Links'){
+							rtId = [SELECT Id, DeveloperName 
+									FROM RecordType 
+									WHERE DeveloperName = 'LinksRecursive' AND SObjectType = 'InvoiceMilestone__c'].Id;
+							System.debug('Ø-rtId Links'+rtId);
+							}
+						System.debug('tpdList ' + tpdList);
 						for(PaymentTypeDetail__c tpd1 : tpdList){
 							numCanoni = tpd1.FeeCount__c;
 							System.System.debug('Ø*** numero canoni: '+numCanoni);
@@ -101,7 +109,7 @@ public class PianificazioneFattureController {
 									if(opp.Account.Acronym__c != null){
 										imStringName = String.valueOf(opp.ReferenceNumber__c)+' - '+ ' '+ opp.Account.Acronym__c+' - '+tp.Name +' - '+monthName+' '+yearName;
 									}else{
-										imStringName = String.valueOf(opp.ReferenceNumber__c)+' - '+ ' '+ opp.Account.Name.left(3)+' - '+tp.Name +' - '+monthName+' '+yearName;
+										imStringName = String.valueOf(opp.ReferenceNumber__c)+' - '+ ' '+opp.Account.Name.left(3)+' - '+tp.Name +' - '+monthName+' '+yearName;
 									}
 									im.Name = imStringName;
 									im.Amount__c = opp.Amount / tpd2.FeeCount__c;
@@ -118,11 +126,18 @@ public class PianificazioneFattureController {
 					//Get RecordType and Create Invoice Milestone
 					if(tp.Type__c == 'One Shot')
 					{
-						rtId = [SELECT Id, DeveloperName 
-								FROM RecordType 
-								WHERE DeveloperName = 'NexusOneShot' AND SObjectType = 'InvoiceMilestone__c'].Id;
-						System.debug('Ø-rtId '+rtId);
-						
+						if(opp.RecordType.DeveloperName == 'Nexus'){
+							rtId = [SELECT Id, DeveloperName 
+									FROM RecordType 
+									WHERE DeveloperName = 'NexusOneShot' AND SObjectType = 'InvoiceMilestone__c'].Id;
+							System.debug('Ø-rtId '+rtId);
+							}
+							if(opp.RecordType.DeveloperName  == 'Links'){
+							rtId = [SELECT Id, DeveloperName 
+									FROM RecordType 
+									WHERE DeveloperName = 'LinksOneShot' AND SObjectType = 'InvoiceMilestone__c'].Id;
+							System.debug('Ø-rtId '+rtId);
+							}
 						for(PaymentTypeDetail__c tpd : tpdList){
 							InvoiceMilestone__c im = New InvoiceMilestone__c();
 							
@@ -146,15 +161,11 @@ public class PianificazioneFattureController {
 							String yearName = String.valueof(im.ExpectedDate__c.year());	///**********************
 							im.Year__c = String.valueOf(Date.today().year());
 							im.Year__c = yearName;
-							
 							//20210223 MM add debug
 							System.debug('opp.Amount ['+ opp.Amount +']');
 							System.debug('tpd.Value__c ['+ tpd.Value__c +']');
 
-							if (opp.Amount == null || tpd.Value__c == null)
-								throw new NullPointerException();
 							im.Amount__c = (opp.Amount * tpd.Value__c) / 100;
-
 							im.Description__c = tpd.Name +' - '+ opp.Name;
 							im.CustomerOrderNumber__c = opp.CustomerOrderNumber__c;
 							imList.add(im);	
@@ -167,8 +178,6 @@ public class PianificazioneFattureController {
 					insert imList;
 					check = true;
 				}
-		}catch(NullPointerException npe) {
-			System.debug('The following exception has occurred: ' + npe.getMessage());
 		}catch(Exception ex){
 		System.debug('Exception : '+ex+', message: '+ex.getMessage()+' - '+ex.getLineNumber()+' - '+ex.getCause());
 		}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FinalStages</fullName>
+    <active>true</active>
+    <description>Non è possibile selezionare gli stati &quot;Fattura Inviata&quot; e &quot;Fattura Pagata&quot; se non si è Amministratore di Sistema</description>
+    <errorConditionFormula>AND($User.ProfileId != &apos;00e09000001yHXG&apos;,
+				OR(ISPICKVAL(Stage__c, &apos;Fattura Inviata&apos;),
+							ISPICKVAL(Stage__c, &apos;Fattura Pagata&apos;))
+)</errorConditionFormula>
+    <errorMessage>You cannot select this stage, contact your system administrator</errorMessage>
+</ValidationRule>

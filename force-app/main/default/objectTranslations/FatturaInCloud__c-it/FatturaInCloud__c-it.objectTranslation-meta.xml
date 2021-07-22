@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Fattura In Cloud</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Fatture In Cloud</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>Fattura In Cloud Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Nexus --></label>
+        <name>Nexus</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

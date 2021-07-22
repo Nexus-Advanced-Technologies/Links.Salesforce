@@ -1,0 +1,29 @@
+.last-row-bold {
+    font-weight: 900;
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+.thead-design{
+    background-color: #1B5297;
+    color: #ffffff;
+}
+
+.td-background-grey {
+    background-color: #e0e0e0ea;
+}
+
+.bold{
+    font-weight: 900;
+}
+
+.border-right{
+    border-right: thin solid;
+}
+
+.badge-backgroung-blue{
+    background-color: var(--sds-c-badge-color-background, #1B5297);
+}

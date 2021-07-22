@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Revenue Center --></label>
+    <name>RevenueCenter__c</name>
+    <picklistValues>
+        <masterLabel>Cost</masterLabel>
+        <translation><!-- Cost --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Nexus - Operations</masterLabel>
+        <translation><!-- Nexus - Operations --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Nexus - Projects</masterLabel>
+        <translation><!-- Nexus - Projects --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Nexus - Publishing</masterLabel>
+        <translation><!-- Nexus - Publishing --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Nexus - T&amp;M</masterLabel>
+        <translation><!-- Nexus - T&amp;M --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Nexus Sales - Operations</masterLabel>
+        <translation><!-- Nexus Sales - Operations --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Nexus Sales - Projects</masterLabel>
+        <translation><!-- Nexus Sales - Projects --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Nexus Sales - SalesForce</masterLabel>
+        <translation><!-- Nexus Sales - SalesForce --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Nexus Sales - T&amp;M</masterLabel>
+        <translation><!-- Nexus Sales - T&amp;M --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

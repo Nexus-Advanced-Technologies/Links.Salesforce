@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Links_Revenue_Maggiore_di_Quota_ATI</fullName>
+    <active>true</active>
+    <errorConditionFormula>LinksRevenue__c &lt;  QuotaATI__c</errorConditionFormula>
+    <errorDisplayField>LinksRevenue__c</errorDisplayField>
+    <errorMessage>Links Revenue must be greater than Quota ATI</errorMessage>
+</ValidationRule>

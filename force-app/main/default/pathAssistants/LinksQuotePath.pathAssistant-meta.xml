@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Quote</entityName>
+    <fieldName>Status</fieldName>
+    <masterLabel>LinksQuotePath</masterLabel>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;Prima di effettuare il passaggio di Stato in &amp;quot;&lt;b&gt;Verified&lt;/b&gt;&amp;quot;.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Indicare il livello di rischio del progetto (Basso – Medio Basso – Medio Alto – Alto), compilando i relativi campi sull&amp;#39;opportunitá.&lt;/li&gt;&lt;li&gt;Controllare che i margini dell&amp;#39; Economic Plan siano soddisfatti. Se cosi non fosse, si prega di cliccare su pulsante &amp;quot;&lt;b&gt;Submit for Approval&lt;/b&gt;&amp;quot; per far partire il processo di approvazione, da parte di un responsabile.&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>0</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;Prima di effettuare il passaggio di Stato in &amp;quot;&lt;b&gt;Registered&amp;quot;,&lt;/b&gt; controllare di aver inserito il Protocol Number fornito dall&amp;#39;amministrazione.&lt;b&gt; &lt;/b&gt;&lt;/p&gt;</info>
+        <picklistValueName>1</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;Generazione Automatica del PDF riferito all&amp;#39;&lt;b&gt;Economic Plan &lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</info>
+        <picklistValueName>3</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;L&amp;#39;opportunità viene chiusa Vinta con relativo Amount Aggiornato&lt;/li&gt;&lt;li&gt;Generazione dell&amp;#39;Ordine con relative righe di dettaglio&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>4</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;L&amp;#39;opportunità viene chiusa Persa con relativo Amount Aggiornato&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</info>
+        <picklistValueName>5</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>Links</recordTypeName>
+</PathAssistant>

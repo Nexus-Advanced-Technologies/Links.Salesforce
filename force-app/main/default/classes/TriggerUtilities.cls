@@ -3,8 +3,8 @@
  * @author            : ¤ → alessio.marra@nexusat.it
  * @see               : OnOpportunity (Trigger)
  * @see               : TriggerSetting (CustomMetadata)
- * @last modified on  : 03/02/2021
- * @last modified by  : ¤ → alessio.marra@nexusat.it
+ * @last modified on  : 03-26-2021
+ * @last modified by  : Œ
  * Modifications Log 
  * Ver   Date         Author                         Modification
  * 1.0   24/01/2021   ¤ → alessio.marra@nexusat.it   Initial Version
@@ -38,12 +38,24 @@ public class TriggerUtilities {
 	public static List<TriggerSetting__mdt> TriggerSettingQuote {
 		get{
 			if(TriggerSettingQuote == null) {
-				TriggerSettingQuote = [SELECT DeveloperName, QuoteAfterInsert__c FROM TriggerSetting__mdt];
+				TriggerSettingQuote = [SELECT DeveloperName, QuoteAfterInsert__c, QuoteAfterUpdate__c FROM TriggerSetting__mdt];
 			}
 			return TriggerSettingQuote;
 		}
 		set;
 	}
+
+	public static List<TriggerSetting__mdt> TriggerSettingQuoteLineItem {
+		get{
+			if(TriggerSettingQuoteLineItem == null) {
+				TriggerSettingQuoteLineItem = [SELECT DeveloperName, QuoteLineItemAfterInsert__c, 	QuoteLineItemAfterUpdate__c, QuoteLineItemAfterDelete__c FROM TriggerSetting__mdt];
+			}
+			return TriggerSettingQuoteLineItem;
+		}
+		set;
+	}
+
+
 
 	public class TriggerUtilitiesException extends Exception {}
 
@@ -173,6 +185,59 @@ public class TriggerUtilities {
 		return quoteMapLst;
 	}
 
+	public static Map<String, List<QuoteLineItem>> splitByCompany(List<QuoteLineItem> quoteLineItemLst) {
+		System.debug('¤ splitByCompany {');
+		System.debug('¤ QuoteLineItem ' + quoteLineItemLst);
+
+		Set<Id> QuoteIdSet = new Set<id>();
+		for (QuoteLineItem quoteLineItem: quoteLineItemLst){
+			QuoteIdSet.add(quoteLineItem.QuoteId);
+		}
+		List<Quote> quoteList = [SELECT id, RecordTypeId FROM Quote WHERE id =:QuoteIdSet];
+		System.debug(quoteList);
+		
+
+		Map<id, id> quoteRecordTypeIdMap = new Map<id, id>();
+		for (Quote record: quoteList){
+			quoteRecordTypeIdMap.put(record.id, record.RecordTypeId);
+		}
+
+		//Map for the result of this method
+		Map<String, List<QuoteLineItem>> quoteLineItemMapLst = new Map<String, List<QuoteLineItem>>();
+		
+		Map<Id, String> recordTypesMap = getRecordType('Quote');
+		List<String> companyNameLst = getCompany();
+
+		for (QuoteLineItem record: quoteLineItemLst) {
+			Id parentRecordTypeId = quoteRecordTypeIdMap.get(record.QuoteId);
+			if (!recordTypesMap.containsKey(parentRecordTypeId)) {
+				throw new TriggerUtilitiesException('This record type does not exist or you do not have permissions (' + parentRecordTypeId + ')');
+			}
+
+			String recordTypeDeveloperName = recordTypesMap.get(parentRecordTypeId);
+
+			for (String companyName : companyNameLst) {
+				if (recordTypeDeveloperName.contains(companyName)) {
+					List<QuoteLineItem> quoteLineItemInnerLst = new List<QuoteLineItem>();
+					if (quoteLineItemMapLst.containsKey(companyName)) {
+						quoteLineItemInnerLst = quoteLineItemMapLst.get(companyName);
+					}
+					quoteLineItemInnerLst.add(record);
+					quoteLineItemMapLst.put(companyName, quoteLineItemInnerLst);
+				}
+			}
+		}
+
+		checkAllSplitted(quoteLineItemLst, quoteLineItemMapLst);
+
+		System.debug('¤ quoteLineItemMapLst: ' + quoteLineItemMapLst);
+		System.debug('¤ } slitByCompany');
+		return quoteLineItemMapLst;
+	}
+
+
+
+
 	/**
 	* @description Get all active Record Types for the passed SObject string
 	* @author ¤ → alessio.marra@nexusat.it | 25/01/2021 
@@ -186,6 +251,7 @@ public class TriggerUtilities {
 		}
 		return recordTypesMap;
 	}
+
 
 	/**
 	* @description Get all companies inserted in CustoMetadata (TriggerSetting)

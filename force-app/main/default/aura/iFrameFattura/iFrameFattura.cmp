@@ -1,0 +1,14 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<aura:attribute type="string" name="width" default="100%"/>
+    <aura:attribute type="string" name="height" default="100%"/>
+    <aura:attribute type="Object" name="Fattura"/>
+    <!--<iframe width="{!v.width}" height="{!v.height}" style="border: 1px solid" src="{!v.url}"/>-->
+    
+    <force:recordData aura:id="recordLoader"
+    	recordId="{!v.recordId}"
+    	fields="Link__c"
+    	targetFields="{!v.Fattura}"
+    />
+    <iframe width="{!v.width}" height="{!v.height}" style="border: 1px solid" src="{!v.Fattura.Link__c}"/>
+    
+</aura:component>

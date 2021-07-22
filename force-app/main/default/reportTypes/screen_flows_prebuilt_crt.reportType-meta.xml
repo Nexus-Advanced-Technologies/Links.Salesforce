@@ -13,27 +13,12 @@
     <sections>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Id</field>
-            <table>FlowInterviewLog</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>CreatedDate</field>
-            <table>FlowInterviewLog</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>CreatedBy</field>
             <table>FlowInterviewLog</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>LastModifiedDate</field>
-            <table>FlowInterviewLog</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>LastModifiedBy</field>
+            <field>CreatedDate</field>
             <table>FlowInterviewLog</table>
         </columns>
         <columns>
@@ -48,17 +33,17 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Id</field>
+            <table>FlowInterviewLog</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FlowNamespace</field>
+            <table>FlowInterviewLog</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>FlowVersionNumber</field>
-            <table>FlowInterviewLog</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>InterviewStartTimestamp</field>
-            <table>FlowInterviewLog</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>InterviewEndTimestamp</field>
             <table>FlowInterviewLog</table>
         </columns>
         <columns>
@@ -68,12 +53,32 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>InterviewEndTimestamp</field>
+            <table>FlowInterviewLog</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>InterviewStartTimestamp</field>
+            <table>FlowInterviewLog</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>InterviewStatus</field>
             <table>FlowInterviewLog</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>FlowNamespace</field>
+            <field>LastModifiedBy</field>
+            <table>FlowInterviewLog</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>LastModifiedDate</field>
+            <table>FlowInterviewLog</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FlowLabel</field>
             <table>FlowInterviewLog</table>
         </columns>
         <masterLabel>Flow Interview Logs</masterLabel>
@@ -81,7 +86,7 @@
     <sections>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Id</field>
+            <field>CreatedBy</field>
             <table>FlowInterviewLog.FlowInterviewLogs</table>
         </columns>
         <columns>
@@ -91,22 +96,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>CreatedBy</field>
-            <table>FlowInterviewLog.FlowInterviewLogs</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>LastModifiedDate</field>
-            <table>FlowInterviewLog.FlowInterviewLogs</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>LastModifiedBy</field>
-            <table>FlowInterviewLog.FlowInterviewLogs</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>LogEntryType</field>
+            <field>DurationSinceStartInMinutes</field>
             <table>FlowInterviewLog.FlowInterviewLogs</table>
         </columns>
         <columns>
@@ -116,17 +106,42 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>ElementDurationInMinutes</field>
+            <table>FlowInterviewLog.FlowInterviewLogs</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Id</field>
+            <table>FlowInterviewLog.FlowInterviewLogs</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>LastModifiedBy</field>
+            <table>FlowInterviewLog.FlowInterviewLogs</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ElementLabel</field>
+            <table>FlowInterviewLog.FlowInterviewLogs</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>LastModifiedDate</field>
+            <table>FlowInterviewLog.FlowInterviewLogs</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>LogEntryTimestamp</field>
             <table>FlowInterviewLog.FlowInterviewLogs</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>DurationSinceStartInMinutes</field>
+            <field>LogEntryType</field>
             <table>FlowInterviewLog.FlowInterviewLogs</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>ElementDurationInMinutes</field>
+            <field>FlowInterviewLog</field>
             <table>FlowInterviewLog.FlowInterviewLogs</table>
         </columns>
         <masterLabel>Flow Interview Log Entries</masterLabel>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Margin_View</fullName>
+    <columns>NAME</columns>
+    <columns>DefaultMargin__c</columns>
+    <columns>MinMargin__c</columns>
+    <columns>UPDATEDBY_USER</columns>
+    <columns>LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <label>Margin View</label>
+    <language>en_US</language>
+</ListView>

@@ -14,10 +14,6 @@
                 <behavior>Edit</behavior>
                 <field>ManagerId</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Company__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
