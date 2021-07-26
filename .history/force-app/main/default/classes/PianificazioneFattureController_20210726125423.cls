@@ -83,7 +83,7 @@ public without sharing class PianificazioneFattureController {
 						Amount__c = opp.Amount / tpd2.FeeCount__c,
 						Description__c = 'Servizio a Canone - '+opp.Name,
 						CustomerOrderNumber__c = opp.CustomerOrderNumber__c,
-						Year__c = yearName
+						Year = yearName
 					);
 					imList.add(im);		
 				}

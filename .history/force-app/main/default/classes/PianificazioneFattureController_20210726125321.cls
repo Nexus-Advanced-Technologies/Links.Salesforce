@@ -58,8 +58,9 @@ public without sharing class PianificazioneFattureController {
 	private static List<InvoiceMilestone__c> createInvoiceMilestoneRecursive(Opportunity opp,PaymentType__c tp,List<PaymentTypeDetail__c> tpdList){
 		List<InvoiceMilestone__c> imList = New List<InvoiceMilestone__c>();
 		Id rtId = null;
+		String imStringName = '';
 		Double numCanoni;
-	    Integer mensilit;
+				Integer mensilit;
 		if(opp.RecordType.DeveloperName == 'Nexus'){
 			rtId = getInvoiceRecordType('NexusRecursive');
 		}else if(opp.RecordType.DeveloperName == 'Links'){
@@ -83,7 +84,7 @@ public without sharing class PianificazioneFattureController {
 						Amount__c = opp.Amount / tpd2.FeeCount__c,
 						Description__c = 'Servizio a Canone - '+opp.Name,
 						CustomerOrderNumber__c = opp.CustomerOrderNumber__c,
-						Year__c = yearName
+						Year = yearName
 					);
 					imList.add(im);		
 				}

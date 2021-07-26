@@ -58,8 +58,9 @@ public without sharing class PianificazioneFattureController {
 	private static List<InvoiceMilestone__c> createInvoiceMilestoneRecursive(Opportunity opp,PaymentType__c tp,List<PaymentTypeDetail__c> tpdList){
 		List<InvoiceMilestone__c> imList = New List<InvoiceMilestone__c>();
 		Id rtId = null;
+		String imStringName = '';
 		Double numCanoni;
-	    Integer mensilit;
+				Integer mensilit;
 		if(opp.RecordType.DeveloperName == 'Nexus'){
 			rtId = getInvoiceRecordType('NexusRecursive');
 		}else if(opp.RecordType.DeveloperName == 'Links'){
@@ -78,13 +79,19 @@ public without sharing class PianificazioneFattureController {
 					InvoiceMilestone__c im = New InvoiceMilestone__c(
 						Opportunity__c  = opp.Id,
 						RecordTypeId = rtId,
-						ExpectedDate__c = oppDate.addMonths(mensilit*i),
-						Name = getInvoiceName(opp,+tp.Name +' - '+monthName+' '+yearName),
-						Amount__c = opp.Amount / tpd2.FeeCount__c,
-						Description__c = 'Servizio a Canone - '+opp.Name,
-						CustomerOrderNumber__c = opp.CustomerOrderNumber__c,
-						Year__c = yearName
+						ExpectedDate__c = oppDate.addMonths(mensilit*i)
 					);
+					
+					if(opp.Account.Acronym__c != null){
+						imStringName = String.valueOf(opp.ReferenceNumber__c)+' - '+ ' '+ opp.Account.Acronym__c+' - '+tp.Name +' - '+monthName+' '+yearName;
+					}else{
+						imStringName = String.valueOf(opp.ReferenceNumber__c)+' - '+ ' '+opp.Account.Name.left(3)+' - '+tp.Name +' - '+monthName+' '+yearName;
+					}
+					im.Name = imStringName;
+					im.Amount__c = opp.Amount / tpd2.FeeCount__c;
+					im.Description__c = 'Servizio a Canone - '+opp.Name ;
+					im.CustomerOrderNumber__c = opp.CustomerOrderNumber__c;
+					im.Year__c = yearName;
 					imList.add(im);		
 				}
 			}

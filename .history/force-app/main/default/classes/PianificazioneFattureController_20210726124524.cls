@@ -58,8 +58,9 @@ public without sharing class PianificazioneFattureController {
 	private static List<InvoiceMilestone__c> createInvoiceMilestoneRecursive(Opportunity opp,PaymentType__c tp,List<PaymentTypeDetail__c> tpdList){
 		List<InvoiceMilestone__c> imList = New List<InvoiceMilestone__c>();
 		Id rtId = null;
+		String imStringName = '';
 		Double numCanoni;
-	    Integer mensilit;
+				Integer mensilit;
 		if(opp.RecordType.DeveloperName == 'Nexus'){
 			rtId = getInvoiceRecordType('NexusRecursive');
 		}else if(opp.RecordType.DeveloperName == 'Links'){
@@ -73,18 +74,24 @@ public without sharing class PianificazioneFattureController {
 			for(Integer i = 0; i< numCanoni; i++){
 				for(PaymentTypeDetail__c tpd2 : tpdList){
 					Date oppDate = opp.CloseDate;
-					String monthName = getMonthName(oppDate.addMonths(mensilit*i).month());
-					String yearName = String.valueof(oppDate.addMonths(mensilit*i).year());
+					String monthName = getMonthName(im.ExpectedDate__c.month());
+					String yearName = String.valueof(im.ExpectedDate__c.year());
 					InvoiceMilestone__c im = New InvoiceMilestone__c(
 						Opportunity__c  = opp.Id,
 						RecordTypeId = rtId,
-						ExpectedDate__c = oppDate.addMonths(mensilit*i),
-						Name = getInvoiceName(opp,+tp.Name +' - '+monthName+' '+yearName),
-						Amount__c = opp.Amount / tpd2.FeeCount__c,
-						Description__c = 'Servizio a Canone - '+opp.Name,
-						CustomerOrderNumber__c = opp.CustomerOrderNumber__c,
-						Year__c = yearName
+						ExpectedDate__c = oppDate.addMonths(mensilit*i)
 					);
+					
+					if(opp.Account.Acronym__c != null){
+						imStringName = String.valueOf(opp.ReferenceNumber__c)+' - '+ ' '+ opp.Account.Acronym__c+' - '+tp.Name +' - '+monthName+' '+yearName;
+					}else{
+						imStringName = String.valueOf(opp.ReferenceNumber__c)+' - '+ ' '+opp.Account.Name.left(3)+' - '+tp.Name +' - '+monthName+' '+yearName;
+					}
+					im.Name = imStringName;
+					im.Amount__c = opp.Amount / tpd2.FeeCount__c;
+					im.Description__c = 'Servizio a Canone - '+opp.Name ;
+					im.CustomerOrderNumber__c = opp.CustomerOrderNumber__c;
+					im.Year__c = yearName;
 					imList.add(im);		
 				}
 			}
@@ -94,6 +101,9 @@ public without sharing class PianificazioneFattureController {
 	private static List<InvoiceMilestone__c> createInvoiceMilestoneOneShot(Opportunity opp,List<PaymentTypeDetail__c> tpdList){
 		List<InvoiceMilestone__c> imList = New List<InvoiceMilestone__c>();
 		Id rtId = null;
+		String imStringName = '';
+		Double numCanoni;
+		Integer mensilit;
 		if(opp.RecordType.DeveloperName == 'Nexus'){
 			rtId = getInvoiceRecordType('NexusOneShot');
 			}
@@ -103,17 +113,23 @@ public without sharing class PianificazioneFattureController {
 			throw new AuraException('Record Type Whrong');
 		}
 		for(PaymentTypeDetail__c tpd : tpdList){
-			InvoiceMilestone__c im = new InvoiceMilestone__c(
-				Name = getInvoiceName(opp,tpd.Name),
-				Rank__c = tpd.Rank__c,
-				Opportunity__c = opp.Id,
-				RecordTypeId = rtId,
-				ExpectedDate__c = Date.today(),
-				Year__c = String.valueof(Date.today().year()),
-				Amount__c = (opp.Amount * tpd.Value__c) / 100,
-				Description__c = tpd.Name +' - '+ opp.Name,
-				CustomerOrderNumber__c = opp.CustomerOrderNumber__c
-			);
+			InvoiceMilestone__c im = new InvoiceMilestone__c();
+			if(opp.Account.Acronym__c != null ){
+				im.Name = String.valueOf(opp.ReferenceNumber__c)+' - '+ opp.Account.Acronym__c+' - '+ tpd.Name;
+			}else{
+				im.Name = String.valueOf(opp.ReferenceNumber__c)+' - '+ opp.Account.Name.left(3)+' - '+ tpd.Name;
+			}
+			im.Rank__c = tpd.Rank__c;
+			im.Opportunity__c = opp.Id;
+			im.RecordTypeId = rtId;
+			im.ExpectedDate__c = Date.today();
+			im.Year__c = String.valueOf(Date.today().year());
+			String yearName = String.valueof(im.ExpectedDate__c.year());	///**********************
+			im.Year__c = String.valueOf(Date.today().year());
+			im.Year__c = yearName;
+			im.Amount__c = (opp.Amount * tpd.Value__c) / 100;
+			im.Description__c = tpd.Name +' - '+ opp.Name;
+			im.CustomerOrderNumber__c = opp.CustomerOrderNumber__c;
 			imList.add(im);	
 		}
 		return imList;
@@ -129,12 +145,12 @@ public without sharing class PianificazioneFattureController {
 			delete invoiceMilestoneToDelete;
 		}
 	}
-	private static String getInvoiceName(Opportunity opp,String EndString){
+	private static String getInvoiceName(Opportunity opp,String End){
 		String imStringName;
 		if(opp.Account.Acronym__c != null ){
-			imStringName = String.valueOf(opp.ReferenceNumber__c)+' - '+ opp.Account.Acronym__c+' - '+ EndString;
+			imStringName = String.valueOf(opp.ReferenceNumber__c)+' - '+ opp.Account.Acronym__c+' - '+ End;
 		}else{
-			imStringName = String.valueOf(opp.ReferenceNumber__c)+' - '+ opp.Account.Name.left(3)+' - '+ EndString;
+			imStringName = String.valueOf(opp.ReferenceNumber__c)+' - '+ opp.Account.Name.left(3)+' - '+ End;
 		}
 		return imStringName;
 	}
