@@ -112,7 +112,7 @@ If account has not pricebook assigned, it's assigned standard one.
             for(Quote q : [SELECT Id, OpportunityId, Total_Revenue__c, Opportunity.Amount, Status, Opportunity.StageName
                            FROM Quote 
                            WHERE OpportunityId =:opportunityId]){
-                    if(quoteNew.Id == q.Id && quoteNew.Status == '3'){
+                    if(quoteNew.Id == q.Id && quoteNew.Status == '4'){
                         Opportunity opp = new Opportunity();
                         opp.Id = quoteNew.OpportunityId;
                         opp.Amount = q.Total_Revenue__c;
