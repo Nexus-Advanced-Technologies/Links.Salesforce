@@ -1,7 +1,7 @@
 /**
  * @description       : 
  * @author            : 
- * @last modified on  : 04/02/2021
+ * @last modified on  : 28/07/2021
  * @last modified by  : ¤ → alessio.marra@nexusat.it
  * Modifications Log 
  * Ver   Date         Author                         Modification
@@ -60,9 +60,9 @@ public without sharing class PianificazioneFattureController {
 		Id rtId = null;
 		Double numCanoni;
 	    Integer mensilit;
-		if(opp.RecordType.DeveloperName == 'Nexus'){
+		if(opp.RecordType.DeveloperName.contains('Nexus')){
 			rtId = getInvoiceRecordType('NexusRecursive');
-		}else if(opp.RecordType.DeveloperName == 'Links'){
+		}else if(opp.RecordType.DeveloperName.contains('Links')){
 			rtId = getInvoiceRecordType('LinksRecursive');
 		}else{
 			throw new AuraException('Record Type Wrong');
@@ -94,10 +94,10 @@ public without sharing class PianificazioneFattureController {
 	private static List<InvoiceMilestone__c> createInvoiceMilestoneOneShot(Opportunity opp,List<PaymentTypeDetail__c> tpdList){
 		List<InvoiceMilestone__c> imList = New List<InvoiceMilestone__c>();
 		Id rtId = null;
-		if(opp.RecordType.DeveloperName == 'Nexus'){
+		if(opp.RecordType.DeveloperName.contains('Nexus')){
 			rtId = getInvoiceRecordType('NexusOneShot');
 			}
-		else if(opp.RecordType.DeveloperName  == 'Links'){
+		else if(opp.RecordType.DeveloperName.contains('Links')){
 			rtId = getInvoiceRecordType('LinksOneShot');
 		}else{
 			throw new AuraException('Record Type Whrong');
