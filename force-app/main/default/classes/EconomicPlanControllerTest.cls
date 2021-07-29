@@ -20,7 +20,7 @@ public with sharing class EconomicPlanControllerTest {
     static void makeData(){
         TriggerUtilities.TriggerSettingQuoteLineItem = createCustomMetadata(true);
 
-        Account account = new Account (RecordTypeId = getRecordTypeId('Account','Nexus'),Name=name);
+        Account account = new Account (RecordTypeId = getRecordTypeId('Account','Customer'),Name=name);
         insert account;
         Product2 prod = new Product2(Name = 'Intern 2021',
                                      Family = 'Standard',

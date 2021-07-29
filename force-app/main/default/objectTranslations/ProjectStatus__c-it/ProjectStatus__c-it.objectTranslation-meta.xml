@@ -24,8 +24,16 @@
             <section>Dates</section>
         </sections>
         <sections>
-            <label><!-- Time Tracking --></label>
-            <section>Time Tracking</section>
+            <label><!-- Links Intranet Tracking --></label>
+            <section>Links Intranet Tracking</section>
+        </sections>
+        <sections>
+            <label><!-- New Section --></label>
+            <section>New Section</section>
+        </sections>
+        <sections>
+            <label><!-- Nexus Jira Time Tracking --></label>
+            <section>Nexus Jira Time Tracking</section>
         </sections>
     </layouts>
     <layouts>

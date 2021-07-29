@@ -3,8 +3,8 @@
     <actionCalls>
         <name>CreateProjectStatus</name>
         <label>CreateProjectStatus</label>
-        <locationX>182</locationX>
-        <locationY>493</locationY>
+        <locationX>191</locationX>
+        <locationY>599</locationY>
         <actionName>CreateProjectStatus</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -20,8 +20,22 @@
     <actionCalls>
         <name>PianificazioneFattureController</name>
         <label>PianificazioneFattureController</label>
-        <locationX>578</locationX>
-        <locationY>493</locationY>
+        <locationX>621</locationX>
+        <locationY>684</locationY>
+        <actionName>PianificazioneFattureController</actionName>
+        <actionType>apex</actionType>
+        <inputParameters>
+            <name>listOppIds</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <name>PianificazioneFattureController2</name>
+        <label>PianificazioneFattureController</label>
+        <locationX>1293</locationX>
+        <locationY>679</locationY>
         <actionName>PianificazioneFattureController</actionName>
         <actionType>apex</actionType>
         <inputParameters>
@@ -34,8 +48,8 @@
     <actionCalls>
         <name>SendEmailCheckCDG</name>
         <label>SendEmail Check CDG</label>
-        <locationX>842</locationX>
-        <locationY>493</locationY>
+        <locationX>864</locationX>
+        <locationY>598</locationY>
         <actionName>SendEmailClass</actionName>
         <actionType>apex</actionType>
         <inputParameters>
@@ -48,8 +62,8 @@
     <actionCalls>
         <name>SendEmailCloseWon</name>
         <label>SendEmail Close Won</label>
-        <locationX>182</locationX>
-        <locationY>613</locationY>
+        <locationX>191</locationX>
+        <locationY>719</locationY>
         <actionName>SendEmailClass</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -66,8 +80,8 @@
         <description>SendMail to sales@nexusat.it</description>
         <name>SendMailSales</name>
         <label>SendMail Sales</label>
-        <locationX>50</locationX>
-        <locationY>853</locationY>
+        <locationX>59</locationX>
+        <locationY>959</locationY>
         <actionName>Opportunity.SendEmailOptyWon</actionName>
         <actionType>emailAlert</actionType>
         <inputParameters>
@@ -81,8 +95,8 @@
     <decisions>
         <name>Amount</name>
         <label>Amount?</label>
-        <locationX>182</locationX>
-        <locationY>733</locationY>
+        <locationX>191</locationX>
+        <locationY>839</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>GREATERTHAN0</name>
@@ -103,8 +117,8 @@
     <decisions>
         <name>RecordType</name>
         <label>RecordType?</label>
-        <locationX>1007</locationX>
-        <locationY>253</locationY>
+        <locationX>1015</locationX>
+        <locationY>359</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Nexus</name>
@@ -121,12 +135,27 @@
             </connector>
             <label>Nexus</label>
         </rules>
+        <rules>
+            <name>Links</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Links</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>StageNameLinkss</targetReference>
+            </connector>
+            <label>Links</label>
+        </rules>
     </decisions>
     <decisions>
         <name>StageName</name>
         <label>StageName?</label>
-        <locationX>644</locationX>
-        <locationY>373</locationY>
+        <locationX>653</locationX>
+        <locationY>479</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>CloseWon</name>
@@ -177,6 +206,28 @@
             <label>Check CDG</label>
         </rules>
     </decisions>
+    <decisions>
+        <name>StageNameLinkss</name>
+        <label>StageNameLinkss</label>
+        <locationX>1277</locationX>
+        <locationY>466</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Is</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.StageName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Milestone Planning</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>PianificazioneFattureController2</targetReference>
+            </connector>
+            <label>IsMilestonePlanning</label>
+        </rules>
+    </decisions>
     <description>- Create Project Status
 - Send Email Close Won
 - Pianificazione Fatture
@@ -192,7 +243,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -203,8 +254,8 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <start>
-        <locationX>881</locationX>
-        <locationY>0</locationY>
+        <locationX>890</locationX>
+        <locationY>48</locationY>
         <connector>
             <targetReference>RecordType</targetReference>
         </connector>
@@ -231,9 +282,23 @@
                 <stringValue>Check CDG</stringValue>
             </value>
         </filters>
+        <filters>
+            <field>StageName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Milestone Planning</stringValue>
+            </value>
+        </filters>
         <object>Opportunity</object>
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
     <status>Active</status>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
 </Flow>

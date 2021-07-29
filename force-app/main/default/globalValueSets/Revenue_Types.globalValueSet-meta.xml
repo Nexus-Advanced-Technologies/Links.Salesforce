@@ -6,16 +6,6 @@
         <label>Prestazioni di Servizi</label>
     </customValue>
     <customValue>
-        <fullName>7</fullName>
-        <default>false</default>
-        <label>Vendita Hardware</label>
-    </customValue>
-    <customValue>
-        <fullName>8</fullName>
-        <default>false</default>
-        <label>Vendita Software e Servizi</label>
-    </customValue>
-    <customValue>
         <fullName>18</fullName>
         <default>false</default>
         <label>Prestazioni di servizi c/terzi T&amp;M</label>
@@ -41,6 +31,30 @@
         <label>Rivendita prodotti finiti HW/SW</label>
     </customValue>
     <customValue>
+        <fullName>Risorse Umane</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Risorse Umane</label>
+    </customValue>
+    <customValue>
+        <fullName>Prestazione Servizi</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Prestazione Servizi</label>
+    </customValue>
+    <customValue>
+        <fullName>Altri Costi Diretti</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Altri Costi Diretti</label>
+    </customValue>
+    <customValue>
+        <fullName>Trasferte</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Trasferte</label>
+    </customValue>
+    <customValue>
         <fullName>Acquisto Servizi</fullName>
         <default>false</default>
         <isActive>false</isActive>
@@ -57,30 +71,6 @@
         <default>false</default>
         <isActive>false</isActive>
         <label>Acquisto Software</label>
-    </customValue>
-    <customValue>
-        <fullName>Trasferte</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>Trasferte</label>
-    </customValue>
-    <customValue>
-        <fullName>Altri Costi Diretti</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>Altri Costi Diretti</label>
-    </customValue>
-    <customValue>
-        <fullName>Prestazione Servizi</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>Prestazione Servizi</label>
-    </customValue>
-    <customValue>
-        <fullName>Risorse Umane</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>Risorse Umane</label>
     </customValue>
     <customValue>
         <fullName>Utenze</fullName>
@@ -101,16 +91,28 @@
         <label>Contributo</label>
     </customValue>
     <customValue>
+        <fullName>Spese varie</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Spese varie</label>
+    </customValue>
+    <customValue>
         <fullName>Ammortamenti</fullName>
         <default>false</default>
         <isActive>false</isActive>
         <label>Ammortamenti</label>
     </customValue>
     <customValue>
-        <fullName>Spese varie</fullName>
+        <fullName>7</fullName>
         <default>false</default>
         <isActive>false</isActive>
-        <label>Spese varie</label>
+        <label>Vendita Hardware</label>
+    </customValue>
+    <customValue>
+        <fullName>8</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Vendita Software e Servizi</label>
     </customValue>
     <masterLabel>Revenue Types</masterLabel>
     <sorted>false</sorted>

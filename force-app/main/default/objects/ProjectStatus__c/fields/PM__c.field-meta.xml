@@ -7,9 +7,9 @@
     <lookupFilter>
         <active>true</active>
         <filterItems>
-            <field>Contact.Account.Name</field>
+            <field>Contact.Account.RecordTypeId</field>
             <operation>equals</operation>
-            <value>NexusAT</value>
+            <value>Internal</value>
         </filterItems>
         <isOptional>false</isOptional>
     </lookupFilter>
