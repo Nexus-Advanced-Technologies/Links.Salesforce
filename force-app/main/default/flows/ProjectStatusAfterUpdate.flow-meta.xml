@@ -4,7 +4,7 @@
         <name>SendEmail</name>
         <label>SendEmail</label>
         <locationX>182</locationX>
-        <locationY>1367</locationY>
+        <locationY>1391</locationY>
         <actionName>ProjectStatus__c.ProjectStatusAlarm</actionName>
         <actionType>emailAlert</actionType>
         <inputParameters>
@@ -18,7 +18,7 @@
         <name>SendNotification</name>
         <label>SendNotification</label>
         <locationX>182</locationX>
-        <locationY>791</locationY>
+        <locationY>815</locationY>
         <actionName>customNotificationAction</actionName>
         <actionType>customNotificationAction</actionType>
         <connector>
@@ -60,7 +60,7 @@
         <name>AddMaioranoToList</name>
         <label>AddMaioranoToList</label>
         <locationX>314</locationX>
-        <locationY>1151</locationY>
+        <locationY>1175</locationY>
         <assignmentItems>
             <assignToReference>ListEmail</assignToReference>
             <operator>Add</operator>
@@ -76,7 +76,7 @@
         <name>EmailToList</name>
         <label>EmailToList</label>
         <locationX>50</locationX>
-        <locationY>1151</locationY>
+        <locationY>1175</locationY>
         <assignmentItems>
             <assignToReference>ListEmail</assignToReference>
             <operator>Add</operator>
@@ -92,7 +92,7 @@
         <name>IdToList</name>
         <label>IdToList</label>
         <locationX>182</locationX>
-        <locationY>671</locationY>
+        <locationY>695</locationY>
         <assignmentItems>
             <assignToReference>ListNotificationUserId</assignToReference>
             <operator>Add</operator>
@@ -108,7 +108,7 @@
         <name>DeliveryManagerEmail</name>
         <label>DeliveryManagerEmail?</label>
         <locationX>182</locationX>
-        <locationY>1031</locationY>
+        <locationY>1055</locationY>
         <defaultConnector>
             <targetReference>AddMaioranoToList</targetReference>
         </defaultConnector>
@@ -133,7 +133,7 @@
         <name>RecordType</name>
         <label>RecordType?</label>
         <locationX>380</locationX>
-        <locationY>311</locationY>
+        <locationY>335</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Nexus</name>
@@ -179,7 +179,7 @@
         <name>GetCustomNotification</name>
         <label>GetCustomNotification</label>
         <locationX>182</locationX>
-        <locationY>431</locationY>
+        <locationY>455</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>GetNotificationUserId</targetReference>
@@ -202,7 +202,7 @@
         <name>GetDeliveryManagerEmail</name>
         <label>GetDeliveryManagerEmail</label>
         <locationX>182</locationX>
-        <locationY>911</locationY>
+        <locationY>935</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>DeliveryManagerEmail</targetReference>
@@ -225,7 +225,7 @@
         <name>GetNotificationUserId</name>
         <label>GetNotificationUserId</label>
         <locationX>182</locationX>
-        <locationY>551</locationY>
+        <locationY>575</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>IdToList</targetReference>
@@ -235,7 +235,7 @@
             <field>Username</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>delivery@nexusat.it</stringValue>
+                <stringValue>delivery@nexusat.it.uat</stringValue>
             </value>
         </filters>
         <object>User</object>
@@ -263,7 +263,7 @@
         <recordTriggerType>Update</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <textTemplates>
         <name>NotificationBody</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>

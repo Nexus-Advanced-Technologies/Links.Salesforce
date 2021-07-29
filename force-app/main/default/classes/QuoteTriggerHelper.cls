@@ -93,6 +93,8 @@ If account has not pricebook assigned, it's assigned standard one.
         conDocLink.ContentDocumentId = conDoc;  
         conDocLink.shareType = 'V';
         insert conDocLink;
+   
+        
        
     }
     public static  Boolean checkRegisteredStatus(Quote quoteNew, Quote quoteOld){

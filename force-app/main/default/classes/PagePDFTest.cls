@@ -9,7 +9,7 @@ public class PagePDFTest
     static void testMethod1() 
     {
     
-        Account account = new Account (RecordTypeId = getRecordTypeId('Account','Nexus'),Name='Test');
+        Account account = new Account (RecordTypeId = getRecordTypeId('Account','Customer'),Name='Test');
         insert account;
         Contact contact = new Contact (RecordTypeId = getRecordTypeId('Contact','Links'),LastName='Test');
         insert contact;

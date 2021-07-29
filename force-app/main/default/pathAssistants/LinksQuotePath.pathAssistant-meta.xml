@@ -5,7 +5,7 @@
     <fieldName>Status</fieldName>
     <masterLabel>LinksQuotePath</masterLabel>
     <pathAssistantSteps>
-        <info>&lt;p&gt;Prima di effettuare il passaggio di Stato in &amp;quot;&lt;b&gt;Verified&lt;/b&gt;&amp;quot;.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Indicare il livello di rischio del progetto (Basso – Medio Basso – Medio Alto – Alto), compilando i relativi campi sull&amp;#39;opportunitá.&lt;/li&gt;&lt;li&gt;Controllare che i margini dell&amp;#39; Economic Plan siano soddisfatti. Se cosi non fosse, si prega di cliccare su pulsante &amp;quot;&lt;b&gt;Submit for Approval&lt;/b&gt;&amp;quot; per far partire il processo di approvazione, da parte di un responsabile.&lt;/li&gt;&lt;/ul&gt;</info>
+        <info>&lt;p&gt;Prima di effettuare il passaggio di Stato in &amp;quot;&lt;b&gt;Verified&lt;/b&gt;&amp;quot;.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Indicare il livello di rischio del progetto (Basso – Medio Basso – Medio Alto – Alto), compilando i relativi campi sull&amp;#39;opportunitá.&lt;/li&gt;&lt;li&gt;Controllare che i margini dell&amp;#39; Economic Plan siano soddisfatti. Se cosi non fosse, si prega di cliccare su pulsante &amp;quot;&lt;b&gt;Invia per l&amp;#39;Approvazione&lt;/b&gt;&amp;quot; per far partire il processo di approvazione, da parte di un responsabile.&lt;/li&gt;&lt;/ul&gt;</info>
         <picklistValueName>0</picklistValueName>
     </pathAssistantSteps>
     <pathAssistantSteps>

@@ -10,7 +10,7 @@ private class QuoteLineItemTriggerHelperTest {
     @TestSetup
     static void makeData(){
         List<TriggerSetting__mdt> customMetaData = createCustomMetadata(true);
-        Account account = new Account (RecordTypeId = TestDataFactory.getRecordTypeId('Account','Nexus'),Name=name);
+        Account account = new Account (RecordTypeId = TestDataFactory.getRecordTypeId('Account','Customer'),Name=name);
         insert account;
         Product2 prod = new Product2(Name = 'Intern 2021',
                                      Family = 'Standard',
