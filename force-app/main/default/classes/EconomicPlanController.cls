@@ -1,7 +1,7 @@
 /**
  * @description       : Apex Controller for LWC economicPlanTableComponent 
  * @author            : Œ | Mirco Centrone
- * @last modified on  : 19-07-2021
+ * @last modified on  : 30-07-2021
  * @last modified by  : Œ
  * Modifications Log 
  * Ver   Date         Author   Modification
@@ -201,18 +201,23 @@ public without sharing class EconomicPlanController {
         Quote quote = [SELECT isMarginValid__c, isMinMarginValid__c, CostHRMargin__c, CostMargin__c, Status FROM Quote WHERE Id=:wrapper.quoteId LIMIT 1];
        
         if(wrapper.marginCheck != null  && wrapper.totalMarginCheck != null){
-                    
-                    quote.isMarginValid__c = wrapper.marginCheck;
-                    quote.isMinMarginValid__c = wrapper.totalMarginCheck;
-                    quote.CostHRMargin__c = wrapper.CostHRMargin;
-                    quote.CostMargin__c = wrapper.CostMargin;
-                    System.debug('Œ Update quoteToUpdate -> '+ quote);
-                    try {
-                        update quote;
-                    } catch (Exception e) {
-                        throw new AuraHandledException(e.getMessage());
-                    } 
-                    return quote;             
+                if(wrapper.marginCheck != quote.isMarginValid__c 
+                     || wrapper.totalMarginCheck !=  quote.isMinMarginValid__c
+                     || wrapper.CostHRMargin != quote.CostHRMargin__c
+                     || wrapper.CostMargin != quote.CostMargin__c )   {
+                      
+                        quote.isMarginValid__c = wrapper.marginCheck;
+                        quote.isMinMarginValid__c = wrapper.totalMarginCheck;
+                        quote.CostHRMargin__c = wrapper.CostHRMargin;
+                        quote.CostMargin__c = wrapper.CostMargin;
+                        System.debug('Œ Update quoteToUpdate -> '+ quote);
+                        try {
+                            update quote;
+                        } catch (Exception e) {
+                            throw new AuraHandledException(e.getMessage());
+                        } 
+                        return quote;      
+                }       
         }
         System.debug(' } Œ EconomicPlanController.setQuoteIsMarginValid ');
         return quote;
