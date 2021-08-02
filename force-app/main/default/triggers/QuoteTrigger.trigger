@@ -11,7 +11,7 @@
  * 1.3   22/04/2021  RC → Riccardo Costantini        Add New Trigger on Quote Links in After Update for View PDF Page in File Section 
  * 1.4   12/05/2021  RC → Riccardo Costantini        Modify QuoteTriggerHelper.setOpportunityAmount(q);
 **/
-trigger QuoteTrigger on Quote (after insert, after update) {
+trigger QuoteTrigger on Quote (after insert, after update,before insert,before update) {
 
 	//Get Trigger.new List splitted by company in Map(company, list)
 	Map<String, List<Quote>> triggerNewSplittedMap = TriggerUtilities.splitByCompany(Trigger.new);
@@ -37,9 +37,31 @@ trigger QuoteTrigger on Quote (after insert, after update) {
 		}
 	}
 
+
+
 	if (triggerNewSplittedMap.containsKey('Links')) {
 		List<Quote> triggerNewSplitted = triggerNewSplittedMap.get('Links');
-		
+
+
+		if(Trigger.isBefore && Trigger.isInsert){
+			if (triggerSettings.get('Links').QuoteBeforeInsert__c) {
+				QuoteTriggerHelper.generateQuoteNumber(triggerNewSplitted);
+			}
+		}
+		if(Trigger.isBefore && Trigger.isUpdate){
+			if (triggerSettings.get('Links').QuoteBeforeInsert__c) {
+				System.debug('start Trigger before Update ');
+				QuoteTriggerHelper.generateProtocolNumber(triggerNewSplitted,Trigger.OldMap);
+				QuoteTriggerHelper.resetProtocolNumber(triggerNewSplitted,Trigger.OldMap);
+				for(Quote quote : triggerNewSplitted){
+					if(quote.Status == '3' && Trigger.OldMap.get(quote.Id).Status != '3'){
+						if(QuoteTriggerHelper.hasDocumentProtocol(quote)){
+							quote.addError('NON PUOI PASSARE ALLO STATO PRESENTED SE NON CI SONO FILE ALLEGATI NEL PROTOCOLLO');
+						}
+					}
+				}
+			}
+		}
 		if (Trigger.isAfter && Trigger.isUpdate) {
 			System.debug('start Trigger after Update ');
 			List<Quote> triggerOldSplitted = triggerOldSplittedMap.get('Links');
