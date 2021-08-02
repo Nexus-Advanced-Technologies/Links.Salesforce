@@ -37,7 +37,6 @@ private class QuoteTriggerHelperTest {
     
     @isTest
     static void testAssignStandardPricebookToQuote(){
-        
         Account accountWithoutPricebook = new Account(
             Name = 'Test Account Without Pricebook'
         );
@@ -77,7 +76,6 @@ private class QuoteTriggerHelperTest {
     
     @isTest
     static void testAssignAccountGeneralPricebookToQuote(){
-        
         Pricebook2 generalPricebook = new Pricebook2(
             Name = 'Test Pricebook General',
             IsActive = true
@@ -133,7 +131,7 @@ private class QuoteTriggerHelperTest {
 	 	Opportunity opp = new Opportunity(
 	 		Name = 'Test opportunity',
 	 		AccountId = acc.Id,
-	 		StageName = 'New',
+	 		StageName = 'Prospecting',
 	 		CloseDate = Date.today()
 	 	);
 	 	insert opp;
@@ -145,7 +143,8 @@ private class QuoteTriggerHelperTest {
 	 	Quote quoteForPdf = new Quote(
 	 		Name = 'Quote for PDF Content',
 	 		OpportunityId = opp.Id,
-	 		Status = '3'
+	 		Status = '3',
+             QuoteNumber__c = '2021-1'
 	 	);
 	 	insert quoteForPdf;
 
@@ -166,7 +165,7 @@ private class QuoteTriggerHelperTest {
         Opportunity opp = new Opportunity(
             Name = 'Test opportunity',
             AccountId = acc.Id,
-            StageName = 'New',
+            StageName = 'Prospecting',
             CloseDate = Date.today(),
             Amount = 4000
         );
@@ -177,12 +176,181 @@ private class QuoteTriggerHelperTest {
             OpportunityId = opp.Id,
             Status = '3'
         );
+        insert quo;
+
+        Quote quo2 = new Quote(
+            Name = 'Quote for PDF Content',
+            OpportunityId = opp.Id,
+            Status = '4'
+        );
+        insert quo2;
+
+        Quote quo3 = new Quote(
+            Name = 'Quote for PDF Content',
+            OpportunityId = opp.Id,
+            Status = '5'
+        );
+        insert quo3;
         
         Test.startTest();
         TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
-        insert quo;
-        Test.stopTest();
-        
+        QuoteTriggerHelper.setOpportunityAmount(quo);
+        QuoteTriggerHelper.setOpportunityAmount(quo2);
+        QuoteTriggerHelper.setOpportunityAmount(quo3);
+        Test.stopTest();  
     }
-    
+
+    @isTest
+    static void testGenerateQuoteNumber(){
+        Account acc = new Account(
+            Name = 'Test Account'
+        );
+        insert acc;
+        
+        Opportunity opp = new Opportunity(
+            Name = 'Test opportunity',
+            AccountId = acc.Id,
+            StageName = 'Prospecting',
+            CloseDate = Date.today(),
+            Amount = 4000
+        );
+        insert opp;
+
+        List<Quote> quoteInsertNew = new List<Quote>();
+        for(Integer i = 0; i<5; i++){
+            Quote quote = new Quote();
+            quote.Name = 'Test ' + i;
+            quote.OpportunityId = opp.Id;
+            quote.Status = '2';
+            quoteInsertNew.add(quote);
+        }
+        insert quoteInsertNew;
+        Test.startTest();
+        TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
+        QuoteTriggerHelper.generateQuoteNumber(quoteInsertNew);
+        Test.stopTest();  
+    }
+
+    @isTest
+    static void testProtocolNumber(){
+        Account acc = new Account(
+            Name = 'Test Account'
+        );
+        insert acc;
+        
+        Opportunity opp = new Opportunity(
+            Name = 'Test opportunity',
+            AccountId = acc.Id,
+            StageName = 'Prospecting',
+            CloseDate = Date.today(),
+            Amount = 4000
+        );
+        insert opp;
+
+        Map<id,Quote> oldmap = new Map<id,Quote>();
+        List<Quote> newList = new List<Quote>();
+        Quote oldQuote = new Quote();
+        oldQuote.Name = 'Test893';
+        oldQuote.OpportunityId = opp.Id;
+        oldQuote.Status = '1';
+        insert oldQuote;
+        oldmap.put(oldQuote.Id,oldQuote);
+        
+        Test.startTest();
+        TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
+        oldQuote.Status = '2';
+        update oldQuote;
+        newList.add(oldQuote);
+        QuoteTriggerHelper.generateProtocolNumber(newList,oldmap);
+        Test.stopTest();  
+    }
+
+
+    @isTest
+    static void testResetProtocolNumber(){
+        Account acc = new Account(
+            Name = 'Test Account'
+        );
+        insert acc;
+        
+        Opportunity opp = new Opportunity(
+            Name = 'Test opportunity',
+            AccountId = acc.Id,
+            StageName = 'Prospecting',
+            CloseDate = Date.today(),
+            Amount = 4000
+        );
+        insert opp;
+
+        Map<id,Quote> oldmap = new Map<id,Quote>();
+        List<Quote> newList = new List<Quote>();
+        Quote oldQuote = new Quote();
+        oldQuote.Name = 'Test893';
+        oldQuote.OpportunityId = opp.Id;
+        oldQuote.Status = '3';
+        insert oldQuote;
+        oldmap.put(oldQuote.Id,oldQuote);
+        
+        Test.startTest();
+        TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
+        oldQuote.Status = '0';
+        update oldQuote;
+        newList.add(oldQuote);
+        QuoteTriggerHelper.resetProtocolNumber(newList,oldmap);
+        Test.stopTest();  
+    }
+
+
+
+    @isTest
+    static void testAttachDocument(){
+        Account acc = new Account(
+            Name = 'Test Account'
+        );
+        insert acc;
+        
+        Opportunity opp = new Opportunity(
+            Name = 'Test opportunity',
+            AccountId = acc.Id,
+            StageName = 'Prospecting',
+            CloseDate = Date.today(),
+            Amount = 4000
+        );
+        insert opp;
+
+        Quote quoteNew = new Quote();
+        quoteNew.Name = 'Test893';
+        quoteNew.OpportunityId = opp.Id;
+        quoteNew.Status = '3';
+        insert quoteNew;
+
+        Protocol__c protocol = new Protocol__c();
+        protocol.Name = '2021-1/1';
+        protocol.Quote__c = quoteNew.Id;
+        insert protocol;
+
+        quoteNew.Protocol__c = protocol.Id;
+        update quoteNew;
+
+
+        ContentVersion contentVersion = new ContentVersion(
+            Title = 'Test',
+            PathOnClient = 'test.jpg',
+            VersionData = Blob.valueOf('Test'),
+            IsMajorVersion = true
+        );
+        insert contentVersion;    
+        List<ContentDocument> documents = [SELECT Id, Title, LatestPublishedVersionId FROM ContentDocument];
+        
+        ContentDocumentLink cdl = New ContentDocumentLink();
+        cdl.LinkedEntityId = protocol.id;
+        cdl.ContentDocumentId = documents[0].Id;
+        cdl.shareType = 'V';
+        insert cdl;
+
+        Test.startTest();
+        TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
+        QuoteTriggerHelper.hasDocumentProtocol(quoteNew);
+        Test.stopTest();  
+    }
 }
