@@ -1,7 +1,7 @@
 /**
  * @description       : JS Controller for LWC EconomicPlanTableComponent
  * @author            : Œ | Mirco Centrone
- * @last modified on  : 19-07-2021
+ * @last modified on  : 30-07-2021
  * @last modified by  : Œ
  * Modifications Log 
  * Ver   Date         Author   Modification
@@ -157,7 +157,7 @@ export default class EconomicPlanTable extends LightningElement {
 
     async connectedCallback() {
         const messageCallback = response => {
-            //console.log('New Event message received: ', JSON.stringify(response));
+            console.log('New Event message received: ', JSON.stringify(response));
             this.refresh();
         };
         console.log('Œ Subscription request sent to: ')

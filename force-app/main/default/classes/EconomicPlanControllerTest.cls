@@ -1,7 +1,7 @@
 /**
  * @description       : 
  * @author            : Œ - Mirco Centrone
- * @last modified on  : 20-07-2021
+ * @last modified on  : 30-07-2021
  * @last modified by  : Œ
  * Modifications Log 
  * Ver   Date         Author   Modification
@@ -10,6 +10,51 @@
 @IsTest
 public with sharing class EconomicPlanControllerTest {
     
+    private static List<TriggerSetting__mdt> createCustomMetadata(Boolean status) {
+		List<TriggerSetting__mdt> triggerSettingMDT = (List<TriggerSetting__mdt>) Json.deserialize(
+			'[' +
+				'{' +
+					'"DeveloperName": "Links",' +
+					'"QuoteLineItemAfterDelete__c": "' + status + '"' +
+				'}' +
+			']' +
+            '[' +
+				'{' +
+					'"DeveloperName": "Links",' +
+					'"QuoteLineItemAfterInsert__c": "' + status + '"' +
+				'}' +
+			']' +
+            '[' +
+				'{' +
+					'"DeveloperName": "Links",' +
+					'"QuoteLineItemAfterUpdate__c": "' + status + '"' +
+				'}' +
+			']'
+			,List<TriggerSetting__mdt>.class
+		); 
+		return triggerSettingMDT;
+	}
+
+    
+    private static List<TriggerSetting__mdt> createQuoteCustomMetadata(Boolean status) {
+        List<TriggerSetting__mdt> triggerSettingMDT = (List<TriggerSetting__mdt>) Json.deserialize(
+            '[' +
+				'{' +
+					'"DeveloperName": "Nexus",' +
+					'"QuoteAfterInsert__c": "' + status + '",' +
+					'"QuoteAfterUpdate__c": "' + status + '"' +
+				'},' +
+				'{' +
+					'"DeveloperName": "Links",' +
+					'"QuoteAfterInsert__c": "' + status + '",' +
+					'"QuoteAfterUpdate__c": "' + status + '"' +
+				'}' +
+            ']'
+            ,List<TriggerSetting__mdt>.class
+        ); 
+        return triggerSettingMDT;
+    }
+
     private static String name = 'Test9956';
 
     public static String getRecordTypeId(String sobjectName, String recordTypeName){
@@ -18,10 +63,9 @@ public with sharing class EconomicPlanControllerTest {
 
     @TestSetup
     static void makeData(){
-        TriggerUtilities.TriggerSettingQuoteLineItem = createCustomMetadata(true);
-
-        Account account = new Account (RecordTypeId = getRecordTypeId('Account','Customer'),Name=name);
-        insert account;
+        TriggerUtilities.TriggerSettingQuoteLineItem = createCustomMetadata(false);
+        TriggerUtilities.TriggerSettingQuote = createQuoteCustomMetadata(false);
+        
         Product2 prod = new Product2(Name = 'Intern 2021',
                                      Family = 'Standard',
                                      ProductCoDe = 'IN',
@@ -48,6 +92,9 @@ public with sharing class EconomicPlanControllerTest {
             IsActive = true);
         insert customPrice;
         
+        Account account = new Account (RecordTypeId = getRecordTypeId('Account','Customer'),Name=name, Pricebook__c = customPB.Id );
+        insert account;
+
         Opportunity opportunity = new Opportunity (RecordTypeId = getRecordTypeId('Opportunity','Links'),Name=name,AccountId=account.Id,CloseDate=Date.today(),StageName='Prospecting',Pricebook2Id=customPB.Id);
         insert opportunity;
 
@@ -78,31 +125,6 @@ public with sharing class EconomicPlanControllerTest {
         Quote_Revenue__c  quoteRevenue = new Quote_Revenue__c(Quote__c = quoteTest.id, Revenue_Type__c = '6');
         insert quoteRevenue;
     }
-
-    private static List<TriggerSetting__mdt> createCustomMetadata(Boolean status) {
-		List<TriggerSetting__mdt> triggerSettingMDT = (List<TriggerSetting__mdt>) Json.deserialize(
-			'[' +
-				'{' +
-					'"DeveloperName": "Links",' +
-					'"QuoteLineItemAfterDelete__c": "' + status + '"' +
-				'}' +
-			']' +
-            '[' +
-				'{' +
-					'"DeveloperName": "Links",' +
-					'"QuoteLineItemAfterInsert__c": "' + status + '"' +
-				'}' +
-			']' +
-            '[' +
-				'{' +
-					'"DeveloperName": "Links",' +
-					'"QuoteLineItemAfterUpdate__c": "' + status + '"' +
-				'}' +
-			']'
-			,List<TriggerSetting__mdt>.class
-		); 
-		return triggerSettingMDT;
-	}
 
 
     @IsTest
