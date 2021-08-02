@@ -38,7 +38,7 @@ public class TriggerUtilities {
 	public static List<TriggerSetting__mdt> TriggerSettingQuote {
 		get{
 			if(TriggerSettingQuote == null) {
-				TriggerSettingQuote = [SELECT DeveloperName, QuoteAfterInsert__c, QuoteAfterUpdate__c FROM TriggerSetting__mdt];
+				TriggerSettingQuote = [SELECT DeveloperName, QuoteAfterInsert__c, QuoteAfterUpdate__c,QuoteBeforeInsert__c, QuoteBeforeUpdate__c FROM TriggerSetting__mdt];
 			}
 			return TriggerSettingQuote;
 		}

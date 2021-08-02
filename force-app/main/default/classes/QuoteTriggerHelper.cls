@@ -1,13 +1,14 @@
 /**
  * @description       : 
  * @author            : Œ
- * @last modified on  : 16-07-2021
- * @last modified by  : Œ
+ * @last modified on  : 30-07-2021
+ * @last modified by  : RC 
  * Modifications Log 
  * Ver   Date         Author   Modification
  * 1.0   22-04-2021   Œ   Initial Version
  * 1.1   23-04-2021   RC   Add Method generateContentVersionPDF and checkRegisteredStatus for generatinf PDF Page on File Section
  * 1.2   12-05-2021   RC   setOpportunityAmount
+ * 1.3   30-07-2021   RC   generateQuoteNumber,generateProtocolNumber,resetProtocolNumber,hasDocumentProtocol
 **/
 public class QuoteTriggerHelper {
     
@@ -69,7 +70,7 @@ If account has not pricebook assigned, it's assigned standard one.
     }
     @future(callout = true)
     public static void generateContentVersionPDF(Id quoteId){
-        Quote q = [SELECT Id, Name, LastModifiedDate FROM Quote WHERE Id = :quoteId];
+        Quote q = [SELECT Id, Name, LastModifiedDate,QuoteNumber__c FROM Quote WHERE Id = :quoteId];
 		String formattedDate = q.LastModifiedDate.format('dd-MM-yyyy');
         ContentVersion conVer = new ContentVersion();
         PageReference PDf =  Page.ViewPDFPage;
@@ -83,7 +84,7 @@ If account has not pricebook assigned, it's assigned standard one.
         }
         conVer.ContentLocation = 'S'; 
         conVer.PathOnClient = '.pdf';
-        conVer.Title = 'Economic Plan '+ q.Name + ' ' + formattedDate; 
+        conVer.Title = 'Economic Plan '+ q.Name + ' ' + formattedDate + '-' + q.QuoteNumber__c.subStringAfter('-'); 
         conVer.VersionData = b;
         insert conVer;    
         
@@ -114,7 +115,14 @@ If account has not pricebook assigned, it's assigned standard one.
             for(Quote q : [SELECT Id, OpportunityId, Total_Revenue__c, Opportunity.Amount, Status, Opportunity.StageName
                            FROM Quote 
                            WHERE OpportunityId =:opportunityId]){
-                    if(quoteNew.Id == q.Id && quoteNew.Status == '4'){
+                            if(quoteNew.Id == q.Id && quoteNew.Status == '3'){
+                                Opportunity opp = new Opportunity();
+                                opp.Id = quoteNew.OpportunityId;
+                                opp.Amount = q.Total_Revenue__c;
+                                opp.StageName = 'Quote Presented';
+                                opportunityToUpdate.add(opp);
+                            } 
+                   else if(quoteNew.Id == q.Id && quoteNew.Status == '4'){
                         Opportunity opp = new Opportunity();
                         opp.Id = quoteNew.OpportunityId;
                         opp.Amount = q.Total_Revenue__c;
@@ -130,4 +138,80 @@ If account has not pricebook assigned, it's assigned standard one.
                     }
         update opportunityToUpdate;
         }
+
+        public static void generateQuoteNumber(List<Quote> quoteList){
+            Map<Integer,Integer> quoteNumberMap = new Map<Integer,Integer>();
+            List<AggregateResult> getQuoteNumber = [SELECT MAX(QuoteNumber__c)MaxQuoteNumber FROM Quote WHERE QuoteNumber__c != '' AND QuoteNumber__c != Null];
+            System.debug(getQuoteNumber);
+            for(AggregateResult maxQuoteNumber : getQuoteNumber){
+                if(maxQuoteNumber.get('MaxQuoteNumber') != Null){
+                quoteNumberMap.put(
+                        Integer.valueOf(((String)maxQuoteNumber.get('MaxQuoteNumber')).subStringBefore('-')),
+                        Integer.valueOf(((String)maxQuoteNumber.get('MaxQuoteNumber')).subStringAfter('-'))
+                        );
+                }
+            }
+            for(Quote quote : quoteList){
+                Integer year = Date.Today().Year();
+                Integer quoteNumber = 0;
+                if(quoteNumberMap.containsKey(year)){
+                    quoteNumber = quoteNumberMap.get(year);
+                }
+                quoteNumber ++;
+                quote.QuoteNumber__c = year + '-' + quoteNumber;
+                quoteNumberMap.put(year,quoteNumber);
+            }
+        }
+
+
+        public static void generateProtocolNumber(List<Quote> listNewQuote,Map<Id,Quote> oldMapQuote){
+            Map<String,Integer> quoteProtocolMap = new Map<String,Integer>();
+            List<Protocol__c> protocolList = new List<Protocol__c>();
+            Set<Id> quoteId = new Set<Id>();
+            for(Quote idQuote : listNewQuote){
+                quoteId.add(idQuote.Id);
+            }
+            List<AggregateResult> getQuoteNumber = [SELECT MAX(Name)MaxProtocolNumber FROM Protocol__c WHERE Name != '' AND Name != Null AND Quote__c IN : quoteId];
+            for(AggregateResult maxProtocolNumber : getQuoteNumber){
+                if(maxProtocolNumber.get('MaxProtocolNumber') != Null){
+                    quoteProtocolMap.put(
+                        ((String)maxProtocolNumber.get('MaxProtocolNumber')).subStringBefore('/'),
+                        Integer.valueOf(((String)maxProtocolNumber.get('MaxProtocolNumber')).subStringAfter('/'))
+                    );
+                }
+            }
+            for(Quote quoteNew : listNewQuote){
+                Integer progressive = 0;
+                if(quoteProtocolMap.containsKey(quoteNew.QuoteNumber__c)){
+                    progressive = quoteProtocolMap.get(quoteNew.QuoteNumber__c);
+                }
+                progressive++;
+                    if(oldMapQuote.get(quoteNew.Id).Status == '1' && quoteNew.Status == '2'){
+                        Protocol__c protocolGenerate = new Protocol__c();
+                        protocolGenerate.Name = quoteNew.QuoteNumber__c + '/' + progressive;
+                        protocolGenerate.Quote__c =  quoteNew.Id;
+                        quoteProtocolMap.put(quoteNew.QuoteNumber__c,progressive);
+                        protocolList.add(protocolGenerate);
+                    }
+                insert protocolList;
+                for(Protocol__c p : protocolList){
+                    quoteNew.Protocol__c = p.Id;
+                    quoteNew.ProtocolNumber__c = p.Name;
+                }
+            }
+        }
+
+        public static void resetProtocolNumber(List<Quote> listNewQuote,Map<Id,Quote> oldMapQuote){
+            for(Quote quoteNew : listNewQuote){
+                    if(oldMapQuote.get(quoteNew.Id).Status != '0' && quoteNew.Status == '0'){
+                        quoteNew.Protocol__c = Null;
+                        quoteNew.ProtocolNumber__c = Null;
+                    }
+                }
+             }
+
+            public static boolean hasDocumentProtocol(Quote newQuote){
+                List<ContentDocumentLink> numberContentDocument = [SELECT LinkedEntityId FROM ContentDocumentLink WHERE LinkedEntityId =: newQuote.Protocol__c];
+                return numberContentDocument.size()<1;
+             }
 }

@@ -14,7 +14,9 @@ public without sharing class PianificazioneFattureController {
 	@InvocableMethod
 	public static void createInvoiceMilestoneInvocable(List<Id> listOppIds){
 		for(Id oppId : listOppIds){
-			createInvoiceMilestone(oppId);
+			if(!createInvoiceMilestone(oppId)){
+				throw new AuraException ('ERRORE PAYMENT TYPE');
+			}
 		}
 	}
 	@AuraEnabled
@@ -67,6 +69,7 @@ public without sharing class PianificazioneFattureController {
 		}else{
 			throw new AuraException('Record Type Wrong');
 		}
+		System.debug('tpdList ' + tpdList);
 		for(PaymentTypeDetail__c tpd1 : tpdList){
 			numCanoni = tpd1.FeeCount__c;
 			mensilit = Integer.valueOf(tpd1.MeasurementUnitMonthly__c);
