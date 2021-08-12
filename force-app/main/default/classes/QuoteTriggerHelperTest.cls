@@ -170,6 +170,12 @@ private class QuoteTriggerHelperTest {
             Amount = 4000
         );
         insert opp;
+        Quote quoteOld = new Quote(
+        	Name = 'test',
+            OpportunityId = opp.Id,
+            Status = '1'
+        );
+        insert quoteOld;
         
         Quote quo = new Quote(
             Name = 'Quote for PDF Content',
@@ -194,9 +200,9 @@ private class QuoteTriggerHelperTest {
         
         Test.startTest();
         TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
-        QuoteTriggerHelper.setOpportunityAmount(quo);
-        QuoteTriggerHelper.setOpportunityAmount(quo2);
-        QuoteTriggerHelper.setOpportunityAmount(quo3);
+        QuoteTriggerHelper.setOpportunityAmount(quo,quoteOld);
+        QuoteTriggerHelper.setOpportunityAmount(quo2,quoteOld);
+        QuoteTriggerHelper.setOpportunityAmount(quo3,quoteOld);
         Test.stopTest();  
     }
 

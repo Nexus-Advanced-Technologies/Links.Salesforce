@@ -10,7 +10,7 @@
  * 1.2   12-05-2021   RC   setOpportunityAmount
  * 1.3   30-07-2021   RC   generateQuoteNumber,generateProtocolNumber,resetProtocolNumber,hasDocumentProtocol
 **/
-public class QuoteTriggerHelper {
+public without sharing class QuoteTriggerHelper {
     
     /**
 Assign account pricebook to quotes. 
@@ -109,26 +109,27 @@ If account has not pricebook assigned, it's assigned standard one.
     }
 
 
-    public static void setOpportunityAmount(Quote quoteNew){
+    public static void setOpportunityAmount(Quote quoteNew, Quote quoteOld){
+        system.debug('************************' + quoteOld.Status);
         List<Opportunity> opportunityToUpdate = new List<Opportunity>(); 
         Id opportunityId = quoteNew.OpportunityId;
             for(Quote q : [SELECT Id, OpportunityId, Total_Revenue__c, Opportunity.Amount, Status, Opportunity.StageName
                            FROM Quote 
                            WHERE OpportunityId =:opportunityId]){
-                            if(quoteNew.Id == q.Id && quoteNew.Status == '3'){
+                            if(quoteNew.Id == q.Id && quoteNew.Status == '3' && quoteOld.Status != '3'){
                                 Opportunity opp = new Opportunity();
                                 opp.Id = quoteNew.OpportunityId;
                                 opp.Amount = q.Total_Revenue__c;
                                 opp.StageName = 'Quote Presented';
                                 opportunityToUpdate.add(opp);
                             } 
-                   else if(quoteNew.Id == q.Id && quoteNew.Status == '4'){
+                   else if(quoteNew.Id == q.Id && quoteNew.Status == '4' && quoteOld.Status != '4'){
                         Opportunity opp = new Opportunity();
                         opp.Id = quoteNew.OpportunityId;
                         opp.Amount = q.Total_Revenue__c;
                         opp.StageName = 'Milestone Planning';
                         opportunityToUpdate.add(opp);
-                    } else if(quoteNew.Id == q.Id && quoteNew.Status == '5'){
+                    } else if(quoteNew.Id == q.Id && quoteNew.Status == '5' && quoteOld.Status != '5'){
                         Opportunity opp = new Opportunity();
                         opp.Id = quoteNew.OpportunityId;
                         opp.Amount = q.Total_Revenue__c;
@@ -158,7 +159,7 @@ If account has not pricebook assigned, it's assigned standard one.
                     quoteNumber = quoteNumberMap.get(year);
                 }
                 quoteNumber ++;
-                quote.QuoteNumber__c = year + '-' + quoteNumber;
+                quote.QuoteNumber__c = year + '-' + String.valueOf(quoteNumber).leftPad(4, '0');
                 quoteNumberMap.put(year,quoteNumber);
             }
         }
