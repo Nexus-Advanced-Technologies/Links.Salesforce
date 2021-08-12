@@ -79,7 +79,7 @@ trigger QuoteTrigger on Quote (after insert, after update,before insert,before u
 					System.debug('For TriggerNewMap');
 					System.debug('Quote: ' + q);
 					Boolean checkStatus = QuoteTriggerHelper.checkRegisteredStatus(q, triggerOldMap.get(q.Id));
-                    QuoteTriggerHelper.setOpportunityAmount(q);
+                    QuoteTriggerHelper.setOpportunityAmount(q,triggerOldMap.get(q.Id));
 					if(checkStatus == true){
 						System.debug('checkStatus == true');
 						QuoteTriggerHelper.generateContentVersionPDF(q.Id);
