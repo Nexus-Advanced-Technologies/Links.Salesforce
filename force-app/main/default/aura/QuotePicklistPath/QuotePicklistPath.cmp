@@ -1,0 +1,39 @@
+<!--
+  @description       : 
+  @author            : ↨ → giuseppe.alemanno@nexusat.it
+  @last modified on  : 25/08/2021
+  @last modified by  : RC → Riccardo Costantini
+-->
+<aura:component implements="flexipage:availableForAllPageTypes,force:lightningQuickActionWithoutHeader,flexipage:availableForRecordHome,forceCommunity:availableForAllPageTypes,force:hasRecordId,force:appHostable" 
+                access="global"
+                controller="QuotePicklistPathController">
+    <aura:attribute name="variant" type="String" default="linear"/>
+    <aura:attribute name="hideUpdateButton" type="Boolean" default="true"/>
+    <aura:attribute name ="nextStage" type="String"/>
+    <div class="runtime_sales_pathassistantPathAssistant" data-aura-class="runtime_sales_pathassistantPathAssistant">
+        <article class="slds-card">
+            <div class="slds-card__body slds-card__body_inner">
+                <div class="slds-path slds-path_has-coaching" >
+                    <div  class="runtime_sales_pathassistantCollapsibleDrawer" data-aura-class="runtime_sales_pathassistantCollapsibleDrawer">
+                        <div class="slds-grid slds-path__track" >
+                            <div class="slds-grid slds-path__scroller-container runtime_sales_pathassistantPathAssistantTabSet"  data-aura-class="runtime_sales_pathassistantPathAssistantTabSet">
+                                <div class="slds-path__scroller uiScroller scroller-wrapper scroll-horizontal">
+                                    <lightning:path aura:id="path" recordId="{!v.recordId}"
+                                                    variant="{!v.variant}"
+                                                    hideUpdateButton="{!v.hideUpdateButton}"
+                                                    onselect="{!c.handleSelect}"/>
+                                </div>
+                                <div class="slds-grid slds-grid_vertical">
+                                   <div class="slds-col"/>
+                                    <div class="slds-col" >
+                                        <lightning:button label="Mark Status as Complete" iconName="utility:check" iconPosition="left" onclick="{!c.updateStage}" variant="brand"/> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</aura:component>
