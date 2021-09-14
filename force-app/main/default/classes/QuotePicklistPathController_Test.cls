@@ -28,7 +28,8 @@ public class QuotePicklistPathController_Test {
         Id qId = [SELECT Id FROM Quote LIMIT 1].Id;
         
         Test.startTest();
-        QuotePicklistPathController.updateStatus('1', qId);
+        QuotePicklistPathController.oldValue(qId);
+        QuotePicklistPathController.updateStatus('1', qId,'2');
         Test.stopTest();
         
         Quote q = [SELECT Status FROM Quote LIMIT 1];
@@ -43,7 +44,7 @@ public class QuotePicklistPathController_Test {
         
         Test.startTest();
         try{
-            QuotePicklistPathController.updateStatus('1', fakeId);
+            QuotePicklistPathController.updateStatus('1', fakeId,'2');
         } catch(AuraHandledException e){
             System.assert(true);
         }

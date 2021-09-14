@@ -7,14 +7,24 @@
 public class QuotePicklistPathController {
     
     @AuraEnabled
-    public static void updateStatus(String statusApiName, Id recordId){
+    public static String oldValue(Id id){
+        Quote quote = [SELECT id,Status FROM Quote WHERE Id =: id];
+        return quote.Status;
+    }
+    
+    @AuraEnabled
+    public static void updateStatus(String statusApiName, Id recordId, String oldValue){
         
         Quote q = new Quote();
         q.Id = recordId;
         q.Status = statusApiName;
         
         try {
-            update q;
+            if(q.Status == Null || q.Status == oldValue){
+                throw new AuraException('ASSICURATI DI AVER SETTATO UNO STATO DIVERSO DA QUELLO CORRENTE');
+            }else{
+                update q;
+            }
         } catch(System.DmlException e){
             system.debug('Message: '+e.getMessage());
             system.debug('StackTrace: '+e.getStackTraceString());
