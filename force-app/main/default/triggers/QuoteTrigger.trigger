@@ -49,24 +49,25 @@ trigger QuoteTrigger on Quote (after insert, after update,before insert,before u
 			}
 		}
 		if(Trigger.isBefore && Trigger.isUpdate){
-			if (triggerSettings.get('Links').QuoteBeforeInsert__c) {
+			if (triggerSettings.get('Links').QuoteBeforeUpdate__c) {
 				System.debug('start Trigger before Update ');
 				QuoteTriggerHelper.generateProtocolNumber(triggerNewSplitted,Trigger.OldMap);
 				QuoteTriggerHelper.resetProtocolNumber(triggerNewSplitted,Trigger.OldMap);
 				for(Quote quote : triggerNewSplitted){
-					if(quote.Status == '3' && Trigger.OldMap.get(quote.Id).Status != '3'){
+                    if(quote.Status == '3' && Trigger.OldMap.get(quote.Id).Status != '3'){
 						if(QuoteTriggerHelper.hasDocumentProtocol(quote)){
 							quote.addError('NON PUOI PASSARE ALLO STATO PRESENTED SE NON CI SONO FILE ALLEGATI NEL PROTOCOLLO');
 						}
 					}
-				}
+                    if(QuoteTriggerHelper.checkStatusQuote(quote,Trigger.OldMap.get(quote.Id))){
+                        quote.addError('ATTENZIONE! DEVI SETTARE ESCLUSIVAMENTE LO STATO SUCCESSIVO A QUELLO ATTUALE');
+                    }
+                }
 			}
 		}
 		if (Trigger.isAfter && Trigger.isUpdate) {
-			System.debug('start Trigger after Update ');
 			List<Quote> triggerOldSplitted = triggerOldSplittedMap.get('Links');
 			if (triggerSettings.get('Links').QuoteAfterUpdate__c) {
-				System.debug('Custom MetaData True');
 				Map<Id, Quote> triggerNewMap = new Map<Id, Quote>();
 				Map<Id, Quote> triggerOldMap = new Map<Id, Quote>();
 				for(Quote q : triggerNewSplitted){
@@ -76,12 +77,10 @@ trigger QuoteTrigger on Quote (after insert, after update,before insert,before u
 					triggerOldMap.put(q.id, q);
 				}
 				for(Quote q : triggerNewMap.values()){
-					System.debug('For TriggerNewMap');
-					System.debug('Quote: ' + q);
+
 					Boolean checkStatus = QuoteTriggerHelper.checkRegisteredStatus(q, triggerOldMap.get(q.Id));
                     QuoteTriggerHelper.setOpportunityAmount(q,triggerOldMap.get(q.Id));
 					if(checkStatus == true){
-						System.debug('checkStatus == true');
 						QuoteTriggerHelper.generateContentVersionPDF(q.Id);
 					}
 					

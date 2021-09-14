@@ -44,6 +44,17 @@ public class TriggerUtilities {
 		}
 		set;
 	}
+    
+    	@TestVisible
+	public static List<TriggerSetting__mdt> TriggerSettingOrder {
+		get{
+			if(TriggerSettingOrder == null) {
+				TriggerSettingOrder = [SELECT DeveloperName, OrderBeforeUpdate__c FROM TriggerSetting__mdt];
+			}
+			return TriggerSettingOrder;
+		}
+		set;
+	}
 
 	public static List<TriggerSetting__mdt> TriggerSettingQuoteLineItem {
 		get{
@@ -100,7 +111,43 @@ public class TriggerUtilities {
 		System.debug('¤ } slitByCompany');
 		return opportuntiyMapLst;
 	}
+    
+    
+    public static Map<String, List<Order>> splitByCompany(List<Order> orderLst) {
+		System.debug('¤ splitByCompany {');
+		System.debug('¤ orderLst: ' + orderLst);
 
+		//Map for the result of this method
+		Map<String, List<Order>> orderMapLst = new Map<String, List<Order>>();
+		
+		Map<Id, String> recordTypesMap = getRecordType('Order');
+		List<String> companyNameLst = getCompany();
+
+		for (Order record: orderLst) {
+			if (!recordTypesMap.containsKey(record.RecordTypeId)) {
+				throw new TriggerUtilitiesException('This record type does not exist or you do not have permissions (' + record.RecordTypeId + ')');
+			}
+
+			String recordTypeDeveloperName = recordTypesMap.get(record.RecordTypeId);
+
+			for (String companyName : companyNameLst) {
+				if (recordTypeDeveloperName.contains(companyName)) {
+					List<Order> orderInnerLst = new List<Order>();
+					if (orderMapLst.containsKey(companyName)) {
+						orderInnerLst = orderMapLst.get(companyName);
+					}
+					orderInnerLst.add(record);
+					orderMapLst.put(companyName, orderInnerLst);
+				}
+			}
+		}
+
+		checkAllSplitted(orderLst, orderMapLst);
+
+		System.debug('¤ opportuntiyMapLst: ' + orderMapLst);
+		System.debug('¤ } slitByCompany');
+		return orderMapLst;
+	}
 	/**
 	* @description Splits the ProjectStatus list with the different companies based on the Record Type
 	* @author ¤ → alessio.marra@nexusat.it | 25/01/2021 

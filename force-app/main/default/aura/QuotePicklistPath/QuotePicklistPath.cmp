@@ -9,7 +9,9 @@
                 controller="QuotePicklistPathController">
     <aura:attribute name="variant" type="String" default="linear"/>
     <aura:attribute name="hideUpdateButton" type="Boolean" default="true"/>
+    <aura:attribute name ="oldStage" type="String"/>
     <aura:attribute name ="nextStage" type="String"/>
+    <aura:attribute name="isTrue" type="Boolean" default="false"/>
     <div class="runtime_sales_pathassistantPathAssistant" data-aura-class="runtime_sales_pathassistantPathAssistant">
         <article class="slds-card">
             <div class="slds-card__body slds-card__body_inner">
@@ -24,9 +26,11 @@
                                                     onselect="{!c.handleSelect}"/>
                                 </div>
                                 <div class="slds-grid slds-grid_vertical">
-                                   <div class="slds-col"/>
+                                    <div class="slds-col"/>
                                     <div class="slds-col" >
-                                        <lightning:button label="Mark Status as Complete" iconName="utility:check" iconPosition="left" onclick="{!c.updateStage}" variant="brand"/> 
+                                        <aura:if isTrue="{!v.oldStage != v.nextStage}">
+                                            <lightning:button label="Mark Status as Complete" iconName="utility:check" iconPosition="left" onclick="{!c.updateStage}" variant="brand"/> 
+                                        </aura:if>
                                     </div>
                                 </div>
                             </div>
