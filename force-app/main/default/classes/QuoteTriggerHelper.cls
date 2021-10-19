@@ -227,5 +227,81 @@ If account has not pricebook assigned, it's assigned standard one.
         
         return checkStatus;
     }
-    
+
+    public static void generateOrder(List<Quote> newQuoteList){
+        List<Order> listOrderToInsert = new List<Order>();
+        Set<Id> quoteId = new Set<Id>();
+        for(Quote idQuote : newQuoteList){
+            quoteId.add(idQuote.Id);
+        }
+        List<QuoteLineItem> quoteLineItemList = [SELECT id,DDTotal__c,DDOvernightAllowance__c,DDTotalCost__c,DDTravelAllowance__c,ListPrice,Description,OvernightAllowanceCost__c,
+                                                        Quantity,Revenue_Type__c,TotalCostHR__c,TravelAllowanceCost__c,UnitPrice,PricebookEntryId
+                                                 FROM QuoteLineItem
+                                                 WHERE QuoteId IN : quoteId];
+
+        List<Cost__c> costList = [SELECT id FROM Cost__c WHERE Quote__c IN : quoteId];
+    try{                                         
+        for(Quote quote : newQuoteList){
+                Order order = new Order();
+                order.AccountId = quote.AccountId;
+                order.Amount__c = quote.Total_Revenue__c;
+                order.EffectiveDate = Date.Today();
+                order.Name = 'Order - ' + quote.Name;
+                order.Pricebook2Id = quote.Pricebook2Id;
+                order.QuoteId = quote.Id;
+                order.Status = 'Draft';
+                listOrderToInsert.add(order);
+        }
+        insert listOrderToInsert;
+        insert generateOrderLineItem(quoteLineItemList,listOrderToInsert);
+        insert generateCostOrderDetail(costList,listOrderToInsert);
+    }catch(DmlException  e){
+        System.debug('Order Error DmlExceptionException: ' + e.getMessage());
+        throw new DmlException('IL NOME INSERITO RISULTA MAGGIORE DELLA LUNGHEZZA CONSENTITA! MODIFICA IL NOME E RIPROVA');
+       
+    }
+    catch(Exception e){
+        System.debug('Order Error AuraException: ' + e.getMessage());
+        throw new AuraException('Errore Durante la Generazione Ordine! Controlla i Dati Inseriti e riprova! Contatta Admin di Sistema!' + e.getMessage());
+        }
+    }
+
+    public static List<OrderItem> generateOrderLineItem(List<QuoteLineItem> quoteLineItemList, List<Order> orderList){
+        List<OrderItem> orderItemToInsert = new List<OrderItem>();
+        String orderId;
+        for(Order order : orderList){
+            orderId = order.Id;
+        }
+        for(QuoteLineItem quoteLineItem : quoteLineItemList){
+            OrderItem orderItem = new OrderItem();
+            orderItem.DDTotal__c = quoteLineItem.DDTotal__c;
+            orderItem.DDOvernightAllowance__c = quoteLineItem.DDOvernightAllowance__c;
+            orderItem.DDTravelAllowance__c = quoteLineItem.DDTravelAllowance__c;
+            orderItem.ListPrice = quoteLineItem.ListPrice;
+            orderItem.Description = quoteLineItem.Description;
+            orderItem.Quantity = quoteLineItem.Quantity;
+            orderItem.RevenueType__c = quoteLineItem.Revenue_Type__c;
+            orderItem.TotalCostHR__c = quoteLineItem.TotalCostHR__c;
+            orderItem.UnitPrice = quoteLineItem.UnitPrice;
+            orderItem.OrderId = orderId;
+            orderItem.PricebookEntryId = quoteLineItem.PricebookEntryId;
+            orderItemToInsert.add(orderItem);
+        }
+        return orderItemToInsert;
+    }
+
+    public static List<Cost_Order_Detail__c> generateCostOrderDetail(List<Cost__c> costList, List<Order> orderList){
+        List<Cost_Order_Detail__c> orderCostToInsert = new List<Cost_Order_Detail__c>();
+        String orderId;
+        for(Order order : orderList){
+            orderId = order.Id;
+        }
+        for(Cost__c cost : costList){
+            Cost_Order_Detail__c costOrderDetail = new Cost_Order_Detail__c();
+            costOrderDetail.Related_Cost__c = cost.Id;
+            costOrderDetail.Order__c = orderId;
+            orderCostToInsert.add(costOrderDetail);
+        }
+        return orderCostToInsert;
+    }
 }

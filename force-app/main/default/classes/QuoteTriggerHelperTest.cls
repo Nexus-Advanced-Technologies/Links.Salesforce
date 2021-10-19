@@ -417,5 +417,120 @@ insert quo2;*/
         
         
     }
-    
+       
+    @isTest
+    static void testGenerateOrder(){
+            Account acc = new Account(
+                Name = 'Test Account'
+            );
+            insert acc;
+            Product2 prod = new Product2(Name = 'Intern 2021',
+            Family = 'Standard',
+            ProductCoDe = 'IN',
+            IsActive = true);
+            insert prod;
+/********************************************************************** */
+            Id pricebookId = Test.getStandardPricebookId();
+
+            PricebookEntry standardPrice = new PricebookEntry(
+            Pricebook2Id = pricebookId, 
+            Product2Id = prod.Id,
+            UnitPrice = 10000, 
+            IsActive = true);
+            insert standardPrice;
+
+            Pricebook2 customPB = new Pricebook2(Name='Links', 
+                                isActive=true);
+            insert customPB;
+                
+            PricebookEntry customPrice = new PricebookEntry(
+            Pricebook2Id = customPB.Id, 
+            Product2Id = prod.Id,
+            UnitPrice = 1200, 
+            IsActive = true);
+            insert customPrice;
+            //***************************************************************************** */
+            Opportunity opportunity = new Opportunity(
+                Name = 'Test opportunity',
+                AccountId = [SELECT id FROM Account LIMIT 1].Id,
+                StageName = 'Prospecting',
+                RecordTypeId = [SELECT Id FROM RecordType WHERE SobjectType = 'Opportunity' AND DeveloperName = 'Links' LIMIT 1].Id,
+                CloseDate = Date.today(),
+                Pricebook2Id=[SELECT id FROM Pricebook2 LIMIT 1].Id
+            );
+            insert opportunity;
+                
+            Quote quote = new Quote();
+            quote.Name = 'Test893';
+            quote.OpportunityId = opportunity.Id;
+            quote.RecordTypeId = getRecordTypeId('Links');
+            insert quote;
+
+            Quote quoteNew = [SELECT Id,AccountId,Total_Revenue__c,Name,Pricebook2Id FROM Quote WHERE Id =: quote.Id];
+
+            Quote_Revenue__c revenue = new Quote_Revenue__c();
+            revenue.Revenue_Type__c = '6';
+            revenue.RecordTypeId = [SELECT Id FROM RecordType WHERE SobjectType = 'Quote_Revenue__c' AND DeveloperName = 'Links' LIMIT 1].Id;
+            revenue.LinksRevenue__c	 = 50000;
+            revenue.Quote__c = quoteNew.Id;
+            insert revenue;
+
+            
+            QuoteLineItem quoteLineItem = new QuoteLineItem(
+                Product2Id=prod.Id,
+                Revenue_Type__c='6',
+                Quantity=1,
+                QuoteId=quote.id,
+                PricebookEntryId=customPrice.id,
+                DDTotal__c=5,
+                TotalCostHR__c=100,
+                DDOvernightAllowance__c = 1,
+                DDTravelAllowance__c = 1,
+                Description = 'test',
+                UnitPrice=customPrice.UnitPrice);
+            insert quoteLineItem;
+
+            Cost__c cost = new Cost__c(Revenue_Type__c='6',Quantity__c=1,Quote__c=quoteNew.id,Cost_Value__c=5);
+            insert cost;
+
+            RevenueTypesCS__c rtCS = new RevenueTypesCS__c();
+            rtCS.Name = 'Prestazioni di Servizi';
+            rtCS.DefaultMargin__c = 30;
+            rtCS.MinMargin__c = 20;
+            insert rtCS;
+
+            Protocol__c protocol = new Protocol__c();
+            protocol.Name = '2021-1/1';
+            protocol.Quote__c = quoteNew.Id;
+            insert protocol;
+            
+            quoteNew.Protocol__c = protocol.Id;
+            update quoteNew;
+            ContentVersion contentVersion = new ContentVersion(
+                Title = 'Test',
+                PathOnClient = 'test.jpg',
+                VersionData = Blob.valueOf('Test'),
+                IsMajorVersion = true
+            );
+            insert contentVersion;    
+            List<ContentDocument> documents = [SELECT Id, Title, LatestPublishedVersionId FROM ContentDocument];
+            
+            ContentDocumentLink cdl = New ContentDocumentLink();
+            cdl.LinkedEntityId = protocol.id;
+            cdl.ContentDocumentId = documents[0].Id;
+            cdl.shareType = 'V';
+            insert cdl;
+            List<Quote> listQuote = new List<Quote>();
+            listQuote.add(quoteNew);
+            
+            Test.startTest();
+            TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
+            QuoteTriggerHelper.generateOrder(listQuote);
+            Test.stopTest(); 
+    }
 }
+ 
+
+
+
+ 

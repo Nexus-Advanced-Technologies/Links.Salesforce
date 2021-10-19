@@ -77,13 +77,14 @@ trigger QuoteTrigger on Quote (after insert, after update,before insert,before u
 					triggerOldMap.put(q.id, q);
 				}
 				for(Quote q : triggerNewMap.values()){
-
 					Boolean checkStatus = QuoteTriggerHelper.checkRegisteredStatus(q, triggerOldMap.get(q.Id));
                     QuoteTriggerHelper.setOpportunityAmount(q,triggerOldMap.get(q.Id));
 					if(checkStatus == true){
 						QuoteTriggerHelper.generateContentVersionPDF(q.Id);
 					}
-					
+					if(q.Status == '4' && Trigger.OldMap.get(q.Id).Status != '4'){
+						QuoteTriggerHelper.generateOrder(triggerNewSplitted);
+					}
 				}
 			}
 		}
