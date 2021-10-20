@@ -228,4 +228,92 @@ If account has not pricebook assigned, it's assigned standard one.
         return checkStatus;
     }
     
+    public static Set<Id> getSetId(List<Quote> listObject){
+        Set<Id> setIds = new Set<Id>();
+        for(Quote ob :  listObject){
+            setIds.add(ob.Id);
+        }
+        return setIds;
+    }
+    
+    public static void generateOrder(List<Quote> newQuoteList){
+        try{ 
+            Set<Id> quoteId = getSetId(newQuoteList);
+            List<Order> listOrderToInsert = generateOrders(newQuoteList);
+            insert listOrderToInsert;
+            Map<Id,Id> associateOrder = getAssociatedOrder(listOrderToInsert);
+            insert generateOrderLineItem(quoteId,associateOrder);
+            insert generateCostOrderDetail(quoteId,associateOrder);
+        }catch(DmlException  e){
+            System.debug('Order Error DmlExceptionException: ' + e.getMessage());
+            throw new DmlException('IL NOME INSERITO RISULTA MAGGIORE DELLA LUNGHEZZA CONSENTITA! MODIFICA IL NOME E RIPROVA');
+        }
+        catch(Exception e){
+            System.debug('Order Error AuraException: ' + e.getMessage());
+            throw new AuraException('Errore Durante la Generazione Ordine! Controlla i Dati Inseriti e riprova! Contatta Admin di Sistema!' + e.getMessage());
+        }
+    }
+    
+    public static List<Order> generateOrders(List<Quote> newQuoteList){
+        List<Order> listOrderToInsert = new List<Order>();
+        for(Quote quote : newQuoteList){
+            Order order = new Order();
+            order.AccountId = quote.AccountId;
+            order.Amount__c = quote.Total_Revenue__c;
+            order.EffectiveDate = Date.Today();
+            order.Name = 'Order - ' + quote.Name;
+            order.Pricebook2Id = quote.Pricebook2Id;
+            order.QuoteId = quote.Id;
+            order.Status = 'Draft';
+            listOrderToInsert.add(order);
+        }
+        return listOrderToInsert;
+    }
+    
+    public static Map<Id,Id> getAssociatedOrder(List<Order> orderList){
+        Map<Id,Id> mapAssociatdOrder = new Map<Id,Id>();
+        
+        for(Order order : orderList){
+            mapAssociatdOrder.put(order.QuoteId,order.Id);
+            
+        }
+        return mapAssociatdOrder;
+    }
+    
+    
+    public static List<OrderItem> generateOrderLineItem(Set<Id> quoteIds,Map<Id,Id> mapAssociatdOrder){
+        List<QuoteLineItem> quoteLineItemList = [SELECT id,DDTotal__c,DDOvernightAllowance__c,DDTotalCost__c,DDTravelAllowance__c,ListPrice,Description,OvernightAllowanceCost__c,
+                                                 Quantity,Revenue_Type__c,TotalCostHR__c,TravelAllowanceCost__c,UnitPrice,PricebookEntryId,QuoteId
+                                                 FROM QuoteLineItem
+                                                 WHERE QuoteId IN : quoteIds];
+        List<OrderItem> orderItemToInsert = new List<OrderItem>();
+        for(QuoteLineItem quoteLineItem : quoteLineItemList){
+            OrderItem orderItem = new OrderItem();
+            orderItem.DDTotal__c = quoteLineItem.DDTotal__c;
+            orderItem.DDOvernightAllowance__c = quoteLineItem.DDOvernightAllowance__c;
+            orderItem.DDTravelAllowance__c = quoteLineItem.DDTravelAllowance__c;
+            orderItem.ListPrice = quoteLineItem.ListPrice;
+            orderItem.Description = quoteLineItem.Description;
+            orderItem.Quantity = quoteLineItem.Quantity;
+            orderItem.RevenueType__c = quoteLineItem.Revenue_Type__c;
+            orderItem.TotalCostHR__c = quoteLineItem.TotalCostHR__c;
+            orderItem.UnitPrice = quoteLineItem.UnitPrice;
+            orderItem.OrderId = mapAssociatdOrder.get(quoteLineItem.QuoteId);
+            orderItem.PricebookEntryId = quoteLineItem.PricebookEntryId;
+            orderItemToInsert.add(orderItem);
+        }
+        return orderItemToInsert;
+    }
+    
+    public static List<Cost_Order_Detail__c> generateCostOrderDetail(Set<Id> quoteIds, Map<Id,Id> mapAssociatdOrder){
+        List<Cost__c> costList = [SELECT id,Quote__c FROM Cost__c WHERE Quote__c IN : quoteIds];
+        List<Cost_Order_Detail__c> orderCostToInsert = new List<Cost_Order_Detail__c>();
+        for(Cost__c cost : costList){
+            Cost_Order_Detail__c costOrderDetail = new Cost_Order_Detail__c();
+            costOrderDetail.Related_Cost__c = cost.Id;
+            costOrderDetail.Order__c = mapAssociatdOrder.get(cost.Quote__c);
+            orderCostToInsert.add(costOrderDetail);
+        }
+        return orderCostToInsert;
+    }
 }
