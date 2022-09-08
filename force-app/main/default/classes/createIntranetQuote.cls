@@ -17,6 +17,8 @@ public with sharing class createIntranetQuote {
         q = toRegistered(q);
         attachFileToProtocol(q, base64, filename);
         toPresented(q);
+        toApproved(q);
+        attachFileToOrder(q,base64,filename);
 
         return null;
     }
@@ -108,8 +110,8 @@ public with sharing class createIntranetQuote {
         QuoteLineItem qli = New QuoteLineItem();
         Product2 prd = [SELECT Id FROM Product2 WHERE Name = 'Consultant' AND ProductCode = 'CS' LIMIT 1];
         PricebookEntry pbe = [SELECT Id FROM PricebookEntry WHERE Product2Id = :prd.Id AND ExtId__c = 'LINKS1087'];
-        RevenueTypesCS__c rcs = [SELECT MinMargin__c FROM RevenueTypesCS__c WHERE Name='Fixed-Price Projects/Services'];
-        Integer DDTotal = Integer.valueOf(((o.Amount*Integer.valueOf(rcs.MinMargin__c))/100)/175);
+        RevenueTypesCS__c rcs = [SELECT DefaultMargin__c FROM RevenueTypesCS__c WHERE Name='Fixed-Price Projects/Services'];
+        Integer DDTotal = Integer.valueOf(((o.Amount*Integer.valueOf(rcs.DefaultMargin__c))/100)/175);
         qli.QuoteId = q.Id;
         qli.Product2Id = prd.Id;
         qli.Quantity = 1;
@@ -120,6 +122,14 @@ public with sharing class createIntranetQuote {
         insert qli;
    
     }
-
-
+    private static void toApproved(Quote q){
+        q.Status = '4';
+        update q;
+    }
+    private static void attachFileToOrder(Quote q,String base64, String filename){
+        ContentVersion cv = createContentVersion(base64, filename);
+        Order ord = new Order();
+        ord = [SELECT Id FROM Order WHERE QuoteId = :q.Id];
+        createContentLink(cv.Id, ord.Id);
+    }
 }

@@ -25,7 +25,9 @@ export default class FileUploaderCompLwc extends LightningElement {
             this.fileData = null
             let title = `${filename} uploaded successfully!!`
             this.toast(title)
+            eval("$A.get('e.force:refreshView').fire();");
         })
+       
     }
 
     toast(title){
@@ -34,5 +36,8 @@ export default class FileUploaderCompLwc extends LightningElement {
             variant:"success"
         })
         this.dispatchEvent(toastEvent)
+
     }
+    
+    
 }
