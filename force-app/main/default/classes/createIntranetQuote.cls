@@ -2,15 +2,19 @@
  * @description       : 
  * @author            : Massimo Frangiamore
  * @group             : 
- * @last modified on  : 08/09/2022
+ * @last modified on  : 13/09/2022
  * @last modified by  : francesco.coli@nexusat.it
 **/
 public with sharing class createIntranetQuote {
     @AuraEnabled
-    public static String uploadFile(String base64, String filename, String recordId) {
+    public static void uploadFile(String base64, String filename, String recordId) {
         system.debug('si sono qui');
         Opportunity o = getOpportunity(recordId);
-        Quote q = generateQuote(o);
+        String s = o.StageName;
+        String ops = [SELECT PaymentType__c  FROM Opportunity WHERE Id = :recordId LIMIT 1].PaymentType__c;      
+        try{
+        if (!String.isBlank(ops)) {           
+            Quote q = generateQuote(o);
         generateQuoteLine(q, o);
         toVerified(q);
         QuoteTriggerHelper.generateContentVersionPDF(q.Id);
@@ -19,8 +23,15 @@ public with sharing class createIntranetQuote {
         toPresented(q);
         toApproved(q);
         attachFileToOrder(q,base64,filename);
-
-        return null;
+        o.StageName = s;
+        update o;
+        } else {
+            throw new AuraHandledException('Payment Type is blank');   
+        }
+            }   catch(Exception e){
+                System.debug(e);
+                throw new AuraHandledException(e.getMessage());   
+            }       
     }
     private static ContentVersion createContentVersion(String base64, String filename) {
         ContentVersion cv = new ContentVersion();
@@ -74,7 +85,7 @@ public with sharing class createIntranetQuote {
     }
 
     private static Opportunity getOpportunity(id OppId){
-        return [SELECT Id, Name, Amount FROM Opportunity WHERE Id = :OppId];
+        return [SELECT Id, Name, Amount, PaymentType__c, StageName FROM Opportunity WHERE Id = :OppId];
     }
 
     private static void generateRevenue(Quote q, Opportunity o) {
@@ -132,4 +143,5 @@ public with sharing class createIntranetQuote {
         ord = [SELECT Id FROM Order WHERE QuoteId = :q.Id];
         createContentLink(cv.Id, ord.Id);
     }
+
 }
