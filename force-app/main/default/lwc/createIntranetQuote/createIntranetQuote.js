@@ -1,10 +1,10 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, track } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import uploadFile from '@salesforce/apex/createIntranetQuote.uploadFile'
 export default class FileUploaderCompLwc extends LightningElement {
     @api recordId;
     fileData
-    //showLoading=false
+    @track showLoading=false;
     openfileUpload(event) {
         const file = event.target.files[0]
         var reader = new FileReader()
@@ -21,12 +21,12 @@ export default class FileUploaderCompLwc extends LightningElement {
     }
     
     handleClick(){
-        //showLoading=true
+        this.showLoading=true
         const {base64, filename, recordId} = this.fileData
         
             uploadFile({ base64, filename, recordId }).then(result=>{
                 this.fileData = null
-                //showLoading=false
+                this.showLoading=false
                 let title = `${filename} uploaded successfully!!`
                 this.toast(title)
                 eval("$A.get('e.force:refreshView').fire();");
@@ -37,7 +37,8 @@ export default class FileUploaderCompLwc extends LightningElement {
                                 variant:"error"
                                 })
                                 console.log(title)
-                                this.dispatchEvent(toastEvent1)                
+                                this.dispatchEvent(toastEvent1)  
+                                this.showLoading=false              
                              })
         
        }
