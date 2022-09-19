@@ -16,32 +16,6 @@ public class CreateIntranetQuote_test{
             RevenueType__c = '6'
         );
         insert custSettings;
-        //Insert Record Types
-        // RecordType recTypeOpp = new RecordType(
-        //     Name = 'Nexus',
-        //     DeveloperName = 'NexusStandard',
-        //     SobjectType = 'Opportunity',
-        //     IsActive = true 
-        // );
-        // insert recTypeOpp;
-        // RecordType recTypeAcc = new RecordType(
-        //     Name = 'Customer',
-        //     DeveloperName = 'Customer',
-        //     SobjectType = 'Account',
-        //     IsActive = true 
-        // );
-        // insert recTypeAcc;
-
-        // RecordType recTypePaymentType = new RecordType(
-        //     Name = 'Customer',
-        //     DeveloperName = 'Customer',
-        //     SobjectType = 'PaymentType__c',
-        //     IsActive = true
-        // );
-        // insert recTypePaymentType;
-
-
-
 
         Account account = new Account(
             Name = 'TestAcc',
@@ -64,7 +38,6 @@ public class CreateIntranetQuote_test{
             IsActive = true);
         insert standardPrice;
  
-
         PaymentType__c paymentType = new PaymentType__c(
             Name = '100% allordine',
             Type__c = 'One Shot',
@@ -90,8 +63,6 @@ public class CreateIntranetQuote_test{
         );
         insert pricebook;
 
-
-
         PricebookEntry pricebookentry = new PricebookEntry(
             Pricebook2Id = pricebook.Id,
             Product2Id = productt.Id,
@@ -106,26 +77,20 @@ public class CreateIntranetQuote_test{
             Name = 'Fixed-Price Projects/Services',
             MinMargin__c = 32
         );
-        insert revenuetypecs;
-
-        // Order order = new Order(
-            
-        // )
-
-        
+        insert revenuetypecs;       
     }
-@isTest 
-public static void testUploadFile (){
-    String base64 = EncodingUtil.base64Encode(Blob.valueof('teststring'));
-    String filename = 'Test name 123';
-    String recordId = [SELECT Id FROM Opportunity LIMIT 1].Id;
+    @isTest 
+    public static void testUploadFile (){
+        String base64 = EncodingUtil.base64Encode(Blob.valueof('teststring'));
+        String filename = 'Test name 123';
+        String recordId = [SELECT Id FROM Opportunity LIMIT 1].Id;
 
 
-    test.startTest();
-    createIntranetQuote.uploadFile(base64, filename, recordId);
-    test.stopTest();
+        test.startTest();
+        createIntranetQuote.uploadFile(base64, filename, recordId);
+        test.stopTest();
 
-    }
+        }
 
 
 }
