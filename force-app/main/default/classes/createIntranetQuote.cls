@@ -2,34 +2,48 @@
  * @description       : 
  * @author            : Massimo Frangiamore
  * @group             : 
- * @last modified on  : 13/09/2022
+ * @last modified on  : 16/09/2022
  * @last modified by  : francesco.coli@nexusat.it
 **/
 public with sharing class createIntranetQuote {
+    private static IntranetQuoteGeneration__c settings;
+    private static IntranetQuoteGeneration__c getSettings() {
+        if(settings == null){
+               settings = IntranetQuoteGeneration__c.getOrgDefaults();
+        }
+        return settings;
+        
+    }
     @AuraEnabled
     public static void uploadFile(String base64, String filename, String recordId) {
         system.debug('si sono qui');
-        Opportunity o = getOpportunity(recordId);
-        String s = o.StageName;
-        String ops = [SELECT PaymentType__c  FROM Opportunity WHERE Id = :recordId LIMIT 1].PaymentType__c;      
-        try{
-        if (!String.isBlank(ops)) {           
-            Quote q = generateQuote(o);
-        generateQuoteLine(q, o);
-        toVerified(q);
-        QuoteTriggerHelper.generateContentVersionPDF(q.Id);
-        q = toRegistered(q);
-        attachFileToProtocol(q, base64, filename);
-        toPresented(q);
-        toApproved(q);
-        attachFileToOrder(q,base64,filename);
-        o.StageName = s;
-        update o;
-        } else {
-            throw new AuraHandledException('Payment Type is blank');   
+        Opportunity opportunity = getOpportunity(recordId);
+        //Id rt = [SELECT Id FROM RecordType WHERE DeveloperName = 'Links' and SobjectType = 'Quote'].Id;
+        //Id opQ = [SELECT OpportunityId FROM Quote WHERE OpportunityId = :recordId AND RecordTypeId = :rt LIMIT 1].OpportunityId;      
+        if(string.isBlank(fileName)){
+            throw new  AuraHandledException('Missing file');
         }
+        try{
+        canCreateQuote(recordId);
+            if (!String.isBlank(opportunity.PaymentType__c)) {     
+                Quote quote = generateQuote(opportunity);
+                toVerified(quote);
+                QuoteTriggerHelper.generateContentVersionPDF(quote.Id);
+                quote = toRegistered(quote);
+                attachFileToProtocol(quote, base64, filename);
+                toPresented(quote);
+                toApproved(quote);
+                attachFileToOrder(quote,base64,filename);
+                opportunity.StageName = opportunity.StageName;
+                update opportunity;
+            } else {
+                throw new AuraHandledException('Payment Type is blank');
+            }
+        // } else {
+        //     throw new AuraHandledException('Links quote already generated');   
+        // }
             }   catch(Exception e){
-                System.debug(e);
+                System.debug(e.getStackTraceString());
                 throw new AuraHandledException(e.getMessage());   
             }       
     }
@@ -67,21 +81,22 @@ public with sharing class createIntranetQuote {
         }
     }
     
-    private static Quote generateQuote(Opportunity op){
+    private static Quote generateQuote(Opportunity opportunity){
         Id recordTypeId =Schema.SObjectType.Quote.getRecordTypeInfosByName().get('Links').getRecordTypeId();
-        Pricebook2 pb = new Pricebook2();
-        pb = [SELECT Id FROM Pricebook2 WHERE ExtId__c ='Links2022'];
-        Quote q = new Quote();
-        q.Name = op.Name;
-        q.RecordTypeId = recordTypeId;
-        q.Pricebook2Id = pb.Id;
-        q.StartDate__c = Date.today();
-        q.OpportunityId = op.Id;
-        q.isMinMarginValid__c = true;
+        Pricebook2 priceBook = new Pricebook2();
+        priceBook = [SELECT Id FROM Pricebook2 WHERE ExtId__c = :getSettings().PriceBookName__c];
+        Quote quote = new Quote();
+        quote.Name = opportunity.Name;
+        quote.RecordTypeId = recordTypeId;
+        quote.Pricebook2Id = priceBook.Id;
+        quote.StartDate__c = Date.today();
+        quote.OpportunityId = opportunity.Id;
+        quote.isMinMarginValid__c = true;
         
-        insert q;
-        generateRevenue(q, op);
-        return q;
+        insert quote;
+        generateRevenue(quote, opportunity);
+        generateQuoteLine(quote, opportunity);
+        return quote;
     }
 
     private static Opportunity getOpportunity(id OppId){
@@ -90,7 +105,7 @@ public with sharing class createIntranetQuote {
 
     private static void generateRevenue(Quote q, Opportunity o) {
         Quote_Revenue__c revenue = new Quote_Revenue__c();
-        revenue.Revenue_Type__c = '6';
+        revenue.Revenue_Type__c = getSettings().RevenueType__c; 
         revenue.Quote__c = q.Id;
         revenue.LinksRevenue__c = o.Amount;
         insert revenue;
@@ -119,17 +134,17 @@ public with sharing class createIntranetQuote {
     }
     private static void generateQuoteLine(Quote q, Opportunity o){
         QuoteLineItem qli = New QuoteLineItem();
-        Product2 prd = [SELECT Id FROM Product2 WHERE Name = 'Consultant' AND ProductCode = 'CS' LIMIT 1];
-        PricebookEntry pbe = [SELECT Id FROM PricebookEntry WHERE Product2Id = :prd.Id AND ExtId__c = 'LINKS1087'];
+        Product2 prd = [SELECT Id FROM Product2 WHERE Name = :getSettings().ProductName__c AND ProductCode = :getSettings().ProductCode__c LIMIT 1]; 
+        PricebookEntry pbe = [SELECT Id, UnitPrice FROM PricebookEntry WHERE Product2Id = :prd.Id AND Pricebook2Id = :q.Pricebook2Id];
         RevenueTypesCS__c rcs = [SELECT DefaultMargin__c FROM RevenueTypesCS__c WHERE Name='Fixed-Price Projects/Services'];
-        Integer DDTotal = Integer.valueOf(((o.Amount*Integer.valueOf(rcs.DefaultMargin__c))/100)/175);
+        System.debug('rcs: '+rcs);
         qli.QuoteId = q.Id;
         qli.Product2Id = prd.Id;
         qli.Quantity = 1;
-        qli.UnitPrice = 175.00;
-        qli.Revenue_Type__c = '6';
+        qli.UnitPrice = pbe.UnitPrice;
+        qli.Revenue_Type__c = getSettings().RevenueType__c;  
         qli.PricebookEntryId = pbe.Id;
-        qli.DDTotal__c = DDtotal;
+        qli.DDTotal__c = (Integer)(((o.Amount*(100-rcs.DefaultMargin__c))/100)/pbe.UnitPrice).Round(System.RoundingMode.DOWN);
         insert qli;
    
     }
@@ -142,6 +157,12 @@ public with sharing class createIntranetQuote {
         Order ord = new Order();
         ord = [SELECT Id FROM Order WHERE QuoteId = :q.Id];
         createContentLink(cv.Id, ord.Id);
+    }
+    public static void canCreateQuote(Id oppId){
+    List<Quote> quoteList = [SELECT Id FROM Quote WHERE OpportunityId = :oppId];
+            if(quoteList.size() > 0){
+                throw new AuraHandledException('Cannot create quote');
+            }     
     }
 
 }
