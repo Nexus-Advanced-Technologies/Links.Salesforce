@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Massimo Frangiamore
  * @group             : 
- * @last modified on  : 16/09/2022
+ * @last modified on  : 19/09/2022
  * @last modified by  : francesco.coli@nexusat.it
 **/
 public with sharing class createIntranetQuote {
@@ -44,6 +44,7 @@ public with sharing class createIntranetQuote {
         // }
             }   catch(Exception e){
                 System.debug(e.getStackTraceString());
+                System.debug(e.getMessage());
                 throw new AuraHandledException(e.getMessage());   
             }       
     }
