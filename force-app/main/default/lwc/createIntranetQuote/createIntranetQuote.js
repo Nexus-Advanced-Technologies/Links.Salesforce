@@ -24,24 +24,29 @@ export default class FileUploaderCompLwc extends LightningElement {
     handleClick() {
         try {
             if(!this.fileData){
-                console.log('error filedata');
-                throw new Error('Missing file');
+                console.log('error filedata');         
+                throw new Error('Missing file.');
             }
             this.showLoading = true;
             const { base64, filename, recordId } = this.fileData
             uploadFile({ base64, filename, recordId }).then(result => {
                 this.fileData = null
-                let title = `${filename} uploaded successfully!!`
+                let title = `${filename} uploaded successfully!`
                 ShowToast.success(this, title);
                 eval("$A.get('e.force:refreshView').fire();");
                 this.showLoading = false
             }).catch(error => {
                 this.showLoading = false
-                HandleError.withToast(this, error);
+                let title2 = 'Quote already generated or Payment Type is empty.';
+                ShowToast.error(this, title2);
+                throw new Error('Quote already generated or Payment Type is empty.');
+                // HandleError.withToast(this, error);
             })
         } catch(error){
-        
-            HandleError.withToast(this, error);
+            let title1 = 'Quote already generated or file not uploaded.';
+            ShowToast.error(this, title1);
+            throw new Error('Quote already generated or file not uploaded.');
+            //HandleError.withToast(this, error);
         }
     }
 
