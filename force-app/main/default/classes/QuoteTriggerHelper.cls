@@ -2,7 +2,7 @@
 * @description       : 
 * @author            : Œ
 * @last modified on  : 30-07-2021
-* @last modified by  : RC 
+* @last modified by  : manolo.giannotta@nexusat.it
 * Modifications Log 
 * Ver   Date         Author   Modification
 * 1.0   22-04-2021   Œ   Initial Version
@@ -219,12 +219,12 @@ If account has not pricebook assigned, it's assigned standard one.
         Boolean checkStatus;
         Integer oldNumber = integer.valueof(oldQuote.Status);
         Integer newNumber = integer.valueof(newQuote.Status);
-        if(oldNumber<newNumber && newNumber>oldNumber+1){
+        String newStatus = string.valueOf(newQuote.Status);
+        if(oldNumber<newNumber && newNumber>oldNumber+1 && !newStatus.equals('5')){
             checkStatus = true;
         }else{
             checkStatus = false;
         }
-        
         return checkStatus;
     }
     
