@@ -1,8 +1,8 @@
 /**
 * @description       : 
 * @author            : 
-* @last modified on  : 16-07-2021
-* @last modified by  : Œ
+* @last modified on  : 19/10/2022
+* @last modified by  : ¤ → alessio.marra@nexusat.it
 * Modifications Log 
 * Ver   Date         Author                         Modification
 * 1.0                                               Initial Version
@@ -14,6 +14,10 @@ private class QuoteTriggerHelperTest {
     
     private static Id getRecordTypeId(String name) {
         return [SELECT Id FROM RecordType WHERE SobjectType = 'Quote' AND DeveloperName = :name LIMIT 1].Id;
+    }
+
+    private static Id getOpportunityRecordTypeId(String name) {
+        return [SELECT Id FROM RecordType WHERE SobjectType = 'Opportunity' AND DeveloperName = :name LIMIT 1].Id;
     }
     
     private static List<TriggerSetting__mdt> createCustomMetadata(Boolean status) {
@@ -527,6 +531,82 @@ insert quo2;*/
             TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
             QuoteTriggerHelper.generateOrder(listQuote);
             Test.stopTest(); 
+    }
+
+    @isTest
+    private static void testCheckOneQuoteForOpportunitySuccess() {
+        Account account = new Account(
+            Name = 'Test Account'
+        );
+        insert account;
+
+        Opportunity opportunity = new Opportunity(
+            Name = 'Test Opportunity',
+            AccountId = account.Id,
+            StageName = 'Prospecting',
+            RecordTypeId = getOpportunityRecordTypeId('Links'),
+            CloseDate = Date.today()
+        );
+        insert opportunity;
+
+        Quote quote = new Quote(
+            Name = 'Test Quote',
+            OpportunityId = opportunity.Id,
+            RecordTypeId = getRecordTypeId('Links')
+        );
+
+        Test.startTest();
+        TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
+        insert quote;
+        Test.stopTest();
+
+        Integer count = (Integer)[SELECT count(Id) c FROM Quote][0].get('c');
+        System.assertEquals(1, count, 'The quote should have been created');
+    }
+
+    @isTest
+    private static void testCheckOneQuoteForOpportunityError() {
+        Account account = new Account(
+            Name = 'Test Account'
+        );
+        insert account;
+
+        Opportunity opportunity = new Opportunity(
+            Name = 'Test Opportunity',
+            AccountId = account.Id,
+            StageName = 'Prospecting',
+            RecordTypeId = getOpportunityRecordTypeId('Links'),
+            CloseDate = Date.today()
+        );
+        insert opportunity;
+        
+        TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
+        Quote quote = new Quote(
+            Name = 'Test Quote',
+            OpportunityId = opportunity.Id,
+            RecordTypeId = getRecordTypeId('Links')
+        );
+        insert quote;
+
+        Quote otherQuote = new Quote(
+            Name = 'Test Quote equal opportunity',
+            OpportunityId = opportunity.Id,
+            RecordTypeId = getRecordTypeId('Links')
+        );
+
+        Test.startTest();
+        TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
+
+        try {
+            insert otherQuote;
+            System.assert(false);
+        } catch (DmlException e) {
+            System.assert(true);
+        }
+        Test.stopTest();
+
+        Integer count = (Integer)[SELECT count(Id) c FROM Quote][0].get('c');
+        System.assertEquals(1, count, 'The quote should have been created');
     }
 }
  

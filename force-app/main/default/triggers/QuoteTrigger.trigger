@@ -1,8 +1,8 @@
 /**
  * @description       : 
  * @author            : 
- * @last modified on  : 04-05-2021
- * @last modified by  : Œ
+ * @last modified on  : 19/10/2022
+ * @last modified by  : ¤ → alessio.marra@nexusat.it
  * Modifications Log 
  * Ver   Date         Author                         Modification
  * 1.0                                               Initial Version
@@ -42,12 +42,18 @@ trigger QuoteTrigger on Quote (after insert, after update,before insert,before u
 	if (triggerNewSplittedMap.containsKey('Links')) {
 		List<Quote> triggerNewSplitted = triggerNewSplittedMap.get('Links');
 
-
 		if(Trigger.isBefore && Trigger.isInsert){
 			if (triggerSettings.get('Links').QuoteBeforeInsert__c) {
 				QuoteTriggerHelper.generateQuoteNumber(triggerNewSplitted);
 			}
 		}
+
+		if(Trigger.isAfter && Trigger.isInsert){
+			if (triggerSettings.get('Links').QuoteBeforeInsert__c) {
+				QuoteTriggerHelper.checkOneQuoteForOpportunity(triggerNewSplitted);
+			}
+		}
+
 		if(Trigger.isBefore && Trigger.isUpdate){
 			if (triggerSettings.get('Links').QuoteBeforeUpdate__c) {
 				System.debug('start Trigger before Update ');

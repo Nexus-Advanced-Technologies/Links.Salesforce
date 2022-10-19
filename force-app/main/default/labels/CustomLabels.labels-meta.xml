@@ -16,4 +16,12 @@
         <shortDescription>Success</shortDescription>
         <value>Invoice Milestone entered successfully</value>
     </labels>
+    <labels>
+        <fullName>ErrorMoreQuote</fullName>
+        <categories>Error Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ErrorMoreQuote</shortDescription>
+        <value>It&apos;s forbidden to create more than one Links Quote for each Opportunity</value>
+    </labels>
 </CustomLabels>
