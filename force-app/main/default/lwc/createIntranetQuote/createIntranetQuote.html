@@ -1,0 +1,23 @@
+<!--
+  @description       : 
+  @author            : Massimo Frangiamore
+  @group             : 
+  @last modified on  : 20/10/2022
+  @last modified by  : francesco.coli@nexusat.it
+-->
+<template>
+    <lightning-card title="Create Intranet Quote" icon-name="custom:custom14">
+        <template if:true={showLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </template>
+        <div class="slds-m-around_medium">
+            <lightning-input type="file"
+            accept=".xlsx, .xls, .csv, .png, .doc, .docx, .pdf"
+            label="Attachment (max size 4 MB)" onchange={openfileUpload}></lightning-input>
+        </div>
+        <template if:true={fileData}>
+            <p>{fileData.filename}</p>
+        </template>
+        <lightning-button variant="brand" label="Submit" title="Submit" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+    </lightning-card>
+</template>
