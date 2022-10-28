@@ -14,13 +14,14 @@ trigger OnDocumentAlyanteTrigger on DocumentAlyante__c (after insert, before upd
 
 	if (Trigger.isAfter && Trigger.isInsert && triggerSettings.get('Links').DocumentAlyanteAfterInsert__c) {
 		OnDocumentAlyanteTriggerHelper.lockRecordsByRecordTypeDeveloperName(Trigger.new,'ActiveInvoice');
-		OnDocumentAlyanteTriggerHelper.lockRecordsByRecordTypeDeveloperName(Trigger.new,'CreditNote');
+		//OnDocumentAlyanteTriggerHelper.lockRecordsByRecordTypeDeveloperName(Trigger.new,'CreditNote');
 	}
 	
 	if (Trigger.isBefore && Trigger.isUpdate && triggerSettings.get('Links').DocumentAlyanteAfterUpdate__c) {
 		OnDocumentAlyanteTriggerHelper.lockRecordsByRecordTypeDeveloperName(Trigger.new,'ActiveInvoice');
-		OnDocumentAlyanteTriggerHelper.lockRecordsByRecordTypeDeveloperName(Trigger.new,'CreditNote');
-		OnDocumentAlyanteTriggerHelper.lockRecordsByRecordTypeDeveloperName(Trigger.new,'PassiveInvoice');
+		//OnDocumentAlyanteTriggerHelper.lockRecordsByRecordTypeDeveloperName(Trigger.new,'CreditNote');
+		//OnDocumentAlyanteTriggerHelper.lockRecordsByRecordTypeDeveloperName(Trigger.new,'PassiveInvoice');
+		
 		// OnDocumentAlyanteTriggerHelper.blockModifyRecord (Trigger.new, Trigger.oldMap, 'PassiveInvoice');
 		// OnDocumentAlyanteTriggerHelper.checkRecordToLock(Trigger.new, Trigger.oldMap, 'PassiveInvoice', new Set<String>{ 'ToBePayed', 'Payed' });
 		OnDocumentAlyanteTriggerHelper.checkRecordToLock(Trigger.new, Trigger.oldMap, 'PreInvoice', new Set<String>{ 'ToBeEmitted' });
