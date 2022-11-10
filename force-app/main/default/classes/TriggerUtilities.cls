@@ -69,7 +69,7 @@ public class TriggerUtilities {
 	public static List<TriggerSetting__mdt> TriggerSettingDocumentAlyante {
 		get {
 			if(TriggerSettingDocumentAlyante == null) {
-				TriggerSettingDocumentAlyante = [SELECT DeveloperName, DocumentAlyanteAfterInsert__c, DocumentAlyanteAfterUpdate__c, DocumentAlyanteBeforeUpdate__c FROM TriggerSetting__mdt];
+				TriggerSettingDocumentAlyante = [SELECT DeveloperName, DocumentAlyanteAfterInsert__c, DocumentAlyanteAfterUpdate__c, DocumentAlyanteBeforeUpdate__c, DocumentAlyanteBeforeDelete__c FROM TriggerSetting__mdt];
 			}
 			return TriggerSettingDocumentAlyante;
 		}

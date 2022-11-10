@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : §
  * @group             : 
- * @last modified on  : 18/02/2022
- * @last modified by  : ¤ → alessio.marra@nexusat.it
+ * @last modified on  : 11/10/2022
+ * @last modified by  : manolo.giannotta@nexusat.it
 **/
 public class OnDocumentAlyanteTriggerHelper {
 	
@@ -144,4 +144,9 @@ public class OnDocumentAlyanteTriggerHelper {
 	// 	}
 	// 	 return changeDocumentFileds;
 	// }
+
+	public static void deleteRelation(List<DocumentAlyante__c> triggerOld){
+		List<DocumentRelationAlyante__c> relations = [SELECT Id FROM DocumentRelationAlyante__c WHERE Child__c IN :triggerOld];
+		delete relations;
+	}
 }
