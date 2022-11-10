@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Creato da Manolo Giannotta</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>MFA - Mail template</name>
+    <style>none</style>
+    <subject>MFA</subject>
+    <textOnly>MFA
+
+Gentile {!Contact.Name}
+
+Dal 1 febbraio 2022 su tutti i prodotti Salesforce verrà implementato un cambio del sistema di autenticazione: sarà infatti introdotta e richiesta l&apos;autenticazione a multi fattori (MFA).
+
+Questo cambiamento impatterà sui seguenti prodotti Salesforce, tra cui anche quelli da noi implementati per {!Account.Name}
+
+Prodotti costruiti sulla Salesforce Platform, come Sales Cloud, Service Cloud,
+
+Salesforce Essentials, Salesforce Field Service...
+
+Heroku
+Marketing Cloud
+MuleSoft Anypoint Platform
+Quip
+Tableau Online
+
+
+Le soluzioni possibili sono di 4 tipi:
+
+
+
+Siamo a disposizione sulla mail team.salesforce@nexusat.it per fornire ulteriori informazioni e per decidere e programmare l’aggiornamento del sistema, qualora ve ne sia la necessità.
+
+Buona giornata,
+Team Salesforce NexusAT
+
+Aggiungi un remind per l’attività
+Aggiungi a Google Calendar
+Aggiungi a Outlook Calendar
+Aggiungi a Office 365 Calendar</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

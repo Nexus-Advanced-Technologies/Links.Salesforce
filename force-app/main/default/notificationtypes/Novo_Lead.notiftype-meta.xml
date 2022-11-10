@@ -4,4 +4,5 @@
     <desktop>true</desktop>
     <masterLabel>Novo Lead</masterLabel>
     <mobile>true</mobile>
+    <slack>false</slack>
 </CustomNotificationType>

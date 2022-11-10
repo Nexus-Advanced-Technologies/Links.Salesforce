@@ -4,7 +4,8 @@
     <active>true</active>
     <errorConditionFormula>AND(
 Quote__r.RecordType.DeveloperName = &quot;Links&quot;,
-NOT(ISPICKVAL(Quote__r.Status, &quot;0&quot;))
+NOT(ISPICKVAL(Quote__r.Status, &quot;0&quot;)),
+				$User.Username != &apos;sysadmin@linksmt.it&apos;
 )</errorConditionFormula>
     <errorMessage>Costs can&apos;t be edited, if quote status is not in Draft.</errorMessage>
 </ValidationRule>

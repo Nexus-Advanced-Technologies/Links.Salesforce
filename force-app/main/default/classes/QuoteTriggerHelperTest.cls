@@ -1,8 +1,8 @@
 /**
 * @description       : 
 * @author            : 
-* @last modified on  : 19/10/2022
-* @last modified by  : ¤ → alessio.marra@nexusat.it
+* @last modified on  : 16-07-2021
+* @last modified by  : Œ
 * Modifications Log 
 * Ver   Date         Author                         Modification
 * 1.0                                               Initial Version
@@ -14,10 +14,6 @@ private class QuoteTriggerHelperTest {
     
     private static Id getRecordTypeId(String name) {
         return [SELECT Id FROM RecordType WHERE SobjectType = 'Quote' AND DeveloperName = :name LIMIT 1].Id;
-    }
-
-    private static Id getOpportunityRecordTypeId(String name) {
-        return [SELECT Id FROM RecordType WHERE SobjectType = 'Opportunity' AND DeveloperName = :name LIMIT 1].Id;
     }
     
     private static List<TriggerSetting__mdt> createCustomMetadata(Boolean status) {
@@ -149,7 +145,7 @@ private class QuoteTriggerHelperTest {
         Quote quoteForPdf = new Quote(
             Name = 'Quote for PDF Content',
             OpportunityId = opp.Id,
-            Status = '0',
+            Status = '3',
             QuoteNumber__c = '2021-1',
             RecordTypeId = getRecordTypeId('Links')
         );
@@ -176,7 +172,7 @@ private class QuoteTriggerHelperTest {
         );
         insert pt;
         
-        Opportunity opportunity = new Opportunity(
+        Opportunity opp = new Opportunity(
             Name = 'Test opportunity',
             AccountId = acc.Id,
             StageName = 'Prospecting',
@@ -184,29 +180,46 @@ private class QuoteTriggerHelperTest {
             PaymentType__c = pt.Id,
             Amount = 4000
         );
-        insert opportunity;
-
-        Quote quote = new Quote(
-            Name = 'Quote',
-            OpportunityId = opportunity.Id,
-            Status = '0',
+        insert opp;
+        Quote quoteOld = new Quote(
+            Name = 'test',
+            OpportunityId = opp.Id,
+            Status = '1',
             RecordTypeId = getRecordTypeId('Links')
         );
-        insert quote;
-        Quote quoteOld = quote.clone(false, true, true, true);
+        insert quoteOld;
+        
+        Quote quo = new Quote(
+            Name = 'Quote for PDF Content',
+            OpportunityId = opp.Id,
+            Status = '3',
+            RecordTypeId = getRecordTypeId('Links')
+        );
+        insert quo;
+        
+        /*
+Quote quo2 = new Quote(
+Name = 'Quote for PDF Content',
+OpportunityId = opp.Id,
+Status = '4',
+RecordTypeId = getRecordTypeId('Links')
+);
+insert quo2;*/
+        
+        Quote quo3 = new Quote(
+            Name = 'Quote for PDF Content',
+            OpportunityId = opp.Id,
+            Status = '5',
+            RecordTypeId = getRecordTypeId('Links')
+        );
+        insert quo3;
         
         Test.startTest();
         TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
-
-        quote.Status = '3';
-        QuoteTriggerHelper.setOpportunityAmount(quote, quoteOld);
-
-        quote.Status = '4';
-        QuoteTriggerHelper.setOpportunityAmount(quote, quoteOld);
-
-        quote.Status = '5';
-        QuoteTriggerHelper.setOpportunityAmount(quote, quoteOld);
-        Test.stopTest();
+        
+        QuoteTriggerHelper.setOpportunityAmount(quo,quoteOld);
+        QuoteTriggerHelper.setOpportunityAmount(quo3,quoteOld);
+        Test.stopTest();  
     }
     
     @isTest
@@ -216,43 +229,29 @@ private class QuoteTriggerHelperTest {
         );
         insert acc;
         
-        Opportunity opportunity1 = new Opportunity(
-            Name = 'Test opportunity 1',
+        Opportunity opp = new Opportunity(
+            Name = 'Test opportunity',
             AccountId = acc.Id,
             StageName = 'Prospecting',
             CloseDate = Date.today(),
             Amount = 4000
         );
-        Opportunity opportunity2 = new Opportunity(
-            Name = 'Test opportunity 2',
-            AccountId = acc.Id,
-            StageName = 'Prospecting',
-            CloseDate = Date.today(),
-            Amount = 4000
-        );
-        insert new List<Opportunity>{ opportunity1, opportunity2 };
-
-        List<Quote> quotes = new List<Quote>();
-        Quote quote1 = new Quote(
-            Name = 'Test 1',
-            RecordTypeId = getRecordTypeId('Links'),
-            OpportunityId = opportunity1.Id,
-            Status = '0'
-        );
-        quotes.add(quote1);
-        Quote quote2 = new Quote(
-            Name = 'Test 2',
-            RecordTypeId = getRecordTypeId('Links'),
-            OpportunityId = opportunity2.Id,
-            Status = '0'
-        );
-        quotes.add(quote2);
-        insert quotes;
-
+        insert opp;
+        
+        List<Quote> quoteInsertNew = new List<Quote>();
+        for(Integer i = 0; i<5; i++){
+            Quote quote = new Quote();
+            quote.Name = 'Test ' + i;
+            quote.RecordTypeId = getRecordTypeId('Links');
+            quote.OpportunityId = opp.Id;
+            quote.Status = '2';
+            quoteInsertNew.add(quote);
+        }
+        insert quoteInsertNew;
         Test.startTest();
         TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
-        QuoteTriggerHelper.generateQuoteNumber(quotes);
-        Test.stopTest();
+        QuoteTriggerHelper.generateQuoteNumber(quoteInsertNew);
+        Test.stopTest();  
     }
     
     @isTest
@@ -262,35 +261,32 @@ private class QuoteTriggerHelperTest {
         );
         insert acc;
         
-        Opportunity opportunity = new Opportunity(
+        Opportunity opp = new Opportunity(
             Name = 'Test opportunity',
             AccountId = acc.Id,
             StageName = 'Prospecting',
             CloseDate = Date.today(),
             Amount = 4000
         );
-        insert opportunity;
+        insert opp;
         
-        Quote quote = new Quote(
-            Name = 'Quote',
-            OpportunityId = opportunity.Id,
-            Status = '0',
-            RecordTypeId = getRecordTypeId('Links')
-        );
-        insert quote;
-        Quote quoteOld = quote.clone(false, true, true, true);
+        Map<id,Quote> oldmap = new Map<id,Quote>();
+        List<Quote> newList = new List<Quote>();
+        Quote oldQuote = new Quote();
+        oldQuote.Name = 'Test893';
+        oldQuote.OpportunityId = opp.Id;
+        oldQuote.Status = '1';
+        oldQuote.RecordTypeId =  getRecordTypeId('Links');
+        insert oldQuote;
+        oldmap.put(oldQuote.Id,oldQuote);
         
         Test.startTest();
         TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
-        
-        quote.Status = '1';
-        quoteOld.Status = '2';
-        List<Quote> newList = new List<Quote>{ quote };
-        Map<Id,Quote> oldmap = new Map<Id,Quote>{
-            quote.Id => quoteOld
-        };
+        oldQuote.Status = '2';
+        update oldQuote;
+        newList.add(oldQuote);
         QuoteTriggerHelper.generateProtocolNumber(newList,oldmap);
-        Test.stopTest();
+        Test.stopTest();  
     }
     
     
@@ -301,34 +297,32 @@ private class QuoteTriggerHelperTest {
         );
         insert acc;
         
-        Opportunity opportunity = new Opportunity(
+        Opportunity opp = new Opportunity(
             Name = 'Test opportunity',
             AccountId = acc.Id,
             StageName = 'Prospecting',
             CloseDate = Date.today(),
             Amount = 4000
         );
-        insert opportunity;
+        insert opp;
         
-        Quote quote = new Quote(
-            Name = 'Quote',
-            OpportunityId = opportunity.Id,
-            Status = '0',
-            RecordTypeId = getRecordTypeId('Links')
-        );
-        insert quote;
-        Quote quoteOld = quote.clone(false, true, true, true);
+        Map<id,Quote> oldmap = new Map<id,Quote>();
+        List<Quote> newList = new List<Quote>();
+        Quote oldQuote = new Quote();
+        oldQuote.Name = 'Test893';
+        oldQuote.OpportunityId = opp.Id;
+        oldQuote.Status = '3';
+        oldQuote.RecordTypeId = getRecordTypeId('Links');
+        insert oldQuote;
+        oldmap.put(oldQuote.Id,oldQuote);
         
         Test.startTest();
         TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
-        
-        quote.Status = '1';
-        List<Quote> newList = new List<Quote>{ quote };
-        Map<Id,Quote> oldmap = new Map<Id,Quote>{
-            quote.Id => quoteOld
-        };
+        oldQuote.Status = '0';
+        update oldQuote;
+        newList.add(oldQuote);
         QuoteTriggerHelper.resetProtocolNumber(newList,oldmap);
-        Test.stopTest();
+        Test.stopTest();  
     }
     
     
@@ -353,7 +347,7 @@ private class QuoteTriggerHelperTest {
         quoteNew.Name = 'Test893';
         quoteNew.OpportunityId = opp.Id;
         quoteNew.RecordTypeId = getRecordTypeId('Links');
-        quoteNew.Status = '0';
+        quoteNew.Status = '3';
         insert quoteNew;
         
         Protocol__c protocol = new Protocol__c();
@@ -371,7 +365,7 @@ private class QuoteTriggerHelperTest {
             VersionData = Blob.valueOf('Test'),
             IsMajorVersion = true
         );
-        insert contentVersion;
+        insert contentVersion;    
         List<ContentDocument> documents = [SELECT Id, Title, LatestPublishedVersionId FROM ContentDocument];
         
         ContentDocumentLink cdl = New ContentDocumentLink();
@@ -383,7 +377,7 @@ private class QuoteTriggerHelperTest {
         Test.startTest();
         TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
         QuoteTriggerHelper.hasDocumentProtocol(quoteNew);
-        Test.stopTest();
+        Test.stopTest();  
     }
     
     @isTest
@@ -393,30 +387,35 @@ private class QuoteTriggerHelperTest {
         );
         insert acc;
         
-        Opportunity opportunity = new Opportunity(
+        Opportunity opp = new Opportunity(
             Name = 'Test opportunity',
             AccountId = acc.Id,
             StageName = 'Prospecting',
             CloseDate = Date.today(),
             Amount = 4000
         );
-        insert opportunity;
+        insert opp;
         
-        Quote quote = new Quote(
-            Name = 'Quote',
-            OpportunityId = opportunity.Id,
-            Status = '0',
-            RecordTypeId = getRecordTypeId('Links')
-        );
-        insert quote;
-        Quote quoteOld = quote.clone(false, true, true, true);
+        Quote quoteOld = new Quote();
+        quoteOld.Name = 'Test893';
+        quoteOld.OpportunityId = opp.Id;
+        quoteOld.RecordTypeId = getRecordTypeId('Links');
+        quoteOld.Status = '0';
+        insert quoteOld;
+        
+        Quote quoteNew = new Quote();
+        quoteNew.Name = 'Test893';
+        quoteNew.OpportunityId = opp.Id;
+        quoteNew.RecordTypeId = getRecordTypeId('Links');
+        quoteNew.Status = '1';
+        insert quoteNew;
         
         Test.startTest();
         TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
-
-        quote.Status = '1';
-        QuoteTriggerHelper.checkStatusQuote(quote,quoteOld);
-        Test.stopTest();
+        QuoteTriggerHelper.checkStatusQuote(quoteNew,quoteOld);
+        Test.stopTest();  
+        
+        
     }
        
     @isTest
@@ -528,81 +527,5 @@ private class QuoteTriggerHelperTest {
             TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
             QuoteTriggerHelper.generateOrder(listQuote);
             Test.stopTest(); 
-    }
-
-    @isTest
-    private static void testCheckOneQuoteForOpportunitySuccess() {
-        Account account = new Account(
-            Name = 'Test Account'
-        );
-        insert account;
-
-        Opportunity opportunity = new Opportunity(
-            Name = 'Test Opportunity',
-            AccountId = account.Id,
-            StageName = 'Prospecting',
-            RecordTypeId = getOpportunityRecordTypeId('Links'),
-            CloseDate = Date.today()
-        );
-        insert opportunity;
-
-        Quote quote = new Quote(
-            Name = 'Test Quote',
-            OpportunityId = opportunity.Id,
-            RecordTypeId = getRecordTypeId('Links')
-        );
-
-        Test.startTest();
-        TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
-        insert quote;
-        Test.stopTest();
-
-        Integer count = (Integer)[SELECT count(Id) c FROM Quote][0].get('c');
-        System.assertEquals(1, count, 'The quote should have been created');
-    }
-
-    @isTest
-    private static void testCheckOneQuoteForOpportunityError() {
-        Account account = new Account(
-            Name = 'Test Account'
-        );
-        insert account;
-
-        Opportunity opportunity = new Opportunity(
-            Name = 'Test Opportunity',
-            AccountId = account.Id,
-            StageName = 'Prospecting',
-            RecordTypeId = getOpportunityRecordTypeId('Links'),
-            CloseDate = Date.today()
-        );
-        insert opportunity;
-        
-        TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
-        Quote quote = new Quote(
-            Name = 'Test Quote',
-            OpportunityId = opportunity.Id,
-            RecordTypeId = getRecordTypeId('Links')
-        );
-        insert quote;
-
-        Quote otherQuote = new Quote(
-            Name = 'Test Quote equal opportunity',
-            OpportunityId = opportunity.Id,
-            RecordTypeId = getRecordTypeId('Links')
-        );
-
-        Test.startTest();
-        TriggerUtilities.TriggerSettingQuote = createCustomMetadata(true);
-
-        try {
-            insert otherQuote;
-            System.assert(false);
-        } catch (DmlException e) {
-            System.assert(true);
-        }
-        Test.stopTest();
-
-        Integer count = (Integer)[SELECT count(Id) c FROM Quote][0].get('c');
-        System.assertEquals(1, count, 'The quote should have been created');
     }
 }

@@ -1,0 +1,221 @@
+{
+  "version" : "53.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "StageName", "OwnerId", "CreatedDate", "SyncedQuoteId", "AccountId", "RecordTypeId", "CloseDate", "ContactId", "Amount", "LeadSource", "IsClosed", "IsWon", "Type" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Opportunity",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Opportunity"
+        }
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "OpportunityId.Id", "OpportunityId", "QuoteId", "QuoteId.Id", "OrderNumber", "Id", "Name" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Order",
+          "name" : "Order"
+        }
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "OwnerId.Id", "Status", "OpportunityId.Id", "OwnerId", "OpportunityId", "CreatedDate", "Id", "Name" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Quote",
+          "name" : "Quote"
+        }
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "JOIN4" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "FinalRecipe",
+          "name" : "FinalRecipe"
+        }
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Username", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "User",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "User"
+        }
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET0", "LOAD_DATASET3" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "OwnerId" ],
+        "rightQualifier" : "User",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN3" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET2", "LOAD_DATASET1" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "Order",
+        "rightKeys" : [ "QuoteId" ]
+      }
+    },
+    "JOIN4" : {
+      "action" : "join",
+      "sources" : [ "JOIN2", "JOIN3" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "SyncedQuoteId.Id" ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "Quote",
+        "rightKeys" : [ "OpportunityId" ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Opportunity",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 532,
+        "graph" : {
+          "LOAD_DATASET0" : null
+        },
+        "connectors" : [ ],
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET1" : {
+        "label" : "Order",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 251.89999999999998,
+        "graph" : {
+          "LOAD_DATASET1" : null
+        },
+        "connectors" : [ ],
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET2" : {
+        "label" : "Quote",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 532.3,
+        "graph" : {
+          "LOAD_DATASET2" : null
+        },
+        "connectors" : [ ],
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "OUTPUT0" : {
+        "label" : "Output",
+        "type" : "OUTPUT",
+        "top" : 253.10000000000002,
+        "left" : 951.3
+      },
+      "LOAD_DATASET3" : {
+        "label" : "User",
+        "type" : "LOAD_DATASET",
+        "top" : 252.10000000000002,
+        "left" : 252.10000000000002,
+        "graph" : {
+          "LOAD_DATASET3" : null
+        },
+        "connectors" : [ ],
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN2" : {
+        "label" : "Join",
+        "type" : "JOIN",
+        "top" : 251.5,
+        "left" : 392
+      },
+      "JOIN3" : {
+        "label" : "Join",
+        "type" : "JOIN",
+        "top" : 112.1,
+        "left" : 392.1
+      },
+      "JOIN4" : {
+        "label" : "Join",
+        "type" : "JOIN",
+        "top" : 250.2,
+        "left" : 811.8
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "JOIN2"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "JOIN2"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "JOIN3"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN3"
+    }, {
+      "source" : "JOIN2",
+      "target" : "JOIN4"
+    }, {
+      "source" : "JOIN3",
+      "target" : "JOIN4"
+    }, {
+      "source" : "JOIN4",
+      "target" : "OUTPUT0"
+    } ],
+    "hiddenColumns" : [ ]
+  }
+}

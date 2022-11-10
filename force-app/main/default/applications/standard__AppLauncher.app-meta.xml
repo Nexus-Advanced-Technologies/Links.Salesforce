@@ -3,6 +3,10 @@
     <defaultLandingTab>standard-AppLauncher</defaultLandingTab>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
     <tabs>standard-AppLauncher</tabs>
     <tabs>standard-Quote</tabs>
+    <tabs>DocumentAlyante__c</tabs>
+    <tabs>InvoiceMilestoneDocumentAlyante__c</tabs>
+    <tabs>OpportunityDocumentAlyante__c</tabs>
 </CustomApplication>

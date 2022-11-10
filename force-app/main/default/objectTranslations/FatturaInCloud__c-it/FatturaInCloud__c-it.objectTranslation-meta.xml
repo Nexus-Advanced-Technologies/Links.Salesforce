@@ -12,12 +12,12 @@
     <layouts>
         <layout>Fattura In Cloud Layout</layout>
         <sections>
-            <label><!-- Custom Links --></label>
+            <label></label>
             <section>Custom Links</section>
         </sections>
     </layouts>
     <recordTypes>
-        <label><!-- Nexus --></label>
+        <label></label>
         <name>Nexus</name>
     </recordTypes>
     <startsWith>Consonant</startsWith>

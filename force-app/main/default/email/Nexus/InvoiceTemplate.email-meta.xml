@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Nexus_Letterhead</letterhead>
+    <name>InvoiceTemplate</name>
+    <style>freeForm</style>
+    <subject>Invio fattura necessario per {!InvoiceMilestone__c.AccountName__c} - {!InvoiceMilestone__c.Name}</subject>
+    <textOnly>Gentile Amministrazione NexusAT,
+è possibile inviare fattura al cliente {!InvoiceMilestone__c.AccountName__c} in merito all&apos;opportunità {!InvoiceMilestone__c.Opportunity__c}.
+
+Di seguito le informazioni principali:
+
+Ammontare: {!InvoiceMilestone__c.Amount__c}.
+Stato: {!InvoiceMilestone__c.Stage__c}.
+Data Prevista: {!InvoiceMilestone__c.ExpectedDate__c}.
+
+Per maggiori dettagli consultare la org Salesforce aziendale al seguente {!InvoiceMilestone__c.Link}.
+
+Grazie e buon lavoro!</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -46,7 +46,7 @@
         </actions>
         <active>true</active>
         <description>Updates the Opportunity Record Type based on the Amount set on the Custom Settings (OpportunitySetting)</description>
-        <formula>AND ( Amount &gt; $Setup.OpportunitySetting__c.ThresholdAmountToUpdateRecordType__c,  RecordType.DeveloperName &lt;&gt; &apos;Links&apos;)</formula>
+        <formula>AND ( Amount &gt; $Setup.OpportunitySetting__c.ThresholdAmountToUpdateRecordType__c,  RecordType.DeveloperName = &apos;NexusStandard&apos;)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -57,7 +57,7 @@
         </actions>
         <active>true</active>
         <description>Updates the Opportunity Record Type based on the Amount set on the Custom Settings (OpportunitySetting)</description>
-        <formula>AND (      OR (     Amount &lt; $Setup.OpportunitySetting__c.ThresholdAmountToUpdateRecordType__c, ISNULL(Amount) ) ,   RecordType.DeveloperName &lt;&gt; &apos;Links&apos; )</formula>
+        <formula>AND (      OR (     Amount &lt; $Setup.OpportunitySetting__c.ThresholdAmountToUpdateRecordType__c, ISNULL(Amount) ) ,   RecordType.DeveloperName = &apos;NexusGreaterAmount&apos; )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
 </Workflow>

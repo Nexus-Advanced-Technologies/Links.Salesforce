@@ -24,6 +24,7 @@
                     <value>3</value>
                 </componentInstanceProperties>
                 <componentName>force:highlightsPanel</componentName>
+                <identifier>force_highlightsPanel</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
@@ -34,6 +35,7 @@
         <itemInstances>
             <componentInstance>
                 <componentName>force:detailPanel</componentName>
+                <identifier>force_detailPanel</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
@@ -44,6 +46,7 @@
         <itemInstances>
             <componentInstance>
                 <componentName>runtime_sales_activities:activityPanel</componentName>
+                <identifier>runtime_sales_activities_activityPanel</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
@@ -70,6 +73,7 @@
                     <value>true</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:reportChart</componentName>
+                <identifier>flexipage_reportChart</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -91,6 +95,7 @@
                     <value>true</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:reportChart</componentName>
+                <identifier>flexipage_reportChart2</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-1b169b7a-719f-4d42-9731-d309cdf4c355</name>
@@ -108,6 +113,7 @@
                     <value>Standard.Tab.detail</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
+                <identifier>detailTab</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -125,6 +131,7 @@
                     <value>Standard.Tab.activity</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
+                <identifier>activityTab</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -138,6 +145,7 @@
                     <value>Standard.Tab.report</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
+                <identifier>reportTab</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
@@ -152,6 +160,7 @@
                     <value>maintabs</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:tabset</componentName>
+                <identifier>flexipage_tabset</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
@@ -182,6 +191,7 @@
                     <value>true</value>
                 </componentInstanceProperties>
                 <componentName>force:relatedListSingleContainer</componentName>
+                <identifier>force_relatedListSingleContainer</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
@@ -212,6 +222,7 @@
                     <value>true</value>
                 </componentInstanceProperties>
                 <componentName>force:relatedListSingleContainer</componentName>
+                <identifier>force_relatedListSingleContainer2</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
@@ -242,6 +253,7 @@
                     <value>true</value>
                 </componentInstanceProperties>
                 <componentName>force:relatedListSingleContainer</componentName>
+                <identifier>force_relatedListSingleContainer3</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-bbe34f75-b4ba-4263-ba46-9ab0b5510e3f</name>
@@ -271,6 +283,7 @@
                     <value>true</value>
                 </componentInstanceProperties>
                 <componentName>force:relatedListSingleContainer</componentName>
+                <identifier>force_relatedListSingleContainer4</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-130e2440-64a1-45b0-980e-4c08fc3a1eac</name>
@@ -292,6 +305,7 @@
                     <value>Contacts</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
+                <identifier>customTab</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -305,6 +319,7 @@
                     <value>Invoices</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
+                <identifier>customTab2</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -318,6 +333,7 @@
                     <value>Opportunities</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
+                <identifier>customTab3</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -331,6 +347,7 @@
                     <value>Projects</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
+                <identifier>customTab4</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
@@ -345,6 +362,7 @@
                     <value>BOTH</value>
                 </componentInstanceProperties>
                 <componentName>runtime_sales_merge:mergeCandidatesPreviewCard</componentName>
+                <identifier>runtime_sales_merge_mergeCandidatesPreviewCard</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -354,6 +372,7 @@
                     <value>sidebartabs</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:tabset</componentName>
+                <identifier>flexipage_tabset2</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -379,6 +398,7 @@
                     <value>true</value>
                 </componentInstanceProperties>
                 <componentName>force:relatedListSingleContainer</componentName>
+                <identifier>force_relatedListSingleContainer5</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -404,6 +424,7 @@
                     <value>true</value>
                 </componentInstanceProperties>
                 <componentName>force:relatedListSingleContainer</componentName>
+                <identifier>force_relatedListSingleContainer6</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>

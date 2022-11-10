@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RevenueToPlan__c</fullName>
+    <externalId>false</externalId>
+    <formula>Amount - (TotalSettled__c + TotalSentInvoices__c +  TotalInDraft__c +  TotalToBeInvoiced__c )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Gap between the amount of the Opportunity and the total amount of the linked Invoice Milestones</inlineHelpText>
+    <label>Revenue To Plan</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

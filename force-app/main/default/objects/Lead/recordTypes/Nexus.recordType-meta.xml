@@ -3,13 +3,45 @@
     <fullName>Nexus</fullName>
     <active>true</active>
     <businessProcess>Nexus</businessProcess>
+    <compactLayoutAssignment>Leads_Custom_Compact_Layout</compactLayoutAssignment>
     <label>Nexus</label>
     <picklistValues>
-        <picklist>Campi_di_Interesse__c</picklist>
+        <picklist>BusinessManager__c</picklist>
         <values>
-            <fullName>Consulenza IT</fullName>
+            <fullName>Antonio Frigerio</fullName>
             <default>false</default>
         </values>
+        <values>
+            <fullName>Flavia Dall%27Ora</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Francesco Veropalumbo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fulvio Vanacore</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Giovanni Costagliola</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Giuseppe Maiorano</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Massimo Colombo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roberto De Simone</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>FieldsOfInterest__c</picklist>
         <values>
             <fullName>Digital Design</fullName>
             <default>false</default>
@@ -23,7 +55,19 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Integrazione Software</fullName>
+            <fullName>DocuSign</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IT Consulting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mulesoft</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Post-Implementation Support</fullName>
             <default>false</default>
         </values>
         <values>
@@ -31,138 +75,46 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Sviluppo software</fullName>
+            <fullName>ServiceMax Asset 360</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Software Development</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Software Integration</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Training</fullName>
             <default>false</default>
         </values>
     </picklistValues>
     <picklistValues>
         <picklist>Industry</picklist>
         <values>
-            <fullName>Agriculture</fullName>
+            <fullName>1</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Apparel</fullName>
+            <fullName>2</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Banking</fullName>
+            <fullName>3</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Biotechnology</fullName>
+            <fullName>4</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Chemicals</fullName>
+            <fullName>5</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Communications</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Construction</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Consulting</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Education</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Electronics</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Energy</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Engineering</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Entertainment</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Environmental</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Finance</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Food %26 Beverage</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Government</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Healthcare</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Hospitality</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Insurance</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Machinery</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Manufacturing</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Media</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Not For Profit</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Other</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Recreation</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Retail</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Shipping</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Technology</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Telecommunications</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Transportation</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Utilities</fullName>
+            <fullName>6</fullName>
             <default>false</default>
         </values>
     </picklistValues>
@@ -170,6 +122,10 @@
         <picklist>LeadSource</picklist>
         <values>
             <fullName>Basecamp_2019</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HR Event 21</fullName>
             <default>false</default>
         </values>
         <values>
@@ -181,15 +137,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Phone Inquiry</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Purchased List</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Referral</fullName>
             <default>false</default>
         </values>
         <values>
@@ -201,7 +149,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Web</fullName>
+            <fullName>Website</fullName>
             <default>false</default>
         </values>
     </picklistValues>
@@ -244,37 +192,13 @@
         </values>
     </picklistValues>
     <picklistValues>
-        <picklist>Record_Owner__c</picklist>
+        <picklist>SourceCompany__c</picklist>
         <values>
-            <fullName>Antonio Frigerio</fullName>
+            <fullName>LinksMT</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Flavia Dall%27Ora</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Francesco Veropalumbo</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Fulvio Vanacore</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Giovanni Costagliola</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Giuseppe Maiorano</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Massimo Colombo</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Roberto De Simone</fullName>
+            <fullName>NexusAT</fullName>
             <default>false</default>
         </values>
     </picklistValues>

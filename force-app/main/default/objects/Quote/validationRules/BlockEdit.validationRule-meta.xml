@@ -3,12 +3,10 @@
     <fullName>BlockEdit</fullName>
     <active>true</active>
     <errorConditionFormula>AND(
-    OR(
-								ISPICKVAL(PRIORVALUE(Status),&quot;4&quot;),
-								ISPICKVAL(PRIORVALUE(Status),&quot;5&quot;)
-				),
-				RecordType.DeveloperName  = &quot;Links&quot;,
-			 $Profile.Name = &quot;LinksSales&quot;			
+ISPICKVAL(PRIORVALUE(Status),&quot;4&quot;),
+				AND(
+								RecordType.DeveloperName  = &quot;Links&quot;,
+								 $Profile.Name = &quot;LinksSales&quot;)
 )</errorConditionFormula>
-    <errorMessage>Non puoi modificare una quote quando è in stato &apos;APPROVED&apos; oppure &apos;DENIED&apos;</errorMessage>
+    <errorMessage>Non puoi modificare una quote quando è in stato &quot;APPROVED&quot;</errorMessage>
 </ValidationRule>

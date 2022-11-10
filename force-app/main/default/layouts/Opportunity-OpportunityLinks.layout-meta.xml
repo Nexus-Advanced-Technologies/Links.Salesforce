@@ -19,6 +19,10 @@
                 <field>Amount</field>
             </layoutItems>
             <layoutItems>
+                <behavior>Edit</behavior>
+                <field>DeliveryProjectManager__c</field>
+            </layoutItems>
+            <layoutItems>
                 <emptySpace>true</emptySpace>
             </layoutItems>
             <layoutItems>
@@ -29,19 +33,27 @@
                 <field>PaymentType__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
-                <field>ProductionOrder__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Risk_Level_Description__c</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>InvoiceAmount__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>BusinessLine__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>IntragroupProjects__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>CompetenceCenter__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>ReferenceNumber__c</field>
+            </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>OwnerId</field>
@@ -49,6 +61,10 @@
             <layoutItems>
                 <behavior>Required</behavior>
                 <field>CloseDate</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>IntranetCost__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
@@ -62,8 +78,16 @@
                 <emptySpace>true</emptySpace>
             </layoutItems>
             <layoutItems>
+                <behavior>Required</behavior>
+                <field>ProductionOrder__c</field>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Risk_Level__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Risk_Level_Description__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -204,7 +228,21 @@
         <relatedList>RelatedQuoteList</relatedList>
     </relatedLists>
     <relatedLists>
+        <relatedList>RelatedEntityHistoryList</relatedList>
+    </relatedLists>
+    <relatedLists>
         <relatedList>RelatedContentNoteList</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <fields>PM__c</fields>
+        <fields>DDWorkingEstimate__c</fields>
+        <fields>DDWorkingConsumptive__c</fields>
+        <fields>DDTravelEstimate__c</fields>
+        <fields>DDTravelConsumptive__c</fields>
+        <fields>DDOvernightEstimate__c</fields>
+        <fields>DDOvernightConsumptive__c</fields>
+        <relatedList>ProjectStatus__c.Opportunity__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
@@ -214,6 +252,13 @@
     </relatedLists>
     <relatedLists>
         <relatedList>RelatedFileList</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <excludeButtons>AddDefaultTeam</excludeButtons>
+        <fields>MemberName</fields>
+        <fields>OppAccessLevel</fields>
+        <fields>TeamMemberRole</fields>
+        <relatedList>RelatedOpportunitySalesTeam</relatedList>
     </relatedLists>
     <relatedObjects>AccountId</relatedObjects>
     <showEmailCheckbox>false</showEmailCheckbox>

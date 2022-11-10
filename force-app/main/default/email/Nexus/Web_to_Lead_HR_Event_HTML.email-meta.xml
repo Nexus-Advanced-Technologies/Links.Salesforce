@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>UTF-8</encodingKey>
+    <letterhead>Nexus_Letterhead_2021</letterhead>
+    <name>Web to Lead HR Event HTML</name>
+    <style>newsletter</style>
+    <subject>Grazie per la tua iscrizione a Employee Experience 2021! Ecco il tuo link.</subject>
+    <textOnly>Gentile {!Lead.Name},
+Ti ringraziamo per la tua iscrizione al webinar Employee Experience 2021 che abbiamo organizzato in collaborazione con Salesforce.
+
+Ecco il link a cui collegarti per il webinar: link
+
+Aggiungi a Google Calendar
+Aggiungi a Outlook Calendar
+Aggiungi a Office 365 Calendar
+
+Ti aspettiamo il 22 giugno alle 11.
+
+Cordiali saluti,
+NexusAT Team</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -130,6 +130,10 @@
                 <behavior>Readonly</behavior>
                 <field>ExpectedCost__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>IntranetCost__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -350,6 +354,9 @@
             <sortOrder>12</sortOrder>
         </platformActionListItems>
     </platformActionList>
+    <relatedLists>
+        <relatedList>RelatedEntityHistoryList</relatedList>
+    </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
         <fields>Amount__c</fields>

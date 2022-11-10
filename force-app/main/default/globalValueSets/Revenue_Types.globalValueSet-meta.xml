@@ -3,32 +3,64 @@
     <customValue>
         <fullName>6</fullName>
         <default>false</default>
-        <label>Prestazioni di Servizi</label>
+        <label>Fixed-Price Projects/Services</label>
     </customValue>
     <customValue>
         <fullName>18</fullName>
         <default>false</default>
-        <label>Prestazioni di servizi c/terzi T&amp;M</label>
+        <label>Fee Rate Consulting</label>
     </customValue>
     <customValue>
         <fullName>19</fullName>
         <default>false</default>
-        <label>Vendita di asset</label>
-    </customValue>
-    <customValue>
-        <fullName>20</fullName>
-        <default>false</default>
-        <label>Canoni per prestazioni</label>
-    </customValue>
-    <customValue>
-        <fullName>21</fullName>
-        <default>false</default>
-        <label>Altri ricavi</label>
+        <label>Links platforms</label>
     </customValue>
     <customValue>
         <fullName>22</fullName>
         <default>false</default>
-        <label>Rivendita prodotti finiti HW/SW</label>
+        <label>Software resale</label>
+    </customValue>
+    <customValue>
+        <fullName>25</fullName>
+        <default>false</default>
+        <label>Hardware resale</label>
+    </customValue>
+    <customValue>
+        <fullName>24</fullName>
+        <default>false</default>
+        <label>Prototype reuse</label>
+    </customValue>
+    <customValue>
+        <fullName>20</fullName>
+        <default>false</default>
+        <label>Service fee</label>
+    </customValue>
+    <customValue>
+        <fullName>23</fullName>
+        <default>false</default>
+        <label>Maintenance fees</label>
+    </customValue>
+    <customValue>
+        <fullName>26</fullName>
+        <default>false</default>
+        <label>Training services</label>
+    </customValue>
+    <customValue>
+        <fullName>21</fullName>
+        <default>false</default>
+        <label>Other revenues</label>
+    </customValue>
+    <customValue>
+        <fullName>Canoni</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Canoni</label>
+    </customValue>
+    <customValue>
+        <fullName>Utenze</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Utenze</label>
     </customValue>
     <customValue>
         <fullName>Risorse Umane</fullName>
@@ -73,18 +105,6 @@
         <label>Acquisto Software</label>
     </customValue>
     <customValue>
-        <fullName>Utenze</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>Utenze</label>
-    </customValue>
-    <customValue>
-        <fullName>Canoni</fullName>
-        <default>false</default>
-        <isActive>false</isActive>
-        <label>Canoni</label>
-    </customValue>
-    <customValue>
         <fullName>Contributo</fullName>
         <default>false</default>
         <isActive>false</isActive>
@@ -103,16 +123,52 @@
         <label>Ammortamenti</label>
     </customValue>
     <customValue>
-        <fullName>7</fullName>
+        <fullName>Rivendita prodotti finiti HW/SW</fullName>
         <default>false</default>
         <isActive>false</isActive>
-        <label>Vendita Hardware</label>
+        <label>Rivendita prodotti finiti HW/SW</label>
+    </customValue>
+    <customValue>
+        <fullName>Altri ricavi</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Altri ricavi</label>
+    </customValue>
+    <customValue>
+        <fullName>Canoni per prestazioni</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Canoni per prestazioni</label>
+    </customValue>
+    <customValue>
+        <fullName>Vendita di asset</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Vendita di asset</label>
+    </customValue>
+    <customValue>
+        <fullName>Prestazioni di servizi c/terzi T&amp;M</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Prestazioni di servizi c/terzi T&amp;M</label>
     </customValue>
     <customValue>
         <fullName>8</fullName>
         <default>false</default>
         <isActive>false</isActive>
         <label>Vendita Software e Servizi</label>
+    </customValue>
+    <customValue>
+        <fullName>Prestazioni di Servizi</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Prestazioni di Servizi</label>
+    </customValue>
+    <customValue>
+        <fullName>7</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Vendita Hardware</label>
     </customValue>
     <masterLabel>Revenue Types</masterLabel>
     <sorted>false</sorted>

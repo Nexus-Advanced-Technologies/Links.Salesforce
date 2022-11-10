@@ -12,21 +12,21 @@
     <layouts>
         <layout>Cost Links</layout>
         <sections>
-            <label><!-- Cost Values --></label>
+            <label></label>
             <section>Cost Values</section>
         </sections>
         <sections>
-            <label><!-- Custom Links --></label>
+            <label></label>
             <section>Custom Links</section>
         </sections>
     </layouts>
     <recordTypes>
-        <label><!-- Links --></label>
+        <label></label>
         <name>Links</name>
     </recordTypes>
     <startsWith>Consonant</startsWith>
     <validationRules>
-        <errorMessage><!-- Costs can&apos;t be edited, if quote status is not in Draft. --></errorMessage>
+        <errorMessage></errorMessage>
         <name>Links_Quote_Status_not_in_Draft</name>
     </validationRules>
 </CustomObjectTranslation>

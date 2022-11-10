@@ -1,0 +1,8 @@
+.hide {
+    display: none;
+} 
+
+.search:hover + .hide {
+    display: block;
+    color: red;
+}

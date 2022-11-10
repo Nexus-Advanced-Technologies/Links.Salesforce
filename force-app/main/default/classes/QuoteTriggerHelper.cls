@@ -1,8 +1,8 @@
 /**
 * @description       : 
 * @author            : Œ
-* @last modified on  : 19/10/2022
-* @last modified by  : ¤ → alessio.marra@nexusat.it
+* @last modified on  : 30-07-2021
+* @last modified by  : RC 
 * Modifications Log 
 * Ver   Date         Author   Modification
 * 1.0   22-04-2021   Œ   Initial Version
@@ -11,7 +11,6 @@
 * 1.3   30-07-2021   RC   generateQuoteNumber,generateProtocolNumber,resetProtocolNumber,hasDocumentProtocol
 **/
 public without sharing class QuoteTriggerHelper {
-    private static final String QUOTE_RECORD_TYPE_LINKS = Schema.getGlobalDescribe().get('Quote').getDescribe().getRecordTypeInfosByName().get('Links').getRecordTypeId();
     
     /**
 Assign account pricebook to quotes. 
@@ -220,12 +219,12 @@ If account has not pricebook assigned, it's assigned standard one.
         Boolean checkStatus;
         Integer oldNumber = integer.valueof(oldQuote.Status);
         Integer newNumber = integer.valueof(newQuote.Status);
-        String newStatus = string.valueOf(newQuote.Status);
-        if(oldNumber<newNumber && newNumber>oldNumber+1 && !newStatus.equals('5')){
+        if(oldNumber<newNumber && newNumber>oldNumber+1){
             checkStatus = true;
         }else{
             checkStatus = false;
         }
+        
         return checkStatus;
     }
     
@@ -316,29 +315,5 @@ If account has not pricebook assigned, it's assigned standard one.
             orderCostToInsert.add(costOrderDetail);
         }
         return orderCostToInsert;
-    }
-
-    public static void checkOneQuoteForOpportunity(List<Quote> triggerNew) {
-        Set<Id> opportunityIds = new Set<Id>();
-        for (Quote quote : triggerNew) {
-            opportunityIds.add(quote.OpportunityId);
-        }
-        List<AggregateResult> aggrOpportunitiesWithMoreQuote = [
-            SELECT OpportunityId
-            FROM Quote
-            WHERE OpportunityId IN :opportunityIds
-            AND RecordTypeId = :QUOTE_RECORD_TYPE_LINKS
-            GROUP BY OpportunityId
-            HAVING count(Id) > 1
-        ];
-        Set<Id> opportunityIdsWithMoreQuote = new Set<Id>();
-        for (AggregateResult aggr : aggrOpportunitiesWithMoreQuote) {
-            opportunityIdsWithMoreQuote.add((Id)aggr.get('OpportunityId'));
-        }
-        for (Quote quote : triggerNew) {
-            if (opportunityIdsWithMoreQuote.contains(quote.OpportunityId)) {
-                quote.addError(Label.ErrorMoreQuote);
-            }
-        }
     }
 }

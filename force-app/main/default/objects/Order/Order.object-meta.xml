@@ -196,14 +196,18 @@
         <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
-    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <compactLayoutAssignment>Compact_Layout_Links</compactLayoutAssignment>
     <enableFeeds>false</enableFeeds>
     <externalSharingModel>ControlledByParent</externalSharingModel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
     <searchLayouts>
         <customTabListAdditionalFields>ORDERS.ORDER_NUMBER</customTabListAdditionalFields>
         <customTabListAdditionalFields>SALES.ACCOUNT.NAME</customTabListAdditionalFields>
         <customTabListAdditionalFields>ORDERS.STATUS</customTabListAdditionalFields>
         <customTabListAdditionalFields>ORDERS.TOTAL_AMOUNT</customTabListAdditionalFields>
+        <excludedStandardButtons>OpenListInQuip</excludedStandardButtons>
+        <excludedStandardButtons>New</excludedStandardButtons>
+        <excludedStandardButtons>NewFromDocument</excludedStandardButtons>
         <lookupDialogsAdditionalFields>ORDERS.ORDER_NUMBER</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>CONTRACT.OWNERALIAS</lookupDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>ORDERS.ORDER_NUMBER</lookupPhoneDialogsAdditionalFields>

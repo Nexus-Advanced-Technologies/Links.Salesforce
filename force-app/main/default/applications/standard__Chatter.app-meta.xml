@@ -3,6 +3,10 @@
     <defaultLandingTab>standard-Chatter</defaultLandingTab>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
     <tabs>standard-Chatter</tabs>
     <tabs>standard-File</tabs>
+    <tabs>DocumentAlyante__c</tabs>
+    <tabs>InvoiceMilestoneDocumentAlyante__c</tabs>
+    <tabs>OpportunityDocumentAlyante__c</tabs>
 </CustomApplication>

@@ -52,6 +52,54 @@ public class OnOpportunityHelper {
 			checkReferenceNumberNullOrDuplicate(triggerNewSplitted);
 			company = null;
 		}
+        company = 'Idea75';
+        if (triggerNewSplittedMap.containsKey(company)) {
+			List<Opportunity> triggerNewSplitted = triggerNewSplittedMap.get(company);
+
+			if (triggerSettings.get(company).OpportunityBeforeInsert__c) {
+				generateReferenceNumbers(triggerNewSplitted);
+			}
+
+			//Always (It cannot be disabled by TriggerSetting Metadata)
+			checkReferenceNumberNullOrDuplicate(triggerNewSplitted);
+			company = null;
+		}
+        company = 'DecHit';
+        if (triggerNewSplittedMap.containsKey(company)) {
+			List<Opportunity> triggerNewSplitted = triggerNewSplittedMap.get(company);
+
+			if (triggerSettings.get(company).OpportunityBeforeInsert__c) {
+				generateReferenceNumbers(triggerNewSplitted);
+			}/*DecHit*/
+
+			//Always (It cannot be disabled by TriggerSetting Metadata)
+			checkReferenceNumberNullOrDuplicate(triggerNewSplitted);
+			company = null;
+		}
+        company = 'Lis';
+        if (triggerNewSplittedMap.containsKey(company)) {
+			List<Opportunity> triggerNewSplitted = triggerNewSplittedMap.get(company);
+
+			if (triggerSettings.get(company).OpportunityBeforeInsert__c) {
+				generateReferenceNumbers(triggerNewSplitted);
+			}/*DecHit*/
+
+			//Always (It cannot be disabled by TriggerSetting Metadata)
+			checkReferenceNumberNullOrDuplicate(triggerNewSplitted);
+			company = null;
+		}
+        company = 'Linfa';
+        if (triggerNewSplittedMap.containsKey(company)) {
+			List<Opportunity> triggerNewSplitted = triggerNewSplittedMap.get(company);
+
+			if (triggerSettings.get(company).OpportunityBeforeInsert__c) {
+				generateReferenceNumbers(triggerNewSplitted);
+			}/*DecHit*/
+
+			//Always (It cannot be disabled by TriggerSetting Metadata)
+			checkReferenceNumberNullOrDuplicate(triggerNewSplitted);
+			company = null;
+		}
 	}
 
 	/**

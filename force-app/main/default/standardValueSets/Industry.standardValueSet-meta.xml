@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>1</fullName>
+        <default>false</default>
+        <label>Banking &amp; Financial Service</label>
+    </standardValue>
+    <standardValue>
+        <fullName>2</fullName>
+        <default>false</default>
+        <label>Government &amp; Public Sector</label>
+    </standardValue>
+    <standardValue>
+        <fullName>3</fullName>
+        <default>false</default>
+        <label>Telco, Energy &amp; Utilities</label>
+    </standardValue>
+    <standardValue>
+        <fullName>4</fullName>
+        <default>false</default>
+        <label>Manufacturing &amp; Industrial Products</label>
+    </standardValue>
+    <standardValue>
+        <fullName>5</fullName>
+        <default>false</default>
+        <label>Information &amp; Communication Technologies</label>
+    </standardValue>
+    <standardValue>
+        <fullName>6</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </standardValue>
+</StandardValueSet>

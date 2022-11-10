@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DraftStatus</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISNEW(),
+NOT(ISPICKVAL(Status , &apos;0&apos;)),
+RecordType.DeveloperName = &apos;Links&apos;,
+$User.Username != &apos;sysadmin@linksmt.it&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Status</errorDisplayField>
+    <errorMessage>In fase di Creazione è obbligatorio inserire lo stato Draft</errorMessage>
+</ValidationRule>

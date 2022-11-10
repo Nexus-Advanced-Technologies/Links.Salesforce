@@ -12,45 +12,45 @@
     <layouts>
         <layout>PTD One Shot - LinksLayout</layout>
         <sections>
-            <label><!-- Custom Links --></label>
+            <label></label>
             <section>Custom Links</section>
         </sections>
     </layouts>
     <layouts>
         <layout>PTD One Shot - NexusLayout</layout>
         <sections>
-            <label><!-- Custom Links --></label>
+            <label></label>
             <section>Custom Links</section>
         </sections>
     </layouts>
     <layouts>
         <layout>PTD Recursive - LinksLayout</layout>
         <sections>
-            <label><!-- Custom Links --></label>
+            <label></label>
             <section>Custom Links</section>
         </sections>
     </layouts>
     <layouts>
         <layout>PTD Recursive - NexusLayout</layout>
         <sections>
-            <label><!-- Custom Links --></label>
+            <label></label>
             <section>Custom Links</section>
         </sections>
     </layouts>
     <recordTypes>
-        <label><!-- Links One Shot --></label>
+        <label></label>
         <name>LinksOneShot</name>
     </recordTypes>
     <recordTypes>
-        <label><!-- Links Recursive --></label>
+        <label></label>
         <name>LinksRecursive</name>
     </recordTypes>
     <recordTypes>
-        <label><!-- Nexus One Shot --></label>
+        <label></label>
         <name>NexusOneShot</name>
     </recordTypes>
     <recordTypes>
-        <label><!-- Nexus Recursive --></label>
+        <label></label>
         <name>NexusRecursive</name>
     </recordTypes>
     <startsWith>Consonant</startsWith>

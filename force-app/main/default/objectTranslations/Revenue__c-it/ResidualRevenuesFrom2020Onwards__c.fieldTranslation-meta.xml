@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
-    <label><!-- Residual Revenues From 2020 Onwards --></label>
+    <label></label>
     <name>ResidualRevenuesFrom2020Onwards__c</name>
 </CustomFieldTranslation>

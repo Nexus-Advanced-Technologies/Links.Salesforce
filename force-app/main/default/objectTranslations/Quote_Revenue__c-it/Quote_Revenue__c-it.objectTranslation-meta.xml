@@ -12,29 +12,29 @@
     <layouts>
         <layout>Links Sales Quote Revenue</layout>
         <sections>
-            <label><!-- Additional Information --></label>
+            <label></label>
             <section>Additional Information</section>
         </sections>
         <sections>
-            <label><!-- Custom Links --></label>
+            <label></label>
             <section>Custom Links</section>
         </sections>
         <sections>
-            <label><!-- Revenue Information --></label>
+            <label></label>
             <section>Revenue Information</section>
         </sections>
     </layouts>
     <recordTypes>
-        <label><!-- Links --></label>
+        <label></label>
         <name>Links</name>
     </recordTypes>
     <startsWith>Consonant</startsWith>
     <validationRules>
-        <errorMessage><!-- Revenues can&apos;t be edited, if quote status is not in Draft. --></errorMessage>
+        <errorMessage></errorMessage>
         <name>Links_Quote_Status_not_in_Draft</name>
     </validationRules>
     <validationRules>
-        <errorMessage><!-- Links Revenue must be greater than Quota ATI --></errorMessage>
+        <errorMessage></errorMessage>
         <name>Links_Revenue_Maggiore_di_Quota_ATI</name>
     </validationRules>
 </CustomObjectTranslation>

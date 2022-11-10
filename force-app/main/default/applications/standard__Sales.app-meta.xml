@@ -3,6 +3,7 @@
     <defaultLandingTab>standard-home</defaultLandingTab>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
     <tabs>standard-Contact</tabs>
     <tabs>standard-Account</tabs>
     <tabs>standard-Lead</tabs>
@@ -14,4 +15,8 @@
     <tabs>standard-Product2</tabs>
     <tabs>standard-Forecasting3</tabs>
     <tabs>standard-Quote</tabs>
+    <tabs>standard-WaveHome</tabs>
+    <tabs>DocumentAlyante__c</tabs>
+    <tabs>InvoiceMilestoneDocumentAlyante__c</tabs>
+    <tabs>OpportunityDocumentAlyante__c</tabs>
 </CustomApplication>

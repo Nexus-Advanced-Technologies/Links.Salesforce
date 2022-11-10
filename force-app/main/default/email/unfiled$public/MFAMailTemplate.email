@@ -1,0 +1,41 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;"/>
+<title>MFA</title>
+</head>
+<body style="font-family: Helvetica, Arial, sans-serif; font-size: 12px">
+<p><span style="font-size:11pt"><span style="line-height:normal"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Arial&quot;,sans-serif"><span style="color:black">Gentile&nbsp;{!Contact.Name}</span></span><br>
+<br>
+<span style="font-family:&quot;Arial&quot;,sans-serif"><span style="color:black">Dal<b> 1 febbraio 2022</b> su tutti i prodotti Salesforce verrà implementato un cambio del sistema di autenticazione: sarà infatti introdotta e richiesta l'<b>autenticazione a multi fattori </b>(MFA).</span></span><br>
+<br>
+<span style="font-family:&quot;Arial&quot;,sans-serif"><span style="color:black">Questo cambiamento impatterà sui seguenti prodotti Salesforce, <b>tra cui anche quelli da noi implementati per&nbsp;{!Account.Name}</b></span></span></span></span></span></p>
+
+<ul>
+	<li style="margin-bottom:11px"><span style="font-size:11pt"><span style="line-height:normal"><span style="tab-stops:list 36.0pt"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Arial&quot;,sans-serif"><span style="color:black">Prodotti costruiti sulla Salesforce Platform, come Sales Cloud, Service Cloud,</span></span></span></span></span></span></li>
+</ul>
+
+<p><span style="font-size:11pt"><span style="line-height:normal"><span style="font-family:Calibri,sans-serif"><span lang="EN-US" style="font-family:&quot;Arial&quot;,sans-serif"><span style="color:black">Salesforce Essentials, Salesforce Field Service...</span></span></span></span></span></p>
+
+<ul>
+	<li style="margin-bottom:11px"><span style="font-size:11pt"><span style="line-height:normal"><span style="tab-stops:list 36.0pt"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Arial&quot;,sans-serif"><span style="color:black">Heroku&nbsp;</span></span></span></span></span></span></li>
+	<li style="margin-bottom:11px"><span style="font-size:11pt"><span style="line-height:normal"><span style="tab-stops:list 36.0pt"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Arial&quot;,sans-serif"><span style="color:black">Marketing Cloud</span></span></span></span></span></span></li>
+	<li style="margin-bottom:11px"><span style="font-size:11pt"><span style="line-height:normal"><span style="tab-stops:list 36.0pt"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Arial&quot;,sans-serif"><span style="color:black">MuleSoft Anypoint Platform&nbsp;</span></span></span></span></span></span></li>
+	<li style="margin-bottom:11px"><span style="font-size:11pt"><span style="line-height:normal"><span style="tab-stops:list 36.0pt"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Arial&quot;,sans-serif"><span style="color:black">Quip&nbsp;</span></span></span></span></span></span></li>
+	<li style="margin-bottom:11px"><span style="font-size:11pt"><span style="line-height:normal"><span style="tab-stops:list 36.0pt"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Arial&quot;,sans-serif"><span style="color:black">Tableau Online</span></span></span></span></span></span></li>
+</ul>
+
+<p style="margin-bottom:11px"><br>
+<span style="font-size:11pt"><span style="line-height:107%"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Arial&quot;,sans-serif"><span style="color:black">Le <b>soluzioni</b> possibili sono di 4 tipi:</span></span><br>
+<br>
+<span style="font-family:Montserrat"><span style="color:black"><img src="https://links.my.salesforce.com/sfc/p/09000004WfaB/a/09000000PY7W/fx2ab.uHD1urfugbP9QmLafrpykz_GatNBH1vOqw_JU" style="width:625px; height:159px"></span></span><br>
+<br>
+<span style="font-family:&quot;Arial&quot;,sans-serif"><span style="color:black">Siamo a disposizione sulla mail </span></span><span style="font-size:12.0pt"><span style="line-height:107%"><span style="font-family:&quot;Arial&quot;,sans-serif"><a href="mailto:team.salesforce@nexusat.it"><span style="font-size:11.0pt"><span style="line-height:107%"><span style="color:#1155cc">team.salesforce@nexusat.it</span></span></span></a></span></span></span><span style="font-family:&quot;Arial&quot;,sans-serif"><span style="color:black"> per fornire ulteriori informazioni e per decidere e programmare l’aggiornamento del sistema, qualora ve ne sia la necessità.</span></span><br>
+&nbsp;<br>
+<span style="background:white"><span style="font-family:&quot;Arial&quot;,sans-serif"><span style="color:#222222">Buona giornata,</span></span></span><br>
+<span style="background:white"><span style="font-family:&quot;Arial&quot;,sans-serif"><span style="color:#222222">Team Salesforce NexusAT</span></span></span><br>
+<br>
+<span style="background:white"><span style="font-family:&quot;Arial&quot;,sans-serif"><span style="color:black">Aggiungi un remind per l’attività</span></span></span><br>
+<span style="background:white"><span style="font-family:&quot;Arial&quot;,sans-serif"><span style="color:black">Aggiungi a Google Calendar</span></span></span><br>
+<span style="background:white"><span style="font-family:&quot;Arial&quot;,sans-serif"><span style="color:#222222">Aggiungi a Outlook Calendar</span></span></span><br>
+<span style="background:white"><span style="font-family:&quot;Arial&quot;,sans-serif"><span style="color:#222222">Aggiungi a Office 365 Calendar</span></span></span></span></span></span></p>
+</body></html>

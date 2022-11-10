@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ReasonWonLost__c</fullName>
+    <externalId>false</externalId>
+    <label>Reason Won/Lost</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <controllingField>StageName</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Customer Relationship</fullName>
+                <default>false</default>
+                <label>Customer Relationship</label>
+            </value>
+            <value>
+                <fullName>Proposed Solution</fullName>
+                <default>false</default>
+                <label>Proposed Solution</label>
+            </value>
+            <value>
+                <fullName>Price</fullName>
+                <default>false</default>
+                <label>Price</label>
+            </value>
+            <value>
+                <fullName>Poor qualification</fullName>
+                <default>false</default>
+                <label>Poor qualification</label>
+            </value>
+            <value>
+                <fullName>Il Cliente ha deciso di non adottare un CRM.</fullName>
+                <default>false</default>
+                <label>Il Cliente ha deciso di non adottare un CRM.</label>
+            </value>
+            <value>
+                <fullName>Il Cliente ha scelto un altro CRM.</fullName>
+                <default>false</default>
+                <label>Il Cliente ha scelto un altro CRM.</label>
+            </value>
+            <value>
+                <fullName>Il Cliente non ha il budget.</fullName>
+                <default>false</default>
+                <label>Il Cliente non ha il budget.</label>
+            </value>
+            <value>
+                <fullName>Il Cliente vuole riparlarne tra 1 anno.</fullName>
+                <default>false</default>
+                <label>Il Cliente vuole riparlarne tra 1 anno.</label>
+            </value>
+            <value>
+                <fullName>Il Cliente non ha il budget per i Servizi Professionali NexusAT.</fullName>
+                <default>false</default>
+                <label>Il Cliente non ha il budget per i Servizi Professionali NexusAT.</label>
+            </value>
+            <value>
+                <fullName>Al Cliente è piaciuto il progetto.</fullName>
+                <default>false</default>
+                <label>Al Cliente è piaciuto il progetto.</label>
+            </value>
+            <value>
+                <fullName>Al Cliente è piaciuto il prezzo.</fullName>
+                <default>false</default>
+                <label>Al Cliente è piaciuto il prezzo.</label>
+            </value>
+            <value>
+                <fullName>Il Cliente vuole SFDC.</fullName>
+                <default>false</default>
+                <label>Il Cliente vuole SFDC.</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Customer Relationship</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Proposed Solution</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Price</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Poor qualification</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Il Cliente ha deciso di non adottare un CRM.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Il Cliente ha scelto un altro CRM.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Il Cliente non ha il budget.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Il Cliente vuole riparlarne tra 1 anno.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Il Cliente non ha il budget per i Servizi Professionali NexusAT.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Al Cliente è piaciuto il progetto.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Al Cliente è piaciuto il prezzo.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Il Cliente vuole SFDC.</valueName>
+        </valueSettings>
+    </valueSet>
+    <visibleLines>6</visibleLines>
+</CustomField>

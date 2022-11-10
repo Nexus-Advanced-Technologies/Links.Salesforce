@@ -6,31 +6,23 @@
     <picklistValues>
         <picklist>Status</picklist>
         <values>
-            <fullName>Accepted</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Approved</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Denied</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Draft</fullName>
+            <fullName>0</fullName>
             <default>true</default>
         </values>
         <values>
-            <fullName>In Review</fullName>
+            <fullName>3</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Needs Review</fullName>
+            <fullName>4</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Presented</fullName>
+            <fullName>5</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Accepted</fullName>
             <default>false</default>
         </values>
         <values>

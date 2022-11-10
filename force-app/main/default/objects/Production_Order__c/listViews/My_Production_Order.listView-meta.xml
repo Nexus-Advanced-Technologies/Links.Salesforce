@@ -9,6 +9,7 @@
     <columns>Status__c</columns>
     <columns>UnitAcronym__c</columns>
     <columns>UnitDescription__c</columns>
+    <columns>SharedUsersLong__c</columns>
     <filterScope>Mine</filterScope>
     <label>My Production Order</label>
 </ListView>

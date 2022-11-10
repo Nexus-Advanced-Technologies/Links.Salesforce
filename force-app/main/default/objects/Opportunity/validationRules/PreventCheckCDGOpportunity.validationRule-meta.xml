@@ -4,6 +4,7 @@
     <active>true</active>
     <description>Impedire il passaggio in Check CDG di una opportunity se non si è prima in Pianifica Milestone</description>
     <errorConditionFormula>AND(
+	AND(
 	OR(
 		ISPICKVAL( PRIORVALUE( StageName ) , &apos;Prospecting&apos;),
 		ISPICKVAL( PRIORVALUE( StageName ) , &apos;Qualification&apos;),
@@ -12,7 +13,7 @@
 		ISPICKVAL( PRIORVALUE( StageName ) , &apos;Proposal/Price Quote&apos;)
 	),
 	ISPICKVAL( StageName , &apos;Check CDG&apos;)
-)</errorConditionFormula>
+),  RecordType.DeveloperName &lt;&gt; &apos;Links&apos;)</errorConditionFormula>
     <errorMessage>L&apos;opportunità non può essere marcata come Check CDG a partire dagli stati Prospecting, Qualification, Needs Analysis, Value Proposition - Demo, Proposal/Price Quote.
 Passare prima in Pianifica Milestone</errorMessage>
 </ValidationRule>

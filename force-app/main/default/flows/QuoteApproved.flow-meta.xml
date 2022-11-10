@@ -7,6 +7,7 @@
         <locationY>671</locationY>
         <actionName>customNotificationAction</actionName>
         <actionType>customNotificationAction</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>customNotifTypeId</name>
             <value>

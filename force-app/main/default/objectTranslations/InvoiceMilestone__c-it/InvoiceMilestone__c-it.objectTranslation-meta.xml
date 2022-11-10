@@ -12,73 +12,109 @@
     <layouts>
         <layout>Invoice Milestone Layout</layout>
         <sections>
-            <label><!-- Custom Links --></label>
+            <label></label>
             <section>Custom Links</section>
         </sections>
     </layouts>
     <layouts>
         <layout>LinksLayout - One Shot</layout>
         <sections>
-            <label><!-- Custom Links --></label>
+            <label></label>
             <section>Custom Links</section>
         </sections>
     </layouts>
     <layouts>
         <layout>LinksLayout - Recursive</layout>
         <sections>
-            <label><!-- Custom Links --></label>
+            <label></label>
             <section>Custom Links</section>
         </sections>
     </layouts>
     <layouts>
         <layout>NexusLayout - One Shot</layout>
         <sections>
-            <label><!-- Custom Links --></label>
+            <label></label>
             <section>Custom Links</section>
         </sections>
     </layouts>
     <layouts>
         <layout>NexusLayout - Recursive</layout>
         <sections>
-            <label><!-- Custom Links --></label>
+            <label></label>
             <section>Custom Links</section>
         </sections>
     </layouts>
     <quickActions>
-        <label><!-- Send email to Administration --></label>
+        <label></label>
+        <name>CreateDraftInvoice</name>
+    </quickActions>
+    <quickActions>
+        <label></label>
         <name>SendEmailToAdministration</name>
     </quickActions>
     <recordTypes>
-        <label><!-- Links One Shot --></label>
+        <label></label>
+        <name>DecHitOneShot</name>
+    </recordTypes>
+    <recordTypes>
+        <label></label>
+        <name>DecHitRecursive</name>
+    </recordTypes>
+    <recordTypes>
+        <label></label>
+        <name>Idea75OneShot</name>
+    </recordTypes>
+    <recordTypes>
+        <label></label>
+        <name>Idea75Recursive</name>
+    </recordTypes>
+    <recordTypes>
+        <label></label>
+        <name>LinfaOneShot</name>
+    </recordTypes>
+    <recordTypes>
+        <label></label>
+        <name>LinfaRecursive</name>
+    </recordTypes>
+    <recordTypes>
+        <label></label>
         <name>LinksOneShot</name>
     </recordTypes>
     <recordTypes>
-        <label><!-- Links Recursive --></label>
+        <label></label>
         <name>LinksRecursive</name>
     </recordTypes>
     <recordTypes>
-        <label><!-- Nexus One Shot --></label>
+        <label></label>
+        <name>LisOneShot</name>
+    </recordTypes>
+    <recordTypes>
+        <label></label>
+        <name>LisRecursive</name>
+    </recordTypes>
+    <recordTypes>
+        <label></label>
         <name>NexusOneShot</name>
     </recordTypes>
     <recordTypes>
-        <label><!-- Nexus Recursive --></label>
+        <label></label>
         <name>NexusRecursive</name>
     </recordTypes>
     <startsWith>Vowel</startsWith>
     <validationRules>
-        <errorMessage><!-- Compilare i campi necessari e selezionare lo stato &quot;Da Fatturare&quot;. --></errorMessage>
+        <errorMessage></errorMessage>
         <name>Block_Change_From_Draft</name>
     </validationRules>
     <validationRules>
-        <errorMessage><!-- Compilare i campi Ammontare e/o Opportunity prima di effettuare il cambio di stato. --></errorMessage>
+        <errorMessage></errorMessage>
         <name>Block_Change_From_Draft_To_DaFatturare</name>
     </validationRules>
     <validationRules>
-        <errorMessage><!-- Impossibile tornare ad uno stato precedente. --></errorMessage>
+        <errorMessage></errorMessage>
         <name>Block_Status_Change_From_FatturaPagata</name>
     </validationRules>
     <validationRules>
-        <errorMessage><!-- You cannot select this stage, contact your system administrator --></errorMessage>
+        <errorMessage></errorMessage>
         <name>FinalStages</name>
     </validationRules>
 </CustomObjectTranslation>

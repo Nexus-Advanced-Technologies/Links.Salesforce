@@ -712,6 +712,26 @@
             <field>IsWon</field>
             <table>Account.Opportunities</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>IntranetCost__c</field>
+            <table>Account.Opportunities</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>BusinessLine__c</field>
+            <table>Account.Opportunities</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>IntragroupProjects__c</field>
+            <table>Account.Opportunities</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>CompetenceCenter__c</field>
+            <table>Account.Opportunities</table>
+        </columns>
         <masterLabel>Opportunities</masterLabel>
     </sections>
     <sections>
@@ -923,6 +943,16 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>SumTimeSpentDD__c</field>
+            <table>Account.Opportunities.Project_Milestones__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>TotalConsumptive__c</field>
+            <table>Account.Opportunities.Project_Milestones__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>TotalEstimate__c</field>
             <table>Account.Opportunities.Project_Milestones__r</table>
         </columns>
         <masterLabel>Project Statuses</masterLabel>

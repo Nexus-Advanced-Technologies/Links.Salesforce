@@ -162,6 +162,7 @@
     <defaultLandingTab>standard-home</defaultLandingTab>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
     <isServiceCloudConsole>true</isServiceCloudConsole>
     <preferences>
         <enableCustomizeMyTabs>false</enableCustomizeMyTabs>
@@ -179,7 +180,19 @@
     <tabs>standard-Case</tabs>
     <tabs>standard-Opportunity</tabs>
     <tabs>standard-Lead</tabs>
+    <tabs>DocumentAlyante__c</tabs>
+    <tabs>InvoiceMilestoneDocumentAlyante__c</tabs>
+    <tabs>OpportunityDocumentAlyante__c</tabs>
     <workspaceConfig>
+        <mappings>
+            <tab>DocumentAlyante__c</tab>
+        </mappings>
+        <mappings>
+            <tab>InvoiceMilestoneDocumentAlyante__c</tab>
+        </mappings>
+        <mappings>
+            <tab>OpportunityDocumentAlyante__c</tab>
+        </mappings>
         <mappings>
             <tab>standard-Account</tab>
         </mappings>

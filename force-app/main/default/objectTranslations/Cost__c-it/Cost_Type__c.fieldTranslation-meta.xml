@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
-    <label><!-- Cost Type --></label>
+    <label></label>
     <name>Cost_Type__c</name>
     <picklistValues>
         <masterLabel>Acquisto Hardware</masterLabel>
-        <translation><!-- Acquisto Hardware --></translation>
+        <translation></translation>
     </picklistValues>
     <picklistValues>
         <masterLabel>Acquisto Servizi</masterLabel>
-        <translation><!-- Acquisto Servizi --></translation>
+        <translation></translation>
     </picklistValues>
     <picklistValues>
         <masterLabel>Acquisto Software</masterLabel>
-        <translation><!-- Acquisto Software --></translation>
+        <translation></translation>
     </picklistValues>
     <picklistValues>
         <masterLabel>Altri costi Diretti</masterLabel>
-        <translation><!-- Altri costi Diretti --></translation>
+        <translation></translation>
     </picklistValues>
     <picklistValues>
         <masterLabel>Ammortamenti</masterLabel>
-        <translation><!-- Ammortamenti --></translation>
+        <translation></translation>
     </picklistValues>
     <picklistValues>
         <masterLabel>Canoni</masterLabel>
-        <translation><!-- Canoni --></translation>
+        <translation></translation>
     </picklistValues>
     <picklistValues>
         <masterLabel>Spese Varie</masterLabel>
-        <translation><!-- Spese Varie --></translation>
+        <translation></translation>
     </picklistValues>
     <picklistValues>
         <masterLabel>Trasferte</masterLabel>
-        <translation><!-- Trasferte --></translation>
+        <translation></translation>
     </picklistValues>
     <picklistValues>
         <masterLabel>Utenze</masterLabel>
-        <translation><!-- Utenze --></translation>
+        <translation></translation>
     </picklistValues>
 </CustomFieldTranslation>
