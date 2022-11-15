@@ -1,0 +1,51 @@
+<!--
+  @description       : 
+  @author            : mattia.miglietta@nexusat.it
+  @last modified on  : 14-11-2022
+  @last modified by  : mattia.miglietta@nexusat.it
+-->
+<template>
+    <lightning-record-edit-form
+        object-api-name="DocumentDetailAlyante__c"
+        onsuccess={handleSuccess}
+        onerror={handleError}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container" style="max-width: 55rem; width: 100%;">
+            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                </svg>
+                <span class="slds-assistive-text">Cancel and close</span>
+            </button>
+            <div class="slds-modal__header">
+                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">New Document Detail</h1>
+            </div>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <lightning-layout multiple-rows>
+                    <template for:each={fieldValues} for:item="elm">
+                        <lightning-layout-item key={elm.name} size="6">
+                            <lightning-input-field required field-name={elm.name} value={elm.value}></lightning-input-field>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+                </div>
+                <div class="slds-modal__footer">
+                    <div class="slds-var-m-top_medium">
+                        <lightning-layout>
+                            <lightning-layout-item size="6"></lightning-layout-item>
+                            <lightning-layout-item size="3" style="padding-left: 25%;">
+                                <lightning-button variant="Neutral" label="Cancel" onclick={goBack}>
+                                </lightning-button>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="3">
+                                <lightning-button variant="brand" type="submit" label="Save">
+                                </lightning-button>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </lightning-record-edit-form>
+<div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+</template>

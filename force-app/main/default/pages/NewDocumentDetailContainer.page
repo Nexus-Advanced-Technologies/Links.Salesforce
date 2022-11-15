@@ -1,0 +1,19 @@
+<!--
+  @description       : 
+  @author            : mattia.miglietta@nexusat.it
+  @last modified on  : 11-11-2022
+  @last modified by  : mattia.miglietta@nexusat.it
+-->
+<apex:page standardController="DocumentAlyante__c">
+    <apex:includeLightning />
+    <div  id="NewOverrideDocumentDetailComponent" />
+    <script>
+        $Lightning.use("c:DocumentDetailApp", function() {
+            $Lightning.createComponent("c:NewDocumentDetailWrapper", {}, 
+            "NewOverrideDocumentDetailComponent",
+            function(cmp) {
+                console.log('Component loaded');
+            });
+        });
+    </script>
+</apex:page>
