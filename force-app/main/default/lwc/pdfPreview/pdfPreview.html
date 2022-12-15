@@ -1,9 +1,23 @@
 <!--
   @description       : 
   @author            : mattia.miglietta@nexusat.it
-  @last modified on  : 24-11-2022
+  @last modified on  : 15-12-2022
   @last modified by  : mattia.miglietta@nexusat.it
 -->
 <template>
+  <template if:true={showLoader}>
+    <div style="height:300px">
+      <lightning-spinner size="medium"></lightning-spinner>
+    </div>
+  </template>
+  <template if:true={showError}>
+    <template if:false={showLoader}>
+      <div style="height:60px;padding-top: 2%; padding-left: 2%">
+        <lightning-formatted-text style="font-weight: bold; font-size: large;" value={errorMessage}></lightning-formatted-text>
+      </div>
+    </template>
+  </template>
+  <template if:true={showData}>
     <iframe src="/resource/JSPDF_Library/web/viewer.html" onload={frameLoaded} height="600px" width="80%" style="margin-left: 8.5%;"></iframe>
+  </template>
 </template>
