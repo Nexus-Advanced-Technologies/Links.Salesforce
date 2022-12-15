@@ -1,8 +1,8 @@
 import getExtIdAlyante from '@salesforce/apex/PdfPreviewController.getExtIdAlyante';
 import getCredentials from '@salesforce/apex/PdfPreviewController.getCredentials';
 import { api, LightningElement, wire } from 'lwc';
-// const baseUrl = 'https://intranet.linksmt.it/SalesforceWebApplicationTest/api/Alyante/PreviewDocument/';
-// const credentials = {username: 'SalesforceDEV', password: '1gxP9ch7k0jc' };
+import errorExtIdBlank from '@salesforce/label/c.PreviewDocumentExtIdBlank';
+// Example :- import greeting from '@salesforce/label/c.greeting';
 export default class PdfPreview extends LightningElement {
     
     @api recordId;
@@ -24,70 +24,72 @@ export default class PdfPreview extends LightningElement {
             this.username = data.Username__c;
             this.password = data.Password__c;
             this.credentials = data;
-            console.log(this.credentials);
         }
-        else if(error) {
-            console.log(error);
+        if(error) {
+            console.error(error);
         }
     }
     @wire(getExtIdAlyante, {recordId: '$recordId', credentials: '$credentials'})
     wiredId({error, data}) {
         if(data) {
             this.showLoader = true;
-            // console.log('DATA -> ',data);
             this.extId = data;
-            this.getPDF();     
+            this.getPDF();
+        } else{
+            error = errorExtIdBlank;
         }
-        else if(error) {
-            console.log('error -> ', data);
-            this.showLoader = false;
-            this.errorMessage = 'ExtIdAlyante non presente';
-            this.showError = true;
-        }
-        else if(!data && !error) {
-            if(this.extId == null) {
-                console.log('error -> ', data);
-                this.showLoader = false;
-                this.errorMessage = 'ExtIdAlyante non presente';
-                this.showError = true;
-            }
+
+        if (error) {
+            this.setError(error);
         }
     }
+
     frameLoaded(evt) {
         setTimeout(() => {
             const iframe = this.template.querySelector('iframe');
             iframe.contentWindow.postMessage(this.base64, window.location.origin);
         })
     }
+
     connectedCallback() {
-        console.log(this.recordId);
-        // this.getPDF();
+        console.log('recordId', this.recordId);
     }
+
     async getPDF() {
         var auth = btoa(`${this.username}:${this.password}`)
-        console.log(auth);
-        var response = await fetch(this.baseUrl + this.extId, {
+        
+        await fetch(this.baseUrl + this.extId, {
             method: 'GET',
             headers: {
-                'Authorization': 'Basic ' + auth, 
+                'Authorization': 'Basic ' + auth,
                 'Content-Type' : 'application/json'
             }
-            }).then(response => {
-            if (!response.ok) {
-                console.log('error');
-                this.errorMessage = 'Non e\' stato possibile recuperare il pdf';
-                this.showLoader = false;
-                this.showError = true;
-                throw new Error(response.status);
-            } 
-            return response.text();
-        }).then((base64) => {
-            this.base64 = base64.replace(/['"]+/g, '');
-            // console.log(this.base64);
+        })
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            }
+            return Promise.reject(response);
+            })
+        .then((json) => {
+            this.base64 = json;
             this.showLoader = false;
             this.showError = false;
             this.showData = true;
+        })
+        .catch((responseError) => {
+            console.error(responseError.status, responseError.statusText);
+            responseError.json()
+            .then((json) => {
+                this.setError(json);
+            })
         });
-        // return response;
+    }
+
+    setError(message) {
+        console.error(message);
+        this.showLoader = false;
+        this.errorMessage = message;
+        this.showError = true;
     }
 }
