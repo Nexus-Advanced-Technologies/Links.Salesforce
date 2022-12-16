@@ -1,10 +1,11 @@
 <!--
   @description       : 
   @author            : mattia.miglietta@nexusat.it
-  @last modified on  : 14-11-2022
+  @last modified on  : 16-12-2022
   @last modified by  : mattia.miglietta@nexusat.it
 -->
 <template>
+    <template if:true={projectPopulated}>
     <lightning-record-edit-form
         object-api-name="DocumentDetailAlyante__c"
         onsuccess={handleSuccess}
@@ -23,7 +24,7 @@
             <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
                 <lightning-layout multiple-rows>
                     <template for:each={fieldValues} for:item="elm">
-                        <lightning-layout-item key={elm.name} size="6">
+                        <lightning-layout-item key={elm} size="6">
                             <lightning-input-field required field-name={elm.name} value={elm.value}></lightning-input-field>
                         </lightning-layout-item>
                     </template>
@@ -47,5 +48,6 @@
             </div>
         </section>
     </lightning-record-edit-form>
+</template>
 <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
 </template>
