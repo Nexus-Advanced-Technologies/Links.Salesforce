@@ -2,6 +2,7 @@ import { api, LightningElement, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getRecordDefaultValues from '@salesforce/apex/createDocumentDetailAlyanteController.getRecordDefaultValues';
+import { refreshApex } from '@salesforce/apex';
 
 const fields = ['Document__c',
                 'Content__c', 'RevenueType__c',
@@ -34,21 +35,19 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
             variant: 'success',
             message: 'The Record was successfully created',
         }));
-        this.navigateToRecordViewPage(detailRecordId);
+        this.navigateToRecordViewPage(this.recordId);
     }
     handleError(event) {
         // console.log('ERROR -> ', event);
     }
-    connectedCallback() {
-        // console.log('connsected');
-        // this.formatElementValues();
-    }
+    // connectedCallback() {
+    //    console.log('connsected');
+    //    this.formatElementValues();
+    // }
     formatElementValues() {
-        // console.log(this.projectValue);
-        // console.log('formatting');
         this.fieldValues = fields.map( elm => {
             var value = '';
-            if(elm == 'Document__c' && this.recordId) { 
+            if(elm == 'Document__c') { 
                 value = this.recordId;
             }
             if(elm == 'Project__c') {
@@ -56,21 +55,34 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
                     value = this.projectValue;
                 }
             }
+            else if(elm !=  'Document__c'){
+                value = '';
+            }
             return ({
                 name: elm, value: value
             })
         })
-        // console.log('formatting data -> ', this.fieldValues);
+        this.projectPopulated = true;
     }
     navigateToRecordViewPage(recordId) {
-        // View a custom object record.
         this[NavigationMixin.Navigate]({
             type: 'standard__recordPage',
             attributes: {
                 recordId: recordId,
                 actionName: 'view'
             }
-        });
+        })
+        this.resetFields();
+    }
+    resetFields() {
+        const inputFields = this.template.querySelectorAll(
+            'lightning-input-field'
+        );
+        if (inputFields) {
+            inputFields.forEach(field => {
+                field.reset();
+            });
+        }
     }
     goBack() {
         this.navigateToRecordViewPage(this.recordId);
