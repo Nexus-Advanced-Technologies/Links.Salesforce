@@ -1,8 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
-		<members>ErrorMoreQuote</members>
+		<members>*</members>
+		<name>CspTrustedSite</name>
+	</types>
+	<types>
+		<members>IntranetAPI__c.BaseUrl__c</members>
+		<members>IntranetAPI__c.Password__c</members>
+		<members>IntranetAPI__c.PreviewDocumentEndpoint__c</members>
+		<members>IntranetAPI__c.Username__c</members>
+		<name>CustomField</name>
+	</types>
+	<types>
+		<members>PreviewDocumentExtIdBlank</members>
+		<members>PreviewDocumentHttpRequest</members>
 		<name>CustomLabel</name>
+	</types>
+	<types>
+		<members>IntranetAPI__c</members>
+		<name>CustomObject</name>
+	</types>
+	<types>
+		<members>Intranet_Links</members>
+		<name>RemoteSiteSetting</name>
+	</types>
+	<types>
+		<members>JSPDF_Library</members>
+		<name>StaticResource</name>
 	</types>
 	<version>55.0</version>
 </Package>

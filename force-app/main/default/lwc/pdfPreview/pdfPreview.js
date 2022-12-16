@@ -1,48 +1,51 @@
-import getExtIdAlyante from '@salesforce/apex/PdfPreviewController.getExtIdAlyante';
+/**
+ * @description       : 
+ * @author            : ¤ → alessio.marra@nexusat.it
+ * @last modified on  : 16/12/2022
+ * @last modified by  : ¤ → alessio.marra@nexusat.it
+**/
+import getDocumentRecord from '@salesforce/apex/PdfPreviewController.getDocumentRecord';
 import getCredentials from '@salesforce/apex/PdfPreviewController.getCredentials';
+
 import { api, LightningElement, wire } from 'lwc';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+// import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
+
 import errorExtIdBlank from '@salesforce/label/c.PreviewDocumentExtIdBlank';
-// Example :- import greeting from '@salesforce/label/c.greeting';
+import errorHttpRequest from '@salesforce/label/c.PreviewDocumentHttpRequest';
+
+// const DOCUMENT_FIELDS = [
+//     'DocumentAlyante__c.ExtIdAlyante__c'
+// ];
+
 export default class PdfPreview extends LightningElement {
     
     @api recordId;
-    extId;
-    response;
-    showData = false;
-    showLoader = true;
-    showError = false;
-    pdf;
-    baseUrl;
-    username;
-    password;
-    errorMessage = '';
-    credentials;
-    @wire(getCredentials, {})
-    wiredCredentials({error, data}) {
-        if(data) {
-            this.baseUrl = data.BaseUrl__c;
-            this.username = data.Username__c;
-            this.password = data.Password__c;
-            this.credentials = data;
-        }
-        if(error) {
-            console.error(error);
-        }
-    }
-    @wire(getExtIdAlyante, {recordId: '$recordId', credentials: '$credentials'})
-    wiredId({error, data}) {
-        if(data) {
-            this.showLoader = true;
-            this.extId = data;
-            this.getPDF();
-        } else{
-            error = errorExtIdBlank;
-        }
 
-        if (error) {
-            this.setError(error);
-        }
+    showLoader;
+    base64;
+    errorMessage;
+    alyanteId;
+
+    get showError() {
+        return this.errorMessage != null;
     }
+
+    get showData() {
+        return this.base64 != null;
+    }
+    
+    // @wire(getRecord, { recordId: '$recordId', fields: DOCUMENT_FIELDS } )
+    // wiredGetDocumentRecord ({error, data}) {
+    //     if (error) {
+    //         console.error(JSON.parse(JSON.stringify(error)));
+    //     } else if (data) {
+    //         console.debug(JSON.parse(JSON.stringify(data)));
+    //         const alyanteId = getFieldValue(data, 'DocumentAlyante__c.ExtIdAlyante__c');
+    //         this.alyanteId = alyanteId;
+    //         console.log('alyante id setted');
+    //     }
+    // }
 
     frameLoaded(evt) {
         setTimeout(() => {
@@ -51,45 +54,72 @@ export default class PdfPreview extends LightningElement {
         })
     }
 
-    connectedCallback() {
-        console.log('recordId', this.recordId);
+    async connectedCallback() {
+        this.showLoader = true;
+        console.debug('recordId', this.recordId);
+
+        const documentRecord = await getDocumentRecord({ recordId: this.recordId } );
+        this.alyanteId = documentRecord.ExtIdAlyante__c;
+        console.log('alyante id setted');
+
+        console.log('alyanteId', this.alyanteId);
+        if (this.alyanteId == null) {
+            this.setError(errorExtIdBlank);
+        } else {
+            const credentials = await getCredentials();
+            const base64 = await this.getPdfBase64(credentials);
+            this.base64 = base64;
+            console.log('base64 setted');
+            this.showLoader = false;
+
+            console.log('base64', this.base64);
+            if (this.base64 == null) {
+                this.setError(errorHttpRequest);
+            }
+        }
     }
 
-    async getPDF() {
-        var auth = btoa(`${this.username}:${this.password}`)
-        
-        await fetch(this.baseUrl + this.extId, {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Basic ' + auth,
-                'Content-Type' : 'application/json'
+    async getPdfBase64(credentials) {
+        try {
+            const auth = btoa(`${credentials.Username__c}:${credentials.Password__c}`);
+            var endpoint = credentials.BaseUrl__c + credentials.PreviewDocumentEndpoint__c;
+            endpoint = endpoint.replace('{ExtIdAlyante__c}', this.alyanteId);
+            const response = await fetch( endpoint, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Basic ' + auth,
+                    'Content-Type' : 'application/json'
+                }
+            });
+
+            console.debug(response);
+
+            if (!response.ok) {
+                console.error(await response.json());
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-        })
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            }
-            return Promise.reject(response);
-            })
-        .then((json) => {
-            this.base64 = json;
-            this.showLoader = false;
-            this.showError = false;
-            this.showData = true;
-        })
-        .catch((responseError) => {
-            console.error(responseError.status, responseError.statusText);
-            responseError.json()
-            .then((json) => {
-                this.setError(json);
-            })
-        });
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     setError(message) {
-        console.error(message);
         this.showLoader = false;
         this.errorMessage = message;
-        this.showError = true;
+        this.dispatchEvent(new ShowToastEvent({
+            title: 'Error',
+            message: message,
+            variant: 'error'
+        }));
     }
+
+    // handleClick(evt) {
+    //     console.log('showData : ',this.showData);
+    //     console.log('showError : ',this.showError);
+    //     console.log('showLoader : ',this.showLoader);
+    //     console.log('errorMessage : ',this.errorMessage);
+    // }
+
 }
