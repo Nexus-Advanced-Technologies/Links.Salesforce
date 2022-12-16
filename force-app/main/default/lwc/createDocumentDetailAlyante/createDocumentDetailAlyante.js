@@ -1,4 +1,4 @@
-import { api, LightningElement, wire } from 'lwc';
+import { api, LightningElement, track, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getRecordDefaultValues from '@salesforce/apex/createDocumentDetailAlyanteController.getRecordDefaultValues';
@@ -14,9 +14,12 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
     @api recordId;
     projectPopulated = false;
     projectValue;
+    @track fetchedData;
     @wire(getRecordDefaultValues, {documentRecordId: '$recordId'})
     valuesFetched({error, data}) {
         if(data) {
+            this.fetchedData = data;
+            console.log('wiredStarted');
             // console.log('DATA -> ', data);
             if(data.Project__c) {
                 this.projectValue = data.Project__c;        
@@ -72,17 +75,23 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
                 actionName: 'view'
             }
         })
-        this.resetFields();
+        this.resetFieldsAndRefresh();
     }
-    resetFields() {
+    resetFieldsAndRefresh() {
         const inputFields = this.template.querySelectorAll(
             'lightning-input-field'
         );
         if (inputFields) {
             inputFields.forEach(field => {
-                field.reset();
+                console.log(field.value);
+                if(field.value != this.recordId && field.value != this.projectValue) {
+                    field.reset();
+                }
+                
             });
         }
+        // this.projectPopulated = false;
+        // refreshApex(this.fetchedData);
     }
     goBack() {
         this.navigateToRecordViewPage(this.recordId);

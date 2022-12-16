@@ -25,7 +25,7 @@
                 <lightning-layout multiple-rows>
                     <template for:each={fieldValues} for:item="elm">
                         <lightning-layout-item key={elm} size="6">
-                            <lightning-input-field required field-name={elm.name} value={elm.value}></lightning-input-field>
+                            <lightning-input-field required field-name={elm.name} value={elm.value} data-id={elm.name}></lightning-input-field>
                         </lightning-layout-item>
                     </template>
                 </lightning-layout>
