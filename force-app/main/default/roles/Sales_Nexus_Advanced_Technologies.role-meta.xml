@@ -4,6 +4,6 @@
     <contactAccessLevel>Edit</contactAccessLevel>
     <mayForecastManagerShare>false</mayForecastManagerShare>
     <name>Sales - Nexus Advanced Technologies</name>
-    <opportunityAccessLevel>Edit</opportunityAccessLevel>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
     <parentRole>Nexus_Advanced_Technologies</parentRole>
 </Role>

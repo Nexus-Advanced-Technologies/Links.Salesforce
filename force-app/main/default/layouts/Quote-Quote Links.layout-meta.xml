@@ -9,12 +9,12 @@
         <label>Quote Information</label>
         <layoutColumns>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>QuoteNumber</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Required</behavior>
                 <field>Name</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>QuoteNumber__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -38,7 +38,7 @@
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Readonly</behavior>
                 <field>Status</field>
             </layoutItems>
             <layoutItems>
@@ -47,11 +47,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>ProtocolNumber__c</field>
+                <field>Email</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Email</field>
+                <behavior>Readonly</behavior>
+                <field>Protocol__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -319,6 +319,7 @@
         <relatedList>Quote_Revenue__c.Quote__c</relatedList>
     </relatedLists>
     <relatedLists>
+        <excludeButtons>New</excludeButtons>
         <fields>ORDERS.ORDER_NUMBER</fields>
         <fields>ORDER.NAME</fields>
         <fields>ORDERS.STATUS</fields>
@@ -334,6 +335,10 @@
         <fields>Actor</fields>
         <fields>Comments</fields>
         <relatedList>RelatedProcessHistoryList</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <relatedList>Protocol__c.Quote__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>

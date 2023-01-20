@@ -1,0 +1,17 @@
+<!--
+  @description       : 
+  @author            : §
+  @group             : 
+  @last modified on  : 01-28-2022
+  @last modified by  : §
+-->
+<template>
+  <!-- sldsValidatorIgnoreNextLine -->
+  <lightning-quick-action-panel header="Create Draft Invoice" class="slds-var-p-vertical_large">
+    <!-- <c-create-alyante-document record-type-name="pre invoice" status="Draft" content={content} account-id={accountId} date={today} opportunity-id={opportunityId} invoice-milestone-id={invoiceMilestoneId} ></c-create-alyante-document> -->
+    <c-create-alyante-document record-type-name="pre invoice" account-id={accountId} status="Draft"
+      opportunities-id={opportunityId} invoice-milestones-id={invoiceMilestoneId} date={today} content={content}
+      onquickactionclose={handleCloseAction}>
+    </c-create-alyante-document>
+  </lightning-quick-action-panel>
+</template>

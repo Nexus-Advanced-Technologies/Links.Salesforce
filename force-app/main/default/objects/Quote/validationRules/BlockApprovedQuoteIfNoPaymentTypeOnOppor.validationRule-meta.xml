@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BlockApprovedQuoteIfNoPaymentTypeOnOppor</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    $RecordType.DeveloperName = &quot;Links&quot;,
+    ISPICKVAL(Status, &quot;4&quot;),
+    ISBLANK( Opportunity.PaymentType__c ) ,
+				 $User.Username != &apos;sysadmin@linksmt.it&apos;,
+				 Opportunity.Amount &gt; 0
+)</errorConditionFormula>
+    <errorMessage>Non puoi aggiornare una quote in stato APPROVED se non è compilato il campo Payment Type sull&apos;Opportunity.</errorMessage>
+</ValidationRule>

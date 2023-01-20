@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Attivazione ordine</fullName>
+        <default>true</default>
+        <label>Attivazione ordine</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Approvazione ordine</fullName>
+        <default>false</default>
+        <label>Approvazione ordine</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Evasione</fullName>
+        <default>false</default>
+        <label>Evasione</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Pagamento</fullName>
+        <default>false</default>
+        <label>Pagamento</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Fatturazione</fullName>
+        <default>false</default>
+        <label>Fatturazione</label>
+    </standardValue>
+</StandardValueSet>

@@ -3,6 +3,8 @@
     <fullName>NexusCompact</fullName>
     <fields>Customer__c</fields>
     <fields>Opportunity__c</fields>
+    <fields>TotalConsumptive__c</fields>
+    <fields>TotalEstimate__c</fields>
     <fields>BudgetDD__c</fields>
     <fields>ConsumptiveDD__c</fields>
     <fields>ProjectSentimentSemaphore__c</fields>

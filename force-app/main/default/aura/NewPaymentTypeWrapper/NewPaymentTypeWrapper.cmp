@@ -1,0 +1,12 @@
+<!--
+  @description       : 
+  @author            : ¤ → alessio.marra@nexusat.it
+  @last modified on  : 28/12/2022
+  @last modified by  : ¤ → alessio.marra@nexusat.it
+-->
+<aura:component
+	implements="lightning:actionOverride,force:hasRecordId,force:hasSObjectName">
+	<aura:dependency resource="c:*" type="COMPONENT"/>
+	<aura:attribute name="recordId" type="String" />
+	<c:createPaymentType recordId="{!v.recordId}"></c:createPaymentType>
+</aura:component>

@@ -6,6 +6,6 @@
     <errorConditionFormula>NOT(OR(
       ISPICKVAL(StageName,&apos;Closed Won&apos;),ISPICKVAL(StageName, &apos;Closed Lost&apos;)
    ))</errorConditionFormula>
-    <errorDisplayField>Reason_Won_Lost__c</errorDisplayField>
+    <errorDisplayField>ReasonWonLost__c</errorDisplayField>
     <errorMessage>Error</errorMessage>
 </ValidationRule>

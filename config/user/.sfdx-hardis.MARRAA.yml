@@ -1,0 +1,3 @@
+installedApps:
+  - git
+sfdxPluginsStdout: "@salesforce/lwc-dev-mobile \e[2m1.6.0\e[22m\n@salesforce/lwc-dev-server \e[2m2.11.0\e[22m\nsfdmu \e[2m4.23.2\e[22m\nsfdx-essentials \e[2m2.12.0\e[22m\nsfdx-git-delta \e[2m5.8.0\e[22m\nsfdx-hardis \e[2m2.97.3\e[22m\nsfpowerkit \e[2m6.0.1\e[22m\ntexei-sfdx-plugin \e[2m1.17.1\e[22m\n"

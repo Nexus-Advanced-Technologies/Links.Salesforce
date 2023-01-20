@@ -9,19 +9,23 @@
         <picklistValueName>0</picklistValueName>
     </pathAssistantSteps>
     <pathAssistantSteps>
-        <info>&lt;p&gt;Prima di effettuare il passaggio di Stato in &amp;quot;&lt;b&gt;Registered&amp;quot;,&lt;/b&gt; controllare di aver inserito il Protocol Number fornito dall&amp;#39;amministrazione.&lt;b&gt; &lt;/b&gt;&lt;/p&gt;</info>
+        <info>&lt;p&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Una volta effettuato il passaggio di stato in &amp;quot;&lt;/span&gt;&lt;b style=&quot;font-size: 13px;&quot;&gt;Registered&lt;/b&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;quot;, viene generato il &lt;/span&gt;&lt;b style=&quot;font-size: 13px;&quot;&gt;Protocollo &lt;/b&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;necessario all&amp;#39;OM.&lt;/span&gt;&lt;/p&gt;</info>
         <picklistValueName>1</picklistValueName>
     </pathAssistantSteps>
     <pathAssistantSteps>
-        <info>&lt;p&gt;Generazione Automatica del PDF riferito all&amp;#39;&lt;b&gt;Economic Plan &lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</info>
+        <info>&lt;p&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Prima di effettuare il passaggio di stato in &amp;quot;&lt;/span&gt;&lt;b style=&quot;font-size: 13px;&quot;&gt;Presented&lt;/b&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;quot;, controllare di aver allegato il file inerente al Protocollo associato.&lt;/span&gt;&lt;/p&gt;</info>
+        <picklistValueName>2</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;ul&gt;&lt;li&gt;Generazione Automatica del PDF riferito all&amp;#39;&lt;b&gt;Economic Plan. &lt;/b&gt;&lt;/li&gt;&lt;li&gt;Lo Stato dell&amp;#39;Opportunità viene settato su &amp;quot;&lt;b&gt;Quote Presented&lt;/b&gt;&amp;quot; con relativo Ammontare aggiornato.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</info>
         <picklistValueName>3</picklistValueName>
     </pathAssistantSteps>
     <pathAssistantSteps>
-        <info>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;L&amp;#39;opportunità viene chiusa Vinta con relativo Amount Aggiornato&lt;/li&gt;&lt;li&gt;Generazione dell&amp;#39;Ordine con relative righe di dettaglio&lt;/li&gt;&lt;/ul&gt;</info>
+        <info>&lt;ul&gt;&lt;li&gt;Lo Stato dell&amp;#39;Opportunità viene settato su &amp;quot;&lt;b&gt;Milestone Planning&lt;/b&gt;&amp;quot; con relativo Ammontare aggiornato&lt;/li&gt;&lt;li&gt;Generazione Automatica delle varie Milestone secondo il Payment Type indicato&lt;/li&gt;&lt;li&gt;Generazione dell&amp;#39;Ordine con relative righe di dettaglio&lt;/li&gt;&lt;/ul&gt;</info>
         <picklistValueName>4</picklistValueName>
     </pathAssistantSteps>
     <pathAssistantSteps>
-        <info>&lt;p&gt;L&amp;#39;opportunità viene chiusa Persa con relativo Amount Aggiornato&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</info>
+        <info>&lt;ul&gt;&lt;li&gt;Lo Stato dell&amp;#39;Opportunità viene settato su &amp;quot;&lt;b&gt;Closed Lost&lt;/b&gt;&amp;quot; con relativo Ammontare aggiornato.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</info>
         <picklistValueName>5</picklistValueName>
     </pathAssistantSteps>
     <recordTypeName>Links</recordTypeName>

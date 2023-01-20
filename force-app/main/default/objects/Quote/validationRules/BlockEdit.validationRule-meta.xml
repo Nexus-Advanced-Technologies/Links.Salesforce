@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BlockEdit</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISPICKVAL(PRIORVALUE(Status),&quot;4&quot;),
+				AND(
+								RecordType.DeveloperName  = &quot;Links&quot;,
+								 $Profile.Name = &quot;LinksSales&quot;)
+)</errorConditionFormula>
+    <errorMessage>Non puoi modificare una quote quando è in stato &quot;APPROVED&quot;</errorMessage>
+</ValidationRule>

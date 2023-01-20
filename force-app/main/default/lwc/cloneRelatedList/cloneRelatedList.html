@@ -1,0 +1,12 @@
+<template>
+    <lightning-datatable
+    key-field="id"
+    data={documentDetails}
+    columns={columns}
+    onsave={handleSave}
+    onrowselection={getSelectedDetail}
+    suppress-bottom-bar={hideTableFooter}
+    >
+    </lightning-datatable>
+    <lightning-button variant="brand" onclick={createRecordDetails} label="Create Document"></lightning-button>
+</template>

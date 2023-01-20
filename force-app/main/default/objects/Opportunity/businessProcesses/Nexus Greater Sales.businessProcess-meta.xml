@@ -15,15 +15,15 @@
         <default>false</default>
     </values>
     <values>
+        <fullName>Milestone Planning</fullName>
+        <default>false</default>
+    </values>
+    <values>
         <fullName>Needs Analysis</fullName>
         <default>false</default>
     </values>
     <values>
         <fullName>Negotiation%2FReview</fullName>
-        <default>false</default>
-    </values>
-    <values>
-        <fullName>Pianifica Milestone</fullName>
         <default>false</default>
     </values>
     <values>

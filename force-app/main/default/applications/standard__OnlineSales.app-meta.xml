@@ -3,8 +3,12 @@
     <formFactors>Large</formFactors>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
     <label>Online Sales</label>
     <navType>Standard</navType>
     <tabs>standard-OnlineSalesHome</tabs>
+    <tabs>DocumentAlyante__c</tabs>
+    <tabs>InvoiceMilestoneDocumentAlyante__c</tabs>
+    <tabs>OpportunityDocumentAlyante__c</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>

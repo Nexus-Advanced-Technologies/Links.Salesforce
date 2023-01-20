@@ -12,13 +12,17 @@
     <layouts>
         <layout>Production Order Layout</layout>
         <sections>
-            <label><!-- Custom Links --></label>
+            <label></label>
             <section>Custom Links</section>
         </sections>
     </layouts>
     <recordTypes>
-        <label><!-- Links --></label>
+        <label></label>
         <name>Links</name>
     </recordTypes>
     <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>BlockEdit</name>
+    </validationRules>
 </CustomObjectTranslation>

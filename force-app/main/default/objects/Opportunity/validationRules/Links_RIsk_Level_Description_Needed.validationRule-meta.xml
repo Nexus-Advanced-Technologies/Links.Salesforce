@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Links_RIsk_Level_Description_Needed</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+$RecordType.DeveloperName = &quot;Links&quot;,
+NOT(ISPICKVAL(Risk_Level__c,&quot;&quot;)),
+ISBLANK(Risk_Level_Description__c)
+)</errorConditionFormula>
+    <errorDisplayField>Risk_Level_Description__c</errorDisplayField>
+    <errorMessage>Risk Level Description must be specified.</errorMessage>
+</ValidationRule>

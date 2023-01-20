@@ -4,6 +4,6 @@
     <protected>false</protected>
     <values>
         <field>UpdatableField__c</field>
-        <value xsi:type="xsd:string">Name,Opportunity__c,Cliente__c,Codice_Account__c,PM__c,ReferenceNumber__c,Account_Category__c,Account__c,Project_Sentiment_Value__c,Stato__c,Tipo__c,Descrizione__c,Time_Tracking_Report__c,Budget_gg__c,Consuntivo_gg__c,Stima_gg_a_terminare__c,Annotazioni_sul_budget__c,Data_fine_prevista__c</value>
+        <value xsi:type="xsd:string">Name,Opportunity__c,Customer__c,AccountCode__c,PM__c,ReferenceNumber__c,AccountCategory__c,Account__c,ProjectSentimentValue__c,Stage__c,Type__c,Description__c,TimeTrackingReport__c,BudgetDD__c,ConsumptiveDD__c,EstimatedToFinishDD__c,BudgetNotes__c,ExpectedEndDate__c</value>
     </values>
 </CustomMetadata>

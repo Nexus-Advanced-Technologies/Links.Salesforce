@@ -1,0 +1,12 @@
+<template>
+    <lightning-quick-action-panel header={createDocumentTitle} class="slds-var-p-vertical_large"></lightning-quick-action-panel>
+    <template if:true={showForm}>
+        <c-create-alyante-document record-type-name="credit note" account-id={accountId} status="Draft" date={date} content={content}
+            is-credit-note="true"
+            is-clone="false" onquickactionclose={handleCloseAction} oncloned={handleCreateSuccess}>
+        </c-create-alyante-document>
+    </template>
+    <template if:true={showRelatedForm}>
+        <c-clone-related-list document-id={documentId} document-details={documentDetails} ondocdetailselected={detailSelected}></c-clone-related-list>
+    </template>
+</template>

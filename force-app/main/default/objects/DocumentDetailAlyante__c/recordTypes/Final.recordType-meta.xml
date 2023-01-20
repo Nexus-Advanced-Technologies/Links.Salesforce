@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Final</fullName>
+    <active>true</active>
+    <label>Final</label>
+    <picklistValues>
+        <picklist>RevenueType__c</picklist>
+        <values>
+            <fullName>18</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>19</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>21</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>22</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>23</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>24</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>26</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>6</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tags__c</picklist>
+        <values>
+            <fullName>Ambito Consulenza%26Audit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ambito Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ambito e-government</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ambito finance%2Fbanche</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ambito fondi professionali</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ambito mobilità</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ambito rendicontazione fondi formazione</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ambito sanità</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ambito turismo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Applicazioni con AI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Applicazioni con IOT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistenza onsite - help desk I%C2%B0 livello</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistenza onsite - help desk II%C2%B0 livello</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistenza remota - help desk I%C2%B0 livello</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistenza remota - help desk II%C2%B0 livello</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chatbot</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Conduzione</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Conservazione sostitutiva</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formazione</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fornitura hardware%2Fstrumenti IT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gestione processi interni</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Governance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hosting e housing infrastruttura</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manutenzione adeguativa</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manutenzione correttiva</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manutenzione evolutiva</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manutenzione migliorativa</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manutenzione normativa</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mobile application</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Portali e applicativi web</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sistema Gestione qualità</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sistema atti%2C protocollo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sistema documentale</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sistema e-procurement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supporto specialistico%2Fconsulenziale</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sviluppo software</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

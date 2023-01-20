@@ -3,7 +3,31 @@
     <label>Nexus</label>
     <protected>false</protected>
     <values>
-        <field>OpportunityAfterInsert__c</field>
+        <field>DocumentAlyanteAfterInsert__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>DocumentAlyanteAfterUpdate__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>DocumentAlyanteBeforeDelete__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>DocumentAlyanteBeforeUpdate__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>DocumentDetailAlyanteBeforeInsert__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>OpportunityBeforeInsert__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>OrderBeforeUpdate__c</field>
         <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
@@ -25,5 +49,29 @@
     <values>
         <field>QuoteAfterInsert__c</field>
         <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>QuoteAfterUpdate__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>QuoteBeforeInsert__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>QuoteBeforeUpdate__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>QuoteLineItemAfterDelete__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>QuoteLineItemAfterInsert__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>QuoteLineItemAfterUpdate__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
 </CustomMetadata>

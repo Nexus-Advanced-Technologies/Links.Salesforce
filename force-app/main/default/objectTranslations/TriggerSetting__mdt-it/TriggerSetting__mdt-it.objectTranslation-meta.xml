@@ -12,19 +12,31 @@
     <layouts>
         <layout>Trigger Setting Layout</layout>
         <sections>
-            <label><!-- Custom Links --></label>
+            <label></label>
             <section>Custom Links</section>
         </sections>
         <sections>
-            <label><!-- Opportunity --></label>
+            <label></label>
+            <section>Document Alyante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>DocumentDetailAlyante</section>
+        </sections>
+        <sections>
+            <label></label>
             <section>Opportunity</section>
         </sections>
         <sections>
-            <label><!-- ProjectStatus --></label>
+            <label></label>
+            <section>Order</section>
+        </sections>
+        <sections>
+            <label></label>
             <section>ProjectStatus</section>
         </sections>
         <sections>
-            <label><!-- Quote --></label>
+            <label></label>
             <section>Quote</section>
         </sections>
     </layouts>

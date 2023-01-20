@@ -1,0 +1,75 @@
+<!--
+  @description       : 
+  @author            : ¤ → alessio.marra@nexusat.it
+  @last modified on  : 03/01/2023
+  @last modified by  : ¤ → alessio.marra@nexusat.it
+-->
+<template>
+	<br><br><br>
+	<lightning-layout>
+		<lightning-layout-item size="8" padding="horizontal-small">{index}
+			<lightning-record-edit-form
+					record-type-id={recordTypeId}
+					object-api-name={objectApiName}
+					onchange={handleInputChange}
+					onload={handleLoad}
+					onsubmit={handleSubmit}
+					onsuccess={handleSuccess}
+					onerror={handleError}>
+					
+			<lightning-modal-header>
+				<h2 class="slds-modal__title slds-hyphenate slds-text-heading_medium">{label.header}</h2>
+			</lightning-modal-header>
+			<lightning-modal-body>
+				<lightning-messages></lightning-messages>
+
+				<template for:each={layout.sections} for:item="section">
+					<div key={section.id} class="slds-m-vertical_none slds-section has-header slds-var-p-bottom_medium slds-is-open">
+						<template if:true={section.useHeading}>
+							<h3 class="slds-section__title slds-var-p-horizontal_small slds-theme_shade">{section.heading}</h3>
+						</template>
+						<lightning-layout multiple-rows="true">
+							<template for:each={section.layoutRows} for:item="layoutRow">
+							<template for:each={layoutRow.layoutItems} for:item="layoutItem">
+								<template for:each={layoutItem.layoutComponents} for:item="layoutComponent">
+								<lightning-layout-item key={layoutComponent.apiName} size={layoutItem.size} padding="horizontal-small">
+									<template if:true={layoutItem.editable}>
+										<lightning-input-field field-name={layoutComponent.apiName}
+																data-id={layoutComponent.apiName}
+																required={layoutItem.required}
+																variant="label-stacked">
+										</lightning-input-field>
+									</template>
+									<template if:false={layoutItem.editable}>
+										<lightning-input-field field-name={layoutComponent.apiName}
+																data-id={layoutComponent.apiName}
+																disabled
+																variant="label-stacked">
+										</lightning-input-field>
+									</template>
+								</lightning-layout-item>
+								</template>
+							</template>
+							</template>
+						</lightning-layout>
+					</div>
+				</template>
+			</lightning-modal-body>
+			<lightning-modal-footer>
+				<lightning-button
+					label={label.cancel}
+					onclick={handleClose}
+					class="slds-var-m-right_small"
+				></lightning-button>
+				<lightning-button
+					variant="brand"
+					type="submit"
+					label={label.save}
+				></lightning-button>
+			</lightning-modal-footer>
+		</lightning-record-edit-form>
+		</lightning-layout-item>
+		<lightning-layout-item size="4" padding="horizontal-small">{paymentTypeId}
+		</lightning-layout-item>
+	</lightning-layout>
+</template>

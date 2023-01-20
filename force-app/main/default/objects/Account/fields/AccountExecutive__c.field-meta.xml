@@ -7,9 +7,9 @@
     <lookupFilter>
         <active>true</active>
         <filterItems>
-            <field>Contact.Account.Id</field>
+            <field>Contact.Account.Name</field>
             <operation>equals</operation>
-            <value>0011v00002iEX3XAAW</value>
+            <value>Salesforce Italia</value>
         </filterItems>
         <isOptional>false</isOptional>
     </lookupFilter>

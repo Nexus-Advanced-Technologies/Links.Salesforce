@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlowDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionNumber>2</activeVersionNumber>
+    <description>IF ProjectStatusValue = &quot;Alarm&quot;
+- Send Custom Notification
+- Send Email to Opportunity Delivery Manager OR giuseppe.maiorano@nexusat.it</description>
+    <masterLabel>ProjectStatus After Update</masterLabel>
+</FlowDefinition>

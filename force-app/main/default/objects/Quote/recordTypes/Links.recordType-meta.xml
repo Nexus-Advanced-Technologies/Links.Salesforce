@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Links</fullName>
+    <active>true</active>
+    <compactLayoutAssignment>Links</compactLayoutAssignment>
+    <label>Links</label>
+    <picklistValues>
+        <picklist>Status</picklist>
+        <values>
+            <fullName>0</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

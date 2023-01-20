@@ -2,6 +2,7 @@
 <RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>NexusCustomer</fullName>
     <active>true</active>
+    <compactLayoutAssignment>NexusCompact</compactLayoutAssignment>
     <label>Nexus Customer</label>
     <picklistValues>
         <picklist>LeadSource</picklist>
@@ -18,15 +19,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Phone Inquiry</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Purchased List</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Referral</fullName>
             <default>false</default>
         </values>
         <values>
@@ -35,10 +28,6 @@
         </values>
         <values>
             <fullName>TechnologyHub</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Web</fullName>
             <default>false</default>
         </values>
     </picklistValues>

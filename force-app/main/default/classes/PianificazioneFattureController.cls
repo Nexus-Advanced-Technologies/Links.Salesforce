@@ -66,8 +66,16 @@ public without sharing class PianificazioneFattureController {
 			rtId = getInvoiceRecordType('NexusRecursive');
 		}else if(opp.RecordType.DeveloperName.contains('Links')){
 			rtId = getInvoiceRecordType('LinksRecursive');
+		}else if(opp.RecordType.DeveloperName.contains('Idea75')){
+			rtId = getInvoiceRecordType('Idea75Recursive');
+		}else if(opp.RecordType.DeveloperName.contains('DecHit')){
+			rtId = getInvoiceRecordType('DecHitRecursive');
+		}else if(opp.RecordType.DeveloperName.contains('Lis')){
+			rtId = getInvoiceRecordType('LisRecursive');
+		}else if(opp.RecordType.DeveloperName.contains('Linfa')){
+			rtId = getInvoiceRecordType('LinfaRecursive');
 		}else{
-			throw new AuraException('Record Type Wrong');
+			throw new AuraException('Record Type Wrong'); 
 		}
 		System.debug('tpdList ' + tpdList);
 		for(PaymentTypeDetail__c tpd1 : tpdList){
@@ -102,6 +110,14 @@ public without sharing class PianificazioneFattureController {
 			}
 		else if(opp.RecordType.DeveloperName.contains('Links')){
 			rtId = getInvoiceRecordType('LinksOneShot');
+		}else if(opp.RecordType.DeveloperName.contains('Idea75')){
+			rtId = getInvoiceRecordType('Idea75OneShot');
+		}else if(opp.RecordType.DeveloperName.contains('DecHit')){
+			rtId = getInvoiceRecordType('DecHitOneShot');
+		}else if(opp.RecordType.DeveloperName.contains('Lis')){
+			rtId = getInvoiceRecordType('LisOneShot');
+		}else if(opp.RecordType.DeveloperName.contains('Linfa')){
+			rtId = getInvoiceRecordType('LinfaOneShot');
 		}else{
 			throw new AuraException('Record Type Whrong');
 		}

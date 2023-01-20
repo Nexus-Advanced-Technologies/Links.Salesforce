@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
-    <label><!-- Stage --></label>
+    <label></label>
     <name>Stage__c</name>
     <picklistValues>
         <masterLabel>Da Fatturare</masterLabel>
-        <translation><!-- Da Fatturare --></translation>
+        <translation></translation>
     </picklistValues>
     <picklistValues>
         <masterLabel>Draft</masterLabel>
-        <translation><!-- Draft --></translation>
+        <translation></translation>
     </picklistValues>
     <picklistValues>
         <masterLabel>Fattura Inviata</masterLabel>
-        <translation><!-- Fattura Inviata --></translation>
+        <translation></translation>
     </picklistValues>
     <picklistValues>
         <masterLabel>Fattura Pagata</masterLabel>
-        <translation><!-- Fattura Pagata --></translation>
+        <translation></translation>
     </picklistValues>
 </CustomFieldTranslation>

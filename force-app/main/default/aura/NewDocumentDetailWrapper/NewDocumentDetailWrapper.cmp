@@ -1,0 +1,13 @@
+<!--
+  @description       : 
+  @author            : mattia.miglietta@nexusat.it
+  @last modified on  : 14-11-2022
+  @last modified by  : mattia.miglietta@nexusat.it
+-->
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,lightning:isUrlAddressable,lightning:actionOverride,force:lightningQuickAction" access="global">
+    <aura:dependency resource="c:*" type="COMPONENT"/>
+    <aura:attribute name="recordId" type="String" />
+    <aura:handler name="init" value="this" action="{!c.init}"/>
+    <lightning:navigation aura:id="navigation"/>
+    <c:createDocumentDetailAlyante recordId="{!v.recordId}"></c:createDocumentDetailAlyante>
+</aura:component>

@@ -12,39 +12,39 @@
     <layouts>
         <layout>NexusLayout</layout>
         <sections>
-            <label><!-- Budget --></label>
+            <label></label>
             <section>Budget</section>
         </sections>
         <sections>
-            <label><!-- Custom Links --></label>
+            <label></label>
             <section>Custom Links</section>
         </sections>
         <sections>
-            <label><!-- Dates --></label>
+            <label></label>
             <section>Dates</section>
         </sections>
         <sections>
-            <label><!-- Links Intranet Tracking --></label>
+            <label></label>
             <section>Links Intranet Tracking</section>
         </sections>
         <sections>
-            <label><!-- New Section --></label>
+            <label></label>
             <section>New Section</section>
         </sections>
         <sections>
-            <label><!-- Nexus Jira Time Tracking --></label>
+            <label></label>
             <section>Nexus Jira Time Tracking</section>
         </sections>
     </layouts>
     <layouts>
         <layout>Project Status Layout</layout>
         <sections>
-            <label><!-- Custom Links --></label>
+            <label></label>
             <section>Custom Links</section>
         </sections>
     </layouts>
     <recordTypes>
-        <label><!-- Nexus --></label>
+        <label></label>
         <name>Nexus</name>
     </recordTypes>
     <startsWith>Consonant</startsWith>

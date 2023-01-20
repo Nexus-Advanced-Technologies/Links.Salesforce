@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TotalSentInvoices__c</fullName>
+    <description>Invoice Milestone amount on sent invoice</description>
+    <externalId>false</externalId>
+    <label>Total Sent Invoices</label>
+    <summarizedField>InvoiceMilestone__c.Amount__c</summarizedField>
+    <summaryFilterItems>
+        <field>InvoiceMilestone__c.Stage__c</field>
+        <operation>equals</operation>
+        <value>Fattura Inviata</value>
+    </summaryFilterItems>
+    <summaryForeignKey>InvoiceMilestone__c.Opportunity__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

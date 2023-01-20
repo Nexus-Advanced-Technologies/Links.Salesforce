@@ -3,19 +3,20 @@
     <fullName>PreventClosingWonOpportunity</fullName>
     <active>true</active>
     <description>Impedire la chiusura in Vinta di una opportunity a partire da stati diversi da Check CDG.</description>
-    <errorConditionFormula>IF( RecordType.DeveloperName = &apos;Opportunity_Greater_Amount&apos;,
+    <errorConditionFormula>AND(
+
 AND(
-OR(
-ISPICKVAL( PRIORVALUE( StageName ) , &apos;Prospecting&apos;),
-ISPICKVAL( PRIORVALUE( StageName ) , &apos;Qualification&apos;),
-ISPICKVAL( PRIORVALUE( StageName ) , &apos;Needs Analysis&apos;),
-ISPICKVAL( PRIORVALUE( StageName ) , &apos;Value Proposition - Demo&apos;),
-ISPICKVAL( PRIORVALUE( StageName ) , &apos;Proposal/Price Quote&apos;),
-ISPICKVAL( PRIORVALUE( StageName ) , &apos;Pianifica Milestone&apos;)
-),
-ISPICKVAL( StageName , &apos;Closed Won&apos;)
-)
-, AND(
+		OR(
+		ISPICKVAL( PRIORVALUE( StageName ) , &apos;Prospecting&apos;),
+		ISPICKVAL( PRIORVALUE( StageName ) , &apos;Qualification&apos;),
+		ISPICKVAL( PRIORVALUE( StageName ) , &apos;Needs Analysis&apos;),
+		ISPICKVAL( PRIORVALUE( StageName ) , &apos;Value Proposition - Demo&apos;),
+		ISPICKVAL( PRIORVALUE( StageName ) , &apos;Proposal/Price Quote&apos;),
+		ISPICKVAL( PRIORVALUE( StageName ) , &apos;Pianifica Milestone&apos;)
+		),
+		ISPICKVAL( StageName , &apos;Closed Won&apos;)
+		), 
+		AND(
 OR(
 ISPICKVAL( PRIORVALUE( StageName ) , &apos;Prospecting&apos;),
 ISPICKVAL( PRIORVALUE( StageName ) , &apos;Qualification&apos;),
@@ -24,7 +25,7 @@ ISPICKVAL( PRIORVALUE( StageName ) , &apos;Value Proposition - Demo&apos;),
 ISPICKVAL( PRIORVALUE( StageName ) , &apos;Proposal/Price Quote&apos;)
 ),
 ISPICKVAL( StageName , &apos;Closed Won&apos;)
-)
-)</errorConditionFormula>
+),
+RecordType.DeveloperName &lt;&gt; &apos;Links&apos;)</errorConditionFormula>
     <errorMessage>L&apos;opportunità non può essere marcata come Closed Won a partire dagli stati Prospecting, Qualification, Needs Analysis, Value Proposition - Demo, Proposal/Price Quote, Pianifica Milestone.</errorMessage>
 </ValidationRule>

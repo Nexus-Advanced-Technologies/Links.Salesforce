@@ -1,0 +1,22 @@
+<!--
+  @description       : 
+  @author            : mattia.miglietta@nexusat.it
+  @last modified on  : 10-11-2022
+  @last modified by  : mattia.miglietta@nexusat.it
+-->
+<apex:component >
+    <apex:includeLightning />
+
+    <div id="componentContainer" />
+    <script>
+        $Lightning.use("c:NewDocumentDetailWrapper", function() {
+            $Lightning.createComponent("c:NewDocumentDetailWrapper",
+                // {PassesValueFromVF:"Micro System"},
+                "componentContainer",
+                function(cmp) {
+             console.log("c:VFPageApp loaded successfully in VF page");
+                }
+            );
+        });
+    </script>
+</apex:component>

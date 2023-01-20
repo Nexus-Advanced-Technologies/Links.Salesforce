@@ -6,6 +6,7 @@
     <columns>CONTACT.TITLE</columns>
     <columns>CONTACT.PHONE1</columns>
     <columns>CONTACT.EMAIL</columns>
+    <columns>CONTACT.RECORDTYPE</columns>
     <columns>CORE.USERS.FIRST_NAME</columns>
     <columns>CORE.USERS.LAST_NAME</columns>
     <filterScope>Everything</filterScope>

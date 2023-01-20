@@ -198,7 +198,7 @@
     <decisions>
         <name>Links</name>
         <label>Links</label>
-        <locationX>737</locationX>
+        <locationX>703</locationX>
         <locationY>126</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -212,7 +212,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>createOrder</targetReference>
+                <targetReference>GetRecordTypeOrder</targetReference>
             </connector>
             <label>Is Record Type Links</label>
         </rules>
@@ -324,6 +324,12 @@
             </value>
         </inputAssignments>
         <inputAssignments>
+            <field>RecordTypeId</field>
+            <value>
+                <elementReference>GetRecordTypeOrder.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
             <field>Status</field>
             <value>
                 <stringValue>Draft</stringValue>
@@ -383,6 +389,34 @@
         <object>Cost__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <recordLookups>
+        <name>GetRecordTypeOrder</name>
+        <label>GetRecordTypeOrder</label>
+        <locationX>959</locationX>
+        <locationY>139</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>createOrder</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SobjectType</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Order</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Links</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>RecordType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <start>
         <locationX>242</locationX>
         <locationY>50</locationY>
@@ -402,7 +436,7 @@
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Active</status>
+    <status>Obsolete</status>
     <variables>
         <name>CostDetailList</name>
         <dataType>SObject</dataType>

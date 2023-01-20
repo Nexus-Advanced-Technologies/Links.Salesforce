@@ -5,6 +5,7 @@
     <columns>OWNER.ALIAS</columns>
     <columns>Description__c</columns>
     <columns>Type__c</columns>
+    <columns>RECORDTYPE</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>

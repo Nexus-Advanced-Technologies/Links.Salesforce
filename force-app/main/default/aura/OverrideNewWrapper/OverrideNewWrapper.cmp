@@ -1,0 +1,26 @@
+<!--
+  @description       : 
+  @author            : ¤ → alessio.marra@nexusat.it
+  @last modified on  : 02/01/2023
+  @last modified by  : ¤ → alessio.marra@nexusat.it
+-->
+<aura:component
+	implements="lightning:actionOverride,force:hasRecordId,force:hasSObjectName,lightning:hasPageReference,lightning:isUrlAddressable">
+	<aura:dependency resource="c:*" type="COMPONENT"/>
+	<aura:attribute name="recordId" type="String" />
+	<aura:attribute name="sObjectName" type="String" />
+	<aura:attribute name="recordTypeId" type="String" />
+
+	<aura:attribute name="additionalParams" type="String" />
+
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+	<!-- <lightning:navigation aura:id="navigation"/> -->
+	<!-- PaymentType__c -->
+	<aura:if isTrue="{!v.sObjectName=='PaymentType__c'}">
+		<c:createPaymentType onclose="{!c.handleClose}"></c:createPaymentType>
+	</aura:if>
+	<!-- PaymentTypeDetail__c -->
+	<aura:if isTrue="{!v.sObjectName=='PaymentTypeDetail__c'}">
+		<c:createPaymentTypeDetail recordTypeId="{!v.recordTypeId}" additionalParams="{!v.additionalParams}" onclose="{!c.handleClose}"></c:createPaymentTypeDetail>
+	</aura:if>
+</aura:component>

@@ -17,7 +17,6 @@
         <backgroundColor>#FFFFFF</backgroundColor>
         <height>0</height>
         <horizontalAlignment>Left</horizontalAlignment>
-        <logo>Public_Folder/NexusAT_logo.png</logo>
         <verticalAlignment>Top</verticalAlignment>
     </header>
     <middleLine>

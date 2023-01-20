@@ -70,7 +70,7 @@
             <field>QuoteId</field>
             <operator>NotEqualTo</operator>
             <value>
-                <stringValue/>
+                <stringValue></stringValue>
             </value>
         </filters>
         <object>QuoteLineItem</object>

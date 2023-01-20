@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Document Detail</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Documents Details</value>
+    </caseValues>
+    <gender>Masculine</gender>
+    <layouts>
+        <layout>Document Detail (CreditNote Document) Layout</layout>
+        <sections>
+            <label></label>
+            <section>Content</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Information2</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Document Detail Final Layout</layout>
+        <sections>
+            <label></label>
+            <section>Content</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Information2</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Document Detail Layout</layout>
+        <sections>
+            <label></label>
+            <section>Content</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Information2</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label></label>
+        <name>New</name>
+    </quickActions>
+    <recordTypes>
+        <label></label>
+        <name>Bulk</name>
+    </recordTypes>
+    <recordTypes>
+        <label></label>
+        <name>Final</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>EndDateGreaterthan_Start_Date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>QuantityLessThan1</name>
+    </validationRules>
+</CustomObjectTranslation>

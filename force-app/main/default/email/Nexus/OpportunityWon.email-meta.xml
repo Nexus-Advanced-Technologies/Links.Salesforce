@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>UTF-8</encodingKey>
+    <letterhead>Nexus_Letterhead</letterhead>
+    <name>OpportunityWon</name>
+    <style>freeForm</style>
+    <subject>Opportunità vinta: {!Opportunity.Account} - {!Opportunity.Name} -  {!Opportunity.Amount}</subject>
+    <textOnly>Ciao,
+
+c&apos;è una nuova opportunità in stato chiuso vinto.
+
+- Nome cliente: {!Opportunity.Account}
+- Nome opportunità: {!Opportunity.Name}
+- Numero di riferimento: {!Opportunity.ReferenceNumber__c}
+- Tipo di servizio: {!Opportunity.ServiceType__c}
+- Data di chiusura prevista: {!Opportunity.CloseDate}
+- Ammontare: {!Opportunity.Amount}
+- Proprietario: {!Opportunity.BusinessManager__c}
+
+Per maggiori informazioni consultare il seguente link: {!Opportunity.Link}
+
+Buon lavoro!</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

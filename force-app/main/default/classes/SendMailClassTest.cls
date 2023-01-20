@@ -12,7 +12,7 @@
 private class SendMailClassTest {
     public static String getRecordTypeId(String sobjectName, String recordTypeName){
         
-        return Schema.getGlobalDescribe().get(sobjectName).getDescribe().getRecordTypeInfosByName().get(recordTypeName).getRecordTypeId();
+        return Schema.getGlobalDescribe().get(sobjectName).getDescribe().getRecordTypeInfosByDeveloperName().get(recordTypeName).getRecordTypeId();
     }
     @TestSetup
     static void dataFactory(){
@@ -208,6 +208,13 @@ private class SendMailClassTest {
         tpdOneShotTest.Rank__c = 1;
         insert tpdOneShotTest;
         
+        TestFattureControllerOneShot('Links',accountId,tpTestOneShotId);
+        TestFattureControllerOneShot('Idea75',accountId,tpTestOneShotId);
+        TestFattureControllerOneShot('DecHit',accountId,tpTestOneShotId);
+        TestFattureControllerOneShot('Lis',accountId,tpTestOneShotId);
+        TestFattureControllerOneShot('Linfa',accountId,tpTestOneShotId); 
+    }
+    static void TestFattureControllerOneShot(string ditta, Id accountId,ID tpTestOneShotId){
         //Insert Opportunity -->One Shot
         Opportunity opp = New Opportunity();
         opp.Name = 'oppTest2';
@@ -216,17 +223,9 @@ private class SendMailClassTest {
         opp.StageName = 'Prospecting';
         opp.PaymentType__c = tpTestOneShotId;
         opp.Amount = 1234;
-        opp.RecordTypeId = getRecordTypeId('Opportunity','Links');
+        opp.RecordTypeId = getRecordTypeId('Opportunity',ditta);
         insert opp;
-        
-        //Update Opportunity to Stage = Proposal/Price Quote
-        Opportunity opp1 = [SELECT Id, StageName 
-                            FROM Opportunity
-                            WHERE Name = 'oppTest2'
-                            LIMIT 1];
-        opp1.StageName = 'Proposal/Price Quote';
-        update opp1;
-        PianificazioneFattureController.createInvoiceMilestone(opp1.Id);
+        PianificazioneFattureController.createInvoiceMilestone(opp.Id);
     }
     @isTest
     static void OpportunityRecursive(){

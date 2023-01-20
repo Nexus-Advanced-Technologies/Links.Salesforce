@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tags__c</fullName>
+    <externalId>false</externalId>
+    <label>Tags</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Sviluppo software</fullName>
+                <default>false</default>
+                <label>Sviluppo software</label>
+            </value>
+            <value>
+                <fullName>Manutenzione correttiva</fullName>
+                <default>false</default>
+                <label>Manutenzione correttiva</label>
+            </value>
+            <value>
+                <fullName>Manutenzione adeguativa</fullName>
+                <default>false</default>
+                <label>Manutenzione adeguativa</label>
+            </value>
+            <value>
+                <fullName>Manutenzione evolutiva</fullName>
+                <default>false</default>
+                <label>Manutenzione evolutiva</label>
+            </value>
+            <value>
+                <fullName>Manutenzione normativa</fullName>
+                <default>false</default>
+                <label>Manutenzione normativa</label>
+            </value>
+            <value>
+                <fullName>Manutenzione migliorativa</fullName>
+                <default>false</default>
+                <label>Manutenzione migliorativa</label>
+            </value>
+            <value>
+                <fullName>Formazione</fullName>
+                <default>false</default>
+                <label>Formazione</label>
+            </value>
+            <value>
+                <fullName>Assistenza onsite - help desk I° livello</fullName>
+                <default>false</default>
+                <label>Assistenza onsite - help desk I° livello</label>
+            </value>
+            <value>
+                <fullName>Assistenza onsite - help desk II° livello</fullName>
+                <default>false</default>
+                <label>Assistenza onsite - help desk II° livello</label>
+            </value>
+            <value>
+                <fullName>Assistenza remota - help desk I° livello</fullName>
+                <default>false</default>
+                <label>Assistenza remota - help desk I° livello</label>
+            </value>
+            <value>
+                <fullName>Assistenza remota - help desk II° livello</fullName>
+                <default>false</default>
+                <label>Assistenza remota - help desk II° livello</label>
+            </value>
+            <value>
+                <fullName>Governance</fullName>
+                <default>false</default>
+                <label>Governance</label>
+            </value>
+            <value>
+                <fullName>Conduzione</fullName>
+                <default>false</default>
+                <label>Conduzione</label>
+            </value>
+            <value>
+                <fullName>Hosting e housing infrastruttura</fullName>
+                <default>false</default>
+                <label>Hosting e housing infrastruttura</label>
+            </value>
+            <value>
+                <fullName>Conservazione sostitutiva</fullName>
+                <default>false</default>
+                <label>Conservazione sostitutiva</label>
+            </value>
+            <value>
+                <fullName>Gestione processi interni</fullName>
+                <default>false</default>
+                <label>Gestione processi interni</label>
+            </value>
+            <value>
+                <fullName>Sistema atti, protocollo</fullName>
+                <default>false</default>
+                <label>Sistema atti, protocollo</label>
+            </value>
+            <value>
+                <fullName>Sistema documentale</fullName>
+                <default>false</default>
+                <label>Sistema documentale</label>
+            </value>
+            <value>
+                <fullName>Sistema Gestione qualità</fullName>
+                <default>false</default>
+                <label>Sistema Gestione qualità</label>
+            </value>
+            <value>
+                <fullName>Sistema e-procurement</fullName>
+                <default>false</default>
+                <label>Sistema e-procurement</label>
+            </value>
+            <value>
+                <fullName>Portali e applicativi web</fullName>
+                <default>false</default>
+                <label>Portali e applicativi web</label>
+            </value>
+            <value>
+                <fullName>Mobile application</fullName>
+                <default>false</default>
+                <label>Mobile application</label>
+            </value>
+            <value>
+                <fullName>Chatbot</fullName>
+                <default>false</default>
+                <label>Chatbot</label>
+            </value>
+            <value>
+                <fullName>Applicazioni con IOT</fullName>
+                <default>false</default>
+                <label>Applicazioni con IOT</label>
+            </value>
+            <value>
+                <fullName>Applicazioni con AI</fullName>
+                <default>false</default>
+                <label>Applicazioni con AI</label>
+            </value>
+            <value>
+                <fullName>Fornitura hardware/strumenti IT</fullName>
+                <default>false</default>
+                <label>Fornitura hardware/strumenti IT</label>
+            </value>
+            <value>
+                <fullName>Supporto specialistico/consulenziale</fullName>
+                <default>false</default>
+                <label>Supporto specialistico/consulenziale</label>
+            </value>
+            <value>
+                <fullName>Ambito sanità</fullName>
+                <default>false</default>
+                <label>Ambito sanità</label>
+            </value>
+            <value>
+                <fullName>Ambito turismo</fullName>
+                <default>false</default>
+                <label>Ambito turismo</label>
+            </value>
+            <value>
+                <fullName>Ambito e-government</fullName>
+                <default>false</default>
+                <label>Ambito e-government</label>
+            </value>
+            <value>
+                <fullName>Ambito mobilità</fullName>
+                <default>false</default>
+                <label>Ambito mobilità</label>
+            </value>
+            <value>
+                <fullName>Ambito fondi professionali</fullName>
+                <default>false</default>
+                <label>Ambito fondi professionali</label>
+            </value>
+            <value>
+                <fullName>Ambito rendicontazione fondi formazione</fullName>
+                <default>false</default>
+                <label>Ambito rendicontazione fondi formazione</label>
+            </value>
+            <value>
+                <fullName>Ambito finance/banche</fullName>
+                <default>false</default>
+                <label>Ambito finance/banche</label>
+            </value>
+            <value>
+                <fullName>Ambito Consulenza&amp;Audit</fullName>
+                <default>false</default>
+                <label>Ambito Consulenza&amp;Audit</label>
+            </value>
+            <value>
+                <fullName>Ambito Energy</fullName>
+                <default>false</default>
+                <label>Ambito Energy</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

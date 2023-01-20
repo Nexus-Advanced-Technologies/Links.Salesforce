@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
-    <help><!-- Indica la scadenza del prossimo pagamento (non è popolato se tutti i pagamenti sono saldati). --></help>
-    <label><!-- Prossima Scadenza --></label>
+    <help></help>
+    <label></label>
     <name>ProssimaScadenza__c</name>
 </CustomFieldTranslation>

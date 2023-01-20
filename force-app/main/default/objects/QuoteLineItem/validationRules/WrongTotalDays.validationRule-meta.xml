@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>WrongTotalDays</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+DDTotal__c &lt;(DDOvernightAllowance__c + DDTravelAllowance__c ),
+ Quote.RecordType.DeveloperName = &apos;Links&apos;,
+ $User.Username != &apos;sysadmin@linksmt.it&apos;
+
+)</errorConditionFormula>
+    <errorMessage>Giorni totali Errati</errorMessage>
+</ValidationRule>

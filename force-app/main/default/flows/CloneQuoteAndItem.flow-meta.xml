@@ -7,6 +7,7 @@
         <locationY>2950</locationY>
         <actionName>c:RedirectFlowRecordId</actionName>
         <actionType>component</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>recordId</name>
             <value>

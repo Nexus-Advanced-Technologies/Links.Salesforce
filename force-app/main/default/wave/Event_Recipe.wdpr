@@ -1,0 +1,337 @@
+{
+  "version" : "53.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "WhoId", "WhatId", "Subject", "Location", "IsAllDayEvent", "DurationInMinutes", "StartDateTime", "EndDateTime", "EndDate", "Description", "AccountId", "OwnerId", "Type", "IsPrivate", "IsGroupEvent", "GroupEventType", "CreatedDate", "RecurrenceEndDateOnly", "RecurrenceDayOfMonth", "RecurrenceMonthOfYear" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Event",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Event"
+        }
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "JOIN4", "LOAD_DATASET1" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "OwnerId" ],
+        "rightQualifier" : "User",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Username", "LastName", "Name", "ExtId__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "User",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "User"
+        }
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "JOIN0", "LOAD_DATASET2" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "AccountId" ],
+        "rightQualifier" : "Account",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Account",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Account"
+        }
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "JOIN1", "LOAD_DATASET3" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "WhatId" ],
+        "rightQualifier" : "Opportunit",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "StageName", "TotalOpportunityQuantity", "Type", "Source__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Opportunity",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Opportunity"
+        }
+      }
+    },
+    "JOIN3" : {
+      "action" : "join",
+      "sources" : [ "JOIN2", "LOAD_DATASET5" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "WhoId" ],
+        "rightQualifier" : "Contact",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET5" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Contact",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Contact"
+        }
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "JOIN3" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "EventDataRecipe",
+          "name" : "EventDataRecipe"
+        }
+      }
+    },
+    "JOIN4" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET0", "LOAD_DATASET7" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "WhatId" ],
+        "rightQualifier" : "Task",
+        "rightKeys" : [ "WhatId" ]
+      }
+    },
+    "LOAD_DATASET7" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "WhatId", "Subject", "Status", "Priority", "OwnerId", "Description", "AccountId", "IsClosed", "CreatedDate", "CallDurationInSeconds", "CallType", "TaskSubtype", "CompletedDateTime" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Task",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Task"
+        }
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Event",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "graph" : {
+          "LOAD_DATASET0" : null
+        },
+        "connectors" : [ ],
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Join",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 531.9
+      },
+      "LOAD_DATASET1" : {
+        "label" : "User",
+        "type" : "LOAD_DATASET",
+        "top" : 392.1,
+        "left" : 532,
+        "graph" : {
+          "LOAD_DATASET1" : null
+        },
+        "connectors" : [ ],
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN1" : {
+        "label" : "Join",
+        "type" : "JOIN",
+        "top" : 112.1,
+        "left" : 671.9
+      },
+      "LOAD_DATASET2" : {
+        "label" : "Account",
+        "type" : "LOAD_DATASET",
+        "top" : 252.10000000000002,
+        "left" : 671.9,
+        "graph" : {
+          "LOAD_DATASET2" : null
+        },
+        "connectors" : [ ],
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN2" : {
+        "label" : "Join",
+        "type" : "JOIN",
+        "top" : 112.1,
+        "left" : 812.2
+      },
+      "LOAD_DATASET3" : {
+        "label" : "Opportunity",
+        "type" : "LOAD_DATASET",
+        "top" : 533.6,
+        "left" : 811.7,
+        "graph" : {
+          "LOAD_DATASET3" : null
+        },
+        "connectors" : [ ],
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN3" : {
+        "label" : "Join",
+        "type" : "JOIN",
+        "top" : 112.5,
+        "left" : 951.7
+      },
+      "LOAD_DATASET5" : {
+        "label" : "Contact",
+        "type" : "LOAD_DATASET",
+        "top" : 392.3,
+        "left" : 952,
+        "graph" : {
+          "LOAD_DATASET5" : null
+        },
+        "connectors" : [ ],
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "OUTPUT0" : {
+        "label" : "Output",
+        "type" : "OUTPUT",
+        "top" : 112.69999999999999,
+        "left" : 1092.4
+      },
+      "JOIN4" : {
+        "label" : "Join",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 391.8
+      },
+      "LOAD_DATASET7" : {
+        "label" : "Task",
+        "type" : "LOAD_DATASET",
+        "top" : 252.2,
+        "left" : 112.30000000000001,
+        "graph" : {
+          "LOAD_DATASET7" : null
+        },
+        "connectors" : [ ],
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      }
+    },
+    "connectors" : [ {
+      "source" : "JOIN4",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "JOIN1"
+    }, {
+      "source" : "JOIN1",
+      "target" : "JOIN2"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "JOIN2"
+    }, {
+      "source" : "JOIN2",
+      "target" : "JOIN3"
+    }, {
+      "source" : "LOAD_DATASET5",
+      "target" : "JOIN3"
+    }, {
+      "source" : "JOIN3",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "LOAD_DATASET0",
+      "target" : "JOIN4"
+    }, {
+      "source" : "LOAD_DATASET7",
+      "target" : "JOIN4"
+    } ],
+    "hiddenColumns" : [ {
+      "fieldName" : "Id",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    } ]
+  }
+}

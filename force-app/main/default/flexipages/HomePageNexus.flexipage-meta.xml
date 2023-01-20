@@ -12,6 +12,7 @@
                     <value>true</value>
                 </componentInstanceProperties>
                 <componentName>desktopDashboards:embeddedDashboard</componentName>
+                <identifier>desktopDashboards_embeddedDashboard</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-c4a741bf-fc7f-439d-ac7c-7534b8d31b36</name>
@@ -29,6 +30,7 @@
                     <value>true</value>
                 </componentInstanceProperties>
                 <componentName>desktopDashboards:embeddedDashboard</componentName>
+                <identifier>desktopDashboards_embeddedDashboard2</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-a3ea8d5a-49ab-4ee4-85cb-9438afc791e3</name>
@@ -50,6 +52,7 @@
                     <value>Progetti</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
+                <identifier>customTab</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -63,6 +66,7 @@
                     <value>Pagamenti</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
+                <identifier>customTab2</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-9fadea68-5b4f-42cf-9ba3-3746fb314761</name>
@@ -76,6 +80,7 @@
                     <value>Facet-9fadea68-5b4f-42cf-9ba3-3746fb314761</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:tabset</componentName>
+                <identifier>flexipage_tabset</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
@@ -96,11 +101,13 @@
         <itemInstances>
             <componentInstance>
                 <componentName>home:recentRecordContainer</componentName>
+                <identifier>home_recentRecordContainer</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
             <componentInstance>
                 <componentName>NXLIBS:IntegrationLogComponent</componentName>
+                <identifier>NXLIBS_IntegrationLogComponent</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>

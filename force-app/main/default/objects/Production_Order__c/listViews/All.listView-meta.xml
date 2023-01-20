@@ -4,11 +4,13 @@
     <columns>NAME</columns>
     <columns>IdProductionOrder__c</columns>
     <columns>ProductionOrderCode__c</columns>
-    <columns>Responsible__c</columns>
     <columns>StartDate__c</columns>
     <columns>Status__c</columns>
     <columns>UnitAcronym__c</columns>
     <columns>UnitDescription__c</columns>
+    <columns>SharedUsersLong__c</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <columns>OWNER.LAST_NAME</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>

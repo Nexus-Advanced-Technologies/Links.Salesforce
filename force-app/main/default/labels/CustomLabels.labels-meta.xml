@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
     <labels>
+        <fullName>Cancel</fullName>
+        <categories>action</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cancel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>New</fullName>
+        <categories>action</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>New</shortDescription>
+        <value>New</value>
+    </labels>
+    <labels>
         <fullName>NexusInvoiceMilestonError</fullName>
         <categories>Nexus-InvoiceMileston</categories>
         <language>en_US</language>
@@ -15,5 +31,29 @@
         <protected>false</protected>
         <shortDescription>Success</shortDescription>
         <value>Invoice Milestone entered successfully</value>
+    </labels>
+    <labels>
+        <fullName>PreviewDocumentExtIdBlank</fullName>
+        <categories>Error Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PreviewDocumentExtIdBlank</shortDescription>
+        <value>Document not yet processed</value>
+    </labels>
+    <labels>
+        <fullName>PreviewDocumentHttpRequest</fullName>
+        <categories>Error Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PreviewDocumentHttpRequest</shortDescription>
+        <value>There was a problem getting the PDF, please try again, if the error still persists contact system administrator</value>
+    </labels>
+    <labels>
+        <fullName>Save</fullName>
+        <categories>action</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Save</shortDescription>
+        <value>Save</value>
     </labels>
 </CustomLabels>

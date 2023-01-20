@@ -48,7 +48,7 @@
         <actionName>View</actionName>
         <comment>Action override created by Lightning App Builder during activation.</comment>
         <content>FatturaInCloudRecordPageNexus</content>
-        <formFactor>Large</formFactor>
+        <formFactor>Small</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>Flexipage</type>
         <pageOrSobjectType>FatturaInCloud__c</pageOrSobjectType>
@@ -57,7 +57,7 @@
         <actionName>View</actionName>
         <comment>Action override created by Lightning App Builder during activation.</comment>
         <content>FatturaInCloudRecordPageNexus</content>
-        <formFactor>Small</formFactor>
+        <formFactor>Large</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>Flexipage</type>
         <pageOrSobjectType>FatturaInCloud__c</pageOrSobjectType>
@@ -244,7 +244,6 @@
     </actionOverrides>
     <brand>
         <headerColor>#FF6600</headerColor>
-        <logo>NexusLogo</logo>
         <logoVersion>1</logoVersion>
         <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
     </brand>
@@ -253,6 +252,7 @@
     <formFactors>Large</formFactors>
     <isNavAutoTempTabsDisabled>true</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>true</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
     <label>Sales @NexusAT</label>
     <navType>Standard</navType>
     <profileActionOverrides>
@@ -292,6 +292,9 @@
     <tabs>Revenue__c</tabs>
     <tabs>standard-report</tabs>
     <tabs>standard-Dashboard</tabs>
+    <tabs>DocumentAlyante__c</tabs>
+    <tabs>InvoiceMilestoneDocumentAlyante__c</tabs>
+    <tabs>OpportunityDocumentAlyante__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Sales_Nexus_UtilityBar</utilityBar>
 </CustomApplication>

@@ -190,7 +190,6 @@
     </actionOverrides>
     <brand>
         <headerColor>#184FA4</headerColor>
-        <logo>LogoLinks</logo>
         <logoVersion>1</logoVersion>
         <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
     </brand>
@@ -198,6 +197,7 @@
     <formFactors>Large</formFactors>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
     <label>Sales@LinksMT</label>
     <navType>Standard</navType>
     <tabs>standard-home</tabs>
@@ -215,6 +215,10 @@
     <tabs>PaymentType__c</tabs>
     <tabs>PaymentTypeDetail__c</tabs>
     <tabs>InvoiceMilestone__c</tabs>
+    <tabs>DocumentAlyante__c</tabs>
+    <tabs>InvoiceMilestoneDocumentAlyante__c</tabs>
+    <tabs>OpportunityDocumentAlyante__c</tabs>
+    <tabs>BusinessUnit__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Sales_LinksMT_UtilityBar</utilityBar>
 </CustomApplication>

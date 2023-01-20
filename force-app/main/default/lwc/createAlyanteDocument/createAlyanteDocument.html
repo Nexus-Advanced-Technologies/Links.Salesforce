@@ -1,0 +1,61 @@
+<!--
+  @description       : 
+  @author            : ¤ → alessio.marra@nexusat.it
+  @last modified on  : 01-28-2022
+  @last modified by  : §
+-->
+<template>
+    <!-- sldsValidatorIgnoreNextLine -->
+    <lightning-record-edit-form object-api-name="DocumentAlyante__c" onsuccess={handleSuccess}
+        onerror={handleError}
+        record-type-id={recordTypeId}>
+        <!-- <template if:true={documentToDisplay}> -->
+        <lightning-messages> </lightning-messages>
+        <div class="slds-grid slds-wrap slds-grid_align-space">
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-input-field field-name="RecordTypeId" value={recordTypeId} variant="label-stacked" disabled>
+                </lightning-input-field>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-input-field field-name="Status__c" value={status} variant="label-stacked" disabled>
+                </lightning-input-field>
+            </div>
+            <div class="slds-col slds-size_1-of-1">
+                <lightning-input-field field-name="Content__c" value={content} variant="label-stacked">
+                </lightning-input-field>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-input-field field-name="Account__c" value={accountId} variant="label-stacked" disabled>
+                </lightning-input-field>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-input-field field-name="Date__c" value={date} variant="label-stacked">
+                </lightning-input-field>
+            </div>
+            <template if:false={isCreditNote}>
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-combobox name="Opportunity" label="Opportunity" placeholder="Select Opportunity"
+                        required="true" value={opportunityId} options={opportunityOptions} onchange={handleOpportunity}
+                        disabled={isOpportunityDisabled} class="combobox-element"></lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-combobox name="InvoiceMilestone" label="Invoice Milestone"
+                        placeholder="Select Invoice Milestone" required="true" value={milestoneId}
+                        options={milestonesOptions} onchange={handleMilestone} disabled={isMilestoneDisabled} class="combobox-element">
+                    </lightning-combobox>
+                </div>
+            </template>
+        </div>
+        <!-- </template> -->
+    </lightning-record-edit-form>
+    <!-- <template if:true={opportunityToDisplay}> -->
+    <!-- </template> -->
+    <!-- <template if:true={invoiceMilestoneToDisplay}> -->
+    <!-- </template> -->
+
+    <div slot="footer" class="slds-align_absolute-center slds-var-m-top_large">
+        <lightning-button variant="neutral" label="Cancel" onclick={closeForm}></lightning-button>
+        <lightning-button variant="brand" label={submitLabel} onclick={handleFormSubmission} class="slds-var-m-left_x-small">
+        </lightning-button>
+    </div>
+</template>

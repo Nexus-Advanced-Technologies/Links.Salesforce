@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>VAT_Number_Italy_Account</fullName>
-    <active>true</active>
+    <active>false</active>
     <description>Validation for italian VAT number</description>
     <errorConditionFormula>IF(NOT(ISBLANK(VATNumber__c)),
 NOT(REGEX(VATNumber__c , &quot;^(IT){0,1}[0-9]{11}$&quot;)),

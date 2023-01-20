@@ -10,6 +10,7 @@
         <connector>
             <targetReference>SendEmailCloseWon</targetReference>
         </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>listOppIds</name>
             <value>
@@ -24,6 +25,7 @@
         <locationY>684</locationY>
         <actionName>PianificazioneFattureController</actionName>
         <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>listOppIds</name>
             <value>
@@ -38,6 +40,7 @@
         <locationY>679</locationY>
         <actionName>PianificazioneFattureController</actionName>
         <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>listOppIds</name>
             <value>
@@ -52,6 +55,7 @@
         <locationY>598</locationY>
         <actionName>SendEmailClass</actionName>
         <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>listOppIds</name>
             <value>
@@ -69,6 +73,7 @@
         <connector>
             <targetReference>Amount</targetReference>
         </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>listOppIds</name>
             <value>
@@ -84,6 +89,7 @@
         <locationY>959</locationY>
         <actionName>Opportunity.SendEmailOptyWon</actionName>
         <actionType>emailAlert</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>SObjectRowId</name>
             <value>
@@ -137,12 +143,40 @@
         </rules>
         <rules>
             <name>Links</name>
-            <conditionLogic>and</conditionLogic>
+            <conditionLogic>or</conditionLogic>
             <conditions>
                 <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <stringValue>Links</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Idea75</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>DecHit</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Lis</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Linfa</stringValue>
                 </rightValue>
             </conditions>
             <connector>
@@ -220,6 +254,13 @@
                 <operator>EqualTo</operator>
                 <rightValue>
                     <stringValue>Milestone Planning</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Amount</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
                 </rightValue>
             </conditions>
             <connector>

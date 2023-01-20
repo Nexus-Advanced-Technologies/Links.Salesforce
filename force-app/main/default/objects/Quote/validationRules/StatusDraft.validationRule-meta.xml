@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>StatusDraft</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    $RecordType.DeveloperName = &quot;Links&quot;,
+    isMinMarginValid__c = FALSE, 
+    ISPICKVAL(PRIORVALUE( Status ),&quot;0&quot;),
+				ISCHANGED(Status) 
+)</errorConditionFormula>
+    <errorMessage>L&apos; Economic Plan non rispetta i parametri minimi per l&apos;auto-approvazione. 
+Per approvare l&apos;Offerta allo stato corrente, inviare richiesta di approvazione, cliccando sul bottone &apos;Invia per l&apos;approvazione&apos;</errorMessage>
+</ValidationRule>

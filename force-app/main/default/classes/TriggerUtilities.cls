@@ -3,8 +3,8 @@
  * @author            : ¤ → alessio.marra@nexusat.it
  * @see               : OnOpportunity (Trigger)
  * @see               : TriggerSetting (CustomMetadata)
- * @last modified on  : 03-26-2021
- * @last modified by  : Œ
+ * @last modified on  : 01-20-2022
+ * @last modified by  : §
  * Modifications Log 
  * Ver   Date         Author                         Modification
  * 1.0   24/01/2021   ¤ → alessio.marra@nexusat.it   Initial Version
@@ -66,7 +66,25 @@ public class TriggerUtilities {
 		set;
 	}
 
+	public static List<TriggerSetting__mdt> TriggerSettingDocumentAlyante {
+		get {
+			if(TriggerSettingDocumentAlyante == null) {
+				TriggerSettingDocumentAlyante = [SELECT DeveloperName, DocumentAlyanteAfterInsert__c, DocumentAlyanteAfterUpdate__c, DocumentAlyanteBeforeUpdate__c, DocumentAlyanteBeforeDelete__c FROM TriggerSetting__mdt];
+			}
+			return TriggerSettingDocumentAlyante;
+		}
+		set;
+	}
 
+	public static List<TriggerSetting__mdt> TriggerSettingDocumentDetailAlyante {
+		get {
+			if(TriggerSettingDocumentDetailAlyante == null) {
+				TriggerSettingDocumentDetailAlyante = [SELECT DeveloperName, DocumentDetailAlyanteBeforeInsert__c FROM TriggerSetting__mdt];
+			}
+			return TriggerSettingDocumentDetailAlyante;
+		}
+		set;
+	}
 
 	public class TriggerUtilitiesException extends Exception {}
 
