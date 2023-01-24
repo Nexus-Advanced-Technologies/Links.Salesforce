@@ -27,6 +27,7 @@ export default class CreateAlyanteDocument extends NavigationMixin(LightningElem
 	@api opportunitiesId;
 	@api invoiceMilestonesId;
 	@api isClone = false;
+	@api isCreditNote = false;
 
 	@track opportunityOptions = [];
 	@track milestonesOptions = [];
@@ -35,6 +36,7 @@ export default class CreateAlyanteDocument extends NavigationMixin(LightningElem
 	@track isOpportunityDisabled = false;
 	@track isMilestoneDisabled = false;
 
+	submitLabel = 'Save';
 	@wire(getObjectInfo, { objectApiName: DOCUMENT_OBJ })
 	handleObjectInfo({error, data}) {
 		if(data) {
@@ -76,7 +78,17 @@ export default class CreateAlyanteDocument extends NavigationMixin(LightningElem
 			console.log(error);
 		}
 	}
+
+	connectedCallback() {
+		if(this.isCreditNote) {
+			this.submitLabel = 'Next';
+		}
+	}
 	
+	handleError(event) {
+		console.log(event.detail);
+	}
+
 	closeForm(){
 		const closeEvt = new CustomEvent("quickactionclose");
 		this.dispatchEvent(closeEvt);
@@ -89,28 +101,39 @@ export default class CreateAlyanteDocument extends NavigationMixin(LightningElem
 
 	handleSuccess(event) {
 		const documentId = event.detail.id;
-		const oppDoc = this.createOpportunityDocument(documentId);
-		const invDoc = this.createInvoiceMilestoneDocument(documentId);
+		if(this.opportunityId != null && this.invoiceMilestonesId != null) {
+			const oppDoc = this.createOpportunityDocument(documentId);
+			const invDoc = this.createInvoiceMilestoneDocument(documentId);
 
-		Promise.all([createRecord(oppDoc), createRecord(invDoc)])
-			.then(() => {
-				if(this.isClone) {
-					const cloneEvent = new CustomEvent("cloned", {
-						detail: {
-							clonedDocumentId: documentId,
-						}
-					});
-					this.dispatchEvent(cloneEvent);
-				} else {
-					this.closeForm();
-					this.showToast("Success", "success", "Document created successfully!");
-					this.redirectToDocument(event.detail.id);
+			Promise.all([createRecord(oppDoc), createRecord(invDoc)])
+				.then(() => {
+					if(this.isClone) {
+						const cloneEvent = new CustomEvent("cloned", {
+							detail: {
+								clonedDocumentId: documentId,
+							}
+						});
+						this.dispatchEvent(cloneEvent);
+					} else {
+						this.closeForm();
+						this.showToast("Success", "success", "Document created successfully!");
+						this.redirectToDocument(event.detail.id);
+					}
+				})
+				.catch(err => {
+					deleteRecord(documentId);
+					console.log(err);
+					this.showToast('Error', 'error', err.body.message);
+				})
+		}
+		else {
+			const cloneEvent = new CustomEvent("cloned", {
+				detail: {
+					clonedDocumentId: documentId,
 				}
-			})
-			.catch(err => {
-				deleteRecord(documentId);
-				this.showToast('Error', 'error', err.body.message);
-			})
+			});
+			this.dispatchEvent(cloneEvent);
+		}
 	}
 
 	createOpportunityDocument(documentId) {

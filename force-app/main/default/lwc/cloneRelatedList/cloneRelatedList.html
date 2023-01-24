@@ -1,0 +1,17 @@
+<template>
+    <lightning-layout multiple-rows>
+        <lightning-layout-item size="12">
+                <lightning-datatable
+                    key-field="id"
+                    data={documentDetails}
+                    columns={columns}
+                    onsave={handleSave}
+                    onrowselection={getSelectedDetail}
+                    suppress-bottom-bar={hideTableFooter}></lightning-datatable>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" style="margin-top: 2%; margin-bottom: 2%;">
+            <lightning-button variant="neutral" label="Previous" onclick={goBack} style="margin-left: 66%"></lightning-button>
+            <lightning-button variant="brand" onclick={createRecordDetails} label="Create Document" style="margin-left: 4%" ></lightning-button>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

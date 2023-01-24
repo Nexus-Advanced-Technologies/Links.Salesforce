@@ -60,19 +60,19 @@ export default class PdfPreview extends LightningElement {
 
         const documentRecord = await getDocumentRecord({ recordId: this.recordId } );
         this.alyanteId = documentRecord.ExtIdAlyante__c;
-        console.log('alyante id setted');
+        console.debug('alyante id setted');
 
-        console.log('alyanteId', this.alyanteId);
+        console.debug('alyanteId', this.alyanteId);
         if (this.alyanteId == null) {
             this.setError(errorExtIdBlank);
         } else {
             const credentials = await getCredentials();
             const base64 = await this.getPdfBase64(credentials);
             this.base64 = base64;
-            console.log('base64 setted');
+            console.debug('base64 setted');
             this.showLoader = false;
 
-            console.log('base64', this.base64);
+            console.debug('base64', this.base64);
             if (this.base64 == null) {
                 this.setError(errorHttpRequest);
             }

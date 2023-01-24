@@ -1,0 +1,18 @@
+<template>
+    <lightning-layout multiple-rows>
+        <lightning-layout-item size="12">
+            <lightning-quick-action-panel header={createDocumentTitle}></lightning-quick-action-panel>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" style="margin-top: -2%;">
+            <template if:true={showForm}>
+                <c-create-alyante-document record-type-name="credit note" account-id={accountId} status="Draft" date={date} content={content}
+                    is-credit-note="true"
+                    is-clone="false" onquickactionclose={handleCloseAction} oncloned={handleCreateSuccess}>
+                </c-create-alyante-document>
+            </template>
+            <template if:true={showRelatedForm}>
+                <c-clone-related-list document-id={documentId} document-details={documentDetails} ondocdetailselected={detailSelected} ongoback={deleteDocument}></c-clone-related-list>
+            </template>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

@@ -49,4 +49,35 @@ public class CloneDraftInvoiceController {
             throw new AuraHandledException(e.getMessage());
         }
     }
+
+    @AuraEnabled(cacheable=true)
+    public static List<DocumentDetailAlyante__c> getDocumentDetails(Id recordId){
+        List<DocumentDetailAlyante__c> documentDetails = new List<DocumentDetailAlyante__c>();
+        try {
+            documentDetails = [SELECT Amount__c, Name, Content__c, Document__c, EndCompetence__c, Project__c, Project__r.Name, RevenueType__c, StartCompetence__c, Tags__c
+                            FROM DocumentDetailAlyante__c
+                            WHERE Document__c = :recordId];
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+        return documentDetails;
+    }    
+    @AuraEnabled
+    public static List<DocumentDetailAlyante__c> createDocumentDetails(List<DocumentDetailAlyante__c> documentDetails) {
+        try {
+            insert documentDetails;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+        return documentDetails;
+    }
+    @AuraEnabled
+    public static void deleteDocument(Id docId){
+        DocumentAlyante__c doc = new DocumentAlyante__c(Id = docId);
+        try {
+            delete doc;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
 }

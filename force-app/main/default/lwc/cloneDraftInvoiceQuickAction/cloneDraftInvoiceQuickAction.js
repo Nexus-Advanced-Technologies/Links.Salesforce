@@ -44,6 +44,7 @@ export default class CloneDraftInvoiceQuickAction extends NavigationMixin(Lightn
     }
 
     get date() {
+        console.log(getFieldValue(this.documentAlyante.data, DATE_FIELD));
         return getFieldValue(this.documentAlyante.data, DATE_FIELD);
     }
 
