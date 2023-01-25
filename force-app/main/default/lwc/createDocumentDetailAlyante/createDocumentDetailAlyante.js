@@ -1,7 +1,7 @@
 /**
  * @description       : 
  * @author            : 
- * @last modified on  : 20/01/2023
+ * @last modified on  : 25/01/2023
  * @last modified by  : ¤ → alessio.marra@nexusat.it
 **/
 import { api, LightningElement, track, wire } from 'lwc';
@@ -10,86 +10,68 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getRecordDefaultValues from '@salesforce/apex/createDocumentDetailAlyanteController.getRecordDefaultValues';
 import { refreshApex } from '@salesforce/apex';
 
-// const fields = ['Content__c',
-//                 'RevenueType__c', 'Document__c',
-//                 'StartCompetence__c', 'Amount__c',
-//                 'EndCompetence__c', 'Project__c',
-//                 'Tags__c'];
-
 const DEBOUNCE_INTERVAL = 300;
 const OBJ_NAME = 'DocumentDetailAlyante__c';
+const INITIALIZE_LAYOUT = {};
 
 export default class NavToNewRecordWithDefaults extends NavigationMixin(LightningElement) {
-    @api recordId;      //TODO - rename in documentId
-    @api recordTypeId;  //FIXME - not working
-    objectApiName = OBJ_NAME;
+	@api documentId;
+	@api recordTypeId;
+	recordId;
+	objectApiName = OBJ_NAME;
 
-    layout = {};
+	layout = INITIALIZE_LAYOUT;
+	formVisible = false;
+	alreadyRenderedDefaultValue = false;
 
-    //TODO - 
-    label = {
-        // cancel: 'Cancel',
-        header: '',
-        new: 'New',
-        // save: 'Save'
-    };
+	//TODO - custom label
+	label = {
+		// cancel: 'Cancel',
+		header: '',
+		new: 'New',
+		// save: 'Save'
+	};
 
-    fieldValues = [];
-    // @api recordId;
-    projectPopulated = false;
-    projectValue;
-    @track fetchedData;
-    @wire(getRecordDefaultValues, {documentRecordId: '$recordId'})      //NOTE - rework/improve
-    valuesFetched({error, data}) {
-        if(data) {
-            this.fetchedData = data;
-            console.log('wiredStarted');
-            // console.log('DATA -> ', data);
-            if(data.Project__c) {
-                this.projectValue = data.Project__c;
-                // console.log(this.projectValue);
-            }
-        }
-        if(error) {
-            console.error(error);
-        }
-        this.projectPopulated = true;
-        // this.formatElementValues();
-    }
-
-    renderedCallback() {
-		console.debug('renderedCallback()');
-        const fields = this.template.querySelectorAll('lightning-input-field');
-        if (fields) {
-            fields.forEach(field => {
-                switch (field.fieldName) {
-                    case 'RecordTypeId':
-                        field.value = this.recordTypeId;
-                        break;
-                    case 'Document__c':
-                        field.value = this.recordId;
-                        break;
-                    case 'Project__c':
-                        field.value = this.projectValue;
-                        break;
-                    default:
-                        field.value = null;
-                        break;
-                }
-                console.debug('[default assignment]', field.fieldName, '=>', field.value);
-            });
-        }
+	projectValue;
+	wiredGetRecordDefaultValuesFlag;
+	@wire(getRecordDefaultValues, {documentRecordId: '$documentId'})		//TODO - rework
+	wiredGetRecordDefaultValues({error, data}) {
+		if(data) {
+			this.wiredGetRecordDefaultValuesFlag = data;
+			console.error('wiredStarted');
+			// console.log('DATA -> ', data);
+			if(data.Project__c) {
+				this.projectValue = data.Project__c;
+			}
+		}
+		if(error) {
+			console.error(error);
+		}
+		this.formVisible = true;
 	}
 
-    handleLoad(evt) {
+	renderedCallback() {
+		console.debug('renderedCallback()');
+		if (!this.alreadyRenderedDefaultValue) {
+			this.renderedDefaultValue();
+			this.alreadyRenderedDefaultValue = true;
+		}
+	}
+
+	handleLoad(evt) {
 		console.debug('handleLoad() => ',JSON.parse(JSON.stringify(evt.detail)));
-		// this.layout = this.modifyLayout(this.getEvtLayout(evt));
-        this.layout = this.formatLayout(evt.detail.layout);
+		if (evt.detail.recordTypeId != this.recordTypeId) {		//quando si fa il 2° run, carica il rt precedente
+			this.layout = INITIALIZE_LAYOUT;
+		}
+		if (this.layoutIsNotReady) {
+			this.layout = this.formatLayout(evt.detail.layout);
+			this.alreadyRenderedDefaultValue = false;
+		}
 
 		this.label.header = `${this.label.new} ${evt.detail.objectInfos[OBJ_NAME].label}: ${evt.detail.record.recordTypeInfo?.name}`;
 	}
 
-    handleInputChange(evt) {
+	handleInputChange(evt) {
 		console.debug('handleInputChange() => ',JSON.parse(JSON.stringify(evt.detail)));
 		try {
 			const target = evt.target;
@@ -97,102 +79,102 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 				const fieldApiName = target.dataset.id;
 				var value = target.value;
 				console.debug('[change]', fieldApiName, '=>', value);
-
-				//TODO - quantity not < 1
-                //FIXME - Tags not deselect all
-
 			}, DEBOUNCE_INTERVAL);
 		} catch (error) {
 			console.error(error);
 		}
 	}
 
-    //TODO - handleSubmit
+	handleSubmit(evt) {
+		try {
+			console.info('handleSubmit() => ',JSON.parse(JSON.stringify(evt.detail)));
+			evt.preventDefault();
+	
+			//NOTE - Custom validation
+			const inputFields = this.template.querySelectorAll('lightning-input-field');
+			var hasError = false;
+			// if (inputFields) {
+			// 	inputFields.forEach(field => {
+			// 		var value = field.value;
+			// 		var errorMessage;
+			// 		switch (field.fieldName) {
+			// 			case 'Name':
+			// 				if (value) {
+			// 					errorMessage = 'Name is required';
+			// 				}
+			// 				break;
+			// 			default:
+			// 				break;
+			// 		}
+			// 		if (errorMessage) {
+			// 			field.setErrors(JSON.parse(`{"body":{"output":{"fieldErrors":{"${field.fieldName}":[{"message":"${errorMessage}"}]}}}}`));
+			// 			hasError = true;
+			// 		}
+			// 	});
+			// }
 
-    handleSuccess(event) {
-        var detailRecordId = event.detail.id;
-        this.dispatchEvent(new ShowToastEvent({
-            title: 'Record Created',        //TODO - custom label
-            variant: 'success',
-            message: 'The Record was successfully created'      //TODO - custom label
-        }));
-        this.navigateToRecordViewPage(this.recordId);
-    }
+			if (hasError) {
+				return;
+			}
+			
+			const fields = evt.detail.fields;
+			console.log('fields: ',JSON.parse(JSON.stringify(fields)));
+			// NOTE - Other assignment
 
-    handleError(event) {
-        //TODO - handle
-    }
+			this.template.querySelector("lightning-record-edit-form").submit(fields);
+		} catch (error) {
+			console.error(error);
+		}
+	}
 
-    timerId;
+	handleSuccess(evt) {
+		console.info('handleSuccess() => ',JSON.parse(JSON.stringify(evt.detail)));
+		this.recordId = evt.detail.id;
+		this.dispatchEvent(new ShowToastEvent({
+			title: 'Record Created',		//TODO - custom label
+			variant: 'success',
+			message: 'The Record was successfully created'		//TODO - custom label
+		}));
+		this.navigateToRecordViewPage(this.documentId);
+	}
+
+	handleError(evt) {
+		console.error('handleError() => ',JSON.parse(JSON.stringify(evt.detail)));
+		this.dispatchEvent(new ShowToastEvent({
+			title: 'Error!',		//TODO - custom label
+			variant: 'error',
+			message: 'An error occurred while attempting to save the record.'		//TODO - custom label
+		}));
+	}
+
+	get layoutIsNotReady() {
+		return (Object.keys(this.layout).length === 0)
+	}
+
+	timerId;
 	debounce(fn, wait) {
 		clearTimeout(this.timerId);
 		this.timerId = setTimeout(fn, wait);
 	}
 
-    // formatElementValues() {
-    //     this.fieldValues = fields.map( elm => {
-    //         var value = '';
-    //         var size = 6;
-    //         switch (elm) {
-    //             case 'Content__c':
-    //                 size = 12;
-    //                 break;
-    //             case 'Document__c':
-    //                 value = this.recordId;
-    //                 break;
-    //             case 'Project__c':
-    //                 if(this.projectValue) {
-    //                     value = this.projectValue;
-    //                 }
-    //                 break;
-    //             case 'Tags__c':
-    //                 size = 12;
-    //                 break;
-    //             default:
-    //                 break;
-    //         }
-    //         return ({
-    //             name: elm,
-    //             value: value,
-    //             size: size
-    //         })
-    //     })
-    //     this.projectPopulated = true;
-    // }
+	goBack() {
+		this.navigateToRecordViewPage(this.documentId);
+	}
 
-    navigateToRecordViewPage(recordId) {
-        this[NavigationMixin.Navigate]({
-            type: 'standard__recordPage',
-            attributes: {
-                recordId: recordId,
-                actionName: 'view'
-            }
-        })
-        this.resetFieldsAndRefresh();
-    }
+	navigateToRecordViewPage(recordId) {
+		this[NavigationMixin.Navigate]({
+			type: 'standard__recordPage',
+			attributes: {
+				recordId: recordId,
+				actionName: 'view'
+			}
+		});
+		this.alreadyRenderedDefaultValue = false;		//per il 2° run
+		// this.layout = INITIALIZE_LAYOUT;
+		// this.renderedDefaultValue();
+	}
 
-    resetFieldsAndRefresh() {       //FIXME - not working
-        const inputFields = this.template.querySelectorAll(
-            'lightning-input-field'
-        );
-        if (inputFields) {
-            inputFields.forEach(field => {
-                console.log(field.value);       //TODO - rework c log
-                if(field.value != this.recordId && field.value != this.projectValue) {
-                    field.reset();
-                }
-                
-            });
-        }
-        // this.projectPopulated = false;
-        // refreshApex(this.fetchedData);
-    }
-
-    goBack() {
-        this.navigateToRecordViewPage(this.recordId);
-    }
-
-    formatLayout(layout) {
+	formatLayout(layout) {
 		const isModeView = layout.mode == "View";
 		const isModeCreate = layout.mode == "Create";
 		const sections = layout.sections.map( section => {
@@ -217,7 +199,7 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 				layoutRows: layoutRows
 			};
 		});
-        var sectionsWithoutSystemInfo = sections.filter(item => item.heading != 'System Information');
+		var sectionsWithoutSystemInfo = sections.filter(item => item.heading != 'System Information');
 		layout = {
 			...layout,
 			sections: sectionsWithoutSystemInfo
@@ -225,5 +207,33 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 
 		console.log('Layout => ',JSON.parse(JSON.stringify(layout)));
 		return layout;
+	}
+
+	renderedDefaultValue() {
+		const fields = this.template.querySelectorAll('lightning-input-field');
+		if (fields) {
+			fields.forEach(field => {
+				switch (field.fieldName) {
+					case 'RecordTypeId':
+						field.value = this.recordTypeId;
+						break;
+					case 'Document__c':
+						field.value = this.documentId;
+						field.disabled = true;
+						break;
+					case 'Project__c':
+						field.value = this.projectValue;
+						field.disabled = true;
+						break;
+					case 'Quantity__c':
+						field.value = 1;
+						break;
+					default:
+						field.value = null;
+						break;
+				}
+				console.debug('[default assignment]', field.fieldName, '=>', field.value);
+			});
+		}
 	}
 }

@@ -1,14 +1,16 @@
 <!--
   @description       : 
   @author            : mattia.miglietta@nexusat.it
-  @last modified on  : 20/01/2023
+  @last modified on  : 24/01/2023
   @last modified by  : ¤ → alessio.marra@nexusat.it
 -->
-<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,lightning:isUrlAddressable,lightning:actionOverride,force:lightningQuickAction" access="global">
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,lightning:hasPageReference,lightning:isUrlAddressable,lightning:actionOverride,force:lightningQuickAction" access="global">
     <aura:dependency resource="c:*" type="COMPONENT"/>
     <aura:attribute name="recordId" type="String" />
     <aura:attribute name="recordTypeId" type="String" />
+    <aura:attribute name="pageReference" type="Object" />
     <aura:handler name="init" value="this" action="{!c.init}"/>
+    <aura:handler name="change" value="{!v.pageReference}" action="{!c.init}" />
     <lightning:navigation aura:id="navigation"/>
-    <c:createDocumentDetailAlyante recordId="{!v.recordId}" recordTypeId="{!v.recordTypeId}"></c:createDocumentDetailAlyante>
+    <c:createDocumentDetailAlyante documentId="{!v.recordId}" recordTypeId="{!v.recordTypeId}"></c:createDocumentDetailAlyante>
 </aura:component>
