@@ -8,7 +8,7 @@ import { api, LightningElement, track, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getRecordDefaultValues from '@salesforce/apex/createDocumentDetailAlyanteController.getRecordDefaultValues';
-import { refreshApex } from '@salesforce/apex';
+import { label } from './utils';
 
 const DEBOUNCE_INTERVAL = 300;
 const OBJ_NAME = 'DocumentDetailAlyante__c';
@@ -24,22 +24,14 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 	formVisible = false;
 	alreadyRenderedDefaultValue = false;
 
-	//TODO - custom label
-	label = {
-		// cancel: 'Cancel',
-		header: '',
-		new: 'New',
-		// save: 'Save'
-	};
+	label = label;
 
 	projectValue;
-	wiredGetRecordDefaultValuesFlag;
-	@wire(getRecordDefaultValues, {documentRecordId: '$documentId'})		//TODO - rework
+
+	@wire(getRecordDefaultValues, {documentRecordId: '$documentId'})
 	wiredGetRecordDefaultValues({error, data}) {
+		console.debug('wiredGetRecordDefaultValues');
 		if(data) {
-			this.wiredGetRecordDefaultValuesFlag = data;
-			console.error('wiredStarted');
-			// console.log('DATA -> ', data);
 			if(data.Project__c) {
 				this.projectValue = data.Project__c;
 			}
@@ -53,14 +45,15 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 	renderedCallback() {
 		console.debug('renderedCallback()');
 		if (!this.alreadyRenderedDefaultValue) {
-			this.renderedDefaultValue();
+			this.renderingDefaultValue();
 			this.alreadyRenderedDefaultValue = true;
 		}
 	}
 
 	handleLoad(evt) {
 		console.debug('handleLoad() => ',JSON.parse(JSON.stringify(evt.detail)));
-		if (evt.detail.recordTypeId != this.recordTypeId) {		//quando si fa il 2° run, carica il rt precedente
+		//NOTE - con più run in sequenza, il 1° onLoad ha il RT della precedente esecuzione
+		if (evt.detail.recordTypeId != this.recordTypeId) {
 			this.layout = INITIALIZE_LAYOUT;
 		}
 		if (this.layoutIsNotReady) {
@@ -131,9 +124,9 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 		console.info('handleSuccess() => ',JSON.parse(JSON.stringify(evt.detail)));
 		this.recordId = evt.detail.id;
 		this.dispatchEvent(new ShowToastEvent({
-			title: 'Record Created',		//TODO - custom label
+			title: this.label.recordCreated.title,
 			variant: 'success',
-			message: 'The Record was successfully created'		//TODO - custom label
+			message: this.label.recordCreated.message
 		}));
 		this.navigateToRecordViewPage(this.documentId);
 	}
@@ -141,9 +134,9 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 	handleError(evt) {
 		console.error('handleError() => ',JSON.parse(JSON.stringify(evt.detail)));
 		this.dispatchEvent(new ShowToastEvent({
-			title: 'Error!',		//TODO - custom label
+			title: this.label.genericError.title,
 			variant: 'error',
-			message: 'An error occurred while attempting to save the record.'		//TODO - custom label
+			message: this.label.genericError.message
 		}));
 	}
 
@@ -169,9 +162,8 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 				actionName: 'view'
 			}
 		});
-		this.alreadyRenderedDefaultValue = false;		//per il 2° run
-		// this.layout = INITIALIZE_LAYOUT;
-		// this.renderedDefaultValue();
+		//NOTE - è necessario sbiancare i valori nel successivo run
+		this.alreadyRenderedDefaultValue = false;
 	}
 
 	formatLayout(layout) {
@@ -209,7 +201,7 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 		return layout;
 	}
 
-	renderedDefaultValue() {
+	renderingDefaultValue() {
 		const fields = this.template.querySelectorAll('lightning-input-field');
 		if (fields) {
 			fields.forEach(field => {
