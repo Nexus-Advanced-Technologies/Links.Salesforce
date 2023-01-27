@@ -1,13 +1,15 @@
 /**
  * @description       : 
  * @author            : 
- * @last modified on  : 25/01/2023
+ * @last modified on  : 27/01/2023
  * @last modified by  : ¤ → alessio.marra@nexusat.it
 **/
-import { api, LightningElement, track, wire } from 'lwc';
+import { api, LightningElement, wire } from 'lwc';
+import { getObjectInfo } from 'lightning/uiObjectInfoApi';
 import { NavigationMixin } from 'lightning/navigation';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getRecordDefaultValues from '@salesforce/apex/createDocumentDetailAlyanteController.getRecordDefaultValues';
+import getRecordTypesAvailable from '@salesforce/apex/createDocumentDetailAlyanteController.getRecordTypesAvailable';
 import { label } from './utils';
 
 const DEBOUNCE_INTERVAL = 300;
@@ -19,14 +21,27 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 	@api recordTypeId;
 	recordId;
 	objectApiName = OBJ_NAME;
+	objectInfo;
 
 	layout = INITIALIZE_LAYOUT;
-	formVisible = false;
 	alreadyRenderedDefaultValue = false;
+	recordTypeChoiceContext;
 
 	label = label;
 
 	projectValue;
+	recordTypesAvailable;
+
+	@wire(getObjectInfo, { objectApiName: '$objectApiName',})
+	wiredGetObjectInfo({error, data}) {
+		console.debug('wiredGetObjectInfo');
+		if(data) {
+			this.objectInfo = data;
+		}
+		if(error) {
+			console.error(error);
+		}
+	};
 
 	@wire(getRecordDefaultValues, {documentRecordId: '$documentId'})
 	wiredGetRecordDefaultValues({error, data}) {
@@ -39,8 +54,18 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 		if(error) {
 			console.error(error);
 		}
-		this.formVisible = true;
-	}
+	};
+
+	@wire(getRecordTypesAvailable, {  })
+	wiredGetRecordTypesAvailable({error, data}) {
+		console.debug('wiredGetRecordTypesAvailable');
+		if(data) {
+			this.recordTypesAvailable = data;
+		}
+		if(error) {
+			console.error(error);
+		}
+	};
 
 	renderedCallback() {
 		console.debug('renderedCallback()');
@@ -48,6 +73,31 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 			this.renderingDefaultValue();
 			this.alreadyRenderedDefaultValue = true;
 		}
+	}
+
+	handleNextChoiceRecordType(evt) {
+		console.debug('handleNextChoiceRecordType() => ',JSON.parse(JSON.stringify(evt.detail)));
+
+		const inputs = this.template.querySelectorAll('[data-id="recordType"]');
+		inputs.forEach(x => x.reportValidity());
+		//FIXME - rimanere sulla pagina se è presente almeno un errore
+		// var allInputsIsValid = inputs.reduce((validSoFar, input) => {
+		// 	return validSoFar && input.checkValidity();
+		// }, true);
+
+		// console.log('allInputsIsValid : ',allInputsIsValid);
+
+		// if (!allInputsIsValid) {
+		// 	return;
+		// }
+
+
+		//FIXME - assegnare il rt selezionato a this.recordTypeId
+		console.log(this.recordTypeChoiceContext);
+		console.log(this.recordTypeChoiceContext['recordType']);
+		// this.recordTypeId = this.recordTypeChoiceContext['recordType'];
+		// console.log('OUTPUT : ',JSON.parse(JSON.stringify(this.recordTypeChoiceContext)));
+		// console.log('OUTPUT : ',this.recordTypeId);
 	}
 
 	handleLoad(evt) {
@@ -61,21 +111,34 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 			this.alreadyRenderedDefaultValue = false;
 		}
 
-		this.label.header = `${this.label.new} ${evt.detail.objectInfos[OBJ_NAME].label}: ${evt.detail.record.recordTypeInfo?.name}`;
+		this.objectInfo = evt.detail.objectInfos[OBJ_NAME];
+		this.setLabelHeader(evt.detail.record.recordTypeInfo?.name);
+		// this.label.header = `${this.label.new} ${evt.detail.objectInfos[OBJ_NAME].label}: ${evt.detail.record.recordTypeInfo?.name}`;
 	}
 
 	handleInputChange(evt) {
 		console.debug('handleInputChange() => ',JSON.parse(JSON.stringify(evt.detail)));
-		try {
-			const target = evt.target;
-			this.debounce(function() {
-				const fieldApiName = target.dataset.id;
+		const target = evt.target;
+		this.debounce(function() {
+			try {
+				const field = target.dataset.id;
+				var context = target.dataset.context;
 				var value = target.value;
-				console.debug('[change]', fieldApiName, '=>', value);
-			}, DEBOUNCE_INTERVAL);
-		} catch (error) {
-			console.error(error);
-		}
+				console.debug('[change]', context, '|', field, '=>', value);
+
+				if (context == 'recordTypeChoice') {
+					if ((this.recordTypeChoiceContext || {}).hasOwnProperty(field)) {
+						this.recordTypeChoiceContext[field] = value;
+					} else {
+						this.recordTypeChoiceContext = Object.assign({[field]: value}, this.recordTypeChoiceContext);
+					}
+					console.debug('[update recordTypeChoiceContext]', JSON.parse(JSON.stringify(this.recordTypeChoiceContext)));
+				}
+
+			} catch (error) {
+				console.error(error);
+			}
+		}, DEBOUNCE_INTERVAL);
 	}
 
 	handleSubmit(evt) {
@@ -134,14 +197,42 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 	handleError(evt) {
 		console.error('handleError() => ',JSON.parse(JSON.stringify(evt.detail)));
 		this.dispatchEvent(new ShowToastEvent({
-			title: this.label.genericError.title,
+			title: this.label.genericErrorOnSave.title,
 			variant: 'error',
-			message: this.label.genericError.message
+			message: this.label.genericErrorOnSave.message
 		}));
 	}
 
+	get formVisible() {
+		//FIXME - il form dovrà essere visibile con la precedente condizione e il this.recordTypeId non null
+		// return this.projectValue != null;
+		return false;
+	}
+
 	get layoutIsNotReady() {
-		return (Object.keys(this.layout).length === 0)
+		return (Object.keys(this.layout).length === 0);
+	}
+
+	get toChoiceRecordType() {
+		if (this.objectInfo) {
+			this.setLabelHeader();
+		}
+		return this.recordTypeId == null && this.objectInfo != null && this.recordTypesAvailable != null;
+	}
+
+	get recordTypeOptions() {
+		var options = [];
+		if(this.objectInfo.recordTypeInfos) {
+			console.debug('recordTypeInfos: ', JSON.parse(JSON.stringify(this.objectInfo.recordTypeInfos)));
+			var recordTypeInfos = this.objectInfo.recordTypeInfos;
+			for(let recordType in recordTypeInfos) {
+				if(recordTypeInfos.hasOwnProperty(recordType)) {
+					options.push({ label: recordTypeInfos[recordType].name, value: recordTypeInfos[recordType].recordTypeId });
+				}
+			}
+			options = options.filter(x => this.recordTypesAvailable.includes(x.value));
+		}
+		return options;
 	}
 
 	timerId;
@@ -226,6 +317,13 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 				}
 				console.debug('[default assignment]', field.fieldName, '=>', field.value);
 			});
+		}
+	}
+
+	setLabelHeader(recordType) {
+		this.label.header = `${this.label.new} ${this.objectInfo.label}`;
+		if (recordType) {
+			this.label.header += `: ${recordType}`;
 		}
 	}
 }
