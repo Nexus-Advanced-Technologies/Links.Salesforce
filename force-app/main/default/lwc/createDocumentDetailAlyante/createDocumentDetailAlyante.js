@@ -31,6 +31,7 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 
 	projectValue;
 	recordTypesAvailable;
+    formVisible = false;
 
 	@wire(getObjectInfo, { objectApiName: '$objectApiName',})
 	wiredGetObjectInfo({error, data}) {
@@ -76,11 +77,14 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 	}
 
 	handleNextChoiceRecordType(evt) {
+        console.log('test');
 		console.debug('handleNextChoiceRecordType() => ',JSON.parse(JSON.stringify(evt.detail)));
-
+        console.log(this.recordTypeChoiceContext);
+		this.recordTypeId = this.recordTypeChoiceContext;
 		const inputs = this.template.querySelectorAll('[data-id="recordType"]');
 		inputs.forEach(x => x.reportValidity());
-		//FIXME - rimanere sulla pagina se è presente almeno un errore
+        this.formVisible = true;
+        
 		// var allInputsIsValid = inputs.reduce((validSoFar, input) => {
 		// 	return validSoFar && input.checkValidity();
 		// }, true);
@@ -90,11 +94,8 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 		// if (!allInputsIsValid) {
 		// 	return;
 		// }
+        
 
-
-		//FIXME - assegnare il rt selezionato a this.recordTypeId
-		console.log(this.recordTypeChoiceContext);
-		console.log(this.recordTypeChoiceContext['recordType']);
 		// this.recordTypeId = this.recordTypeChoiceContext['recordType'];
 		// console.log('OUTPUT : ',JSON.parse(JSON.stringify(this.recordTypeChoiceContext)));
 		// console.log('OUTPUT : ',this.recordTypeId);
@@ -119,26 +120,25 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 	handleInputChange(evt) {
 		console.debug('handleInputChange() => ',JSON.parse(JSON.stringify(evt.detail)));
 		const target = evt.target;
-		this.debounce(function() {
-			try {
-				const field = target.dataset.id;
-				var context = target.dataset.context;
-				var value = target.value;
-				console.debug('[change]', context, '|', field, '=>', value);
+		try {
+			const field = target.dataset.id;
+			var context = target.dataset.context;
+			var value = target.value;
+			console.debug('[change]', context, '|', field, '=>', value);
 
-				if (context == 'recordTypeChoice') {
-					if ((this.recordTypeChoiceContext || {}).hasOwnProperty(field)) {
-						this.recordTypeChoiceContext[field] = value;
-					} else {
-						this.recordTypeChoiceContext = Object.assign({[field]: value}, this.recordTypeChoiceContext);
-					}
-					console.debug('[update recordTypeChoiceContext]', JSON.parse(JSON.stringify(this.recordTypeChoiceContext)));
-				}
-
-			} catch (error) {
-				console.error(error);
+			if (context == 'recordTypeChoice') {
+                this.recordTypeChoiceContext = JSON.parse(JSON.stringify(evt.detail.value));
+				// if ((this.recordTypeChoiceContext || {}).hasOwnProperty(field)) {
+				// 	this.recordTypeChoiceContext[field] = value;
+				// } else {
+				// 	this.recordTypeChoiceContext = Object.assign({[field]: value}, this.recordTypeChoiceContext);
+				// }
+				console.debug('[update recordTypeChoiceContext]', JSON.parse(JSON.stringify(this.recordTypeChoiceContext)));
 			}
-		}, DEBOUNCE_INTERVAL);
+
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
 	handleSubmit(evt) {
@@ -203,11 +203,10 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 		}));
 	}
 
-	get formVisible() {
-		//FIXME - il form dovrà essere visibile con la precedente condizione e il this.recordTypeId non null
-		// return this.projectValue != null;
-		return false;
-	}
+	// get formVisible() {
+	// 	// return this.projectValue != null;
+	// 	return false;
+	// }
 
 	get layoutIsNotReady() {
 		return (Object.keys(this.layout).length === 0);
@@ -218,6 +217,7 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 			this.setLabelHeader();
 		}
 		return this.recordTypeId == null && this.objectInfo != null && this.recordTypesAvailable != null;
+		// return false;
 	}
 
 	get recordTypeOptions() {
