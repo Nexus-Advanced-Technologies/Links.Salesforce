@@ -11,6 +11,9 @@ import l_GenericErrorOnSaveMessage from '@salesforce/label/c.GenericErrorOnSaveM
 
 import l_SelectRecordType from '@salesforce/label/c.SelectRecordType';
 
+import l_ProjWarnTitle from '@salesforce/label/c.ProjectWarningTitle';
+import l_ProjWarnMessage from '@salesforce/label/c.ProjectWarningMessage';
+
 const LABEL = {
 	cancel: l_Cancel,
 	close: l_Close,
@@ -25,7 +28,11 @@ const LABEL = {
 		title: l_GenericErrorOnSaveTitle,
 		message: l_GenericErrorOnSaveMessage
 	},
-	selectRecordType: l_SelectRecordType
+	selectRecordType: l_SelectRecordType,
+	projectWarning: {
+		title: l_ProjWarnTitle,
+		message: l_ProjWarnMessage
+	}
 };
 
 export { LABEL as label }

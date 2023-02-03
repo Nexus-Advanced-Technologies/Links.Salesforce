@@ -11,6 +11,7 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getRecordDefaultValues from '@salesforce/apex/createDocumentDetailAlyanteController.getRecordDefaultValues';
 import getRecordTypesAvailable from '@salesforce/apex/createDocumentDetailAlyanteController.getRecordTypesAvailable';
 import { label } from './utils';
+import { getDataConnectorSourceObjectDataPreviewWithFields } from 'lightning/analyticsWaveApi';
 
 const DEBOUNCE_INTERVAL = 300;
 const OBJ_NAME = 'DocumentDetailAlyante__c';
@@ -25,13 +26,14 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 
 	layout = INITIALIZE_LAYOUT;
 	alreadyRenderedDefaultValue = false;
-	recordTypeChoiceContext;
+	recordTypeChoiceContext={};
 
 	label = label;
 
 	projectValue;
 	recordTypesAvailable;
-    formVisible = false;
+    // formVisible = false;
+    timerId;
 
 	@wire(getObjectInfo, { objectApiName: '$objectApiName',})
 	wiredGetObjectInfo({error, data}) {
@@ -80,11 +82,16 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
         console.log('test');
 		console.debug('handleNextChoiceRecordType() => ',JSON.parse(JSON.stringify(evt.detail)));
         console.log(this.recordTypeChoiceContext);
-		this.recordTypeId = this.recordTypeChoiceContext;
 		const inputs = this.template.querySelectorAll('[data-id="recordType"]');
 		inputs.forEach(x => x.reportValidity());
-        this.formVisible = true;
-        
+        this.recordTypeId = this.recordTypeChoiceContext['recordType'];
+        if(this.projectValue == null) {
+            this.dispatchEvent(new ShowToastEvent({
+                title: this.label.projectWarning.title,
+                variant: 'warning',
+                message: this.label.projectWarning.message
+            })); 
+        }
 		// var allInputsIsValid = inputs.reduce((validSoFar, input) => {
 		// 	return validSoFar && input.checkValidity();
 		// }, true);
@@ -118,27 +125,30 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 	}
 
 	handleInputChange(evt) {
+        clearTimeout(this.timerId);
 		console.debug('handleInputChange() => ',JSON.parse(JSON.stringify(evt.detail)));
 		const target = evt.target;
-		try {
-			const field = target.dataset.id;
-			var context = target.dataset.context;
-			var value = target.value;
-			console.debug('[change]', context, '|', field, '=>', value);
+        this.timerId = setTimeout(() => {
+            try {
+                const field = target.dataset.id;
+                var context = target.dataset.context;
+                var value = target.value;
+                console.debug('[change]', context, '|', field, '=>', value);
+                console.log(JSON.parse(JSON.stringify(evt.detail.value)));
+                if (context == 'recordTypeChoice') {
+                    this.recordTypeChoiceContext[field] = JSON.parse(JSON.stringify(evt.detail.value));
+                    // if ((this.recordTypeChoiceContext || {}).hasOwnProperty(field)) {
+                    // 	this.recordTypeChoiceContext[field] = value;
+                    // } else {
+                    // 	this.recordTypeChoiceContext = Object.assign({[field]: value}, this.recordTypeChoiceContext);
+                    // }
+                    console.debug('[update recordTypeChoiceContext]', JSON.parse(JSON.stringify(this.recordTypeChoiceContext)));
+                }
 
-			if (context == 'recordTypeChoice') {
-                this.recordTypeChoiceContext = JSON.parse(JSON.stringify(evt.detail.value));
-				// if ((this.recordTypeChoiceContext || {}).hasOwnProperty(field)) {
-				// 	this.recordTypeChoiceContext[field] = value;
-				// } else {
-				// 	this.recordTypeChoiceContext = Object.assign({[field]: value}, this.recordTypeChoiceContext);
-				// }
-				console.debug('[update recordTypeChoiceContext]', JSON.parse(JSON.stringify(this.recordTypeChoiceContext)));
-			}
-
-		} catch (error) {
-			console.error(error);
-		}
+            } catch (error) {
+                console.error(error);
+            }
+        }, DEBOUNCE_INTERVAL);
 	}
 
 	handleSubmit(evt) {
@@ -185,6 +195,7 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 
 	handleSuccess(evt) {
 		console.info('handleSuccess() => ',JSON.parse(JSON.stringify(evt.detail)));
+        console.log('Values -> ' + this.recordTypeChoiceContext);
 		this.recordId = evt.detail.id;
 		this.dispatchEvent(new ShowToastEvent({
 			title: this.label.recordCreated.title,
@@ -203,17 +214,17 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 		}));
 	}
 
-	// get formVisible() {
-	// 	// return this.projectValue != null;
-	// 	return false;
-	// }
+	get formVisible() {
+		return this.recordTypeId != null;
+		// return false;
+	}
 
 	get layoutIsNotReady() {
 		return (Object.keys(this.layout).length === 0);
 	}
 
 	get toChoiceRecordType() {
-		if (this.objectInfo) {
+		if (this.objectInfo && this.recordTypeId == null) {
 			this.setLabelHeader();
 		}
 		return this.recordTypeId == null && this.objectInfo != null && this.recordTypesAvailable != null;
@@ -235,11 +246,11 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 		return options;
 	}
 
-	timerId;
-	debounce(fn, wait) {
-		clearTimeout(this.timerId);
-		this.timerId = setTimeout(fn, wait);
-	}
+	// timerId;
+	// debounce(fn, wait) {
+	// 	clearTimeout(this.timerId);
+	// 	this.timerId = setTimeout(fn, wait);
+	// }
 
 	goBack() {
 		this.navigateToRecordViewPage(this.documentId);
@@ -253,7 +264,8 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 				actionName: 'view'
 			}
 		});
-		//NOTE - è necessario sbiancare i valori nel successivo run
+		//NOTE - è necessario per sbiancare i valori nel successivo run
+        this.recordTypeId = null;
 		this.alreadyRenderedDefaultValue = false;
 	}
 
@@ -306,7 +318,7 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 						break;
 					case 'Project__c':
 						field.value = this.projectValue;
-						field.disabled = true;
+						// field.disabled = true;
 						break;
 					case 'Quantity__c':
 						field.value = 1;
@@ -321,6 +333,7 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 	}
 
 	setLabelHeader(recordType) {
+        console.log('set label header -> ' + recordType);
 		this.label.header = `${this.label.new} ${this.objectInfo.label}`;
 		if (recordType) {
 			this.label.header += `: ${recordType}`;
