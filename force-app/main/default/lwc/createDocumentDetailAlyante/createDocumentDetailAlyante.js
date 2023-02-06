@@ -85,7 +85,7 @@ export default class NavToNewRecordWithDefaults extends NavigationMixin(Lightnin
 		const inputs = this.template.querySelectorAll('[data-id="recordType"]');
 		inputs.forEach(x => x.reportValidity());
         this.recordTypeId = this.recordTypeChoiceContext['recordType'];
-        if(this.projectValue == null) {
+        if(this.projectValue == null && this.recordTypeId != null) {
             this.dispatchEvent(new ShowToastEvent({
                 title: this.label.projectWarning.title,
                 variant: 'warning',
