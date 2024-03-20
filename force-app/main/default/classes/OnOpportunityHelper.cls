@@ -2,8 +2,8 @@
  * @description       : Helper Class for OnOpportuntiy trigger
  * @author            : 
  * @see               : OnOpportunity (Trigger)
- * @last modified on  : 26/03/2021
- * @last modified by  : ¤ → alessio.marra@nexusat.it
+ * @last modified on  : 03/20/2024
+ * @last modified by  : mattia.muzzopappa@nexusat.it
  * Modifications Log 
  * Ver   Date         Author                         Modification
  * 1.0   24/01/2021                                  Initial Version (Porting from ORG Nexus)
@@ -20,38 +20,91 @@ public class OnOpportunityHelper {
 	* @param Map<Id Opportunity> triggerOldMap 
 	**/
 	public static void beforeInsert(List<Opportunity> triggerNew) {
+
+		Boolean bypassTrigger = bypassTrigger(triggerNew);
+
 		String company = null;
 
-		//Get Trigger.new List splitted by company in Map(company, list)
-		Map<String, List<Opportunity>> triggerNewSplittedMap = TriggerUtilities.splitByCompany(triggerNew);
+		if(bypassTrigger == false) {
+			//Get Trigger.new List splitted by company in Map(company, list)
+			Map<String, List<Opportunity>> triggerNewSplittedMap = TriggerUtilities.splitByCompany(triggerNew);
 
-		//Get CustomMetadata with trigger information for each company
-		Map<String, TriggerSetting__mdt> triggerSettings = getTriggerSetting();
+			//Get CustomMetadata with trigger information for each company
+			Map<String, TriggerSetting__mdt> triggerSettings = getTriggerSetting();
 
-		company = 'Nexus';
-		if (triggerNewSplittedMap.containsKey(company)) {
-			List<Opportunity> triggerNewSplitted = triggerNewSplittedMap.get(company);
+			company = 'Nexus';
+			if (triggerNewSplittedMap.containsKey(company)) {
+				List<Opportunity> triggerNewSplitted = triggerNewSplittedMap.get(company);
 
-			if (triggerSettings.get(company).OpportunityBeforeInsert__c) {
-				generateReferenceNumbers(triggerNewSplitted);
+				if (triggerSettings.get(company).OpportunityBeforeInsert__c) {
+					generateReferenceNumbers(triggerNewSplitted);
+				}
+
+				//Always (It cannot be disabled by TriggerSetting Metadata)
+				checkReferenceNumberNullOrDuplicate(triggerNewSplitted);
+				company = null;
 			}
+			company = 'Links';
+			if (triggerNewSplittedMap.containsKey(company)) {
+				List<Opportunity> triggerNewSplitted = triggerNewSplittedMap.get(company);
 
-			//Always (It cannot be disabled by TriggerSetting Metadata)
-			checkReferenceNumberNullOrDuplicate(triggerNewSplitted);
-			company = null;
-		}
-        company = 'Links';
-        if (triggerNewSplittedMap.containsKey(company)) {
-			List<Opportunity> triggerNewSplitted = triggerNewSplittedMap.get(company);
+				if (triggerSettings.get(company).OpportunityBeforeInsert__c) {
+					generateReferenceNumbers(triggerNewSplitted);
+				}
 
-			if (triggerSettings.get(company).OpportunityBeforeInsert__c) {
-				generateReferenceNumbers(triggerNewSplitted);
+				//Always (It cannot be disabled by TriggerSetting Metadata)
+				checkReferenceNumberNullOrDuplicate(triggerNewSplitted);
+				company = null;
 			}
+			company = 'Idea75';
+			if (triggerNewSplittedMap.containsKey(company)) {
+				List<Opportunity> triggerNewSplitted = triggerNewSplittedMap.get(company);
 
-			//Always (It cannot be disabled by TriggerSetting Metadata)
-			checkReferenceNumberNullOrDuplicate(triggerNewSplitted);
-			company = null;
-		}
+				if (triggerSettings.get(company).OpportunityBeforeInsert__c) {
+					generateReferenceNumbers(triggerNewSplitted);
+				}
+
+				//Always (It cannot be disabled by TriggerSetting Metadata)
+				checkReferenceNumberNullOrDuplicate(triggerNewSplitted);
+				company = null;
+			}
+			company = 'DecHit';
+			if (triggerNewSplittedMap.containsKey(company)) {
+				List<Opportunity> triggerNewSplitted = triggerNewSplittedMap.get(company);
+
+				if (triggerSettings.get(company).OpportunityBeforeInsert__c) {
+					generateReferenceNumbers(triggerNewSplitted);
+				}/*DecHit*/
+
+				//Always (It cannot be disabled by TriggerSetting Metadata)
+				checkReferenceNumberNullOrDuplicate(triggerNewSplitted);
+				company = null;
+			}
+			company = 'Lis';
+			if (triggerNewSplittedMap.containsKey(company)) {
+				List<Opportunity> triggerNewSplitted = triggerNewSplittedMap.get(company);
+
+				if (triggerSettings.get(company).OpportunityBeforeInsert__c) {
+					generateReferenceNumbers(triggerNewSplitted);
+				}/*DecHit*/
+
+				//Always (It cannot be disabled by TriggerSetting Metadata)
+				checkReferenceNumberNullOrDuplicate(triggerNewSplitted);
+				company = null;
+			}
+			company = 'Linfa';
+			if (triggerNewSplittedMap.containsKey(company)) {
+				List<Opportunity> triggerNewSplitted = triggerNewSplittedMap.get(company);
+
+				if (triggerSettings.get(company).OpportunityBeforeInsert__c) {
+					generateReferenceNumbers(triggerNewSplitted);
+				}/*DecHit*/
+
+				//Always (It cannot be disabled by TriggerSetting Metadata)
+				checkReferenceNumberNullOrDuplicate(triggerNewSplitted);
+				company = null;
+			}
+		}	
 	}
 
 	/**
@@ -250,5 +303,18 @@ public class OnOpportunityHelper {
 			}
 		}
 		LoggerHandler.end('¤ checkReferenceNumberIsChanged');
+	}
+
+	private static Boolean bypassTrigger(List<Opportunity> triggerNew) {
+		Boolean bypassTrigger = false;
+		Map <Id,RecordType> recordTypeMap = new Map<Id,RecordType> ([SELECT Id, DeveloperName FROM RecordType]);
+		for(Opportunity record : triggerNew) {
+			if(recordTypeMap.containsKey(record.RecordTypeId)) {
+				if(recordTypeMap.get(record.RecordTypeId).DeveloperName == 'LinksGroup') {
+					bypassTrigger = true;
+				}
+			}
+		}
+		return bypassTrigger;
 	}
 }

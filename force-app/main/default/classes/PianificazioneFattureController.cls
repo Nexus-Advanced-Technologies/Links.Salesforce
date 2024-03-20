@@ -1,8 +1,8 @@
 /**
  * @description       : 
  * @author            : 
- * @last modified on  : 28/07/2021
- * @last modified by  : ¤ → alessio.marra@nexusat.it
+ * @last modified on  : 03/20/2024
+ * @last modified by  : mattia.muzzopappa@nexusat.it
  * Modifications Log 
  * Ver   Date         Author                         Modification
  * 1.0                                               Initial Version
@@ -66,6 +66,16 @@ public without sharing class PianificazioneFattureController {
 			rtId = getInvoiceRecordType('NexusRecursive');
 		}else if(opp.RecordType.DeveloperName.contains('Links')){
 			rtId = getInvoiceRecordType('LinksRecursive');
+		}else if(opp.RecordType.DeveloperName.contains('Idea75')){
+			rtId = getInvoiceRecordType('Idea75Recursive');
+		}else if(opp.RecordType.DeveloperName.contains('DecHit')){
+			rtId = getInvoiceRecordType('DecHitRecursive');
+		}else if(opp.RecordType.DeveloperName.contains('Lis')){
+			rtId = getInvoiceRecordType('LisRecursive');
+		}else if(opp.RecordType.DeveloperName.contains('Linfa')){
+			rtId = getInvoiceRecordType('LinfaRecursive');
+		}else if(opp.RecordType.DeveloperName.contains('LinksGroup')){
+			rtId = getInvoiceRecordType('LinksGroupRecursive');
 		}else{
 			throw new AuraException('Record Type Wrong');
 		}
@@ -102,10 +112,21 @@ public without sharing class PianificazioneFattureController {
 			}
 		else if(opp.RecordType.DeveloperName.contains('Links')){
 			rtId = getInvoiceRecordType('LinksOneShot');
+		}else if(opp.RecordType.DeveloperName.contains('Idea75')){
+			rtId = getInvoiceRecordType('Idea75OneShot');
+		}else if(opp.RecordType.DeveloperName.contains('DecHit')){
+			rtId = getInvoiceRecordType('DecHitOneShot');
+		}else if(opp.RecordType.DeveloperName.contains('Lis')){
+			rtId = getInvoiceRecordType('LisOneShot');
+		}else if(opp.RecordType.DeveloperName.contains('Linfa')){
+			rtId = getInvoiceRecordType('LinfaOneShot');
+		}else if(opp.RecordType.DeveloperName.contains('LinksGroup')){
+			rtId = getInvoiceRecordType('LinksGroupOneShot');
 		}else{
-			throw new AuraException('Record Type Whrong');
+			throw new AuraException('Record Type Wrong');
 		}
 		for(PaymentTypeDetail__c tpd : tpdList){
+			//Attenzione, il campo Value sul Payment Type Detail è obbligatorio per la creazione dell' Invoice Milestone
 			InvoiceMilestone__c im = new InvoiceMilestone__c(
 				Name = getInvoiceName(opp,tpd.Name),
 				Rank__c = tpd.Rank__c,
