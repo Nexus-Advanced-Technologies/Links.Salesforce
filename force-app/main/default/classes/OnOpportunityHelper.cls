@@ -2,7 +2,7 @@
  * @description       : Helper Class for OnOpportuntiy trigger
  * @author            : 
  * @see               : OnOpportunity (Trigger)
- * @last modified on  : 03/20/2024
+ * @last modified on  : 03/22/2024
  * @last modified by  : mattia.muzzopappa@nexusat.it
  * Modifications Log 
  * Ver   Date         Author                         Modification
@@ -114,9 +114,12 @@ public class OnOpportunityHelper {
 	* @param Map<Id Opportunity> triggerOldMap 
 	**/
 	public static void beforeUpdate(List<Opportunity> triggerNew, Map<Id,Opportunity> triggerOldMap) {
+		Boolean bypassTrigger = bypassTrigger(triggerNew);
+		if(bypassTrigger == false) {
 
-		//For all company
-		checkReferenceNumberIsChanged(triggerNew, triggerOldMap);
+			//For all company
+			checkReferenceNumberIsChanged(triggerNew, triggerOldMap);
+		}
 	}
 
 	/**
